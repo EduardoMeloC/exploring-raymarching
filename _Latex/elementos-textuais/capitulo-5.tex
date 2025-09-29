@@ -1,0 +1,27 @@
+\chapter{Conclusion}\label{chp:LABEL_CHP_5}
+
+In this work, we demonstrated the versatility and expressiveness of the ray marching technique. Initially, we compared ray tracing and ray marching, highlighting their similarities and differences. Signed Distance Functions were also presented as a flexible mathematical representation of geometry, allowing us to easily apply techniques for the construction of procedural scenes. After building a strong foundation upon these concepts, we explored how this technique can be employed to render volumetric clouds in real time. 
+
+Through the adoption of an iterative approach that presented code snippets and algorithms supported by rendered examples, we ultimately provided a comprehensive overview of ray marching and its capabilities. The techniques explored not only achieve the intended visual outcomes but also provide a 
+robust framework for further experimentation with procedural and volumetric rendering. 
+
+\section{Future Works}
+
+Building on these results, further explorations could be made to apply more physically accurate shading on clouds. State-of-the-art techniques build on these basic 
+principles by incorporating physically based models such as Beer’s Law and the Powder 
+Effect, as exemplified in the cloud rendering system of \textit{Horizon Zero Dawn} 
+\cite{Schneider2015Cloudscapes}.
+
+Regarding Signed Distance Fields, many other applications are open: from font rendering 
+\cite{green2007siggraph} and ambient sound propagation \cite{Mizdal2019AmbientSound}, to the 
+approximation of distance fields from mesh data using neural networks 
+\cite{park2019deepsdf}. Recent research also investigates their role in differentiable 
+rendering \cite{nimier2020differentiable} and implicit neural representations, as SDFs can
+provide a continuous and differentiable description of geometry. These diverse 
+applications highlight the versatility of SDFs as a unifying mathematical framework.
+
+% Beer's Law and Powder Effect https://progmdong.github.io/2019-03-04/Volumetric_Rendering/
+% Mencionar outros metodos de obter formas complexas como:
+% GRIDS: https://renderdiagrams.org/2017/12/28/signed-distance-fields/
+% https://steamcdn-a.akamaihd.net/apps/valve/2007/SIGGRAPH2007_AlphaTestedMagnification.pdf
+% NEURAL NETWORKS: 

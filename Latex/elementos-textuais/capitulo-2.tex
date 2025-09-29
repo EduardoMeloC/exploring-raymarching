@@ -6,12 +6,12 @@ One of the goals of computer graphics is to synthesize images of virtual scenes 
 
 A scene consists of a camera, 3D objects, and light sources placed in the environment. The goal when using ray tracing or ray marching is to generate a 2D render of the scene from the camera's point of view. We will need to traverse a 2D grid with the dimensions of our final image - the canvas. Then, given a camera point, we iterate over each position in the canvas, shooting a ray in its direction. This process is the basis of both ray marching and ray tracing.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=10.64cm,height=7cm]{imagens/ray-trace.jpg} 
-    \caption{Ray Tracing Algorithm \protect\footnotemark}
-    \label{fig:internet}
-\end{figure}
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=10.64cm,height=7cm]{imagens/ray-trace.jpg} 
+%     \caption{Ray Tracing Algorithm \protect\footnotemark}
+%     \label{fig:internet}
+% \end{figure}
 
 For didactic purposes, we will ignore details such as the field of view, and we will assume that the distance between the canvas and the camera origin is always equal to 1, and that the canvas center will be positioned at $(0, 0, 0)$.
 
@@ -31,7 +31,6 @@ The logic for traversing a 2D canvas and computing ray interactions with objects
 
 \begin{algorithm}[H]
 \caption{Canvas Traversal}
-\label{alg:marchray}
 \begin{algorithmic}[1]
 \Procedure{Render}{Canvas, Scene}
     \For{$y \gets 0$ to $CanvasResolution.y - 1$}
@@ -104,25 +103,25 @@ In traditional computer graphics, most objects on a screen are represented as a 
 
 In our example, we simplify the scene by using a single sphere. Since the mathematical formula for ray-sphere intersection is well-established\footnote{https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection.html}, it allows us to render a smooth and precise representation of the sphere without the need for tessellation.
 
-The \texttt{GetHitColor} function currently returns only the object's albedo. To simulate realistic lighting behavior, additional calculations are required.
+The \texttt{GetHitColor} function currently returns only the object's albedo. To simulate realistic lighting behavior, additional calculations are required, which will be detailed in Chapter 3.
 
 By rendering a scene with a black background, a large white sphere below the camera to simulate the ground, and a smaller red sphere above it, the image shown in Figure 3 is produced.
 
-\begin{figure}[ht]
-    \centering
-    \fbox{\includegraphics[width=7.64cm,height=7.64cm]{imagens/unlit-raytraced-sphere.png}}
-    \caption{Unlit Raytraced Sphere}
-    \label{fig:internet}
-\end{figure}
+% \begin{figure}[ht]
+%     \centering
+%     \fbox{\includegraphics[width=7.64cm,height=7.64cm]{imagens/unlit-raytraced-sphere.png}}
+%     \caption{Unlit Raytraced Sphere}
+%     \label{fig:internet}
+% \end{figure}
 
 
 \section{Marching the Ray}
 
-If the term `trace' implies a fast, swift motion, `march' is used to convey taking one step at a time. The ray marching algorithm uses the \texttt{MarchRay} function instead of \texttt{TraceRay}, so rather than calculating a direct intersection between the ray and the object, it resorts to iteratively marching through space, at each step sampling the distance to all objects in the scene, until one distance turns negative, or smaller than a specified threshold, which is considered a hit. The distance-sampling function is called SDF (Signed Distance Function), as it returns positive when outside the object, negative when inside. What is handy about SDF is that they are prone to various operations, some of which will be explored in Chapter 3. 
+If the term `trace' implies a fast, swift motion, `march' is used to convey taking one step at a time. The ray marching algorithm uses the \texttt{MarchRay} function instead of \texttt{TraceRay}, so rather than calculating a direct intersection between the ray and the object, it resorts to iteratively marching through space, at each step sampling the distance to all objects in the scene, until one distance turns negative, or smaller than a specified threshold, which is considered a hit. The distance-sampling function is called SDF (Signed Distance Function), as it returns positive when outside the object, negative when inside. What is handy about SDF is that they are prone to various operations, chapter 3 will go though into some of them. 
 
 Ray marching can be seen as a family of solvers, and there are variations of this process, on questions such as how to quantify the step size between samples. A traditional approach uses a fixed step size, in which the ray traverses space at constant steps. This has many applications, although when trying to render light in solids such as the sphere in Figure \ref{fig:internet}, the ray must be backtracked (Figure \ref{fig:spheretracing}), so as to obtain the exact collision point. Also, there is a chance of missing a collision altogether between samples (Figure \ref{fig:raymarch_fail}), especially when dealing with finely textured or detailed objects.
 
-To prevent the march from ever skipping a surface between steps, instead of fixed, the next step size could be picked as the minimum distance between all samples to an object. The ray then acts as if it has a sensor, advising to march slower when surfaces are nearby. When a distance becomes smaller than a specified threshold, it`s considered a hit. This is observed in Figure \ref{fig:spheretracing}, at each step the circle's radius is a 2D representation of the minimum distance to a surface and thus the step size. In Algorithm \ref{alg:marchray} the method is described in code, in it the procedure \textsc{GetDistance}, at each step, calls within it the SDF of each object in scene, returning the minimum distance.
+To prevent the march from ever skipping a surface between steps, instead of fixed, the next step size could be picked as the minimum distance between all samples to an object. The ray then acts as if it has a sensor, advising to march slower when surfaces are nearby. When a distance becomes smaller than a specified threshold, it`s considered a hit. This is observed in Figure \ref{fig:spheretracing}, at each step the circle's radius is a 2D representation of the minimum distance to a surface and thus the step size. In Algorithm \ref{alg:marchray} is the method described in code, in it the procedure \textsc{GetDistance}, at each step, calls within it the SDF of each object in scene, returning the minimum distance.
 
 \begin{figure}[ht]
     \centering
@@ -244,12 +243,12 @@ Altough the demand for ray tracing specific hardware all but decreases, there is
 % \section{Images}\label{sec:LABEL_CHP_2_SEC_B}
 % Reference: \url{http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics}
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{imagens/chick.png}
-%   \caption{Chick}
-%   \label{fig:LABEL_FIG_1}
-% \end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{imagens/chick.png}
+  \caption{Chick}
+  \label{fig:LABEL_FIG_1}
+\end{figure}
 
 % \section{Equations}\label{sec:LABEL_CHP_2_SEC_C}
 % Reference: \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
