@@ -6,12 +6,12 @@ One of the goals of computer graphics is to synthesize images of virtual scenes 
 
 A scene consists of a camera, 3D objects, and light sources placed in the environment. The goal when using ray tracing or ray marching is to generate a 2D render of the scene from the camera's point of view. We will need to traverse a 2D grid with the dimensions of our final image - the canvas. Then, given a camera point, we iterate over each position in the canvas, shooting a ray in its direction. This process is the basis of both ray marching and ray tracing.
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=10.64cm,height=7cm]{imagens/ray-trace.jpg} 
-%     \caption{Ray Tracing Algorithm \protect\footnotemark}
-%     \label{fig:internet}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=10.64cm,height=7cm]{imagens/ray-trace.jpg} 
+    \caption{Ray Tracing Algorithm \protect\footnotemark}
+    \label{fig:internet}
+\end{figure}
 
 For didactic purposes, we will ignore details such as the field of view, and we will assume that the distance between the canvas and the camera origin is always equal to 1, and that the canvas center will be positioned at $(0, 0, 0)$.
 
@@ -31,6 +31,7 @@ The logic for traversing a 2D canvas and computing ray interactions with objects
 
 \begin{algorithm}[H]
 \caption{Canvas Traversal}
+\label{alg:marchray}
 \begin{algorithmic}[1]
 \Procedure{Render}{Canvas, Scene}
     \For{$y \gets 0$ to $CanvasResolution.y - 1$}
@@ -107,12 +108,12 @@ The \texttt{GetHitColor} function currently returns only the object's albedo. To
 
 By rendering a scene with a black background, a large white sphere below the camera to simulate the ground, and a smaller red sphere above it, the image shown in Figure 3 is produced.
 
-% \begin{figure}[ht]
-%     \centering
-%     \fbox{\includegraphics[width=7.64cm,height=7.64cm]{imagens/unlit-raytraced-sphere.png}}
-%     \caption{Unlit Raytraced Sphere}
-%     \label{fig:internet}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \fbox{\includegraphics[width=7.64cm,height=7.64cm]{imagens/unlit-raytraced-sphere.png}}
+    \caption{Unlit Raytraced Sphere}
+    \label{fig:internet}
+\end{figure}
 
 
 \section{Marching the Ray}
@@ -243,12 +244,12 @@ Altough the demand for ray tracing specific hardware all but decreases, there is
 % \section{Images}\label{sec:LABEL_CHP_2_SEC_B}
 % Reference: \url{http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.3\textwidth]{imagens/chick.png}
-  \caption{Chick}
-  \label{fig:LABEL_FIG_1}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=0.3\textwidth]{imagens/chick.png}
+%   \caption{Chick}
+%   \label{fig:LABEL_FIG_1}
+% \end{figure}
 
 % \section{Equations}\label{sec:LABEL_CHP_2_SEC_C}
 % Reference: \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}

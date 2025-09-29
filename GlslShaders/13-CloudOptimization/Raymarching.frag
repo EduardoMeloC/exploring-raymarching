@@ -44,7 +44,7 @@ Scene createScene(){
     PointLight[NLIGHTS] pointLights; 
 
     vec3 pointLightPos = vec3(0., 2., -5.);
-    float radiusDistance = 4.;
+    float radiusDistance = 5.;
     pointLightPos.x += cos(iTime) * radiusDistance;
     pointLightPos.z += sin(iTime) * radiusDistance;
     pointLights[0] = PointLight(
@@ -175,6 +175,8 @@ HitCandidate getDist(vec3 point, Scene scene){
 }
 
 float getDensity(vec3 point, Scene scene){
+    // float noise = textureLod(iChannel1,(point.xy*10. + 0.5) / 256.0, 0.0).x;
+    // float noise = noise(point*10.);
     float noise = fbm(point);
 
     vec3 cloudCenter = vec3(0., 2., -5.);
@@ -182,6 +184,7 @@ float getDensity(vec3 point, Scene scene){
     float cloudDist = length(point - cloudCenter) - cloudRadius;
 
     return -cloudDist+noise;
+    // return noise;
 }
 
 vec3 getNormal(vec3 point,float d, Scene scene){

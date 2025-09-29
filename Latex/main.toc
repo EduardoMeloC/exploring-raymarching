@@ -7,7 +7,7 @@
 \contentsline {chapter}{\numberline {2}Ray Tracing vs Ray Marching}{14}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Traversing the Canvas}{14}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Tracing the Ray}{17}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Marching the Ray}{18}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Marching the Ray}{19}{section.2.3}%
 \contentsline {section}{\numberline {2.4}When to march rather than trace}{21}{section.2.4}%
 \contentsline {chapter}{\numberline {3}Signed Distance Functions Techniques}{23}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Basic Shapes}{23}{section.3.1}%
@@ -18,14 +18,15 @@
 \contentsline {subsection}{\numberline {3.3.1}Union, Intersection and Subtraction}{29}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Smooth Union, Intersection and Subtraction}{30}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Domain Repetition}{32}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Displacement}{33}{subsection.3.3.4}%
-\contentsline {chapter}{\numberline {4}Clouds}{36}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Volumetric Rendering}{36}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Noise}{37}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Volumetric Shading}{37}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Conclusion and Future Works}{38}{chapter.5}%
-\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{39}{chapter.5}%
-\contentsline {section}{\numberline {5.1}*}{39}{section.5.1}%
-\contentsline {chapter}{\numberline {}\uppercase {Glossário}}{40}{section.5.1}%
-\contentsline {chapter}{\numberline {}\uppercase {ANEXO A}\vspace {-4mm}}{41}{section.5.1}%
-\contentsline {chapter}{\numberline {}\uppercase {ANEXO B}\vspace {-4mm}}{41}{section.5.1}%
+\contentsline {subsection}{\numberline {3.3.4}Displacement}{34}{subsection.3.3.4}%
+\contentsline {chapter}{\numberline {4}Clouds}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Volumetric Rendering}{37}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Shaping the Cloud with Noise}{40}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Volumetric Shading}{41}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Conclusion}{44}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Future Works}{44}{section.5.1}%
+\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{45}{section.5.1}%
+\contentsline {section}{\numberline {5.2}*}{45}{section.5.2}%
+\contentsline {chapter}{\numberline {}\uppercase {Glossário}}{46}{section.5.2}%
+\contentsline {chapter}{\numberline {}\uppercase {ANEXO A}\vspace {-4mm}}{47}{section.5.2}%
+\contentsline {chapter}{\numberline {}\uppercase {ANEXO B}\vspace {-4mm}}{47}{section.5.2}%
