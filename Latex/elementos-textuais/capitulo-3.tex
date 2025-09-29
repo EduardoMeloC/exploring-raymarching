@@ -2,7 +2,7 @@
 
 A \textit{Signed Distance Function} (SDF) provides a way to describe geometric forms in a continuous manner by associating each point in space with its \textit{signed distance} to a surface. The function returns positive value when the point is outside the shape and a negative value when the point is inside the shape. This framework is highly flexible, allowing the representation of shapes in 2D, 3D, and even N-dimensional spaces, since the Euclidean distance is not restricted to a particular number of dimensions.  
 
-A defining feature of Ray Marching is its use of signed distance functions to describe geometry, rather than traditional vertices, edges, and faces. This approach is precisely what makes Ray Marching a powerful technique, capable of rendering of smooth surfaces, shapes distorted by procedural noise, repetitive patterns, fractals, and dynamic shapes that evolve over time.
+A defining feature of Ray Marching is its use of signed distance functions to describe geometry, rather than traditional vertices, edges, and faces. This approach is precisely what makes Ray Marching a powerful technique, capable of rendering smooth surfaces, shapes distorted by procedural noise, repetitive patterns, and dynamic shapes that evolve over time.
     
 This chapter further describes signed distance functions for basic shapes and explores techniques for constructing complex shapes by combining and manipulating the fields to achieve the desired scene composition.
 
@@ -146,7 +146,7 @@ If expanded to $\mathbb{R}^4 $, the SDF can help visualize forms such as the tes
 
 \section{Basic Transformations}
 
-All primitive described in the previous section were centered at the origin. In order to perform a transformation such as scaling, rotation or translation, it is possible to apply the transformation at the query point $\mathbf{p}$.
+All primitives described in the previous section were centered at the origin. In order to perform a transformation such as scaling, rotation or translation, it is possible to apply the transformation at the query point $\mathbf{p}$.
 
 %BOTAR EXEMPLO DE CODIGO FACIL
 %vec3 opTransformRotate( in vec3 p, in transform t, in sdf3d primitive ){

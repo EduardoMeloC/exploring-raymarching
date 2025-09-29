@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1758759190.93102 "main.bcf" "main.bbl" "main" 1759106941.60471 0
-  "elementos-postextuais/referencias.bib" 1758757380 2230 cf56455bbdcae15cadd180ea54343521 ""
-  "main.bcf" 1759106940 108183 bc0c8e783687dacc2fed0dde7f87c40b "pdflatex"
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1759118928.43113 -1
+  "elementos-postextuais/referencias.bib" 1759114480 3870 13fb71596f62b26fff84bc3974d6590d ""
+  "main.bcf" 1759118927 108688 a0b95b61e6ad1cf4570d8203e89ab0e2 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1759106933.17238 "c:/dev/TCC/Latex/main.tex" "main.pdf" "main" 1759106941.60615 0
+["pdflatex"] 1759118922.09599 "c:/dev/TCC/Latex/main.tex" "main.pdf" "main" 1759118928.43254 2
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1758759143 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbi1200.pk" 1758759175 42728 2657daaf5cbcd686e6d2430a123bdd73 ""
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1758759177 31952 c439c305f1ec4a12e686d58acd6795ed ""
@@ -184,11 +184,11 @@
   "elementos-pretextuais/dedicatoria.tex" 1758757380 101 cd81379f4e64bdfedf109c5a66860c94 ""
   "elementos-pretextuais/epigrafe.tex" 1758757380 264 1f52b80cab7a0a70b78bebe122d4e103 ""
   "elementos-pretextuais/glossario.tex" 1758757380 88 9de2202535524625dbc1af662c8cf5ef ""
-  "elementos-textuais/capitulo-1.tex" 1759009896 4164 ca417a4ee6285939a044b2e771b9cfc2 ""
-  "elementos-textuais/capitulo-2.tex" 1759106830 18152 da8289265b315420bbae53fb5c3e8658 ""
-  "elementos-textuais/capitulo-3.tex" 1759009908 23702 821ea7f821613e63791e027a5f3b50ac ""
-  "elementos-textuais/capitulo-4.tex" 1759106936 13186 2c3f4d0d58b4701b1000ec8e33fd83ea ""
-  "elementos-textuais/capitulo-5.tex" 1759106317 1201 ddfd5d8de450d1f6c160b3a4a9946af5 ""
+  "elementos-textuais/capitulo-1.tex" 1759110782 4784 46136319e0494116abc4fc68ee0faefc ""
+  "elementos-textuais/capitulo-2.tex" 1759115241 18116 c8d12d6bdd47c70a9b0aab35cd10be8e ""
+  "elementos-textuais/capitulo-3.tex" 1759117266 23690 bf717fb4344556e9ff9886e0858f46b5 ""
+  "elementos-textuais/capitulo-4.tex" 1759118918 13201 6d634318ba572b5b96c5edd3773b9b53 ""
+  "elementos-textuais/capitulo-5.tex" 1759114480 2725 e8ef7b3f2c731a9c0bb682b1f514298d ""
   "iidefs.sty" 1758757380 1919 615fe0ae2ef8881a9b13484e1c89d647 ""
   "imagens/circle-customColor.png" 1758757380 157286 af205adefa3b5405783a73825a640bae ""
   "imagens/circle-plainColor.png" 1758757380 7769 763e36a5913e208d390777331f907b97 ""
@@ -239,14 +239,14 @@
   "imagens/unlit-raymarched-sphere.png" 1758757380 11907 fc6fa22acc14608edb6549415adaeb63 ""
   "imagens/unlit-raytraced-sphere.png" 1758757380 9409 868dc52ffe61a68c7d8dd4bb9eb87e20 ""
   "listings-glsl.prf" 1758757380 4748 9ff1c6bd33d1999a16d76e6ce4d5a207 ""
-  "main.aux" 1759106940 15875 6e81d346e72fb15f0abe686a2d8042e8 "pdflatex"
-  "main.bbl" 1758759194 6044 c46c743e94140db4849b6f106cdb405d "biber main"
-  "main.lof" 1759106940 3226 30ad699e3214b6d61b25af5a69a9c7b2 "pdflatex"
-  "main.lot" 1759106940 174 4dce01e29b71ca9c7b3e978ad68a2bce "pdflatex"
-  "main.out" 1759106940 4313 906d591e94570bf3b70236ec16f5df77 "pdflatex"
-  "main.run.xml" 1759106940 2334 d06a224f68e0bcb13b9526a6552cf805 "pdflatex"
+  "main.aux" 1759118927 16420 dbc6087eec09bff1122a297527c8570e "pdflatex"
+  "main.bbl" 1759114486 6044 c46c743e94140db4849b6f106cdb405d "biber main"
+  "main.lof" 1759118927 3226 30ad699e3214b6d61b25af5a69a9c7b2 "pdflatex"
+  "main.lot" 1759118927 174 4dce01e29b71ca9c7b3e978ad68a2bce "pdflatex"
+  "main.out" 1759118927 4313 906d591e94570bf3b70236ec16f5df77 "pdflatex"
+  "main.run.xml" 1759118927 2334 e2c7340c001ada4a8c338d1790f1f5a3 "pdflatex"
   "main.tex" 1758757380 5749 3d1f00f32c585bc342d61a8b7e731b5d ""
-  "main.toc" 1759106940 2519 7c68fc25f2b93894ef1abe867e310611 "pdflatex"
+  "main.toc" 1759118927 2519 4f639f32d1dea6a566fa76ab69669c20 "pdflatex"
   "projetofinal-dcc.cls" 1758757380 28439 9a2daaf641bc8bf4de11a3b494e81c08 ""
   "tocstyle.sty" 1758757380 35919 46e27d40dcd0b3ee2a301d9bdf72fdbb ""
   (generated)

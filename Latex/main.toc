@@ -25,8 +25,8 @@
 \contentsline {section}{\numberline {4.3}Volumetric Shading}{41}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Conclusion}{44}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Future Works}{44}{section.5.1}%
-\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{45}{section.5.1}%
-\contentsline {section}{\numberline {5.2}*}{45}{section.5.2}%
-\contentsline {chapter}{\numberline {}\uppercase {Glossário}}{46}{section.5.2}%
-\contentsline {chapter}{\numberline {}\uppercase {ANEXO A}\vspace {-4mm}}{47}{section.5.2}%
-\contentsline {chapter}{\numberline {}\uppercase {ANEXO B}\vspace {-4mm}}{47}{section.5.2}%
+\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{46}{section.5.1}%
+\contentsline {section}{\numberline {5.2}*}{46}{section.5.2}%
+\contentsline {chapter}{\numberline {}\uppercase {Glossário}}{47}{section.5.2}%
+\contentsline {chapter}{\numberline {}\uppercase {ANEXO A}\vspace {-4mm}}{48}{section.5.2}%
+\contentsline {chapter}{\numberline {}\uppercase {ANEXO B}\vspace {-4mm}}{48}{section.5.2}%

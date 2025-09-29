@@ -5,6 +5,23 @@ geometry, allowing us to easily apply techniques for the construction of procedu
 
 \section{Future Works}
 
+Although the presented methods provide a strong foundation for cloud rendering, further explorations could be made to apply more physically accurate shading on clouds. State of the art cloud rendering technology is built upon the presented foundation, and on top of that, Beer's Law & Powder Effect is applied in Horizon Zero Dawn's cloud rendering. % Adicionar Referências
+
+Regarding Signed Distance Fields, many other applications are open: from Font Rendering, Ambient Sound the approximation of signed distance fields from mesh data using neural networks. 
+
+Regarding Signed Distance Fields, many other applications are open: from font rendering 
+\cite{green2007siggraph} and ambient sound propagation \cite{tiagocesar}, to the 
+approximation of distance fields from mesh data using neural networks 
+\cite{atzmon2019sal, park2019deepsdf}. Beyond these, SDFs have been employed in collision 
+detection \cite{van2011sdfcollisions}, constructive solid geometry 
+\cite{hart1996csgeometry}, and efficient pathfinding, due to their compact representation 
+of spatial information. Recent research also investigates their role in differentiable 
+rendering \cite{nimier2020differentiable} and implicit neural representations, where SDFs 
+provide a continuous and differentiable description of geometry. These diverse 
+applications highlight the versatility of SDFs as a unifying mathematical framework, 
+bridging the gap between real-time graphics, physical simulation, and emerging machine 
+learning methods.
+
 % Beer's Law & Powder Effect https://progmdong.github.io/2019-03-04/Volumetric_Rendering/
 % Mencionar outros metodos de obter formas complexas como:
 % GRIDS: https://renderdiagrams.org/2017/12/28/signed-distance-fields/
