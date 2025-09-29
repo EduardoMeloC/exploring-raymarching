@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1759118928.43113 -1
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1759120062.60197 -1
   "elementos-postextuais/referencias.bib" 1759114480 3870 13fb71596f62b26fff84bc3974d6590d ""
-  "main.bcf" 1759118927 108688 a0b95b61e6ad1cf4570d8203e89ab0e2 "pdflatex"
+  "main.bcf" 1759120061 108687 56fd8aaa9b263f8ced476ed4630040b9 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1759118922.09599 "c:/dev/TCC/Latex/main.tex" "main.pdf" "main" 1759118928.43254 2
+["pdflatex"] 1759120055.27186 "c:/dev/TCC/Latex/main.tex" "main.pdf" "main" 1759120062.60357 2
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1758759143 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbi1200.pk" 1758759175 42728 2657daaf5cbcd686e6d2430a123bdd73 ""
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1758759177 31952 c439c305f1ec4a12e686d58acd6795ed ""
@@ -239,14 +239,13 @@
   "imagens/unlit-raymarched-sphere.png" 1758757380 11907 fc6fa22acc14608edb6549415adaeb63 ""
   "imagens/unlit-raytraced-sphere.png" 1758757380 9409 868dc52ffe61a68c7d8dd4bb9eb87e20 ""
   "listings-glsl.prf" 1758757380 4748 9ff1c6bd33d1999a16d76e6ce4d5a207 ""
-  "main.aux" 1759118927 16420 dbc6087eec09bff1122a297527c8570e "pdflatex"
+  "main.aux" 1759120061 15943 3b79d139ec25db78e4c747846d8bf67f "pdflatex"
   "main.bbl" 1759114486 6044 c46c743e94140db4849b6f106cdb405d "biber main"
-  "main.lof" 1759118927 3226 30ad699e3214b6d61b25af5a69a9c7b2 "pdflatex"
-  "main.lot" 1759118927 174 4dce01e29b71ca9c7b3e978ad68a2bce "pdflatex"
-  "main.out" 1759118927 4313 906d591e94570bf3b70236ec16f5df77 "pdflatex"
-  "main.run.xml" 1759118927 2334 e2c7340c001ada4a8c338d1790f1f5a3 "pdflatex"
+  "main.lof" 1759120061 3226 19c7fe4b92ac38ee156d9d3dd30618b2 "pdflatex"
+  "main.lot" 1759120061 174 4dce01e29b71ca9c7b3e978ad68a2bce "pdflatex"
+  "main.out" 1759120061 4313 906d591e94570bf3b70236ec16f5df77 "pdflatex"
   "main.tex" 1758757380 5749 3d1f00f32c585bc342d61a8b7e731b5d ""
-  "main.toc" 1759118927 2519 4f639f32d1dea6a566fa76ab69669c20 "pdflatex"
+  "main.toc" 1759120061 2519 bf5dbb495a9456b0157897ccf0fbe37d "pdflatex"
   "projetofinal-dcc.cls" 1758757380 28439 9a2daaf641bc8bf4de11a3b494e81c08 ""
   "tocstyle.sty" 1758757380 35919 46e27d40dcd0b3ee2a301d9bdf72fdbb ""
   (generated)
