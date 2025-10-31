@@ -45,7 +45,7 @@ float sphereDistance(vec3 point, float radius){
 
 Since an SDF returns a positive distance when a point is outside the primitive and a negative distance when inside, this information can be used to assign different colors to a 2D shape rendered on the canvas.
 
-\begin{lstlisting}[language=GLSL, caption={Code 3: Rendering Circles}, label={lst:ColoringCircle} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 3: Rendering Circles}, label={lst:ColoringCircle} float=ht]
 vec3 plainColor (in float d){
      return vec3(1.0) - sign(d)*vec3(0.4);
 }
@@ -61,7 +61,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 }
 \end{lstlisting}
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
@@ -101,7 +101,7 @@ Since lighting models are outside the scope of this essay, readers may refer to 
 
 Similar to the 2D circle, the signed distance function (SDF) of a 2D box, or rectangle, can be generalized to higher dimensions.
 
-\begin{lstlisting}[language=GLSL, caption={Code 4: Rectangle and Box SDF}, label={lst:RectangleAndBox} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 4: Rectangle and Box SDF}, label={lst:RectangleAndBox} float=ht]
 float rectangleDistance( in vec2 p, in vec2 b ){
     vec2 d = abs(p)-b;
     return length(max(d,0.0)) + min(max(d.x,d.y),0.0);
@@ -168,7 +168,7 @@ This section describes some of the main SDF operations used in modeling based on
 Operations between objects are some of the most elegant features of SDFs, and the most basic ones are the combinations: Union, Intersection and Subtraction. These three have very simple definitions and are great ways to introduce SDF operations. They take as input the SDF resulting distance of two primitive SDFs.
 
 
-\begin{lstlisting}[language=GLSL, caption={Code 5: SDF Union, Intersection and Subtraction}, label={lst:UnionIntersectionSubtraction} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 5: SDF Union, Intersection and Subtraction}, label={lst:UnionIntersectionSubtraction} float=ht]
 float unionOperation( float d1, float d2 )
 {
     return min(d1,d2);
@@ -192,7 +192,7 @@ From the perspective of a 3D raymarched vision, given $\mathbf{d1}$ and $\mathbf
 \end{itemize}
 
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
 
     % Row 1
@@ -244,7 +244,7 @@ From the perspective of a 3D raymarched vision, given $\mathbf{d1}$ and $\mathbf
 A more complicated, yet visually appealing way to display the basic boolean operations is through the use of Smooth Minimum and Maximum. As the name implies, instead of binary hard edge transitions between the primitives, it offers a smooth blend. Figures \ref{fig:sunion}, \ref{fig:sinter} and \ref{fig:ssub} combine the same box and circle with each smooth variant of the basic operations.
 This blending can be achieved through multiple types of functions, such as quadratic, cubic, exponential, sigmoid, each having it`s pros and cons \cite{quilez2013smin}.
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
@@ -288,13 +288,13 @@ Since $\mathbf{k}$ is the distance in which the shapes start to combine, $\mathb
 
 \begin{equation}
     c\ =\frac{h^{n}k}{2n}
-    \label{eq:example_equation}
+    \label{eq:example_equation_2}
 \end{equation}
 
 Between all values of $\mathbf{n}$, the quadratic version ($\mathbf{n=2}$) produces the gentler of curves, and is prioritized over the others. To better visualize what $\mathbf{c}$ means, Figure \ref{fig:sunion} represents $\mathbf{c}$ in purple. Squaring $\mathbf{h}$ makes c ease into 1, instead of following a straight ramp. Multiplying by $\mathbf{k}$ compensates any variation, as the peak of $\mathbf{h}$ decreases as $\mathbf{k}$ increases. Lastly, the divisor helps position the peak to the right place.
 To achieve smooth maximum, all that is needed is $\mathbf{max(a,b)+c}$.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
 
     % Row 1
@@ -349,7 +349,7 @@ There are many variations of this technique, as any domain parametrization can b
 
 This can be achieved through the natural repetitive pattern of trigonometric functions such as $sin(x)$ and $cos(x)$, however, bending the domain with these functions will compromise the accurate Euclidean distances of the space the SDFs relies on, and this might generate unwished features. Functions such as $round(x)$ or $mod(x)$ (modulus operator) are more commonly used instead.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
 
     % Row 1
@@ -400,7 +400,7 @@ shows an example of repeated spheres in a repeated domain.
 
 Displacement is a technique used to adjust the geometry to simulate bumps or irregularities, adding fine detail to the surface. This is often done by perturbing the distance field using patterns that look random, such as static or grain, which can be generated with mathematical formulas (procedural noise) or taken from images (noise textures).
 
-\begin{lstlisting}[language=GLSL, caption={Code 6: SDF Displacement}, label={lst:Displacement} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 6: SDF Displacement}, label={lst:Displacement} float=ht]
 float displacementOperation( in sdf3d sdfShape, in vec3 p )
 {
     float d1 = sdfShape(p);
@@ -415,7 +415,7 @@ A key property of 2D and 3D Signed Distance Functions is that their gradient has
 
 This issue can be attenuated by reducing the step size and increasing the number of marching iterations, though this comes at a performance cost. In practice, small deviations in the length of the gradient rarely produce noticeable artifacts, making displacement through function addition still useful for subtle surface displacement.
 
-\begin{lstlisting}[language=GLSL, caption={Code 7: Wave Distortion on Sphere}, label={lst:DistortionOnSphere} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 7: Wave Distortion on Sphere}, label={lst:DistortionOnSphere} float=ht]
 float distortedSphereDistance(vec3 p){
     float sphereRadius = 2.0;
     vec3 sphereCenter = vec3(0., 2., -5.);

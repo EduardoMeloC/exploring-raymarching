@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.21)  30 OCT 2025 20:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.21)  30 OCT 2025 23:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -7,32 +7,7 @@ entering extended mode
 (c:/Users/Rafael/Documents/GitHub/TCC/_Latex/main.tex
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
-(./projetofinal-dcc.cls (c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.sty
-Package: csquotes 2024-04-04 v5.2o context-sensitive quotations (JAW)
- (c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count275
-) (c:/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
-)
-\csq@reset=\count276
-\csq@gtype=\count277
-\csq@glevel=\count278
-\csq@qlevel=\count279
-\csq@maxlvl=\count280
-\csq@tshold=\count281
-\csq@ltx@everypar=\toks18
-Package csquotes Info: The 'quote' environment appears to be undefined.
-(csquotes)             I'm defining a typical 'quote' environment now.
- (c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.def
-File: csquotes.def 2024-04-04 v5.2o csquotes generic definitions (JAW)
-)
-Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
-Package csquotes Info: ... configuration file loaded successfully.
- (c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.cfg
-File: csquotes.cfg 
-)) (c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+(./projetofinal-dcc.cls (c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
  (c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
@@ -57,17 +32,17 @@ Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
 \col@sep=\dimen148
 \ar@mcellbox=\box53
 \extrarowheight=\dimen149
-\NC@list=\toks19
+\NC@list=\toks17
 \extratabsurround=\skip49
 \backup@length=\skip50
 \ar@cellbox=\box54
 )
-\everycr=\toks20
+\everycr=\toks18
 \minrowclearance=\skip51
-\rownum=\count282
+\rownum=\count275
 ) (c:/texlive/2025/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2025/08/03 v25.12 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
-\babel@savecnt=\count283
+\babel@savecnt=\count276
 LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2045.
 LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2047.
 LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2049.
@@ -79,7 +54,7 @@ LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) o
 \l@unhyphenated=\language90
  (c:/texlive/2025/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count284
+\bbl@dirlevel=\count277
  (c:/texlive/2025/texmf-dist/tex/generic/babel-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
  (c:/texlive/2025/texmf-dist/tex/generic/babel/locale/en/babel-english.tex
@@ -106,13 +81,19 @@ Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
+) (c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count278
+) (c:/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
 ) (c:/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
  (c:/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )) (c:/texlive/2025/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count285
+\lrq@indent=\count279
  (c:/texlive/2025/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 )) (c:/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
@@ -121,49 +102,49 @@ Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-\c@tabx@nest=\count286
-\c@listtotal=\count287
-\c@listcount=\count288
-\c@liststart=\count289
-\c@liststop=\count290
-\c@citecount=\count291
-\c@citetotal=\count292
-\c@multicitecount=\count293
-\c@multicitetotal=\count294
-\c@instcount=\count295
-\c@maxnames=\count296
-\c@minnames=\count297
-\c@maxitems=\count298
-\c@minitems=\count299
-\c@citecounter=\count300
-\c@maxcitecounter=\count301
-\c@savedcitecounter=\count302
-\c@uniquelist=\count303
-\c@uniquename=\count304
-\c@refsection=\count305
-\c@refsegment=\count306
-\c@maxextratitle=\count307
-\c@maxextratitleyear=\count308
-\c@maxextraname=\count309
-\c@maxextradate=\count310
-\c@maxextraalpha=\count311
-\c@abbrvpenalty=\count312
-\c@highnamepenalty=\count313
-\c@lownamepenalty=\count314
-\c@maxparens=\count315
-\c@parenlevel=\count316
-\blx@tempcnta=\count317
-\blx@tempcntb=\count318
-\blx@tempcntc=\count319
-\c@blx@maxsection=\count320
-\blx@maxsegment@0=\count321
-\blx@notetype=\count322
-\blx@parenlevel@text=\count323
-\blx@parenlevel@foot=\count324
-\blx@sectionciteorder@0=\count325
-\blx@sectionciteorderinternal@0=\count326
-\blx@entrysetcounter=\count327
-\blx@biblioinstance=\count328
+\c@tabx@nest=\count280
+\c@listtotal=\count281
+\c@listcount=\count282
+\c@liststart=\count283
+\c@liststop=\count284
+\c@citecount=\count285
+\c@citetotal=\count286
+\c@multicitecount=\count287
+\c@multicitetotal=\count288
+\c@instcount=\count289
+\c@maxnames=\count290
+\c@minnames=\count291
+\c@maxitems=\count292
+\c@minitems=\count293
+\c@citecounter=\count294
+\c@maxcitecounter=\count295
+\c@savedcitecounter=\count296
+\c@uniquelist=\count297
+\c@uniquename=\count298
+\c@refsection=\count299
+\c@refsegment=\count300
+\c@maxextratitle=\count301
+\c@maxextratitleyear=\count302
+\c@maxextraname=\count303
+\c@maxextradate=\count304
+\c@maxextraalpha=\count305
+\c@abbrvpenalty=\count306
+\c@highnamepenalty=\count307
+\c@lownamepenalty=\count308
+\c@maxparens=\count309
+\c@parenlevel=\count310
+\blx@tempcnta=\count311
+\blx@tempcntb=\count312
+\blx@tempcntc=\count313
+\c@blx@maxsection=\count314
+\blx@maxsegment@0=\count315
+\blx@notetype=\count316
+\blx@parenlevel@text=\count317
+\blx@parenlevel@foot=\count318
+\blx@sectionciteorder@0=\count319
+\blx@sectionciteorderinternal@0=\count320
+\blx@entrysetcounter=\count321
+\blx@biblioinstance=\count322
 \labelnumberwidth=\skip52
 \labelalphawidth=\skip53
 \biblabelsep=\skip54
@@ -175,9 +156,9 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \blx@bcfin=\read3
 \blx@bcfout=\write3
 \blx@langwohyphens=\language91
-\c@mincomprange=\count329
-\c@maxcomprange=\count330
-\c@mincompwidth=\count331
+\c@mincomprange=\count323
+\c@maxcomprange=\count324
+\c@mincompwidth=\count325
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (c:/texlive/2025/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -187,74 +168,74 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'alphabetic.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count332
-\c@savedafterword=\count333
-\c@annotator=\count334
-\c@savedannotator=\count335
-\c@author=\count336
-\c@savedauthor=\count337
-\c@bookauthor=\count338
-\c@savedbookauthor=\count339
-\c@commentator=\count340
-\c@savedcommentator=\count341
-\c@editor=\count342
-\c@savededitor=\count343
-\c@editora=\count344
-\c@savededitora=\count345
-\c@editorb=\count346
-\c@savededitorb=\count347
-\c@editorc=\count348
-\c@savededitorc=\count349
-\c@foreword=\count350
-\c@savedforeword=\count351
-\c@holder=\count352
-\c@savedholder=\count353
-\c@introduction=\count354
-\c@savedintroduction=\count355
-\c@namea=\count356
-\c@savednamea=\count357
-\c@nameb=\count358
-\c@savednameb=\count359
-\c@namec=\count360
-\c@savednamec=\count361
-\c@translator=\count362
-\c@savedtranslator=\count363
-\c@shortauthor=\count364
-\c@savedshortauthor=\count365
-\c@shorteditor=\count366
-\c@savedshorteditor=\count367
-\c@labelname=\count368
-\c@savedlabelname=\count369
-\c@institution=\count370
-\c@savedinstitution=\count371
-\c@lista=\count372
-\c@savedlista=\count373
-\c@listb=\count374
-\c@savedlistb=\count375
-\c@listc=\count376
-\c@savedlistc=\count377
-\c@listd=\count378
-\c@savedlistd=\count379
-\c@liste=\count380
-\c@savedliste=\count381
-\c@listf=\count382
-\c@savedlistf=\count383
-\c@location=\count384
-\c@savedlocation=\count385
-\c@organization=\count386
-\c@savedorganization=\count387
-\c@origlocation=\count388
-\c@savedoriglocation=\count389
-\c@origpublisher=\count390
-\c@savedorigpublisher=\count391
-\c@publisher=\count392
-\c@savedpublisher=\count393
-\c@language=\count394
-\c@savedlanguage=\count395
-\c@origlanguage=\count396
-\c@savedoriglanguage=\count397
-\c@pageref=\count398
-\c@savedpageref=\count399
+\c@afterword=\count326
+\c@savedafterword=\count327
+\c@annotator=\count328
+\c@savedannotator=\count329
+\c@author=\count330
+\c@savedauthor=\count331
+\c@bookauthor=\count332
+\c@savedbookauthor=\count333
+\c@commentator=\count334
+\c@savedcommentator=\count335
+\c@editor=\count336
+\c@savededitor=\count337
+\c@editora=\count338
+\c@savededitora=\count339
+\c@editorb=\count340
+\c@savededitorb=\count341
+\c@editorc=\count342
+\c@savededitorc=\count343
+\c@foreword=\count344
+\c@savedforeword=\count345
+\c@holder=\count346
+\c@savedholder=\count347
+\c@introduction=\count348
+\c@savedintroduction=\count349
+\c@namea=\count350
+\c@savednamea=\count351
+\c@nameb=\count352
+\c@savednameb=\count353
+\c@namec=\count354
+\c@savednamec=\count355
+\c@translator=\count356
+\c@savedtranslator=\count357
+\c@shortauthor=\count358
+\c@savedshortauthor=\count359
+\c@shorteditor=\count360
+\c@savedshorteditor=\count361
+\c@labelname=\count362
+\c@savedlabelname=\count363
+\c@institution=\count364
+\c@savedinstitution=\count365
+\c@lista=\count366
+\c@savedlista=\count367
+\c@listb=\count368
+\c@savedlistb=\count369
+\c@listc=\count370
+\c@savedlistc=\count371
+\c@listd=\count372
+\c@savedlistd=\count373
+\c@liste=\count374
+\c@savedliste=\count375
+\c@listf=\count376
+\c@savedlistf=\count377
+\c@location=\count378
+\c@savedlocation=\count379
+\c@organization=\count380
+\c@savedorganization=\count381
+\c@origlocation=\count382
+\c@savedoriglocation=\count383
+\c@origpublisher=\count384
+\c@savedorigpublisher=\count385
+\c@publisher=\count386
+\c@savedpublisher=\count387
+\c@language=\count388
+\c@savedlanguage=\count389
+\c@origlanguage=\count390
+\c@savedoriglanguage=\count391
+\c@pageref=\count392
+\c@savedpageref=\count393
 \shorthandwidth=\skip60
 \shortjournalwidth=\skip61
 \shortserieswidth=\skip62
@@ -278,19 +259,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (c:/texlive/2025/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2025/07/10 v3.21 biblatex compatibility (PK/MW)
-\c@textcitecount=\count400
-\c@textcitetotal=\count401
-\c@textcitemaxnames=\count402
-\c@biburlbigbreakpenalty=\count403
-\c@biburlbreakpenalty=\count404
-\c@biburlnumpenalty=\count405
-\c@biburlucpenalty=\count406
-\c@biburllcpenalty=\count407
+\c@textcitecount=\count394
+\c@textcitetotal=\count395
+\c@textcitemaxnames=\count396
+\c@biburlbigbreakpenalty=\count397
+\c@biburlbreakpenalty=\count398
+\c@biburlnumpenalty=\count399
+\c@biburlucpenalty=\count400
+\c@biburllcpenalty=\count401
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count408
+\c@smartand=\count402
 )
 Package biblatex Info: Trying to load bibliography style 'alphabetic'...
 Package biblatex Info: ... file 'alphabetic.bbx' found.
@@ -300,8 +281,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (c:/texlive/2025/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2025/07/10 v3.21 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count409
-\c@bbx:relatedtotal=\count410
+\c@bbx:relatedcount=\count403
+\c@bbx:relatedtotal=\count404
 ))
 Package biblatex Info: Trying to load citation style 'alphabetic'...
 Package biblatex Info: ... file 'alphabetic.cbx' found.
@@ -329,7 +310,7 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2025-09-02 L3 programming layer (loader) 
  (c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count411
+\l__color_backend_stack_int=\count405
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2025-09-02 L3 programming layer (loader) 
@@ -346,37 +327,22 @@ Document Class: report 2025/01/22 v1.4n Standard LaTeX document class
 (c:/texlive/2025/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count412
-\c@chapter=\count413
-\c@section=\count414
-\c@subsection=\count415
-\c@subsubsection=\count416
-\c@paragraph=\count417
-\c@subparagraph=\count418
-
-
-c:/texlive/2025/texmf-dist/tex/latex/base/report.cls:483: LaTeX Error: Command \quote already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.483                {\endlist}
-                               
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-\c@figure=\count419
-\c@table=\count420
+\c@part=\count406
+\c@chapter=\count407
+\c@section=\count408
+\c@subsection=\count409
+\c@subsubsection=\count410
+\c@paragraph=\count411
+\c@subparagraph=\count412
+\c@figure=\count413
+\c@table=\count414
 \abovecaptionskip=\skip74
 \belowcaptionskip=\skip75
 \bibindent=\dimen151
 ) (c:/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
-\inpenc@prehook=\toks21
-\inpenc@posthook=\toks22
+\inpenc@prehook=\toks20
+\inpenc@posthook=\toks21
 ) (c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
 ) (c:/texlive/2025/texmf-dist/tex/latex/tools/indentfirst.sty
@@ -403,7 +369,7 @@ For additional information on amsmath, use the `?' option.
 Package: amstext 2024/11/17 v2.01 AMS text
  (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks23
+\@emptytoks=\toks22
 \ex@=\dimen154
 )) (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
@@ -411,14 +377,14 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ) (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count421
+\inf@bad=\count415
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count422
-\leftroot@=\count423
+\uproot@=\count416
+\leftroot@=\count417
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count424
-\DOTSCASE@=\count425
+\classnum@=\count418
+\DOTSCASE@=\count419
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
@@ -431,31 +397,31 @@ LaTeX Info: Redefining \Bigg on input line 724.
 \big@size=\dimen156
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count426
+\macc@depth=\count420
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count427
+\c@MaxMatrixCols=\count421
 \dotsspace@=\muskip22
-\c@parentequation=\count428
-\dspbrk@lvl=\count429
-\tag@help=\toks24
-\row@=\count430
-\column@=\count431
-\maxfields@=\count432
-\andhelp@=\toks25
+\c@parentequation=\count422
+\dspbrk@lvl=\count423
+\tag@help=\toks23
+\row@=\count424
+\column@=\count425
+\maxfields@=\count426
+\andhelp@=\toks24
 \eqnshift@=\dimen157
 \alignsep@=\dimen158
 \tagshift@=\dimen159
 \tagwidth@=\dimen160
 \totwidth@=\dimen161
 \lineht@=\dimen162
-\@envbody=\toks26
+\@envbody=\toks25
 \multlinegap=\skip77
 \multlinetaggap=\skip78
-\mathdisplay@stack=\toks27
+\mathdisplay@stack=\toks26
 LaTeX Info: Redefining \[ on input line 2949.
 LaTeX Info: Redefining \] on input line 2950.
 ) (c:/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -473,13 +439,13 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count433
+\c@section@level=\count427
 ) (c:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen163
-\Hy@linkcounter=\count434
-\Hy@pagecounter=\count435
+\Hy@linkcounter=\count428
+\Hy@pagecounter=\count429
  (c:/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -487,7 +453,7 @@ Now handling font encoding PD1 ...
 ) (c:/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count436
+\Hy@SavedSpaceFactor=\count430
  (c:/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -500,7 +466,7 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count437
+\c@Hy@tempcnt=\count431
 LaTeX Info: Redefining \url on input line 4801.
 \XeTeXLinkMargin=\dimen164
  (c:/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
@@ -508,7 +474,7 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (c:/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count438
+\Fld@menulength=\count432
 \Field@Width=\dimen165
 \Fld@charsize=\dimen166
 Package hyperref Info: Hyper figures OFF on input line 6078.
@@ -518,15 +484,15 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count439
-\c@Item=\count440
-\c@Hfootnote=\count441
+\Hy@abspage=\count433
+\c@Item=\count434
+\c@Hfootnote=\count435
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (c:/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count442
-\c@bookmark@seq@number=\count443
+\Fld@listcount=\count436
+\c@bookmark@seq@number=\count437
  (c:/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
  (c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -551,28 +517,28 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthL=\skip91
 \f@nch@widthC=\skip92
 \f@nch@widthR=\skip93
-\@temptokenb=\toks28
+\@temptokenb=\toks27
 ) (./iidefs.sty
 Package: iidefs 
 ) (c:/texlive/2025/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count444
+\lst@mode=\count438
 \lst@gtempboxa=\box57
-\lst@token=\toks29
-\lst@length=\count445
+\lst@token=\toks28
+\lst@length=\count439
 \lst@currlwidth=\dimen167
-\lst@column=\count446
-\lst@pos=\count447
+\lst@column=\count440
+\lst@pos=\count441
 \lst@lostspace=\dimen168
 \lst@width=\dimen169
-\lst@newlines=\count448
-\lst@lineno=\count449
+\lst@newlines=\count442
+\lst@lineno=\count443
 \lst@maxwidth=\dimen170
  (c:/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty
 File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
 ) (c:/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
-\c@lstnumber=\count450
-\lst@skipnumbers=\count451
+\c@lstnumber=\count444
+\lst@skipnumbers=\count445
 \lst@framebox=\box58
 ) (c:/texlive/2025/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2024/09/23 1.10c listings configuration
@@ -580,17 +546,17 @@ File: listings.cfg 2024/09/23 1.10c listings configuration
 Package: listings 2024/09/23 1.10c (Carsten Heinz)
  (c:/texlive/2025/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2020/02/08 v1.2c extra appendix facilities
-\c@@pps=\count452
-\c@@ppsavesec=\count453
-\c@@ppsaveapp=\count454
+\c@@pps=\count446
+\c@@ppsavesec=\count447
+\c@@ppsaveapp=\count448
 ) (c:/texlive/2025/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
 \labelindent=\skip94
 \enit@outerparindent=\dimen171
-\enit@toks=\toks30
+\enit@toks=\toks29
 \enit@inbox=\box59
-\enit@count@id=\count455
-\enitdp@description=\count456
+\enit@count@id=\count449
+\enitdp@description=\count450
 ) (c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
  (c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
@@ -605,27 +571,27 @@ Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@hangindent=\dimen179
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count457
-\c@continuedfloat=\count458
+\c@caption@flags=\count451
+\c@continuedfloat=\count452
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 ) (c:/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count459
-\float@exts=\toks31
+\c@float@type=\count453
+\float@exts=\toks30
 \float@box=\box60
-\@float@everytoks=\toks32
+\@float@everytoks=\toks31
 \@floatcapt=\box61
 ) (c:/texlive/2025/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen180
 \WF@size=\dimen181
-\c@WF@wrappedlines=\count460
+\c@WF@wrappedlines=\count454
 \WF@box=\box62
-\WF@everypar=\toks33
+\WF@everypar=\toks32
 Package: wrapfig 2003/01/31  v 3.6
 )
-\c@ii@authorcount=\count461
-\c@ii@bancacount=\count462
+\c@ii@authorcount=\count455
+\c@ii@bancacount=\count456
 \titlepagewinwidth=\skip95
 \titlepagewinheight=\skip96
 \titlepagewinvoffset=\skip97
@@ -640,7 +606,7 @@ Package tocstyle Warning: THIS IS A DEPRECATED ALPHA VERSION!
 (tocstyle)                THERE IS NO SUPPORT, IF YOU USE THIS PACKAGE!
 (tocstyle)                Maybe it would be better, not to load this package.
 
-\tocstyle@indentstyle=\count463
+\tocstyle@indentstyle=\count457
 Package tocstyle Info: no tocstyle.cfg found on input line 949.
 )
 exclude: 
@@ -666,66 +632,65 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 ) (c:/texlive/2025/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks34
-\thm@bodyfont=\toks35
-\thm@headfont=\toks36
-\thm@notefont=\toks37
-\thm@headpunct=\toks38
+\thm@style=\toks33
+\thm@bodyfont=\toks34
+\thm@headfont=\toks35
+\thm@notefont=\toks36
+\thm@headpunct=\toks37
 \thm@preskip=\skip98
 \thm@postskip=\skip99
 \thm@headsep=\skip100
-\dth@everypar=\toks39
+\dth@everypar=\toks38
 ) (c:/texlive/2025/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
-\@float@every@algorithm=\toks40
-\c@algorithm=\count464
+\@float@every@algorithm=\toks39
+\c@algorithm=\count458
 ) (c:/texlive/2025/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
  (c:/texlive/2025/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count465
-\c@ALG@rem=\count466
-\c@ALG@nested=\count467
+\c@ALG@line=\count459
+\c@ALG@rem=\count460
+\c@ALG@nested=\count461
 \ALG@tlm=\skip101
 \ALG@thistlm=\skip102
-\c@ALG@Lnr=\count468
-\c@ALG@blocknr=\count469
-\c@ALG@storecount=\count470
-\c@ALG@tmpcounter=\count471
+\c@ALG@Lnr=\count462
+\c@ALG@blocknr=\count463
+\c@ALG@storecount=\count464
+\c@ALG@tmpcounter=\count465
 \ALG@tmplength=\skip103
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (c:/texlive/2025/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
-\c@KVtest=\count472
+\c@KVtest=\count466
 \sf@farskip=\skip104
 \sf@captopadj=\dimen182
 \sf@capskip=\skip105
 \sf@nearskip=\skip106
-\c@subfigure=\count473
-\c@subfigure@save=\count474
-\c@lofdepth=\count475
-\c@subtable=\count476
-\c@subtable@save=\count477
-\c@lotdepth=\count478
+\c@subfigure=\count467
+\c@subfigure@save=\count468
+\c@lofdepth=\count469
+\c@subtable=\count470
+\c@subtable@save=\count471
+\c@lotdepth=\count472
 \sf@top=\skip107
 \sf@bottom=\skip108
 ) (./listings-glsl.prf (c:/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 ))
 
-Package csquotes Warning: Load 'inputenc' before 'csquotes' on input line 71.
-
-Package csquotes Info: Checking for multilingual support...
-Package csquotes Info: ... found 'babel' package.
-Package csquotes Info: Adjusting default style.
-Package csquotes Info: Redefining alias 'default' -> 'english'.
-
 Package biblatex Warning: Load 'inputenc' before biblatex.
 
-No file main.aux.
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+\@quotelevel=\count473
+\@quotereset=\count474
+(./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
@@ -746,19 +711,19 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
 LaTeX Font Info:    ... okay on input line 71.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 71.
 LaTeX Font Info:    ... okay on input line 71.
-(c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count479
+\scratchcounter=\count475
 \scratchdimen=\dimen183
 \scratchbox=\box63
-\nofMPsegments=\count480
-\nofMParguments=\count481
-\everyMPshowfont=\toks41
-\MPscratchCnt=\count482
+\nofMPsegments=\count476
+\nofMParguments=\count477
+\everyMPshowfont=\toks40
+\MPscratchCnt=\count478
 \MPscratchDim=\dimen184
-\MPnumerator=\count483
-\makeMPintoPDFobject=\count484
-\everyMPtoPDFconversion=\toks42
+\MPnumerator=\count479
+\makeMPintoPDFobject=\count480
+\everyMPtoPDFconversion=\toks41
 ) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -781,10 +746,11 @@ Package biblatex Info: ... file 'main.bbl' found.
 Package biblatex Info: Reference section=0 on input line 71.
 Package biblatex Info: Reference segment=0 on input line 71.
 Package hyperref Info: Link coloring OFF on input line 71.
+ (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-\c@lstlisting=\count485
+\c@lstlisting=\count481
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
@@ -827,36 +793,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 97--97
 
  []
 
-c:/Users/Rafael/Documents/GitHub/TCC/_Latex/main.tex:97: Undefined control sequence.
-<argument> \advisorname 
-                        : \@advisor \\
-l.97 \maketitle
-               
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-c:/Users/Rafael/Documents/GitHub/TCC/_Latex/main.tex:97: Undefined control sequence.
-<recently read> \coadvisorname 
-                               
-l.97 \maketitle
-               
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 97--97
-[]\T1/cmr/m/n/12 : Prof. João An-tônio Re-cio da
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--97
-
+Underfull \hbox (badness 3118) in paragraph at lines 97--97
+\T1/cmr/m/n/12 João Vi-tor de Oliveira Silva, M.Sc.:
  []
 
 
@@ -874,7 +818,7 @@ l.97 \maketitle
                 [1
 
 ]
-<elementos-pretextuais/ficha_catalografica.png, id=13, 539.01375pt x 376.40625pt>
+<elementos-pretextuais/ficha_catalografica.png, id=120, 539.01375pt x 376.40625pt>
 File: elementos-pretextuais/ficha_catalografica.png Graphic file (type png)
 <use elementos-pretextuais/ficha_catalografica.png>
 Package pdftex.def Info: elementos-pretextuais/ficha_catalografica.png  used on input line 97.
@@ -912,8 +856,188 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 <to be read again> 
                    \relax 
 l.143 \makefigurespage
-                       [3]
-No file main.lof.
+                       [3] (./main.lof
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+
+Overfull \hbox (6.85419pt too wide) in paragraph at lines 19--19
+ [][] [][]\T1/cmr/m/n/12 Raymarched Con-struc-tive Solid Ge-om-e-try Op-er-a-tions with Cube and Sphere 
+ []
+
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
+)
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
@@ -926,8 +1050,197 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 l.144 
        [4
 
-]
-No file main.toc.
+] (./main.toc
+number indent by \l@... (toc, 0):  0.0pt
+text indent by \l@... (toc, 0):  17.6207pt
+number indent by parent (toc, 0):  0.0pt
+text indent calculated (toc, 0): 13.4967pt
+number indent calculated (toc, 0): 0.0pt
+text noindent (toc, 0): 34.49158pt
+number noindent (toc, 0): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 0):  0.0pt
+text indent by \l@... (toc, 0):  17.6207pt
+number indent by parent (toc, 0):  0.0pt
+text indent calculated (toc, 0): 13.4967pt
+number indent calculated (toc, 0): 0.0pt
+text noindent (toc, 0): 34.49158pt
+number noindent (toc, 0): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 0):  0.0pt
+text indent by \l@... (toc, 0):  17.6207pt
+number indent by parent (toc, 0):  0.0pt
+text indent calculated (toc, 0): 13.4967pt
+number indent calculated (toc, 0): 0.0pt
+text noindent (toc, 0): 34.49158pt
+number noindent (toc, 0): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 2):  44.63913pt
+text indent by \l@... (toc, 2):  37.59077pt
+number indent by parent (toc, 2):  34.38048pt
+text indent calculated (toc, 2): 34.49158pt
+number indent calculated (toc, 2): 34.38048pt
+text noindent (toc, 2): 34.49158pt
+number noindent (toc, 2): 0.0pt
+number indent by \l@... (toc, 2):  44.63913pt
+text indent by \l@... (toc, 2):  37.59077pt
+number indent by parent (toc, 2):  34.38048pt
+text indent calculated (toc, 2): 34.49158pt
+number indent calculated (toc, 2): 34.38048pt
+text noindent (toc, 2): 34.49158pt
+number noindent (toc, 2): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 2):  44.63913pt
+text indent by \l@... (toc, 2):  37.59077pt
+number indent by parent (toc, 2):  34.38048pt
+text indent calculated (toc, 2): 34.49158pt
+number indent calculated (toc, 2): 34.38048pt
+text noindent (toc, 2): 34.49158pt
+number noindent (toc, 2): 0.0pt
+number indent by \l@... (toc, 2):  44.63913pt
+text indent by \l@... (toc, 2):  37.59077pt
+number indent by parent (toc, 2):  34.38048pt
+text indent calculated (toc, 2): 34.49158pt
+number indent calculated (toc, 2): 34.38048pt
+text noindent (toc, 2): 34.49158pt
+number noindent (toc, 2): 0.0pt
+number indent by \l@... (toc, 2):  44.63913pt
+text indent by \l@... (toc, 2):  37.59077pt
+number indent by parent (toc, 2):  34.38048pt
+text indent calculated (toc, 2): 34.49158pt
+number indent calculated (toc, 2): 34.38048pt
+text noindent (toc, 2): 34.49158pt
+number noindent (toc, 2): 0.0pt
+number indent by \l@... (toc, 2):  44.63913pt
+text indent by \l@... (toc, 2):  37.59077pt
+number indent by parent (toc, 2):  34.38048pt
+text indent calculated (toc, 2): 34.49158pt
+number indent calculated (toc, 2): 34.38048pt
+text noindent (toc, 2): 34.49158pt
+number noindent (toc, 2): 0.0pt
+number indent by \l@... (toc, 0):  0.0pt
+text indent by \l@... (toc, 0):  17.6207pt
+number indent by parent (toc, 0):  0.0pt
+text indent calculated (toc, 0): 13.4967pt
+number indent calculated (toc, 0): 0.0pt
+text noindent (toc, 0): 34.49158pt
+number noindent (toc, 0): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 0):  0.0pt
+text indent by \l@... (toc, 0):  17.6207pt
+number indent by parent (toc, 0):  0.0pt
+text indent calculated (toc, 0): 13.4967pt
+number indent calculated (toc, 0): 0.0pt
+text noindent (toc, 0): 34.49158pt
+number noindent (toc, 0): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+number indent by \l@... (toc, 0):  0.0pt
+text indent by \l@... (toc, 0):  17.6207pt
+number indent by parent (toc, 0):  0.0pt
+text indent calculated (toc, 0): 13.4967pt
+number indent calculated (toc, 0): 0.0pt
+text noindent (toc, 0): 34.49158pt
+number noindent (toc, 0): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
+)
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
@@ -938,424 +1251,332 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 <to be read again> 
                    \relax 
 l.159 
-       [5] (./elementos-textuais/capitulo-1.tex
+       [5]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.159 
+       [6] (./elementos-textuais/capitulo-1.tex
 Chapter 1.
-<imagens/raymarched-clouds-schneider.png, id=41, 980.91469pt x 561.59813pt>
+<imagens/raymarched-clouds-schneider.png, id=233, 980.91469pt x 561.59813pt>
 File: imagens/raymarched-clouds-schneider.png Graphic file (type png)
 <use imagens/raymarched-clouds-schneider.png>
 Package pdftex.def Info: imagens/raymarched-clouds-schneider.png  used on input line 15.
 (pdftex.def)             Requested size: 393.49646pt x 258.92097pt.
 
 
-[6
+[7
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{Hfootnote.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.23 ...es/s2016-pbs-frostbite-sky-clouds-new.pdf}
-                                                  
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[][][]\T1/cmr/m/n/10 Source: https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-
- []
+l.33 ...Shadertoy \footnotetext{www.shadertoy.com}
+                                                  , a tool for running fragm...
 
+[8 <./imagens/raymarched-clouds-schneider.png>]) (./elementos-textuais/capitulo-2.tex
 
-
-[7 <./imagens/raymarched-clouds-schneider.png>]) (./elementos-textuais/capitulo-2.tex
-
-[8]
+[9]
 Chapter 2.
-<imagens/ray-trace.jpg, id=69, 1066.98625pt x 701.62125pt>
+<imagens/ray-trace.jpg, id=255, 1066.98625pt x 701.62125pt>
 File: imagens/ray-trace.jpg Graphic file (type jpg)
 <use imagens/ray-trace.jpg>
 Package pdftex.def Info: imagens/ray-trace.jpg  used on input line 11.
 (pdftex.def)             Requested size: 302.72665pt x 199.17189pt.
 
 
-[9
+[10
 
 {c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 33.
 
 
-[10 <./imagens/ray-trace.jpg>]
+[11 <./imagens/ray-trace.jpg>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 58.
 
 
-[11]
-
 [12]
-<imagens/unlit-raytraced-sphere.png, id=127, 596.2275pt x 567.11874pt>
+
+[13]
+<imagens/unlit-raytraced-sphere.png, id=309, 596.2275pt x 567.11874pt>
 File: imagens/unlit-raytraced-sphere.png Graphic file (type png)
 <use imagens/unlit-raytraced-sphere.png>
 Package pdftex.def Info: imagens/unlit-raytraced-sphere.png  used on input line 114.
 (pdftex.def)             Requested size: 217.38014pt x 217.37651pt.
 
 
-[13 <./imagens/unlit-raytraced-sphere.png>]
-
-LaTeX Warning: Reference `fig:internet' on page 14 undefined on input line 124.
-
-
-LaTeX Warning: Reference `fig:spheretracing' on page 14 undefined on input line 124.
-
-
-LaTeX Warning: Reference `fig:raymarch_fail' on page 14 undefined on input line 124.
-
-
-LaTeX Warning: Reference `fig:spheretracing' on page 14 undefined on input line 126.
-
-
-LaTeX Warning: Reference `alg:marchray' on page 14 undefined on input line 126.
-
-<imagens/spheretracing.png, id=135, 376.40625pt x 265.99374pt>
+[14 <./imagens/unlit-raytraced-sphere.png>]
+<imagens/spheretracing.png, id=322, 376.40625pt x 265.99374pt>
 File: imagens/spheretracing.png Graphic file (type png)
 <use imagens/spheretracing.png>
 Package pdftex.def Info: imagens/spheretracing.png  used on input line 130.
 (pdftex.def)             Requested size: 217.38531pt x 153.64737pt.
-<imagens/raymarch_fixed_fail.jpg, id=136, 188.20313pt x 110.66344pt>
+<imagens/raymarch_fixed_fail.jpg, id=323, 188.20313pt x 110.66344pt>
 File: imagens/raymarch_fixed_fail.jpg Graphic file (type jpg)
 <use imagens/raymarch_fixed_fail.jpg>
 Package pdftex.def Info: imagens/raymarch_fixed_fail.jpg  used on input line 137.
 (pdftex.def)             Requested size: 217.39392pt x 127.76007pt.
-<imagens/unlit-raymarched-sphere.png, id=139, 816.04875pt x 567.11874pt>
+<imagens/unlit-raymarched-sphere.png, id=326, 816.04875pt x 567.11874pt>
 File: imagens/unlit-raymarched-sphere.png Graphic file (type png)
 <use imagens/unlit-raymarched-sphere.png>
 Package pdftex.def Info: imagens/unlit-raymarched-sphere.png  used on input line 144.
 (pdftex.def)             Requested size: 217.37256pt x 150.79631pt.
 
 
-[14]
-Overfull \vbox (105.63464pt too high) has occurred while \output is active []
+[15]
 
+[16 <./imagens/spheretracing.png> <./imagens/raymarch_fixed_fail.jpg>]
 
+[17 <./imagens/unlit-raymarched-sphere.png>]) (./elementos-textuais/capitulo-3.tex
 
-[15 <./imagens/spheretracing.png> <./imagens/raymarch_fixed_fail.jpg>]
-
-LaTeX Warning: Reference `fig:unlit_march_sphere' on page 16 undefined on input line 173.
-
-
-
-[16 <./imagens/unlit-raymarched-sphere.png>]) (./elementos-textuais/capitulo-3.tex
-
-[17]
+[18]
 Chapter 3.
 
 
-[18
+[19
 
 ]
 
-[19]
-<imagens/circle-plainColor.png, id=198, 700.6175pt x 393.47pt>
+[20]
+<imagens/circle-plainColor.png, id=376, 700.6175pt x 393.47pt>
 File: imagens/circle-plainColor.png Graphic file (type png)
 <use imagens/circle-plainColor.png>
 Package pdftex.def Info: imagens/circle-plainColor.png  used on input line 68.
 (pdftex.def)             Requested size: 170.71718pt x 95.87564pt.
-<imagens/circle-customColor.png, id=199, 700.6175pt x 393.47pt>
+<imagens/circle-customColor.png, id=377, 700.6175pt x 393.47pt>
 File: imagens/circle-customColor.png Graphic file (type png)
 <use imagens/circle-customColor.png>
 Package pdftex.def Info: imagens/circle-customColor.png  used on input line 74.
 (pdftex.def)             Requested size: 170.71718pt x 95.87564pt.
-
-
-LaTeX Warning: Reference `fig:plainColoredCircle' on page 20 undefined on input line 80.
-
-
-LaTeX Warning: Reference `fig:customColoredCircle' on page 20 undefined on input line 80.
-
-<imagens/sdf-sphere.png, id=200, 700.6175pt x 393.47pt>
+<imagens/sdf-sphere.png, id=380, 700.6175pt x 393.47pt>
 File: imagens/sdf-sphere.png Graphic file (type png)
 <use imagens/sdf-sphere.png>
 Package pdftex.def Info: imagens/sdf-sphere.png  used on input line 86.
 (pdftex.def)             Requested size: 256.0774pt x 143.81648pt.
-<imagens/rectangle-customColor.png, id=202, 700.6175pt x 393.47pt>
+<imagens/rectangle-customColor.png, id=382, 700.6175pt x 393.47pt>
 File: imagens/rectangle-customColor.png Graphic file (type png)
 <use imagens/rectangle-customColor.png>
 Package pdftex.def Info: imagens/rectangle-customColor.png  used on input line 97.
 (pdftex.def)             Requested size: 256.0774pt x 143.81648pt.
 
 
-[20 <./imagens/circle-plainColor.png> <./imagens/circle-customColor.png>]
+[21 <./imagens/circle-plainColor.png> <./imagens/circle-customColor.png>]
 
-LaTeX Warning: Reference `fig:square_sdf' on page 21 undefined on input line 116.
-
-
-
-[21 <./imagens/sdf-sphere.png> <./imagens/rectangle-customColor.png>]
-<imagens/square_sdf.png, id=235, 646.415pt x 640.3925pt>
+[22 <./imagens/sdf-sphere.png> <./imagens/rectangle-customColor.png>]
+<imagens/square_sdf.png, id=412, 646.415pt x 640.3925pt>
 File: imagens/square_sdf.png Graphic file (type png)
 <use imagens/square_sdf.png>
 Package pdftex.def Info: imagens/square_sdf.png  used on input line 127.
 (pdftex.def)             Requested size: 213.39651pt x 211.39857pt.
 
 
-[22 <./imagens/square_sdf.png>]
-<imagens/sdf-cube.png, id=241, 1927.2pt x 1084.05pt>
+[23 <./imagens/square_sdf.png>]
+<imagens/sdf-cube.png, id=418, 1927.2pt x 1084.05pt>
 File: imagens/sdf-cube.png Graphic file (type png)
 <use imagens/sdf-cube.png>
 Package pdftex.def Info: imagens/sdf-cube.png  used on input line 139.
 (pdftex.def)             Requested size: 256.0774pt x 144.0412pt.
 
 
-[23 <./imagens/sdf-cube.png>]
+[24 <./imagens/sdf-cube.png>]
 
-[24]
-<imagens/sdf-operations/cube.png, id=269, 803.0pt x 451.6875pt>
+[25]
+<imagens/sdf-operations/cube.png, id=442, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/cube.png Graphic file (type png)
 <use imagens/sdf-operations/cube.png>
 Package pdftex.def Info: imagens/sdf-operations/cube.png  used on input line 201.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/sphere.png, id=270, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/sphere.png, id=443, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/sphere.png Graphic file (type png)
 <use imagens/sdf-operations/sphere.png>
 Package pdftex.def Info: imagens/sdf-operations/sphere.png  used on input line 207.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/union.png, id=271, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/union.png, id=444, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/union.png Graphic file (type png)
 <use imagens/sdf-operations/union.png>
 Package pdftex.def Info: imagens/sdf-operations/union.png  used on input line 213.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/intersection.png, id=272, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/intersection.png, id=445, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/intersection.png Graphic file (type png)
 <use imagens/sdf-operations/intersection.png>
 Package pdftex.def Info: imagens/sdf-operations/intersection.png  used on input line 222.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/subtraction1.png, id=273, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/subtraction1.png, id=446, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/subtraction1.png Graphic file (type png)
 <use imagens/sdf-operations/subtraction1.png>
 Package pdftex.def Info: imagens/sdf-operations/subtraction1.png  used on input line 228.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/subtraction2.png, id=274, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/subtraction2.png, id=447, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/subtraction2.png Graphic file (type png)
 <use imagens/sdf-operations/subtraction2.png>
 Package pdftex.def Info: imagens/sdf-operations/subtraction2.png  used on input line 234.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-
-
-LaTeX Warning: Reference `fig:sunion' on page 25 undefined on input line 244.
-
-
-LaTeX Warning: Reference `fig:sinter' on page 25 undefined on input line 244.
-
-
-LaTeX Warning: Reference `fig:ssub' on page 25 undefined on input line 244.
-
-<imagens/smoothUnion.png, id=276, 338.26375pt x 315.1775pt>
+<imagens/smoothUnion.png, id=452, 338.26375pt x 315.1775pt>
 File: imagens/smoothUnion.png Graphic file (type png)
 <use imagens/smoothUnion.png>
 Package pdftex.def Info: imagens/smoothUnion.png  used on input line 251.
 (pdftex.def)             Requested size: 170.71718pt x 159.0696pt.
-<imagens/smoothIntersection.png, id=277, 305.14pt x 260.975pt>
+<imagens/smoothIntersection.png, id=453, 305.14pt x 260.975pt>
 File: imagens/smoothIntersection.png Graphic file (type png)
 <use imagens/smoothIntersection.png>
 Package pdftex.def Info: imagens/smoothIntersection.png  used on input line 257.
 (pdftex.def)             Requested size: 170.71718pt x 146.0136pt.
-<imagens/smoothSubtraction.png, id=278, 257.96375pt x 262.9825pt>
+<imagens/smoothSubtraction.png, id=454, 257.96375pt x 262.9825pt>
 File: imagens/smoothSubtraction.png Graphic file (type png)
 <use imagens/smoothSubtraction.png>
 Package pdftex.def Info: imagens/smoothSubtraction.png  used on input line 266.
 (pdftex.def)             Requested size: 170.71718pt x 174.04248pt.
-<imagens/desmos_smin.png, id=279, 869.2475pt x 602.25pt>
+<imagens/desmos_smin.png, id=455, 869.2475pt x 602.25pt>
 File: imagens/desmos_smin.png Graphic file (type png)
 <use imagens/desmos_smin.png>
 Package pdftex.def Info: imagens/desmos_smin.png  used on input line 272.
 (pdftex.def)             Requested size: 170.71718pt x 118.27911pt.
 
 
-[25 <./imagens/sdf-operations/cube.png> <./imagens/sdf-operations/sphere.png> <./imagens/sdf-operations/union.png> <./imagens/sdf-operations/intersection.png> <./imagens/sdf-operations/subtraction1.png> <./imagens/sdf-operations/subtraction2.png>]
+[26 <./imagens/sdf-operations/cube.png> <./imagens/sdf-operations/sphere.png> <./imagens/sdf-operations/union.png> <./imagens/sdf-operations/intersection.png> <./imagens/sdf-operations/subtraction1.png> <./imagens/sdf-operations/subtraction2.png>]
 
-[26 <./imagens/smoothUnion.png> <./imagens/smoothIntersection.png> <./imagens/smoothSubtraction.png> <./imagens/desmos_smin.png>]
-
-LaTeX Warning: Reference `fig:smin' on page 27 undefined on input line 280.
-
-
-LaTeX Warning: Reference `fig:smin' on page 27 undefined on input line 287.
-
-
-LaTeX Warning: Reference `fig:sunion' on page 27 undefined on input line 294.
-
-<imagens/smooth-sdf-operations/add-unsmooth.png, id=299, 803.0pt x 451.6875pt>
+[27 <./imagens/smoothUnion.png> <./imagens/smoothIntersection.png> <./imagens/smoothSubtraction.png> <./imagens/desmos_smin.png>]
+<imagens/smooth-sdf-operations/add-unsmooth.png, id=476, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/add-unsmooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/add-unsmooth.png>
 Package pdftex.def Info: imagens/smooth-sdf-operations/add-unsmooth.png  used on input line 303.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/subtraction-unsmooth.png, id=300, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/subtraction-unsmooth.png, id=477, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/subtraction-unsmooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/subtraction-unsmooth.png>
 Package pdftex.def Info: imagens/smooth-sdf-operations/subtraction-unsmooth.png  used on input line 309.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/intersection-unsmooth.png, id=301, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/intersection-unsmooth.png, id=478, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/intersection-unsmooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/intersection-unsmooth.png>
 Package pdftex.def Info: imagens/smooth-sdf-operations/intersection-unsmooth.png  used on input line 315.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/add-smooth.png, id=302, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/add-smooth.png, id=479, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/add-smooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/add-smooth.png>
 Package pdftex.def Info: imagens/smooth-sdf-operations/add-smooth.png  used on input line 324.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/subtraction-smooth.png, id=303, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/subtraction-smooth.png, id=480, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/subtraction-smooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/subtraction-smooth.png>
 Package pdftex.def Info: imagens/smooth-sdf-operations/subtraction-smooth.png  used on input line 330.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/intersection-smooth.png, id=304, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/intersection-smooth.png, id=481, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/intersection-smooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/intersection-smooth.png>
 Package pdftex.def Info: imagens/smooth-sdf-operations/intersection-smooth.png  used on input line 336.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-
-[27]
-<imagens/domainRepetition-circle.png, id=315, 700.6175pt x 393.47pt>
+[28 <./imagens/smooth-sdf-operations/add-unsmooth.png> <./imagens/smooth-sdf-operations/subtraction-unsmooth.png> <./imagens/smooth-sdf-operations/intersection-unsmooth.png> <./imagens/smooth-sdf-operations/add-smooth.png> <./imagens/smooth-sdf-operations/subtraction-smooth.png> <./imagens/smooth-sdf-operations/intersection-smooth.png>]
+<imagens/domainRepetition-circle.png, id=494, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-circle.png Graphic file (type png)
 <use imagens/domainRepetition-circle.png>
 Package pdftex.def Info: imagens/domainRepetition-circle.png  used on input line 358.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
-<imagens/domainRepetition-sine.png, id=316, 700.6175pt x 393.47pt>
+<imagens/domainRepetition-sine.png, id=495, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-sine.png Graphic file (type png)
 <use imagens/domainRepetition-sine.png>
 Package pdftex.def Info: imagens/domainRepetition-sine.png  used on input line 364.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
-<imagens/domainRepetition-round.png, id=317, 700.6175pt x 393.47pt>
+<imagens/domainRepetition-round.png, id=496, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-round.png Graphic file (type png)
 <use imagens/domainRepetition-round.png>
 Package pdftex.def Info: imagens/domainRepetition-round.png  used on input line 373.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
-<imagens/domainRepetition-mod.png, id=318, 700.6175pt x 393.47pt>
+<imagens/domainRepetition-mod.png, id=497, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-mod.png Graphic file (type png)
 <use imagens/domainRepetition-mod.png>
 Package pdftex.def Info: imagens/domainRepetition-mod.png  used on input line 379.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: Reference `fig:domainRepetition' on page 28 undefined on input line 387.
-
-
-LaTeX Warning: Reference `fig:sdf-3d-domainRepetition' on page 28 undefined on input line 389.
-
-<imagens/domain-repetition.png, id=319, 803.0pt x 451.6875pt>
+<imagens/domain-repetition.png, id=500, 803.0pt x 451.6875pt>
 File: imagens/domain-repetition.png Graphic file (type png)
 <use imagens/domain-repetition.png>
 Package pdftex.def Info: imagens/domain-repetition.png  used on input line 394.
 (pdftex.def)             Requested size: 256.0774pt x 144.0467pt.
 
 
-[28 <./imagens/smooth-sdf-operations/add-unsmooth.png> <./imagens/smooth-sdf-operations/subtraction-unsmooth.png> <./imagens/smooth-sdf-operations/intersection-unsmooth.png> <./imagens/smooth-sdf-operations/add-smooth.png> <./imagens/smooth-sdf-operations/subtraction-smooth.png> <./imagens/smooth-sdf-operations/intersection-smooth.png>]
-
 [29 <./imagens/domainRepetition-circle.png> <./imagens/domainRepetition-sine.png> <./imagens/domainRepetition-round.png> <./imagens/domainRepetition-mod.png>]
 
 [30 <./imagens/domain-repetition.png>]
-<imagens/sdf-distortion/sin-cos-distortion.png, id=367, 700.6175pt x 394.47375pt>
+<imagens/sdf-distortion/sin-cos-distortion.png, id=523, 700.6175pt x 394.47375pt>
 File: imagens/sdf-distortion/sin-cos-distortion.png Graphic file (type png)
 <use imagens/sdf-distortion/sin-cos-distortion.png>
 Package pdftex.def Info: imagens/sdf-distortion/sin-cos-distortion.png  used on input line 435.
 (pdftex.def)             Requested size: 256.0774pt x 144.18335pt.
-
-
-LaTeX Warning: Reference `fig:sin-cos-distortion' on page 31 undefined on input line 440.
-
 ) (./elementos-textuais/capitulo-4.tex
 
 [31 <./imagens/sdf-distortion/sin-cos-distortion.png>]
 Chapter 4.
 
+LaTeX Warning: Float too large for page by 5.87726pt on input line 58.
+
+
 
 [32
 
 ]
-Overfull \vbox (5.87726pt too high) has occurred while \output is active []
-
-
-
-[33]
-
-LaTeX Warning: Reference `alg:marchray_cloud' on page 34 undefined on input line 60.
-
-
-LaTeX Warning: Reference `alg:marchray' on page 34 undefined on input line 60.
-
-
-LaTeX Warning: Reference `fig:spheretracing' on page 34 undefined on input line 62.
-
-
-LaTeX Warning: Reference `fig:no-noise-cloud' on page 34 undefined on input line 62.
-
-<imagens/cloud-noise/no-noise-cloud.png, id=389, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/no-noise-cloud.png, id=553, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/no-noise-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/no-noise-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/no-noise-cloud.png  used on input line 74.
 (pdftex.def)             Requested size: 256.0774pt x 144.18335pt.
 
 
-[34 <./imagens/cloud-noise/no-noise-cloud.png>]
-
-LaTeX Warning: Reference `fig:cloud_noise' on page 35 undefined on input line 87.
-
-<imagens/cloud-noise/white-noise.png, id=402, 700.6175pt x 394.47375pt>
+[33 <./imagens/cloud-noise/no-noise-cloud.png>]
+<imagens/cloud-noise/white-noise.png, id=567, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/white-noise.png Graphic file (type png)
 <use imagens/cloud-noise/white-noise.png>
 Package pdftex.def Info: imagens/cloud-noise/white-noise.png  used on input line 98.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/white-noise-cloud.png, id=403, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/white-noise-cloud.png, id=568, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/white-noise-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/white-noise-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/white-noise-cloud.png  used on input line 104.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/value-noise.png, id=404, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/value-noise.png, id=569, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/value-noise.png Graphic file (type png)
 <use imagens/cloud-noise/value-noise.png>
 Package pdftex.def Info: imagens/cloud-noise/value-noise.png  used on input line 113.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/value-noise-cloud.png, id=405, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/value-noise-cloud.png, id=570, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/value-noise-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/value-noise-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/value-noise-cloud.png  used on input line 119.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: Reference `fig:fbm_clouds' on page 35 undefined on input line 129.
-
-<imagens/cloud-noise/1-octave-fbm.png, id=406, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/1-octave-fbm.png, id=572, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/1-octave-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/1-octave-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/1-octave-fbm.png  used on input line 137.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/1-octave-fbm-cloud.png, id=407, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/1-octave-fbm-cloud.png, id=573, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/1-octave-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/1-octave-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/1-octave-fbm-cloud.png  used on input line 144.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/2-octaves-fbm.png, id=408, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/2-octaves-fbm.png, id=574, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/2-octaves-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/2-octaves-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/2-octaves-fbm.png  used on input line 153.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/2-octaves-fbm-cloud.png, id=409, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/2-octaves-fbm-cloud.png, id=575, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/2-octaves-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/2-octaves-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/2-octaves-fbm-cloud.png  used on input line 160.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/3-octaves-fbm.png, id=410, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/3-octaves-fbm.png, id=576, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/3-octaves-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/3-octaves-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/3-octaves-fbm.png  used on input line 169.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/3-octaves-fbm-cloud.png, id=411, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/3-octaves-fbm-cloud.png, id=577, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/3-octaves-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/3-octaves-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/3-octaves-fbm-cloud.png  used on input line 176.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/4-octaves-fbm.png, id=412, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/4-octaves-fbm.png, id=578, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/4-octaves-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/4-octaves-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/4-octaves-fbm.png  used on input line 185.
@@ -1365,80 +1586,66 @@ Overfull \hbox (77.72781pt too wide) in paragraph at lines 186--187
  []\T1/cmr/m/n/10.95 vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25+vn(uv*8.)*0.125 
  []
 
-<imagens/cloud-noise/4-octaves-fbm-cloud.png, id=413, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/4-octaves-fbm-cloud.png, id=579, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/4-octaves-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/4-octaves-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/4-octaves-fbm-cloud.png  used on input line 192.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[34]
 
-
-[35]
-
-[36 <./imagens/cloud-noise/white-noise.png> <./imagens/cloud-noise/white-noise-cloud.png> <./imagens/cloud-noise/value-noise.png> <./imagens/cloud-noise/value-noise-cloud.png>]
-
-[37 <./imagens/cloud-noise/1-octave-fbm.png> <./imagens/cloud-noise/1-octave-fbm-cloud.png> <./imagens/cloud-noise/2-octaves-fbm.png> <./imagens/cloud-noise/2-octaves-fbm-cloud.png> <./imagens/cloud-noise/3-octaves-fbm.png> <./imagens/cloud-noise/3-octaves-fbm-cloud.png> <./imagens/cloud-noise/4-octaves-fbm.png> <./imagens/cloud-noise/4-octaves-fbm-cloud.png>]
-<imagens/cloud-noise/lit-cloud.png, id=448, 771.88374pt x 604.2575pt>
+[35 <./imagens/cloud-noise/white-noise.png> <./imagens/cloud-noise/white-noise-cloud.png> <./imagens/cloud-noise/value-noise.png> <./imagens/cloud-noise/value-noise-cloud.png>]
+<imagens/cloud-noise/lit-cloud.png, id=597, 771.88374pt x 604.2575pt>
 File: imagens/cloud-noise/lit-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/lit-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/lit-cloud.png  used on input line 231.
 (pdftex.def)             Requested size: 270.30118pt x 211.59471pt.
 ) (./elementos-textuais/capitulo-5.tex
 
-[38 <./imagens/cloud-noise/lit-cloud.png>]
+[36]
+
+[37]
+
+[38 <./imagens/cloud-noise/1-octave-fbm.png> <./imagens/cloud-noise/1-octave-fbm-cloud.png> <./imagens/cloud-noise/2-octaves-fbm.png> <./imagens/cloud-noise/2-octaves-fbm-cloud.png> <./imagens/cloud-noise/3-octaves-fbm.png> <./imagens/cloud-noise/3-octaves-fbm-cloud.png> <./imagens/cloud-noise/4-octaves-fbm.png> <./imagens/cloud-noise/4-octaves-fbm-cloud.png>]
+
+[39 <./imagens/cloud-noise/lit-cloud.png>]
 Chapter 5.
 )
 
-[39
+[40
 
 ]
 
-[40]
+[41]
 
-[41] (./main.aux)
+[42] (./main.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7F9839FBDDB13BD6A566837009512D2E;4067.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 7F9839FBDDB13BD6A566837009512D2E;4067.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25743 strings out of 467797
- 447209 string characters out of 5435982
- 1380227 words of memory out of 5000000
- 53864 multiletter control sequences out of 15000+600000
+ 25240 strings out of 467797
+ 438671 string characters out of 5435982
+ 1364912 words of memory out of 5000000
+ 53359 multiletter control sequences out of 15000+600000
  649858 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,12n,96p,1575b,2440s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,12n,96p,1575b,3001s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
+
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbi1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti0800.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (43 pages, 4928966 bytes).
+Output written on main.pdf (44 pages, 4937465 bytes).
 PDF statistics:
- 646 PDF objects out of 1000 (max. 8388607)
- 460 compressed objects within 5 object streams
+ 814 PDF objects out of 1000 (max. 8388607)
+ 625 compressed objects within 7 object streams
  207 named destinations out of 1000 (max. 500000)
- 246 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 462 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,4 @@
-\usepackage{csquotes}
+%\usepackage{csquotes}
 \usepackage[table]{xcolor}
 \usepackage[english]{babel}
 \usepackage[
@@ -209,13 +209,13 @@ style=alphabetic,
 }
 % Orientador
 \DeclareRobustCommand{\advisor}[3][]{
-  \gdef\@advisorname{#2}
+  \gdef\advisorname{#2}
   \gdef\@advisororigin{#3}
   \gdef\@advisor{#1~#2}
 }
 %Co-orientador
 \DeclareRobustCommand{\coadvisor}[3][]{
-  \gdef\@coadvisorname{#2}
+  \gdef\coadvisorname{#2}
   \gdef\@coadvisororigin{#3}
   \gdef\@coadvisor{#1~#2}
 }

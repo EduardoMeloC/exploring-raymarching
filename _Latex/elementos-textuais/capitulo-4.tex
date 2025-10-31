@@ -16,7 +16,7 @@ Secondly, to consistently sample the density along the cloud, a constant step si
 
 To mitigate the loss, an outer bound will be applied to clouds. With a separate SDF, the bound will act as a regular surface, and when hit, Ray Marching will switch into the fixed step mode.
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
 \caption{MarchRay}
 \label{alg:marchray_cloud}
 \begin{algorithmic}[1]
@@ -61,7 +61,7 @@ The pseudocode in algorithm \ref{alg:marchray_cloud} builds upon algorithm \ref{
 
 Thanks to the use of outer bounds for the clouds, the optimized Sphere Tracing (Figure \ref{fig:spheretracing}) is kept as normal, up until a cloud bound is hit, at line 13. At this point, Fixed-Step Ray Marching begins, and either stops when a hard surface is hit (line 18) or when the vision is fully clouded (line 22). As discussed, the \texttt{GetDensity(p)} function acts as the \texttt{GetDist(p)} for cloudy objects, so for a cloudy sphere, it may simply look like Code 8, and produce the effect in Figure \ref{fig:no-noise-cloud}. It certainly looks cloudy, but still lacks the organic shapes of a conventional cloud.
 
-\begin{lstlisting}[language=GLSL, caption={Code 8: Get density of spherical cloud}, label={lst:GetDensity} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 8: Get density of spherical cloud}, label={lst:GetDensity} float=ht]
 float GetDensity(p){
     vec3 cloudCenter = vec3(0., 0., 0.);
     float cloudRadius = 2.0;
@@ -89,7 +89,7 @@ Instead, what is needed is a structured form of randomness, where nearby points 
 
 % @TODO: Adicionar como o código de getDensity seria alterado
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
 
     % Row 1
@@ -128,7 +128,7 @@ While value noise introduces a better variation, it still produces patterns that
 
 Figure \ref{fig:fbm_clouds} shows the 2D construction of the fBm, with each layer and the corresponding cloud render, where the noise is evaluated in three dimensions rather than two.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
 
     % Row 1: 1-Octave FBM Noise
@@ -212,7 +212,7 @@ At each sample location, we advance slightly along the light’s direction and m
   \item When the density decreases, the cloud is less dense, leading to reduced scattering
 \end{itemize}
 
-\begin{lstlisting}[language=GLSL, caption={Code 9: Lighting the Cloud Volume}, label={lst:Displacement} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 9: Lighting the Cloud Volume}, label={CloudVolume} float=ht]
 vec3 ldir = -normalize(light.direction);
 vec3 li = light.color * (light.intensity / (4. * PI));
 diffuse = clamp((getDensity(marchPos, scene) - getDensity(marchPos + 0.3 * ldir, scene)) / 0.3, 0.0, 1.0 );

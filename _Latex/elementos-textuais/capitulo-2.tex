@@ -4,13 +4,13 @@ One of the goals of computer graphics is to synthesize images of virtual scenes 
 
 \section{Traversing the Canvas}
 
-A scene consists of a camera, 3D objects, and light sources placed in the environment. The goal when using ray tracing or ray marching is to generate a 2D render of the scene from the camera's point of view. We will need to traverse a 2D grid with the dimensions of our final image - the canvas. Then, given a camera point, we iterate over each position in the canvas, shooting a ray in its direction. This process is the basis of both ray marching and ray tracing.
+A scene consists of a camera, 3D objects, and light sources placed in the environment. The goal when using ray tracing or ray marching is to generate a 2D render of the scene from the camera's point of view. We will need to traverse the canvas, a 2D grid, with the dimensions of our final image. Then, given a camera point, we iterate over each position in the canvas, shooting a ray in its direction. This process is the basis of both ray marching and ray tracing, as shown in Figure \ref{fig:raytracingalgorithm}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=10.64cm,height=7cm]{imagens/ray-trace.jpg} 
     \caption{Ray Tracing Algorithm \protect\footnotemark}
-    \label{fig:internet}
+    \label{fig:raytracingalgorithm}
 \end{figure}
 
 For didactic purposes, we will ignore details such as the field of view, and we will assume that the distance between the canvas and the camera origin is always equal to 1, and that the canvas center will be positioned at $(0, 0, 0)$.
@@ -29,9 +29,9 @@ We are then able to establish the following definitions:
 
 The logic for traversing a 2D canvas and computing ray interactions with objects in the scene is outlined in \textbf{Algorithm 1 - Canvas Traversal}. This process applies to both ray tracing and ray marching, with the key difference being the implementation of the \texttt{TraceRay} function, used by ray tracing, which could be exchanged for \texttt{MarchRay}, used by ray marching.
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
 \caption{Canvas Traversal}
-\label{alg:marchray}
+\label{alg:canvastraversal}
 \begin{algorithmic}[1]
 \Procedure{Render}{Canvas, Scene}
     \For{$y \gets 0$ to $CanvasResolution.y - 1$}
@@ -52,10 +52,10 @@ The logic for traversing a 2D canvas and computing ray interactions with objects
 \end{algorithmic}
 \end{algorithm}
 
-The pseudocode explicitly uses nested loops to traverse the canvas. In the GLSL implementation that follows, the iteration logic is unnecessary because the fragment shader operates on a per-pixel basis. Each invocation of the shader corresponds to a single pixel on the canvas, and the GPU automatically handles the parallel execution of the shader for all pixels. The input \texttt{fragCoord} provides the current pixel's coordinates, \texttt{vec2} and \text{{vec3}} represent 2D and 3D vectors respectively, and GLSL functions handle vector operations like normalization and dot products. 
+The pseudocode explicitly uses nested loops to traverse the canvas. In the GLSL implementation that follows, the iteration logic is unnecessary because the fragment shader operates on a per-pixel basis. Each invocation of the shader corresponds to a single pixel on the canvas, and the GPU automatically handles the parallel execution of the shader for all pixels. The input \texttt{fragCoord} provides the current pixel's coordinates, \texttt{vec2} and \texttt{vec3} represent 2D and 3D vectors respectively, and GLSL functions handle vector operations like normalization and dot products. 
 
 
-\begin{lstlisting}[language=GLSL, caption={Code 1: Canvas Traversal}, label={lst:CanvasTraversal} float=H]
+\begin{lstlisting}[language=GLSL, caption={Code 1: Canvas Traversal}, label={lst:CanvasTraversal} float=ht]
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     Scene scene = createScene();
@@ -83,7 +83,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 In ray tracing, once a ray is cast in the direction of a pixel on the canvas, it must traverse the scene to identify the closest object intersecting the ray. This requires a function capable of calculating the intersection between the ray and the geometric objects in the scene. The closest intersection point determines what will be rendered on the screen.
 
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
 \caption{TraceRay}
 \begin{algorithmic}[1]
 \Procedure{TraceRay}{RayOrigin, RayDirection, Scene}
@@ -146,7 +146,7 @@ To prevent the march from ever skipping a surface between steps, instead of fixe
     \label{fig:unlit_march_sphere}
 \end{figure}
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
 \caption{MarchRay}
 \label{alg:marchray}
 \begin{algorithmic}[1]

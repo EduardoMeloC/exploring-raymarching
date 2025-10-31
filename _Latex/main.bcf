@@ -2373,22 +2373,22 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">elementos-postextuais/referencias.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">:NVIDIA</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">quilez2013distfunctions</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">Hillaire2016FrostbiteSky</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">turn0search0</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">book:REF_BOOK_1</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">:NVIDIA</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">quilez2013distfunctions</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">Hillaire2016FrostbiteSky</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">turn0search0</bcf:citekey>
     <bcf:citekey order="6" intorder="1">book:REF_BOOK_1</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">:NVIDIA</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">akenine-moller2018realtimerendering</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">quilez2013smin</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">:REF_IN_1</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">book:REF_BOOK_1</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">:NVIDIA</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">akenine-moller2018realtimerendering</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">quilez2013smin</bcf:citekey>
     <bcf:citekey order="11" intorder="1">:REF_IN_1</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">Schneider2015Cloudscapes</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">green2007siggraph</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">Mizdal2019AmbientSound</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">park2019deepsdf</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">nimier2020differentiable</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">:REF_IN_1</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">Schneider2015Cloudscapes</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">green2007siggraph</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">Mizdal2019AmbientSound</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">park2019deepsdf</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">nimier2020differentiable</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="anyt">

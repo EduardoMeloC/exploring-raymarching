@@ -13,14 +13,13 @@ In this context, Ray Marching stands out as an innovative technique, particularl
 \begin{figure}[ht]
     \centering
     \includegraphics[width=13.83cm,height=9.1cm]{imagens/raymarched-clouds-schneider.png} 
-    \caption{Raymarched Clouds obtained by Schneider et al.\protect\footnotemark}
-    \label{fig:internet}
+    \caption{Raymarched Clouds obtained by Schneider et al.\protect\footnotemark[1]{}}
+    \label{fig:frostbite}
 \end{figure}
-\footnotetext{Source: Schneider et al.}
 
-Ray Marching has found several practical applications in the gaming industry, particularly for rendering complex and dynamic scenes. In the Frostbite Engine \cite{Hillaire2016FrostbiteSky}, used in titles such as Battlefield V, Ray Marching is employed to render highly realistic volumetric clouds. This approach allows the engine to simulate depth, light scattering, and other atmospheric effects in real time, creating lifelike skies that respond dynamically to environmental lighting conditions. 
+Ray Marching has found several practical applications in the gaming industry, particularly for rendering complex and dynamic scenes. In the Frostbite Engine \cite{Hillaire2016FrostbiteSky}, used in titles such as Battlefield V, Ray Marching is employed to render highly realistic volumetric clouds, which can be seen in Figure \ref{fig:frostbite}. This approach allows the engine to simulate depth, light scattering, and other atmospheric effects in real time, creating lifelike skies that respond dynamically to environmental lighting conditions. 
 
-\footnotetext{Source: https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf}
+\footnotetext[1]{Source: media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf}
 
 \section{Scope and Objective}
 
@@ -31,7 +30,7 @@ We also explore the potential of Ray Marching for procedural rendering, showcasi
 
 \section{Methodology}
 
-We take an iterative approach to explore the Ray Marching algorithm, showcasing its capacity to render smooth, noisy, and dynamic surfaces. Real-time 3D applications often rely on graphics APIs such as OpenGL, DirectX, or Vulkan for GPU programming. To simplify development and focus on Ray Marching itself, we use Shadertoy — a tool for running fragment shaders written in GLSL (OpenGL Shading Language) without the extensive setup. Fragment shaders are GPU programs that process each pixel on the screen, taking inputs such as the pixel position and canvas resolution.
+We take an iterative approach to explore the Ray Marching algorithm, showcasing its capacity to render smooth, noisy, and dynamic surfaces. Real-time 3D applications often rely on graphics APIs such as OpenGL, DirectX, or Vulkan for GPU programming. To simplify development and focus on Ray Marching itself, we use Shadertoy \footnotetext{www.shadertoy.com}, a tool for running fragment shaders written in GLSL (OpenGL Shading Language) without the extensive setup. Fragment shaders are GPU programs that process each pixel on the screen, taking inputs such as the pixel position and canvas resolution.
 
 \section{Text Structure}
 
