@@ -135,7 +135,7 @@ Figure \ref{fig:fbm_clouds} shows the 2D construction of the fBm, with each laye
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/cloud-noise/1-octave-fbm.png}\\[0.3em]
-        \small valueNoise(uv)
+        \small \texttt{valueNoise(uv)}
     \end{minipage}%
     \hfill
     % Row 1: 1-Octave Cloud
@@ -151,7 +151,7 @@ Figure \ref{fig:fbm_clouds} shows the 2D construction of the fBm, with each laye
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/cloud-noise/2-octaves-fbm.png}\\[0.3em]
-        \small vn(uv)+vn(uv*2.)*0.5
+        \small \texttt{vn(uv)+vn(uv*2.)*0.5}
     \end{minipage}%
     \hfill
     % Row 2: 2-Octaves Cloud
@@ -167,7 +167,7 @@ Figure \ref{fig:fbm_clouds} shows the 2D construction of the fBm, with each laye
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/cloud-noise/3-octaves-fbm.png}\\[0.3em]
-        \small vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25
+        \small \texttt{vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25}
     \end{minipage}%
     \hfill
     % Row 3: 3-Octaves Cloud
@@ -183,7 +183,7 @@ Figure \ref{fig:fbm_clouds} shows the 2D construction of the fBm, with each laye
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/cloud-noise/4-octaves-fbm.png}\\[0.3em]
-        \small vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25+vn(uv*8.)*0.125
+        \small \texttt{...vn(uv*4.)*0.25+vn(uv*8.)*0.125}
     \end{minipage}%
     \hfill
     % Row 4: 4-Octaves Cloud
@@ -226,11 +226,15 @@ simulation of light transport. In particular, it does not strictly follow Beer's
 which describes the exponential attenuation of light as it travels through a medium. 
 Nevertheless, this approximation is sufficient for the purposes of our case study, as it is enough to produce visually convincing results in scenes with few light sources.
 
+A demonstration of how this lighting approximation can produce compelling results is shown at Figure \ref{fig:lit-cloud}, displaying a raymarched cloud lit from a white directional light and a pink point light.
+
 \begin{figure}[ht]
     \centering
     \fbox{\includegraphics[width=9.5cm]{imagens/cloud-noise/lit-cloud.png}}
     \caption{Raymarched Cloud lit from directional light and point light}.
     \label{fig:lit-cloud}
 \end{figure}
+
+
 
 % Possível extra: Renderizar cena com SDFs diferentes de esfera para nuvem
