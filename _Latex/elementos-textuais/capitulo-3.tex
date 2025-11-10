@@ -116,10 +116,10 @@ float boxDistance( in vec3 p, in vec3 b ){
 The rectangle SDF is defined at the origin $\mathbf{[0,0]}$, and due to the rectangle's symmetry, it is often more convenient to work within the first cartesian quadrant. To achieve this, $\mathbf{b}$ (half each box`s side) is subtracted from $\mathbf{abs(p)}$, yielding a point $\mathbf{d}$. As illustrated in Figure \ref{fig:square_sdf}:
 
 \begin{itemize}
-    \item If only $\mathbf{d.x<0}$, it indicates that $\mathbf{p}$ is above the rectangle, in section 1, and the shortest distance is straight down.
-    \item If only $\mathbf{d.y<0}$, it means that $\mathbf{p}$ is next to the rectangle, in section 3, so the shortest distance is straight left.
-    \item If both $\mathbf{d.x}<0$ and $\mathbf{d.y<0}$, the point is inside the rectangle, in section 4, thus the shortest distance is the closest of the two sides.
-    \item Finally, if neither component is negative, the point lies diagonally outside the rectangle, in section 2, so the distance to the corner is the shortest.
+    \item If only $\mathbf{d.x<0}$, it indicates that $\mathbf{p}$ is above the rectangle, in Section 1, and the shortest distance is straight down.
+    \item If only $\mathbf{d.y<0}$, it means that $\mathbf{p}$ is next to the rectangle, in Section 3, so the shortest distance is straight left.
+    \item If both $\mathbf{d.x}<0$ and $\mathbf{d.y<0}$, the point is inside the rectangle, in Section 4, thus the shortest distance is the closest of the two sides.
+    \item Finally, if neither component is negative, the point lies diagonally outside the rectangle, in Section 2, so the distance to the corner is the shortest.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -129,7 +129,7 @@ The rectangle SDF is defined at the origin $\mathbf{[0,0]}$, and due to the rect
     \label{fig:square_sdf}
 \end{figure}
 
-It can be seen that when both $\mathbf{d.x}$ and $\mathbf{d.y}$ are limited to zero, which visually means snapping all points to section 2, the distance to the corner encases the results, although not entirely. If in section 4, inside the rectangle, $\mathbf{length(max(d,0.0))}$ is always 0. In such cases, the SDF should return the negative distance to the nearest edge of the rectangle, adding the expression $\mathbf{min(max(d.x,d.y),0.0)}$. The min() function ensures non-zero distances are only possible in section 4. With that, all sections are considered.
+It can be seen that when both $\mathbf{d.x}$ and $\mathbf{d.y}$ are limited to zero, which visually means snapping all points to Section 2, the distance to the corner encases the results, although not entirely. If in Section 4, inside the rectangle, $\mathbf{length(max(d,0.0))}$ is always 0. In such cases, the SDF should return the negative distance to the nearest edge of the rectangle, adding the expression $\mathbf{min(max(d.x,d.y),0.0)}$. The min() function ensures non-zero distances are only possible in Section 4. With that, all Sections are considered.
 
 This process can be generalized to higher dimensions in a similar fashion. As such, the 3D box SDF can be derived by extending the approach to $\mathbb{R}^3 $, where p and b are now three-dimensional vectors.
 
@@ -146,7 +146,7 @@ If expanded to $\mathbb{R}^4 $, the SDF can help visualize forms such as the tes
 
 \section{Basic Transformations}
 
-All primitives described in the previous section were centered at the origin. In order to perform a transformation such as scaling, rotation or translation, it is possible to apply the transformation at the query point $\mathbf{p}$.
+All primitives described in the previous Section were centered at the origin. In order to perform a transformation such as scaling, rotation or translation, it is possible to apply the transformation at the query point $\mathbf{p}$.
 
 %BOTAR EXEMPLO DE CODIGO FACIL
 %vec3 opTransformRotate( in vec3 p, in transform t, in sdf3d primitive ){
@@ -160,8 +160,8 @@ All primitives described in the previous section were centered at the origin. In
 
 \section{Operations}
 
-While being able to display a variety of primitives is great, both ray tracing and ray marching have such capabilities. As time goes by, what is required of modern computer graphics becomes much more than that, and in search of building more complex forms is where both methods part ways. While ray tracing depends on high polygon-count models, almost never using other types of primitives, ray marching finds more success with a variety of solutions, one such being the use of various combinations between primitives and operations as building blocks.
-This section describes some of the main SDF operations used in modeling based on basic primitives. Having primitives centered at the origin also facilitates many of the operations.
+While being able to display a variety of primitives is great, both Ray Tracing and Ray Marching have such capabilities. As time goes by, what is required of modern computer graphics becomes much more than that, and in search of building more complex forms is where both methods part ways. While Ray Tracing depends on high polygon-count models, almost never using other types of primitives, Ray Marching finds more success with a variety of solutions, one such being the use of various combinations between primitives and operations as building blocks.
+This Section describes some of the main SDF operations used in modeling based on basic primitives. Having primitives centered at the origin also facilitates many of the operations.
 
 \subsection{Union, Intersection and Subtraction}
 
@@ -275,7 +275,7 @@ This blending can be achieved through multiple types of functions, such as quadr
 \end{minipage}
 \end{figure}
 
-Because it is fast and does not overestimate distances, the quadratic polynomial is less prone to visual artifacts and is the most widely used version for ray marching, thus being the one this section focuses on. Similarly to the regular min function, smin (smooth minimum) takes as input $\mathbf{a}$ and $\mathbf{b}$, which could be distances, or points in space, plus the threshold $\mathbf{k}$. The blending starts where the distance between $\mathbf{a}$ and $\mathbf{b}$ is smaller than $\mathbf{k}$.
+Because it is fast and does not overestimate distances, the quadratic polynomial is less prone to visual artifacts and is the most widely used version for Ray Marching, thus being the one this Section focuses on. Similarly to the regular min function, smin (smooth minimum) takes as input $\mathbf{a}$ and $\mathbf{b}$, which could be distances, or points in space, plus the threshold $\mathbf{k}$. The blending starts where the distance between $\mathbf{a}$ and $\mathbf{b}$ is smaller than $\mathbf{k}$.
 
 Figure \ref{fig:smin} will help navigate the explanation ahead, $\mathbf{a\ =\ -\left(2-x\right)^{2}+2}$ is in red and $\mathbf{b\ =\ \left(2-x\right)^{2}\ +.5}$ in blue. To find smin, all polynomial methods start by finding the $\mathbf{h()}$ function, which is 0 by default, and ramps up to 1, starting at $\mathbf{|a - b|=k}$ and peaking at $\mathbf{|a - b|=0}$:
 

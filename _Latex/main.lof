@@ -7,7 +7,7 @@
 \contentsline {figure}{\numberline {2}{\ignorespaces Ray Tracing Algorithm \footnotemark }}{11}{figure.caption.4}%
 \contentsline {figure}{\numberline {3}{\ignorespaces Unlit Raytraced Sphere}}{14}{figure.caption.5}%
 \contentsline {figure}{\numberline {4}{\ignorespaces Above, binary search maneuver to bypass fixed step limitations, below a display of Sphere Tracing}}{16}{figure.caption.6}%
-\contentsline {figure}{\numberline {5}{\ignorespaces A problematic case of fixed step, from section 8.3 of \blx@tocontentsinit {0}\cite {book:REF_BOOK_1}}}{16}{figure.caption.7}%
+\contentsline {figure}{\numberline {5}{\ignorespaces A problematic case of fixed step, from Section 8.3 of \blx@tocontentsinit {0}\cite {book:REF_BOOK_1}}}{16}{figure.caption.7}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Unlit Raymarched Sphere}}{17}{figure.caption.8}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {7}{\ignorespaces Plain Colored Circle}}{21}{figure.caption.9}%

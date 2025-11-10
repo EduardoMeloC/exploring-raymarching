@@ -186,6 +186,39 @@
       \verb https://www.sbgames.org/sbgames2019/files/papers/ComputacaoFull/198453.pdf
       \endverb
     \endentry
+    \entry{MusgraveFractalTerrains}{report}{}
+      \name{author}{1}{}{%
+        {{hash=b889feb567378d061d51324277500e75}{%
+           family={Musgrave},
+           familyi={M\bibinitperiod},
+           given={F.\bibnamedelimi Kenton},
+           giveni={F\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of Chicago}%
+      }
+      \strng{namehash}{b889feb567378d061d51324277500e75}
+      \strng{fullhash}{b889feb567378d061d51324277500e75}
+      \strng{bibnamehash}{b889feb567378d061d51324277500e75}
+      \strng{authorbibnamehash}{b889feb567378d061d51324277500e75}
+      \strng{authornamehash}{b889feb567378d061d51324277500e75}
+      \strng{authorfullhash}{b889feb567378d061d51324277500e75}
+      \field{labelalpha}{Musnd}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Course notes, retrieved from \url{https://www.classes.cs.uchicago.edu/archive/2015/fall/23700-1/final-project/MusgraveTerrain00.pdf}}
+      \field{title}{Procedural Fractal Terrains}
+      \field{type}{techreport}
+      \field{year}{n.d.}
+      \verb{urlraw}
+      \verb https://www.classes.cs.uchicago.edu/archive/2015/fall/23700-1/final-project/MusgraveTerrain00.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.classes.cs.uchicago.edu/archive/2015/fall/23700-1/final-project/MusgraveTerrain00.pdf
+      \endverb
+    \endentry
     \entry{nimier2020differentiable}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=842180dbcd36e62dd45ccff6b48fded8}{%
