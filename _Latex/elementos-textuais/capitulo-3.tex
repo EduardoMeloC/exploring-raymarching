@@ -165,7 +165,7 @@ This Section describes some of the main SDF operations used in modeling based on
 
 \subsection{Union, Intersection and Subtraction}
 
-Operations between objects are some of the most elegant features of SDFs, and the most basic ones are the combinations: Union, Intersection and Subtraction. These three have very simple definitions and are great ways to introduce SDF operations. They take as input the SDF resulting distance of two primitive SDFs.
+Operations between objects are some of the most elegant features of SDFs, and the most basic ones are the combinations: Union, Intersection and Subtraction. These three have very simple definitions and are great ways to introduce SDF operations. They take as input the SDF resulting distance of two primitive SDFs $\mathbf{d_1}$ and $\mathbf{d_2}$, as described in Code 5.
 
 
 \begin{lstlisting}[language=GLSL, caption={Code 5: SDF Union, Intersection and Subtraction}, label={lst:UnionIntersectionSubtraction} float=ht]
@@ -183,14 +183,15 @@ float subtractionOperation( float d1, float d2 )
 }
 \end{lstlisting}
 
-From the perspective of a 3D raymarched vision, given $\mathbf{d1}$ and $\mathbf{d2}$, SDF distances from objects 1 and 2:
+From the perspective of a 3D raymarched vision, given $\mathbf{d_1}$ and $\mathbf{d_2}$, SDF distances from objects 1 and 2:
 
 \begin{itemize}
-    \item Taking the minimum between $\mathbf{d1}$ and $\mathbf{d2}$ is like seeing only the closest surface from both objects to camera, which is already the case for solids seen from the outside.
-    \item Taking the maximum between $\mathbf{d1}$ and $\mathbf{d2}$ means that nothing outside the intersection of both objects is seen, since the ray march will only consider a hit if both SDF results are below the hit threshold.
-    \item Taking the maximum between $\mathbf{-d1}$ and $\mathbf{d2}$ is like intersecting with the inverse of d1, which means that all $\mathbf{R}^3 $ except object1. This results in the subtraction of objects 1 from 2.
+    \item Taking the minimum between $\mathbf{d_1}$ and $\mathbf{d_2}$ is like seeing only the closest surface from both objects to camera, which is already the case for solids seen from the outside.
+    \item Taking the maximum between $\mathbf{d_1}$ and $\mathbf{d_2}$ means that nothing outside the intersection of both objects is seen, since the ray march will only consider a hit if both SDF results are below the hit threshold.
+    \item Taking the maximum between $\mathbf{-d_1}$ and $\mathbf{d_2}$ is like intersecting with the inverse of d1, which means that all $\mathbb{R}^3 $ except object1. This results in the subtraction of objects 1 from 2.
 \end{itemize}
 
+Figure \ref{fig:sdf_operations} illustrates these constructive solid geometry operations between a cube and a sphere.
 
 \begin{figure}[ht]
     \centering
@@ -275,24 +276,26 @@ This blending can be achieved through multiple types of functions, such as quadr
 \end{minipage}
 \end{figure}
 
-Because it is fast and does not overestimate distances, the quadratic polynomial is less prone to visual artifacts and is the most widely used version for Ray Marching, thus being the one this Section focuses on. Similarly to the regular min function, smin (smooth minimum) takes as input $\mathbf{a}$ and $\mathbf{b}$, which could be distances, or points in space, plus the threshold $\mathbf{k}$. The blending starts where the distance between $\mathbf{a}$ and $\mathbf{b}$ is smaller than $\mathbf{k}$.
+Because it is fast and does not overestimate distances, the quadratic polynomial is less prone to visual artifacts and is the most widely used version for Ray Marching, thus being the one this Section focuses on. Similarly to the regular \texttt{min} function, \texttt{smin} (Smooth Minimum) takes as input $\mathbf{a}$ and $\mathbf{b}$, which could be distances, or points in space, plus the threshold $k$. The blending starts where the distance between $\mathbf{a}$ and $\mathbf{b}$ is smaller than $k$.
 
-Figure \ref{fig:smin} will help navigate the explanation ahead, $\mathbf{a\ =\ -\left(2-x\right)^{2}+2}$ is in red and $\mathbf{b\ =\ \left(2-x\right)^{2}\ +.5}$ in blue. To find smin, all polynomial methods start by finding the $\mathbf{h()}$ function, which is 0 by default, and ramps up to 1, starting at $\mathbf{|a - b|=k}$ and peaking at $\mathbf{|a - b|=0}$:
+Figure \ref{fig:smin} will help navigate the explanation ahead, $a\ =\ -\left(2-x\right)^{2}+2$ is in red and $b\ =\ \left(2-x\right)^{2}\ +.5$ in blue. To find \texttt{smin}, all polynomial methods start by finding the $h()$ function, which is 0 by default, and ramps up to 1, starting at $|\mathbf{a} - \mathbf{b}|=k$ and peaking at $|\mathbf{a} - \mathbf{b}|=0$:
 
 \begin{equation}
     h = \frac{\max(k - |a - b|, 0.0)}{k}
     \label{eq:example_equation}
 \end{equation}
 
-Since $\mathbf{k}$ is the distance in which the shapes start to combine, $\mathbf{h()}$ helps delimitate exactly that, as represented in green, Figure \ref{fig:smin}. Next, there needs to be a $\mathbf{c}$ such that $\mathbf{min(a,b)-c}$ produces the smoothed curve. This is no random requirement, but a simplified structure of what is the DD (Direct Difference) family of smin solutions. For polynomials, a simple solution for $\mathbf{c}$ is as follows, with $\mathbf{n>1.5}$ already producing great results:
+Since $k$ is the distance in which the shapes start to combine, $h()$ helps delimitate exactly that, as represented in green, Figure \ref{fig:smin}. Next, there needs to be a $c$ such that $\texttt{min}{(\textbf{a},\textbf{b})-c}$ produces the smoothed curve. This is no random requirement, but a simplified structure of what is the DD (Direct Difference) family of \texttt{smin} solutions. For polynomials, a simple solution for $c$ is as follows, with $n>1.5$ already producing great results:
 
 \begin{equation}
     c\ =\frac{h^{n}k}{2n}
     \label{eq:example_equation_2}
 \end{equation}
 
-Between all values of $\mathbf{n}$, the quadratic version ($\mathbf{n=2}$) produces the gentler of curves, and is prioritized over the others. To better visualize what $\mathbf{c}$ means, Figure \ref{fig:sunion} represents $\mathbf{c}$ in purple. Squaring $\mathbf{h}$ makes c ease into 1, instead of following a straight ramp. Multiplying by $\mathbf{k}$ compensates any variation, as the peak of $\mathbf{h}$ decreases as $\mathbf{k}$ increases. Lastly, the divisor helps position the peak to the right place.
-To achieve smooth maximum, all that is needed is $\mathbf{max(a,b)+c}$.
+Between all values of $\mathbf{n}$, the quadratic version ($\mathbf{n=2}$) produces the gentler of curves, and is prioritized over the others. To better visualize what $c$ means, Figure \ref{fig:sunion} represents $c$ in purple. Squaring ${h}$ makes $c$ ease into 1, instead of following a straight ramp. Multiplying by $k$ compensates any variation, as the peak of ${h}$ decreases as $k$ increases. Lastly, the divisor helps position the peak to the right place.
+To achieve smooth maximum, all that is needed is $\texttt{max}(\mathbf{a},\mathbf{b})+c$.
+
+A visualization of the addition, subtraction, and intersection operations, along with their smooth counterparts, is shown in Figure \ref{fig:smooth_sdf_operations}.
 
 \begin{figure}[ht]
     \centering
@@ -343,11 +346,11 @@ To achieve smooth maximum, all that is needed is $\mathbf{max(a,b)+c}$.
 
 \subsection{Domain Repetition}
 
-Since SDFs are expressed as mathematical functions, they can be transformed to repeat periodically across space. This technique, known as domain repetition, allows for the creation of infinite, repeating patterns in a scene while also optimizing performance by avoiding the need for multiple individual primitives.
+Since SDFs are expressed as mathematical functions, they can be transformed to repeat periodically across space. This technique, known as Domain Repetition, allows for the creation of infinite, repeating patterns in a scene while also optimizing performance by avoiding the need for multiple individual primitives.
 
 There are many variations of this technique, as any domain parametrization can be made repeating, but the core idea is to use mathematical operations that will result in the desired scene. 
 
-This can be achieved through the natural repetitive pattern of trigonometric functions such as $sin(x)$ and $cos(x)$, however, bending the domain with these functions will compromise the accurate Euclidean distances of the space the SDFs relies on, and this might generate unwished features. Functions such as $round(x)$ or $mod(x)$ (modulus operator) are more commonly used instead.
+This can be achieved through the natural repetitive pattern of trigonometric functions such as $sin(x)$ and $cos(x)$, however, bending the domain with these functions will compromise the accurate Euclidean distances of the space the SDFs relies on, and this might generate features that are not desired. Functions such as $round(x)$ or $mod(x)$ (modulus operator) are more commonly used instead.
 
 \begin{figure}[ht]
     \centering
@@ -356,13 +359,13 @@ This can be achieved through the natural repetitive pattern of trigonometric fun
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/domainRepetition-circle.png}\\
-        circleDistance(uv, 0.1)
+        \footnotesize\texttt{\mbox{circleDistance(uv, 0.1)}}
     \end{minipage}%
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/domainRepetition-sine.png}\\
-        circleDistance(sin(uv * 5.)*0.2, 0.1)
+        \footnotesize\texttt{\mbox{circleDistance(sin(uv * 5.)*0.2, 0.1)}}
     \end{minipage}
 
     \vspace{1em} % space between rows
@@ -371,13 +374,13 @@ This can be achieved through the natural repetitive pattern of trigonometric fun
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/domainRepetition-round.png}\\
-        circleDistance(uv - round(uv), 0.1)
+        \footnotesize\texttt{circleDistance(uv - round(uv), 0.1)}
     \end{minipage}%
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{imagens/domainRepetition-mod.png}\\
-        circleDistance(mod(uv, 1.)-0.5, 0.1)
+        \footnotesize\texttt{circleDistance(mod(uv, 1.)-0.5, 0.1)}
     \end{minipage}
 
     \caption{Examples of Domain Repetition techniques.}
@@ -398,7 +401,7 @@ shows an example of repeated spheres in a repeated domain.
 
 \subsection{Displacement}
 
-Displacement is a technique used to adjust the geometry to simulate bumps or irregularities, adding fine detail to the surface. This is often done by perturbing the distance field using patterns that look random, such as static or grain, which can be generated with mathematical formulas (procedural noise) or taken from images (noise textures).
+Displacement is a technique used to adjust the geometry to simulate bumps or irregularities, adding fine detail to the surface. This is often done by perturbing the distance field using patterns that look random, such as static or grain, which can be generated with mathematical formulas (procedural noise) or taken from images (noise textures). This technique is implemented in Code 6.
 
 \begin{lstlisting}[language=GLSL, caption={Code 6: SDF Displacement}, label={lst:Displacement} float=ht]
 float displacementOperation( in sdf3d sdfShape, in vec3 p )
@@ -411,7 +414,7 @@ float displacementOperation( in sdf3d sdfShape, in vec3 p )
 
 Although noisy functions are commonly used for displacement, any function can be applied to distort the distance field. This flexibility enables the creation of non-Euclidean effects, such as bending or twisting space. However, this comes with a caveat: the sum of an SDF and an arbitrary function is not necessarily an SDF.
 
-A key property of 2D and 3D Signed Distance Functions is that their gradient has length $1.0$ everywhere in the space. Since SDFs measure distances, the rate of change of distance must be equal to 1.0. When two SDFs are added, this property is violated — the gradient no longer has unit length, effectively "bending" space. This can cause the raymarcher to underestimate or overestimate the true distance from the surface.
+A key property of 2D and 3D Signed Distance Functions is that their gradient has length $1$ everywhere in the space. Since SDFs measure distances, the rate of change of distance must be equal to $1$. When two SDFs are added, this property is violated: the gradient no longer has unit length, effectively ``bending'' space. This can cause the raymarcher to underestimate or overestimate the true distance from the surface.
 
 This issue can be attenuated by reducing the step size and increasing the number of marching iterations, though this comes at a performance cost. In practice, small deviations in the length of the gradient rarely produce noticeable artifacts, making displacement through function addition still useful for subtle surface displacement.
 

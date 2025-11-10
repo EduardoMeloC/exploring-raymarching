@@ -24,10 +24,10 @@
 \contentsline {figure}{\numberline {18}{\ignorespaces Raymarched Smooth Operations with Cube and Sphere SDFs.}}{28}{figure.caption.17}%
 \contentsline {figure}{\numberline {19}{\ignorespaces Examples of Domain Repetition techniques.}}{29}{figure.caption.18}%
 \contentsline {figure}{\numberline {20}{\ignorespaces sphereDistance(p - 6.5*round(p/6.5), 1.0)}}{30}{figure.caption.19}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Distortion on Sphere from Code 7}}{31}{figure.caption.20}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Distortion on Sphere from Code 7}}{32}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {22}{\ignorespaces Raymarched Sphere with density}}{33}{figure.caption.21}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Comparison of White Noise and Value Noise for cloud generation.}}{35}{figure.caption.22}%
-\contentsline {figure}{\numberline {24}{\ignorespaces FBM Noise and Corresponding Cloud Examples with Increasing Octaves.}}{38}{figure.caption.23}%
-\contentsline {figure}{\numberline {25}{\ignorespaces Raymarched Cloud lit from directional light and point light}}{39}{figure.caption.24}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Raymarched Sphere with density}}{34}{figure.caption.21}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Comparison of White Noise and Value Noise for cloud generation.}}{36}{figure.caption.22}%
+\contentsline {figure}{\numberline {24}{\ignorespaces FBM Noise and Corresponding Cloud Examples with Increasing Octaves.}}{39}{figure.caption.23}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Raymarched Cloud lit from directional light and point light}}{40}{figure.caption.24}%
 \addvspace {10\p@ }

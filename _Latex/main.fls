@@ -485,6 +485,10 @@ INPUT .\imagens\desmos_smin.png
 INPUT .\imagens\desmos_smin.png
 INPUT .\imagens\desmos_smin.png
 INPUT .\imagens\desmos_smin.png
+INPUT C:\Users\eduar\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt0800.tfm
+INPUT C:\Users\eduar\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt0800.tfm
+INPUT C:\Users\eduar\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx0800.tfm
+INPUT C:\Users\eduar\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx0600.tfm
 INPUT .\imagens\smooth-sdf-operations\add-unsmooth.png
 INPUT .\imagens\smooth-sdf-operations\add-unsmooth.png
 INPUT .\imagens\smooth-sdf-operations\add-unsmooth.png
@@ -576,8 +580,6 @@ INPUT .\elementos-textuais\capitulo-4.tex
 INPUT .\elementos-textuais\capitulo-4.tex
 INPUT .\elementos-textuais\capitulo-4.tex
 INPUT elementos-textuais\capitulo-4.tex
-INPUT C:\Users\eduar\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx0800.tfm
-INPUT C:\Users\eduar\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx0600.tfm
 INPUT .\imagens\cloud-noise\no-noise-cloud.png
 INPUT .\imagens\cloud-noise\no-noise-cloud.png
 INPUT .\imagens\cloud-noise\no-noise-cloud.png
