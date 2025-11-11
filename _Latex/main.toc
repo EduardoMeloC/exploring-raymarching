@@ -17,13 +17,13 @@
 \contentsline {section}{\numberline {3.3}Operations}{24}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Union, Intersection and Subtraction}{25}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Smooth Union, Intersection and Subtraction}{26}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Domain Repetition}{28}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.3}Domain Repetition}{29}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Displacement}{30}{subsection.3.3.4}%
-\contentsline {chapter}{\numberline {4}Clouds}{32}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Volumetric Rendering}{32}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Shaping the Cloud with Noise}{34}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Volumetric Shading}{35}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Conclusion}{40}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Future Works}{40}{section.5.1}%
-\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{41}{section.5.1}%
-\contentsline {section}{\numberline {5.2}*}{41}{section.5.2}%
+\contentsline {chapter}{\numberline {4}Clouds}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Volumetric Rendering}{33}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Shaping the Cloud with Noise}{35}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Volumetric Shading}{36}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Conclusion}{41}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Future Works}{41}{section.5.1}%
+\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{42}{section.5.1}%
+\contentsline {section}{\numberline {5.2}*}{42}{section.5.2}%

@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.3 $
+% $ biblatex bbl format version 3.2 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,8 +18,8 @@
 
 
 \refsection{0}
-  \datalist[entry]{anyt/global//global/global/global}
-    \entry{akenine-moller2018realtimerendering}{book}{}{}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{akenine-moller2018realtimerendering}{book}{}
       \name{author}{3}{}{%
         {{hash=f6061b73d9bdb8fceb556ed41cd144a6}{%
            family={Akenine-Möller},
@@ -42,12 +42,10 @@
       }
       \strng{namehash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \strng{fullhash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
-      \strng{fullhashraw}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \strng{bibnamehash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \strng{authorbibnamehash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \strng{authornamehash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \strng{authorfullhash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
-      \strng{authorfullhashraw}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \field{labelalpha}{AHH18}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
@@ -58,7 +56,7 @@
       \field{title}{Real-Time Rendering}
       \field{year}{2018}
     \endentry
-    \entry{green2007siggraph}{inproceedings}{}{}
+    \entry{green2007siggraph}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=6eaf40df0366e3a055dee01e950d1dc8}{%
            family={Green},
@@ -68,12 +66,10 @@
       }
       \strng{namehash}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{fullhash}{6eaf40df0366e3a055dee01e950d1dc8}
-      \strng{fullhashraw}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{bibnamehash}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{authorbibnamehash}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{authornamehash}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{authorfullhash}{6eaf40df0366e3a055dee01e950d1dc8}
-      \strng{authorfullhashraw}{6eaf40df0366e3a055dee01e950d1dc8}
       \field{labelalpha}{Gre07}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
@@ -83,7 +79,7 @@
       \field{title}{Improved Alpha-Tested Magnification for Vector Textures and Special Effects}
       \field{year}{2007}
     \endentry
-    \entry{turn0search0}{misc}{}{}
+    \entry{turn0search0}{misc}{}
       \name{author}{2}{}{%
         {{hash=f2cd5883c9757f88d9a81f92ee663907}{%
            family={Haines},
@@ -98,12 +94,10 @@
       }
       \strng{namehash}{4bb577992ec0879c109df6dc7287614f}
       \strng{fullhash}{4bb577992ec0879c109df6dc7287614f}
-      \strng{fullhashraw}{4bb577992ec0879c109df6dc7287614f}
       \strng{bibnamehash}{4bb577992ec0879c109df6dc7287614f}
       \strng{authorbibnamehash}{4bb577992ec0879c109df6dc7287614f}
       \strng{authornamehash}{4bb577992ec0879c109df6dc7287614f}
       \strng{authorfullhash}{4bb577992ec0879c109df6dc7287614f}
-      \strng{authorfullhashraw}{4bb577992ec0879c109df6dc7287614f}
       \field{labelalpha}{HA15}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
@@ -118,7 +112,7 @@
       \verb https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection.html
       \endverb
     \endentry
-    \entry{Hillaire2016FrostbiteSky}{report}{}{}
+    \entry{Hillaire2016FrostbiteSky}{report}{}
       \name{author}{1}{}{%
         {{hash=a37eb0629ae081d1dab037319d4bf54d}{%
            family={Hillaire},
@@ -131,12 +125,10 @@
       }
       \strng{namehash}{a37eb0629ae081d1dab037319d4bf54d}
       \strng{fullhash}{a37eb0629ae081d1dab037319d4bf54d}
-      \strng{fullhashraw}{a37eb0629ae081d1dab037319d4bf54d}
       \strng{bibnamehash}{a37eb0629ae081d1dab037319d4bf54d}
       \strng{authorbibnamehash}{a37eb0629ae081d1dab037319d4bf54d}
       \strng{authornamehash}{a37eb0629ae081d1dab037319d4bf54d}
       \strng{authorfullhash}{a37eb0629ae081d1dab037319d4bf54d}
-      \strng{authorfullhashraw}{a37eb0629ae081d1dab037319d4bf54d}
       \field{labelalpha}{Hil16}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
@@ -153,7 +145,7 @@
       \verb https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf
       \endverb
     \endentry
-    \entry{Mizdal2019AmbientSound}{inproceedings}{}{}
+    \entry{Mizdal2019AmbientSound}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=a7d8503903da7a4133715172afda7b62}{%
            family={Mizdal},
@@ -174,12 +166,10 @@
       }
       \strng{namehash}{053af64ac08101504ea82f1cef25d906}
       \strng{fullhash}{053af64ac08101504ea82f1cef25d906}
-      \strng{fullhashraw}{053af64ac08101504ea82f1cef25d906}
       \strng{bibnamehash}{053af64ac08101504ea82f1cef25d906}
       \strng{authorbibnamehash}{053af64ac08101504ea82f1cef25d906}
       \strng{authornamehash}{053af64ac08101504ea82f1cef25d906}
       \strng{authorfullhash}{053af64ac08101504ea82f1cef25d906}
-      \strng{authorfullhashraw}{053af64ac08101504ea82f1cef25d906}
       \field{labelalpha}{MP19}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
@@ -196,7 +186,40 @@
       \verb https://www.sbgames.org/sbgames2019/files/papers/ComputacaoFull/198453.pdf
       \endverb
     \endentry
-    \entry{nimier2020differentiable}{inproceedings}{}{}
+    \entry{MusgraveFractalTerrains}{report}{}
+      \name{author}{1}{}{%
+        {{hash=b889feb567378d061d51324277500e75}{%
+           family={Musgrave},
+           familyi={M\bibinitperiod},
+           given={F.\bibnamedelimi Kenton},
+           giveni={F\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of Chicago}%
+      }
+      \strng{namehash}{b889feb567378d061d51324277500e75}
+      \strng{fullhash}{b889feb567378d061d51324277500e75}
+      \strng{bibnamehash}{b889feb567378d061d51324277500e75}
+      \strng{authorbibnamehash}{b889feb567378d061d51324277500e75}
+      \strng{authornamehash}{b889feb567378d061d51324277500e75}
+      \strng{authorfullhash}{b889feb567378d061d51324277500e75}
+      \field{labelalpha}{Musnd}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Course notes, retrieved from \url{https://www.classes.cs.uchicago.edu/archive/2015/fall/23700-1/final-project/MusgraveTerrain00.pdf}}
+      \field{title}{Procedural Fractal Terrains}
+      \field{type}{techreport}
+      \field{year}{n.d.}
+      \verb{urlraw}
+      \verb https://www.classes.cs.uchicago.edu/archive/2015/fall/23700-1/final-project/MusgraveTerrain00.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.classes.cs.uchicago.edu/archive/2015/fall/23700-1/final-project/MusgraveTerrain00.pdf
+      \endverb
+    \endentry
+    \entry{nimier2020differentiable}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=842180dbcd36e62dd45ccff6b48fded8}{%
            family={Nimier-David},
@@ -221,12 +244,10 @@
       }
       \strng{namehash}{13a570fe00b84847504dbb5d03b62d92}
       \strng{fullhash}{feef6d0a81a80d98d0d7ed3b9b980474}
-      \strng{fullhashraw}{feef6d0a81a80d98d0d7ed3b9b980474}
       \strng{bibnamehash}{13a570fe00b84847504dbb5d03b62d92}
       \strng{authorbibnamehash}{13a570fe00b84847504dbb5d03b62d92}
       \strng{authornamehash}{13a570fe00b84847504dbb5d03b62d92}
       \strng{authorfullhash}{feef6d0a81a80d98d0d7ed3b9b980474}
-      \strng{authorfullhashraw}{feef6d0a81a80d98d0d7ed3b9b980474}
       \field{labelalpha}{Nim+20}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
@@ -236,7 +257,7 @@
       \field{title}{Differentiable Signed Distance Function Rendering}
       \field{year}{2020}
     \endentry
-    \entry{:NVIDIA}{article}{}{}
+    \entry{:NVIDIA}{article}{}
       \name{author}{5}{}{%
         {{hash=cd3be0a5137c10ac9170ec950c6fc03c}{%
            family={Ouyang},
@@ -266,12 +287,10 @@
       }
       \strng{namehash}{4d118ca786bea29b82f8d5a988f761c9}
       \strng{fullhash}{cb945cda3c6747e741a7ba2836f52577}
-      \strng{fullhashraw}{cb945cda3c6747e741a7ba2836f52577}
       \strng{bibnamehash}{4d118ca786bea29b82f8d5a988f761c9}
       \strng{authorbibnamehash}{4d118ca786bea29b82f8d5a988f761c9}
       \strng{authornamehash}{4d118ca786bea29b82f8d5a988f761c9}
       \strng{authorfullhash}{cb945cda3c6747e741a7ba2836f52577}
-      \strng{authorfullhashraw}{cb945cda3c6747e741a7ba2836f52577}
       \field{labelalpha}{Ouy+21}
       \field{sortinit}{O}
       \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
@@ -299,7 +318,7 @@
       \endverb
       \keyw{CCS Concepts,• Computing methodologies → Rendering,Ray tracing}
     \endentry
-    \entry{park2019deepsdf}{inproceedings}{}{}
+    \entry{park2019deepsdf}{inproceedings}{}
       \name{author}{5}{}{%
         {{hash=cef3fbbccf81ac6acea8e00c8137c326}{%
            family={Park},
@@ -329,12 +348,10 @@
       }
       \strng{namehash}{30ba824db16c5501cf28476ce5ecc005}
       \strng{fullhash}{8927ca8e6f9564821df0550ceb47683d}
-      \strng{fullhashraw}{8927ca8e6f9564821df0550ceb47683d}
       \strng{bibnamehash}{30ba824db16c5501cf28476ce5ecc005}
       \strng{authorbibnamehash}{30ba824db16c5501cf28476ce5ecc005}
       \strng{authornamehash}{30ba824db16c5501cf28476ce5ecc005}
       \strng{authorfullhash}{8927ca8e6f9564821df0550ceb47683d}
-      \strng{authorfullhashraw}{8927ca8e6f9564821df0550ceb47683d}
       \field{labelalpha}{Par+19}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
@@ -344,7 +361,7 @@
       \field{title}{DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation}
       \field{year}{2019}
     \endentry
-    \entry{book:REF_BOOK_1}{book}{}{}
+    \entry{book:REF_BOOK_1}{book}{}
       \name{author}{2}{}{%
         {{hash=c69ff00a5e1719a4ad2dddd6254ac3c9}{%
            family={Pharr},
@@ -362,12 +379,10 @@
       }
       \strng{namehash}{a8caa1a83a4164c3470c0834efb385dd}
       \strng{fullhash}{a8caa1a83a4164c3470c0834efb385dd}
-      \strng{fullhashraw}{a8caa1a83a4164c3470c0834efb385dd}
       \strng{bibnamehash}{a8caa1a83a4164c3470c0834efb385dd}
       \strng{authorbibnamehash}{a8caa1a83a4164c3470c0834efb385dd}
       \strng{authornamehash}{a8caa1a83a4164c3470c0834efb385dd}
       \strng{authorfullhash}{a8caa1a83a4164c3470c0834efb385dd}
-      \strng{authorfullhashraw}{a8caa1a83a4164c3470c0834efb385dd}
       \field{labelalpha}{PF05}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
@@ -377,7 +392,7 @@
       \field{title}{GPU Gems 2: Programming Techniques for High-Performance Graphics and General-Purpose Computation (Gpu Gems)}
       \field{year}{2005}
     \endentry
-    \entry{quilez2013distfunctions}{misc}{}{}
+    \entry{quilez2013distfunctions}{misc}{}
       \name{author}{1}{}{%
         {{hash=00f9bcdad45f435417911d040feff60a}{%
            family={Quilez},
@@ -387,12 +402,10 @@
       }
       \strng{namehash}{00f9bcdad45f435417911d040feff60a}
       \strng{fullhash}{00f9bcdad45f435417911d040feff60a}
-      \strng{fullhashraw}{00f9bcdad45f435417911d040feff60a}
       \strng{bibnamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorbibnamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
-      \strng{authorfullhashraw}{00f9bcdad45f435417911d040feff60a}
       \field{extraname}{1}
       \field{labelalpha}{Qui13}
       \field{sortinit}{Q}
@@ -405,7 +418,7 @@
       \field{title}{Smooth Minimum for {SDFs}}
       \field{year}{2013}
     \endentry
-    \entry{quilez2013smin}{misc}{}{}
+    \entry{quilez2013smin}{misc}{}
       \name{author}{1}{}{%
         {{hash=00f9bcdad45f435417911d040feff60a}{%
            family={Quilez},
@@ -415,12 +428,10 @@
       }
       \strng{namehash}{00f9bcdad45f435417911d040feff60a}
       \strng{fullhash}{00f9bcdad45f435417911d040feff60a}
-      \strng{fullhashraw}{00f9bcdad45f435417911d040feff60a}
       \strng{bibnamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorbibnamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
-      \strng{authorfullhashraw}{00f9bcdad45f435417911d040feff60a}
       \field{extraname}{2}
       \field{labelalpha}{Qui13}
       \field{sortinit}{Q}
@@ -433,7 +444,7 @@
       \field{title}{Smooth Minimum for {SDFs}}
       \field{year}{2013}
     \endentry
-    \entry{:REF_IN_1}{inproceedings}{}{}
+    \entry{:REF_IN_1}{inproceedings}{}
       \name{author}{5}{}{%
         {{hash=ef86db133c01f029113a2b663ce980ae}{%
            family={Riley},
@@ -478,16 +489,13 @@
       }
       \strng{namehash}{b8c1d5c1937d422d68a0750a0d5b1583}
       \strng{fullhash}{a38d978487925cc3c769c43487bc65bd}
-      \strng{fullhashraw}{a38d978487925cc3c769c43487bc65bd}
       \strng{bibnamehash}{b8c1d5c1937d422d68a0750a0d5b1583}
       \strng{authorbibnamehash}{b8c1d5c1937d422d68a0750a0d5b1583}
       \strng{authornamehash}{b8c1d5c1937d422d68a0750a0d5b1583}
       \strng{authorfullhash}{a38d978487925cc3c769c43487bc65bd}
-      \strng{authorfullhashraw}{a38d978487925cc3c769c43487bc65bd}
       \strng{editorbibnamehash}{6c32fa0a4a3d9f2849b210d6fca3f4c3}
       \strng{editornamehash}{6c32fa0a4a3d9f2849b210d6fca3f4c3}
       \strng{editorfullhash}{6c32fa0a4a3d9f2849b210d6fca3f4c3}
-      \strng{editorfullhashraw}{6c32fa0a4a3d9f2849b210d6fca3f4c3}
       \field{labelalpha}{Ril+04}
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
@@ -502,7 +510,7 @@
       \verb /10.2312/EGWR/EGSR04/375-386
       \endverb
     \endentry
-    \entry{Schneider2015Cloudscapes}{inproceedings}{}{}
+    \entry{Schneider2015Cloudscapes}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=dd66896eabe258fe0f73c78968ae36b4}{%
            family={Schneider},
@@ -517,12 +525,10 @@
       }
       \strng{namehash}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{fullhash}{e0f9024c4821e5217ee47d6a0ab403b8}
-      \strng{fullhashraw}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{bibnamehash}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{authorbibnamehash}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{authornamehash}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{authorfullhash}{e0f9024c4821e5217ee47d6a0ab403b8}
-      \strng{authorfullhashraw}{e0f9024c4821e5217ee47d6a0ab403b8}
       \field{labelalpha}{SV15}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
