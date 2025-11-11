@@ -61,7 +61,7 @@ The pseudocode in algorithm \ref{alg:marchray_cloud} builds upon algorithm \ref{
 
 Thanks to the use of outer bounds for the clouds, the optimized Sphere Tracing (Figure \ref{fig:spheretracing}) is kept as normal, up until a cloud bound is hit, at line 13. At this point, Fixed-Step Ray Marching begins, and either stops when a hard surface is hit (line 18) or when the vision is fully clouded (line 22). As discussed, the \texttt{GetDensity(p)} function acts as the \texttt{GetDist(p)} for cloudy objects, so for a cloudy sphere, it may simply look like Code 8, and produce the effect in Figure \ref{fig:no-noise-cloud}. It certainly looks cloudy, but still lacks the organic shapes of a conventional cloud.
 
-\begin{lstlisting}[language=GLSL, caption={Code 8: Get density of spherical cloud}, label={lst:GetDensity} float=ht]
+\begin{lstlisting}[language=GLSL, caption={Code 8: Get density of spherical cloud}, label={lst:GetDensity}, float=ht]
 float GetDensity(p){
     vec3 cloudCenter = vec3(0., 0., 0.);
     float cloudRadius = 2.0;

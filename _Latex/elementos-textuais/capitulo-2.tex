@@ -27,7 +27,7 @@ We are then able to establish the following definitions:
 
 \footnotetext{Source: https://developer.nvidia.com/discover/ray-tracing}
 
-The logic for traversing a 2D canvas and computing ray interactions with objects in the scene is outlined in \textbf{Algorithm 1 - Canvas Traversal}. This process applies to both ray tracing and ray marching, with the key difference being the implementation of the \texttt{TraceRay} function, used by ray tracing, which could be exchanged for \texttt{MarchRay}, used by ray marching.
+The logic for traversing a 2D canvas and computing ray interactions with objects in the scene is outlined in Algorithm \ref{alg:canvastraversal}. This process applies to both ray tracing and ray marching, with the key difference being the implementation of the \texttt{TraceRay} function, used by ray tracing, which could be exchanged for \texttt{MarchRay}, used by ray marching.
 
 \begin{algorithm}[ht]
 \caption{Canvas Traversal}
@@ -52,7 +52,7 @@ The logic for traversing a 2D canvas and computing ray interactions with objects
 \end{algorithmic}
 \end{algorithm}
 
-The pseudocode explicitly uses nested loops to traverse the canvas. In the GLSL implementation that follows, the iteration logic is unnecessary because the fragment shader operates on a per-pixel basis. Each invocation of the shader corresponds to a single pixel on the canvas, and the GPU automatically handles the parallel execution of the shader for all pixels. The input \texttt{fragCoord} provides the current pixel's coordinates, \texttt{vec2} and \texttt{vec3} represent 2D and 3D vectors respectively, and GLSL functions handle vector operations like normalization and dot products. 
+The pseudocode explicitly uses nested loops to traverse the canvas. In Code 1 is the GLSL implementation, and there it can be seen that the iteration logic is unnecessary because the fragment shader operates on a per-pixel basis. Each invocation of the shader corresponds to a single pixel on the canvas, and the GPU automatically handles the parallel execution of the shader for all pixels. The input \texttt{fragCoord} provides the current pixel's coordinates, \texttt{vec2} and \texttt{vec3} represent 2D and 3D vectors respectively, and GLSL functions handle vector operations like normalization and dot products. 
 
 
 \begin{lstlisting}[language=GLSL, caption={Code 1: Canvas Traversal}, label={lst:CanvasTraversal} float=ht]
@@ -80,13 +80,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 \section{Tracing the Ray}
 
-In ray tracing, once a ray is cast in the direction of a pixel on the canvas, it must traverse the scene to identify the closest object intersecting the ray. This requires a function capable of calculating the intersection between the ray and the geometric objects in the scene. The closest intersection point determines what will be rendered on the screen.
+In ray tracing, once a ray is cast in the direction of a pixel on the canvas, it must traverse the scene to identify the closest object intersecting the ray. This requires a function capable of calculating the intersection between the ray and the geometric objects in the scene. The closest intersection point determines what will be rendered on the screen, as can be seen on Algorithm \ref{alg:traceray}.
 
 
 \begin{algorithm}[ht]
 \caption{TraceRay}
+\label{alg:traceray}
 \begin{algorithmic}[1]
-\Procedure{TraceRay}{RayOrigin, RayDirection, Scene}
+\Procedure{Trace Ray}{RayOrigin, RayDirection, Scene}
     \State $ \mathbf{ClosestHit} \gets \text{RAYHIT\_INFINITY} $
     \ForEach {$\text{object} \in \text{Scene} $}
         \State $\mathbf{Hit} \gets \Call{RayObjectIntersection}{object, RayOrigin, RayDirection}$
@@ -102,12 +103,11 @@ In ray tracing, once a ray is cast in the direction of a pixel on the canvas, it
 
 In traditional computer graphics, most objects on a screen are represented as a collection of triangles. This allows any geometry tesselated into triangles to be described using ray-triangle intersection calculations. However, rendering smooth shapes requires an extremely fine mesh, leading to a high polygon count. This can create a significant performance bottleneck, especially in scenes containing thousands of objects, potentially resulting in millions of triangles.
 
-In the presented example, the scene is simplified to a single sphere. Since the analytic solution for ray-sphere intersection is well known \cite{turn0search0}, the surface can
-be rendered smoothly and accurately without relying on geometric tessellation.
+In Figure \ref{fig:internet}, the scene is simplified to a single sphere. Since the analytic solution for ray-sphere intersection is well known \cite{turn0search0}, the surface can be rendered smoothly and accurately without relying on geometric tessellation.
 
-The \texttt{GetHitColor} function currently returns only the object's albedo. To simulate realistic lighting behavior, additional calculations are required.
+In Code 1, ours \texttt{GetHitColor} function currently returns only the object's albedo, the pure color of the object. To simulate realistic lighting behavior, the function can be expanded with additional calculations.
 
-By rendering a scene with a black background, a large white sphere below the camera to simulate the ground, and a smaller red sphere above it, the image shown in Figure 3 is produced.
+By rendering a scene with a black background, a large white sphere below the camera to simulate the ground, and a smaller red sphere above it, the image shown in Figure \ref{fig:internet} is produced.
 
 \begin{figure}[ht]
     \centering
@@ -170,16 +170,16 @@ To prevent the march from ever skipping a surface between steps, instead of fixe
 \end{algorithmic}
 \end{algorithm}
 
-To illustrate a limitation of the method, Figure \ref{fig:unlit_march_sphere} was rendered with a low step cap of 150. Careful inspection reveals that the distant ground plane disappears near the edges of the sphere. This occurs because rays take smaller steps when approaching a surface, requiring more iterations to traverse its boundary. As a result, the step budget is exhausted before the rays can reach the the ground plane. Fortunately, 150 steps is well below the typical \texttt{MAX\_MARCH\_STEPS}. Using a higher value removes this artifact with little added cost, and beyond this edge case, most rays terminate within fewer than 10 steps due to the scene's distance limits.
+To illustrate a limitation of the method, Figure \ref{fig:unlit_march_sphere} was rendered with a low step cap of 150. Careful inspection reveals that the distant ground plane disappears near the edges of the sphere. This occurs because rays take smaller steps when approaching a surface, requiring more iterations to traverse its boundary. As a result, the step budget is exhausted before the rays can reach the the ground plane. Fortunately, 150 steps is well below the typical \texttt{MAX\_MARCH\_STEPS}. Using a higher value removes this artifact with little added cost, and beyond this edge case, most rays terminate within fewer than 10 steps due to the scene's distance limits. For reference, our final scenes have the cap of marching steps at around 1000.
 
 \section{When to march rather than trace}
 
-At first glance, when comparing both methods, ray tracing comes off as the best, most optimal one. Ray marching is prone to visual features and might take a lot of marching steps to produce the best image, especially in crowded scenes. In the landscape of real-time computing, many companies also prioritize ray tracing over ray marching. Nowadays, most of the 3d modeling done in software like Blender and Zbrush is not based on primitives such as spheres and boxes, but rather on just polygons. As such, any traditionally modeled scene, with high poly counts, textures, reflection, refraction, and shadows, is better suited to ray tracing, especially considering recent advances in hardware-accelerated path tracing on modern GPUs 
+At first glance, when comparing both methods, ray tracing comes off as the best, most optimal one. Ray marching is prone to visual features and might take a lot of marching steps to produce the best image, especially in crowded scenes. In the landscape of real-time computing, many companies also prioritize ray tracing over ray marching. Nowadays, most of the 3d modeling done in software like Blender \footnote{https://www.blender.org/about/} and Zbrush \footnote{https://www.maxon.net/en/zbrush} is not based on primitives such as spheres and boxes, but rather on just polygons. As such, any traditionally modeled scene, with high poly counts, textures, reflection, refraction, and shadows, is better suited to ray tracing, especially considering recent advances in hardware-accelerated path tracing on modern GPUs 
 (e.g., NVIDIA RTX architecture \cite{:NVIDIA}).
 
 Now, it doesn`t mean ray marching has no competitive applications. Far from it, the flexibility of SDFs, and capability of diverse object combination and manipulation makes it particularly well-suited for rendering complex, mathematically defined shapes, such as fractals. Moreover, ray marching excels at rendering volumetric effects like clouds, fog, and smoke, which are inherently continuous and difficult to model with traditional polygonal geometry. By evaluating density functions at each step along a ray, ray marching can accurately simulate light scattering, absorption, and shadowing within these volumetric media.
 
-Altough the demand for ray tracing specific hardware all but decreases, there is still a place for ray marching in real-time computing, even if it isn’t suited for rendering high-poly solid objects. It`s creative potential flourishes in communities like Shadertoy, where innovative ray-marched shaders showcase it's versatility. Beyond artistic applications, AAA games still leverage ray marching for realistic, dynamic effects like clouds characters fly through or smokes that bullets poke holes at. Additionally, in scientific fields, there are laboratories that apply ray marching on visualizations of all sorts, including 3D scalar fields, complex mathematical structures, such as Julia sets of quadratic functions and other quaternionic fractals. While its use cases may be more specialized, ray marching remains a powerful tool across both creative and technical domains, and hybrid solutions, using both marching and tracing, are widely adopted as to optimize the pros and cons of each method.
+Altough the demand for ray tracing specific hardware all but decreases, there is still a place for ray marching in real-time computing, even if it isn’t suited for rendering high-poly solid objects. It`s creative potential flourishes in communities like Shadertoy, where innovative ray-marched shaders showcase it's versatility. Beyond artistic applications, most mid-budget to high-budget games still leverage ray marching for realistic, dynamic effects like clouds characters fly through or smokes that bullets poke holes at. Additionally, in scientific fields, there are laboratories that apply ray marching on visualizations of all sorts, including 3D volumetric fields \cite{kettunen2021}, complex mathematical structures, such as Julia sets of quadratic functions and other quaternionic fractals \cite{quilez2001juliasets}. While its use cases may be more specialized, ray marching remains a powerful tool across both creative and technical domains, and hybrid solutions, using both marching and tracing, are widely adopted as to optimize the pros and cons of each method.
 
 % Capítulo 3 (ou apêndice): Shading e Iluminação
 

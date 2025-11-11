@@ -1,6 +1,6 @@
 \chapter{Signed Distance Functions Techniques}\label{chp:LABEL_CHP_3}
 
-A \textit{Signed Distance Function} (SDF) provides a way to describe geometric forms in a continuous manner by associating each point in space with its \textit{signed distance} to a surface. The function returns positive value when the point is outside the shape and a negative value when the point is inside the shape. This framework is highly flexible, allowing the representation of shapes in 2D, 3D, and even N-dimensional spaces, since the Euclidean distance is not restricted to a particular number of dimensions.  
+A Signed Distance Function (SDF) provides a way to describe geometric forms in a continuous manner by associating each point in space with its \textit{signed distance} to a surface. The function returns positive value when the point is outside the shape and a negative value when the point is inside the shape. This framework is highly flexible, allowing the representation of shapes in 2D, 3D, and even N-dimensional spaces, since the Euclidean distance is not restricted to a particular number of dimensions.  
 
 A defining feature of Ray Marching is its use of signed distance functions to describe geometry, rather than traditional vertices, edges, and faces. This approach is precisely what makes Ray Marching a powerful technique, capable of rendering smooth surfaces, shapes distorted by procedural noise, repetitive patterns, and dynamic shapes that evolve over time.
     
@@ -22,16 +22,19 @@ The general form of an SDF function includes:
 
 For a circle centered at the origin in $ \mathbb{R}^ 2 $ with radius $r$, the SDF is given by:
 
-$$\text{CircleSDF}(\mathbf{p}) = \|\mathbf{p}\| - r$$
+\begin{equation}\label{eq:circleSDF}
+\text{CircleSDF}(\mathbf{p}) = \|\mathbf{p}\| - r
+\end{equation}
 
 A sphere in three-dimensional space follows the same principle. If the sphere is centered at the origin with radius $r$, the SDF becomes:
 
-$$\text{SphereSDF}(\mathbf{p}) = \|\mathbf{p}\| - r$$
-
+\begin{equation}\label{eq:sphereSDF}
+\text{SphereSDF}(\mathbf{p}) = \|\mathbf{p}\| - r
+\end{equation}
 
 where $\mathbf{p}$ in $\mathbb{R}^3 $ is now a point in three-dimensional space.
 
-The only difference between the circle and the sphere is the dimension of the query point $\mathbf{p}$. In the case of a circle, $\mathbf{p}$ is a two-dimensional vector, whereas for a sphere, $\mathbf{p}$ is a three-dimensional vector. The formula remains structurally identical because both objects are defined by a center and a radius in their respective spaces.
+The only difference between the circle and the sphere is the dimension of the query point $\mathbf{p}$. In the case of a circle, $\mathbf{p}$ is a two-dimensional vector, whereas for a sphere, $\mathbf{p}$ is a three-dimensional vector. The formula remains structurally identical because both objects are defined by a center and a radius in their respective spaces. Their corresponding implementations may be seen on Code 2 and Code 3, respectively.
 
 \begin{lstlisting}[language=GLSL, caption={Code 2: Circle and Sphere SDFs}, label={lst:CircleAndSphere} float=H]
 float circleDistance(vec2 point, float radius){
@@ -88,7 +91,7 @@ In Figure \ref{fig:plainColoredCircle}, it is possible to see the color outside 
   \label{fig:sdf-sphere}
 \end{figure}
 
-Since lighting models are outside the scope of this essay, readers may refer to Real-Time Rendering, 4th Edition by Akenine-Möller et al. for further details on shading techniques \cite{akenine-moller2018realtimerendering}.
+Since lighting models are outside the scope of this work, readers may refer to \cite{akenine-moller2018realtimerendering} for further details on shading techniques.
 
 \subsection{Rectangles and Boxes}
 
@@ -99,7 +102,7 @@ Since lighting models are outside the scope of this essay, readers may refer to 
   \label{fig:customColoredRectangle}
 \end{figure}
 
-Similar to the 2D circle, the signed distance function (SDF) of a 2D box, or rectangle, can be generalized to higher dimensions.
+Similar to the 2D circle, the signed distance function (SDF) of a 2D box, or rectangle, can be generalized to higher dimensions (see Code 4).
 
 \begin{lstlisting}[language=GLSL, caption={Code 4: Rectangle and Box SDF}, label={lst:RectangleAndBox} float=ht]
 float rectangleDistance( in vec2 p, in vec2 b ){
@@ -113,12 +116,12 @@ float boxDistance( in vec3 p, in vec3 b ){
 }
 \end{lstlisting}
 
-The rectangle SDF is defined at the origin $\mathbf{[0,0]}$, and due to the rectangle's symmetry, it is often more convenient to work within the first cartesian quadrant. To achieve this, $\mathbf{b}$ (half each box`s side) is subtracted from $\mathbf{abs(p)}$, yielding a point $\mathbf{d}$. As illustrated in Figure \ref{fig:square_sdf}:
+The rectangle SDF is defined at the origin $(0,0)$, and due to the rectangle's symmetry, it is often more convenient to work within the first cartesian quadrant. To achieve this, $\mathbf{b}$ (half each box`s side) is subtracted from $\texttt{abs}(\mathbf{p})$, yielding a point $\mathbf{d}$. As illustrated in Figure \ref{fig:square_sdf}:
 
 \begin{itemize}
-    \item If only $\mathbf{d.x<0}$, it indicates that $\mathbf{p}$ is above the rectangle, in section 1, and the shortest distance is straight down.
-    \item If only $\mathbf{d.y<0}$, it means that $\mathbf{p}$ is next to the rectangle, in section 3, so the shortest distance is straight left.
-    \item If both $\mathbf{d.x}<0$ and $\mathbf{d.y<0}$, the point is inside the rectangle, in section 4, thus the shortest distance is the closest of the two sides.
+    \item If only $\mathbf{d}.x<0$, it indicates that $\mathbf{p}$ is above the rectangle, in section 1, and the shortest distance is straight down.
+    \item If only $\mathbf{d}.y<0$, it means that $\mathbf{p}$ is next to the rectangle, in section 3, so the shortest distance is straight left.
+    \item If both $\mathbf{d}.x<0$ and $\mathbf{d}.y<0$, the point is inside the rectangle, in section 4, thus the shortest distance is the closest of the two sides.
     \item Finally, if neither component is negative, the point lies diagonally outside the rectangle, in section 2, so the distance to the corner is the shortest.
 \end{itemize}
 
@@ -129,7 +132,7 @@ The rectangle SDF is defined at the origin $\mathbf{[0,0]}$, and due to the rect
     \label{fig:square_sdf}
 \end{figure}
 
-It can be seen that when both $\mathbf{d.x}$ and $\mathbf{d.y}$ are limited to zero, which visually means snapping all points to section 2, the distance to the corner encases the results, although not entirely. If in section 4, inside the rectangle, $\mathbf{length(max(d,0.0))}$ is always 0. In such cases, the SDF should return the negative distance to the nearest edge of the rectangle, adding the expression $\mathbf{min(max(d.x,d.y),0.0)}$. The min() function ensures non-zero distances are only possible in section 4. With that, all sections are considered.
+It can be seen that when both $\mathbf{d}.x$ and $\mathbf{d}.y$ are limited to zero, which visually means snapping all points to section 2, the distance to the corner encases the results, although not entirely. If in section 4, inside the rectangle, $\mathbf{length(max(d,0.0))}$ is always 0. In such cases, the SDF should return the negative distance to the nearest edge of the rectangle, adding the expression $\mathbf{min(max(d.x,d.y),0.0)}$. The min() function ensures non-zero distances are only possible in section 4. With that, all sections are considered.
 
 This process can be generalized to higher dimensions in a similar fashion. As such, the 3D box SDF can be derived by extending the approach to $\mathbb{R}^3 $, where p and b are now three-dimensional vectors.
 
@@ -165,8 +168,7 @@ This section describes some of the main SDF operations used in modeling based on
 
 \subsection{Union, Intersection and Subtraction}
 
-Operations between objects are some of the most elegant features of SDFs, and the most basic ones are the combinations: Union, Intersection and Subtraction. These three have very simple definitions and are great ways to introduce SDF operations. They take as input the SDF resulting distance of two primitive SDFs.
-
+Operations between objects are some of the most elegant features of SDFs, and the most basic ones are the combinations: Union, Intersection and Subtraction. These three have very simple definitions and are great ways to introduce SDF operations. They take as input the SDF resulting distance of two primitive SDFs $\mathbf{d_1}$ and $\mathbf{d_2}$, as described in Code 5.
 
 \begin{lstlisting}[language=GLSL, caption={Code 5: SDF Union, Intersection and Subtraction}, label={lst:UnionIntersectionSubtraction} float=ht]
 float unionOperation( float d1, float d2 )
@@ -183,12 +185,12 @@ float subtractionOperation( float d1, float d2 )
 }
 \end{lstlisting}
 
-From the perspective of a 3D raymarched vision, given $\mathbf{d1}$ and $\mathbf{d2}$, SDF distances from objects 1 and 2:
+From the perspective of a 3D raymarched vision, given $\mathbf{d_1}$ and $\mathbf{d_2}$, SDF distances from objects 1 and 2:
 
 \begin{itemize}
-    \item Taking the minimum between $\mathbf{d1}$ and $\mathbf{d2}$ is like seeing only the closest surface from both objects to camera, which is already the case for solids seen from the outside.
-    \item Taking the maximum between $\mathbf{d1}$ and $\mathbf{d2}$ means that nothing outside the intersection of both objects is seen, since the ray march will only consider a hit if both SDF results are below the hit threshold.
-    \item Taking the maximum between $\mathbf{-d1}$ and $\mathbf{d2}$ is like intersecting with the inverse of d1, which means that all $\mathbf{R}^3 $ except object1. This results in the subtraction of objects 1 from 2.
+    \item Taking the minimum between $\mathbf{d_1}$ and $\mathbf{d_2}$ is like seeing only the closest surface from both objects to camera, which is already the case for solids seen from the outside.
+    \item Taking the maximum between $\mathbf{d_1}$ and $\mathbf{d_2}$ means that nothing outside the intersection of both objects is seen, since the ray march will only consider a hit if both SDF results are below the hit threshold.
+    \item Taking the maximum between $\mathbf{-d_1}$ and $\mathbf{d_2}$ is like intersecting with the inverse of d1, which means that all $\mathbf{R}^3 $ except object1. This results in the subtraction of objects 1 from 2.
 \end{itemize}
 
 
@@ -280,14 +282,14 @@ Because it is fast and does not overestimate distances, the quadratic polynomial
 Figure \ref{fig:smin} will help navigate the explanation ahead, $\mathbf{a\ =\ -\left(2-x\right)^{2}+2}$ is in red and $\mathbf{b\ =\ \left(2-x\right)^{2}\ +.5}$ in blue. To find smin, all polynomial methods start by finding the $\mathbf{h()}$ function, which is 0 by default, and ramps up to 1, starting at $\mathbf{|a - b|=k}$ and peaking at $\mathbf{|a - b|=0}$:
 
 \begin{equation}
-    h = \frac{\max(k - |a - b|, 0.0)}{k}
+    \mathbf{h} = \frac{\max(\mathbf{k} - \|\mathbf{a} - \mathbf{b}\|, 0.0)}{\mathbf{k}}
     \label{eq:example_equation}
 \end{equation}
 
 Since $\mathbf{k}$ is the distance in which the shapes start to combine, $\mathbf{h()}$ helps delimitate exactly that, as represented in green, Figure \ref{fig:smin}. Next, there needs to be a $\mathbf{c}$ such that $\mathbf{min(a,b)-c}$ produces the smoothed curve. This is no random requirement, but a simplified structure of what is the DD (Direct Difference) family of smin solutions. For polynomials, a simple solution for $\mathbf{c}$ is as follows, with $\mathbf{n>1.5}$ already producing great results:
 
 \begin{equation}
-    c\ =\frac{h^{n}k}{2n}
+    \mathbf{c}\ =\frac{\mathbf{h}^{\mathbf{n}}\mathbf{k}}{\mathbf{2n}}
     \label{eq:example_equation_2}
 \end{equation}
 
