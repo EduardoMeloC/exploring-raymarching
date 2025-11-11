@@ -149,17 +149,90 @@ If expanded to $\mathbb{R}^4 $, the SDF can help visualize forms such as the tes
 
 \section{Basic Transformations}
 
-All primitives described in the previous Section were centered at the origin. In order to perform a transformation such as scaling, rotation or translation, it is possible to apply the transformation at the query point $\mathbf{p}$.
+All primitives described in the previous Section were centered at the origin. In order to perform a transformation such as scaling, rotation or translation, it is possible to apply the inverse transformation at the query point $\mathbf{p}$: this way, we are transforming the space, and not the shape directly.
 
-%BOTAR EXEMPLO DE CODIGO FACIL
-%vec3 opTransformRotate( in vec3 p, in transform t, in sdf3d primitive ){
-%    return primitive( invert(t)*p );
-%}
-%float opScale( in vec3 p, in float s, in sdf3d primitive ){
-%    return primitive(p/s)*s;
-%}
+In Code 5, by subtracting the vector $(0., 3., 0.)$, the sphere is effectively positioned at $(0., 3., 0.)$.
 
-%UM PARAGRAFO PRA EXPLICAR RAPIDINHO
+\begin{lstlisting}[language=GLSL, caption={Code 5: Translating Sphere}, label={lst:TransformingSphere} float=ht]
+float transformedSphere(vec3 point)
+{
+    return sphereDistance(point - vec3(0., 3., 0.));
+}
+\end{lstlisting}
+
+Affine transformations can also be handled directly using matrices. GLSL provides built-in support for creating and inverting matrices. Code 6 shows how different affine transformations can be composed, and the result is illustrated in Figure \ref{fig:affineTransformations}.
+
+\begin{lstlisting}[language=GLSL, caption={Code 5: Translating Sphere}, label={lst:TransformingSphere} float=ht]
+float transformedSphere(vec3 point)
+{
+    // Scale 2X along Y
+    mat4 S = mat4(
+        vec4(1., 0., 0., 0.),
+        vec4(0., 2., 0., 0.),
+        vec4(0., 0., 1., 0.),
+        vec4(0., 0., 0., 1.)
+    );
+    
+    // Rotation in XY
+    float t = PI/4.;
+    mat4 R = mat4(
+        vec4(cos(t), sin(t), 0., 0.),
+        vec4(-sin(t), cos(t), 0., 0.),
+        vec4(0., 0., 1., 0.),
+        vec4(0., 0., 0., 1.)
+    );
+    
+    // Translate to (-2., -1., -1.)
+    mat4 T = mat4(
+        vec4(1., 0., 0., -2.),
+        vec4(0., 1., 0., -1.),
+        vec4(0., 0., 1., -1.),
+        vec4(0., 0., 0., 1.)
+    );
+
+    mat4 transformationMatrix = S * R * T;
+    
+    vec3 transformedPoint = (vec4(point, 1.) * inverse(transformationMatrix)).xyz;
+
+    return sphereDistance(transformedPoint);
+}
+\end{lstlisting}
+
+
+\begin{figure}[ht]
+    \centering
+
+    % Row 1
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/transformations/1-transformations-identity.png}\\
+        Original Sphere
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/transformations/2-transformations-scale.png}\\
+        Scale 2X along Y
+    \end{minipage}
+
+    \vspace{1em} % space between rows
+
+    % Row 2
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/transformations/3-transformations-rotation.png}\\
+        Rotation in XY
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/transformations/4-transformations-translation.png}\\
+        Translate to (-2., -1., -1.)
+    \end{minipage}
+
+    \caption{Composing Different Affine Transformations on a Sphere}
+    \label{fig:affineTransformations}
+\end{figure}
 
 \section{Operations}
 
@@ -192,7 +265,7 @@ From the perspective of a 3D raymarched vision, given $\mathbf{d_1}$ and $\mathb
 \begin{itemize}
     \item Taking the minimum between $\mathbf{d_1}$ and $\mathbf{d_2}$ is like seeing only the closest surface from both objects to camera, which is already the case for solids seen from the outside.
     \item Taking the maximum between $\mathbf{d_1}$ and $\mathbf{d_2}$ means that nothing outside the intersection of both objects is seen, since the ray march will only consider a hit if both SDF results are below the hit threshold.
-    \item Taking the maximum between $\mathbf{-d_1}$ and $\mathbf{d_2}$ is like intersecting with the inverse of d1, which means that all $\mathbb{R}^3 $ except object1. This results in the subtraction of objects 1 from 2.
+    \item Taking the maximum between $\mathbf{-d_1}$ and $\mathbf{d_2}$ is like intersecting with the inverse of $\mathbf{d_1}$, which means that all $\mathbb{R}^3 $ except object1. This results in the subtraction of objects 1 from 2.
 \end{itemize}
 
 Figure \ref{fig:sdf_operations} illustrates these constructive solid geometry operations between a cube and a sphere.
