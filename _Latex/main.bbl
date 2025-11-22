@@ -145,6 +145,64 @@
       \verb https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf
       \endverb
     \endentry
+    \entry{kettunen2021}{article}{}
+      \name{author}{4}{}{%
+        {{hash=23afc84944b4c7d301421491babaf2c2}{%
+           family={Kettunen},
+           familyi={K\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6745e0460e2d8c50b9bc55cec5e99715}{%
+           family={D'Eon},
+           familyi={D\bibinitperiod},
+           given={Eugene},
+           giveni={E\bibinitperiod}}}%
+        {{hash=0a6b526649063fb6ed8b508d4e46442c}{%
+           family={Pantaleoni},
+           familyi={P\bibinitperiod},
+           given={Jacopo},
+           giveni={J\bibinitperiod}}}%
+        {{hash=eb871242c3cc6b59592dcb005fddd0cd}{%
+           family={Novák},
+           familyi={N\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{c20a94d70428e39e76c3cd512e39971a}
+      \strng{fullhash}{79c13ec6b5844a5c24aecdc24f00e0d1}
+      \strng{bibnamehash}{c20a94d70428e39e76c3cd512e39971a}
+      \strng{authorbibnamehash}{c20a94d70428e39e76c3cd512e39971a}
+      \strng{authornamehash}{c20a94d70428e39e76c3cd512e39971a}
+      \strng{authorfullhash}{79c13ec6b5844a5c24aecdc24f00e0d1}
+      \field{labelalpha}{Ket+21}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0730-0301}
+      \field{journaltitle}{ACM Trans. Graph.}
+      \field{month}{7}
+      \field{number}{4}
+      \field{title}{An unbiased ray-marching transmittance estimator}
+      \field{volume}{40}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.1145/3450626.3459937
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3450626.3459937
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3450626.3459937
+      \endverb
+      \keyw{u-statistics,transmittance,power series,poisson estimator,comb filter}
+    \endentry
     \entry{Mizdal2019AmbientSound}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=a7d8503903da7a4133715172afda7b62}{%
@@ -392,7 +450,7 @@
       \field{title}{GPU Gems 2: Programming Techniques for High-Performance Graphics and General-Purpose Computation (Gpu Gems)}
       \field{year}{2005}
     \endentry
-    \entry{quilez2013distfunctions}{misc}{}
+    \entry{quilez2001juliasets}{misc}{}
       \name{author}{1}{}{%
         {{hash=00f9bcdad45f435417911d040feff60a}{%
            family={Quilez},
@@ -407,6 +465,31 @@
       \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
       \field{extraname}{1}
+      \field{labelalpha}{Qui01}
+      \field{sortinit}{Q}
+      \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://iquilezles.org/articles/juliasets3d/}}
+      \field{note}{Accessed: 2025-09-28}
+      \field{title}{3D Julia sets}
+      \field{year}{2001}
+    \endentry
+    \entry{quilez2013distfunctions}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=00f9bcdad45f435417911d040feff60a}{%
+           family={Quilez},
+           familyi={Q\bibinitperiod},
+           given={Inigo},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{00f9bcdad45f435417911d040feff60a}
+      \strng{fullhash}{00f9bcdad45f435417911d040feff60a}
+      \strng{bibnamehash}{00f9bcdad45f435417911d040feff60a}
+      \strng{authorbibnamehash}{00f9bcdad45f435417911d040feff60a}
+      \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
+      \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
+      \field{extraname}{2}
       \field{labelalpha}{Qui13}
       \field{sortinit}{Q}
       \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
@@ -432,7 +515,7 @@
       \strng{authorbibnamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{labelalpha}{Qui13}
       \field{sortinit}{Q}
       \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}

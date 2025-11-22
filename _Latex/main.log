@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  10 NOV 2025 16:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  22 NOV 2025 20:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -697,7 +697,11 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count451
 \@quotereset=\count452
-(main.aux)
+(main.aux
+
+LaTeX Warning: Label `{lst:TransformingSphere} float' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
@@ -821,7 +825,7 @@ l.97 \maketitle
                 [1
 
 ]
-<elementos-pretextuais/ficha_catalografica.png, id=119, 539.01375pt x 376.40625pt>
+<elementos-pretextuais/ficha_catalografica.png, id=127, 539.01375pt x 376.40625pt>
 File: elementos-pretextuais/ficha_catalografica.png Graphic file (type png)
 <use elementos-pretextuais/ficha_catalografica.png>
 Package pdftex.def Info: elementos-pretextuais/ficha_catalografica.png  used on input line 97.
@@ -945,8 +949,15 @@ text indent calculated (lof, 1): 17.6207pt
 number indent calculated (lof, 1): 0.0pt
 text noindent (lof, 1): 17.6207pt
 number noindent (lof, 1): 0.0pt
+number indent by \l@... (lof, 1):  0.0pt
+text indent by \l@... (lof, 1):  64.60922pt
+number indent by parent (lof, 1):  0.0pt
+text indent calculated (lof, 1): 17.6207pt
+number indent calculated (lof, 1): 0.0pt
+text noindent (lof, 1): 17.6207pt
+number noindent (lof, 1): 0.0pt
 
-Overfull \hbox (6.85419pt too wide) in paragraph at lines 19--19
+Overfull \hbox (6.85419pt too wide) in paragraph at lines 20--20
  [][] [][]\T1/cmr/m/n/12 Raymarched Con-struc-tive Solid Ge-om-e-try Op-er-a-tions with Cube and Sphere 
  []
 
@@ -1235,6 +1246,26 @@ text indent calculated (toc, 1): 20.88377pt
 number indent calculated (toc, 1): 13.4967pt
 text noindent (toc, 1): 34.49158pt
 number noindent (toc, 1): 0.0pt
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.30 ...uppercase {Bibliography}}{44}{section.6.1}
+                                                  % [5]
+number indent by \l@... (toc, 0):  0.0pt
+text indent by \l@... (toc, 0):  17.6207pt
+number indent by parent (toc, 0):  0.0pt
+text indent calculated (toc, 0): 13.4967pt
+number indent calculated (toc, 0): 0.0pt
+text noindent (toc, 0): 34.49158pt
+number noindent (toc, 0): 0.0pt
+number indent by \l@... (toc, 1):  17.6207pt
+text indent by \l@... (toc, 1):  27.01843pt
+number indent by parent (toc, 1):  13.4967pt
+text indent calculated (toc, 1): 20.88377pt
+number indent calculated (toc, 1): 13.4967pt
+text noindent (toc, 1): 34.49158pt
+number noindent (toc, 1): 0.0pt
 )
 \tf@toc=\write6
 \openout6 = `main.toc'.
@@ -1244,14 +1275,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 <to be read again> 
                    \relax 
 l.159 
-       [5]
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.159 
        [6] (elementos-textuais/capitulo-1.tex
 Chapter 1.
-<imagens/raymarched-clouds-schneider.png, id=231, 980.91469pt x 561.59813pt>
+<imagens/raymarched-clouds-schneider.png, id=243, 980.91469pt x 561.59813pt>
 File: imagens/raymarched-clouds-schneider.png Graphic file (type png)
 <use imagens/raymarched-clouds-schneider.png>
 Package pdftex.def Info: imagens/raymarched-clouds-schneider.png  used on input line 15.
@@ -1265,7 +1291,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{Hfootnote.2}) 
 l.33 ...Shadertoy \footnotetext{www.shadertoy.com}
                                                   , a tool for running fragm... [8 <./imagens/raymarched-clouds-schneider.png>]) (elementos-textuais/capitulo-2.tex [9]
 Chapter 2.
-<imagens/ray-trace.jpg, id=253, 1066.98625pt x 701.62125pt>
+<imagens/ray-trace.jpg, id=265, 1066.98625pt x 701.62125pt>
 File: imagens/ray-trace.jpg Graphic file (type jpg)
 <use imagens/ray-trace.jpg>
 Package pdftex.def Info: imagens/ray-trace.jpg  used on input line 11.
@@ -1281,23 +1307,23 @@ Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on inp
  [11 <./imagens/ray-trace.jpg>]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 58.
  [12] [13]
-<imagens/unlit-raytraced-sphere.png, id=307, 596.2275pt x 567.11874pt>
+<imagens/unlit-raytraced-sphere.png, id=323, 596.2275pt x 567.11874pt>
 File: imagens/unlit-raytraced-sphere.png Graphic file (type png)
 <use imagens/unlit-raytraced-sphere.png>
 Package pdftex.def Info: imagens/unlit-raytraced-sphere.png  used on input line 114.
 (pdftex.def)             Requested size: 217.38014pt x 217.37651pt.
  [14 <./imagens/unlit-raytraced-sphere.png>]
-<imagens/spheretracing.png, id=319, 376.40625pt x 265.99374pt>
+<imagens/spheretracing.png, id=335, 376.40625pt x 265.99374pt>
 File: imagens/spheretracing.png Graphic file (type png)
 <use imagens/spheretracing.png>
 Package pdftex.def Info: imagens/spheretracing.png  used on input line 130.
 (pdftex.def)             Requested size: 217.38531pt x 153.64737pt.
-<imagens/raymarch_fixed_fail.jpg, id=320, 188.20313pt x 110.66344pt>
+<imagens/raymarch_fixed_fail.jpg, id=336, 188.20313pt x 110.66344pt>
 File: imagens/raymarch_fixed_fail.jpg Graphic file (type jpg)
 <use imagens/raymarch_fixed_fail.jpg>
 Package pdftex.def Info: imagens/raymarch_fixed_fail.jpg  used on input line 137.
 (pdftex.def)             Requested size: 217.39392pt x 127.76007pt.
-<imagens/unlit-raymarched-sphere.png, id=323, 816.04875pt x 567.11874pt>
+<imagens/unlit-raymarched-sphere.png, id=339, 816.04875pt x 567.11874pt>
 File: imagens/unlit-raymarched-sphere.png Graphic file (type png)
 <use imagens/unlit-raymarched-sphere.png>
 Package pdftex.def Info: imagens/unlit-raymarched-sphere.png  used on input line 144.
@@ -1307,213 +1333,233 @@ Chapter 3.
 [19
 
 ] [20]
-<imagens/circle-plainColor.png, id=373, 700.6175pt x 393.47pt>
+<imagens/circle-plainColor.png, id=397, 700.6175pt x 393.47pt>
 File: imagens/circle-plainColor.png Graphic file (type png)
 <use imagens/circle-plainColor.png>
-Package pdftex.def Info: imagens/circle-plainColor.png  used on input line 68.
+Package pdftex.def Info: imagens/circle-plainColor.png  used on input line 71.
 (pdftex.def)             Requested size: 170.71718pt x 95.87564pt.
-<imagens/circle-customColor.png, id=374, 700.6175pt x 393.47pt>
+<imagens/circle-customColor.png, id=398, 700.6175pt x 393.47pt>
 File: imagens/circle-customColor.png Graphic file (type png)
 <use imagens/circle-customColor.png>
-Package pdftex.def Info: imagens/circle-customColor.png  used on input line 74.
+Package pdftex.def Info: imagens/circle-customColor.png  used on input line 77.
 (pdftex.def)             Requested size: 170.71718pt x 95.87564pt.
-<imagens/sdf-sphere.png, id=377, 700.6175pt x 393.47pt>
+<imagens/sdf-sphere.png, id=401, 700.6175pt x 393.47pt>
 File: imagens/sdf-sphere.png Graphic file (type png)
 <use imagens/sdf-sphere.png>
-Package pdftex.def Info: imagens/sdf-sphere.png  used on input line 86.
+Package pdftex.def Info: imagens/sdf-sphere.png  used on input line 89.
 (pdftex.def)             Requested size: 256.0774pt x 143.81648pt.
-<imagens/rectangle-customColor.png, id=379, 700.6175pt x 393.47pt>
+<imagens/rectangle-customColor.png, id=403, 700.6175pt x 393.47pt>
 File: imagens/rectangle-customColor.png Graphic file (type png)
 <use imagens/rectangle-customColor.png>
-Package pdftex.def Info: imagens/rectangle-customColor.png  used on input line 97.
+Package pdftex.def Info: imagens/rectangle-customColor.png  used on input line 100.
 (pdftex.def)             Requested size: 256.0774pt x 143.81648pt.
  [21 <./imagens/circle-plainColor.png> <./imagens/circle-customColor.png>] [22 <./imagens/sdf-sphere.png> <./imagens/rectangle-customColor.png>]
-<imagens/square_sdf.png, id=409, 646.415pt x 640.3925pt>
+<imagens/square_sdf.png, id=435, 646.415pt x 640.3925pt>
 File: imagens/square_sdf.png Graphic file (type png)
 <use imagens/square_sdf.png>
-Package pdftex.def Info: imagens/square_sdf.png  used on input line 127.
+Package pdftex.def Info: imagens/square_sdf.png  used on input line 130.
 (pdftex.def)             Requested size: 213.39651pt x 211.39857pt.
  [23 <./imagens/square_sdf.png>]
-<imagens/sdf-cube.png, id=415, 1927.2pt x 1084.05pt>
+<imagens/sdf-cube.png, id=441, 1927.2pt x 1084.05pt>
 File: imagens/sdf-cube.png Graphic file (type png)
 <use imagens/sdf-cube.png>
-Package pdftex.def Info: imagens/sdf-cube.png  used on input line 139.
+Package pdftex.def Info: imagens/sdf-cube.png  used on input line 142.
 (pdftex.def)             Requested size: 256.0774pt x 144.0412pt.
  [24 <./imagens/sdf-cube.png>] [25]
-<imagens/sdf-operations/cube.png, id=440, 803.0pt x 451.6875pt>
+<imagens/transformations/1-transformations-identity.png, id=490, 803.0pt x 451.6875pt>
+File: imagens/transformations/1-transformations-identity.png Graphic file (type png)
+<use imagens/transformations/1-transformations-identity.png>
+Package pdftex.def Info: imagens/transformations/1-transformations-identity.png  used on input line 208.
+(pdftex.def)             Requested size: 192.0548pt x 108.02814pt.
+<imagens/transformations/2-transformations-scale.png, id=491, 803.0pt x 451.6875pt>
+File: imagens/transformations/2-transformations-scale.png Graphic file (type png)
+<use imagens/transformations/2-transformations-scale.png>
+Package pdftex.def Info: imagens/transformations/2-transformations-scale.png  used on input line 214.
+(pdftex.def)             Requested size: 192.0548pt x 108.02814pt.
+<imagens/transformations/3-transformations-rotation.png, id=492, 803.0pt x 451.6875pt>
+File: imagens/transformations/3-transformations-rotation.png Graphic file (type png)
+<use imagens/transformations/3-transformations-rotation.png>
+Package pdftex.def Info: imagens/transformations/3-transformations-rotation.png  used on input line 223.
+(pdftex.def)             Requested size: 192.0548pt x 108.02814pt.
+<imagens/transformations/4-transformations-translation.png, id=493, 803.0pt x 451.6875pt>
+File: imagens/transformations/4-transformations-translation.png Graphic file (type png)
+<use imagens/transformations/4-transformations-translation.png>
+Package pdftex.def Info: imagens/transformations/4-transformations-translation.png  used on input line 229.
+(pdftex.def)             Requested size: 192.0548pt x 108.02814pt.
+ [26 <./imagens/transformations/1-transformations-identity.png> <./imagens/transformations/2-transformations-scale.png> <./imagens/transformations/3-transformations-rotation.png> <./imagens/transformations/4-transformations-translation.png>] [27]
+<imagens/sdf-operations/cube.png, id=522, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/cube.png Graphic file (type png)
 <use imagens/sdf-operations/cube.png>
-Package pdftex.def Info: imagens/sdf-operations/cube.png  used on input line 202.
+Package pdftex.def Info: imagens/sdf-operations/cube.png  used on input line 279.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/sphere.png, id=441, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/sphere.png, id=523, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/sphere.png Graphic file (type png)
 <use imagens/sdf-operations/sphere.png>
-Package pdftex.def Info: imagens/sdf-operations/sphere.png  used on input line 208.
+Package pdftex.def Info: imagens/sdf-operations/sphere.png  used on input line 285.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/union.png, id=442, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/union.png, id=524, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/union.png Graphic file (type png)
 <use imagens/sdf-operations/union.png>
-Package pdftex.def Info: imagens/sdf-operations/union.png  used on input line 214.
+Package pdftex.def Info: imagens/sdf-operations/union.png  used on input line 291.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/intersection.png, id=443, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/intersection.png, id=525, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/intersection.png Graphic file (type png)
 <use imagens/sdf-operations/intersection.png>
-Package pdftex.def Info: imagens/sdf-operations/intersection.png  used on input line 223.
+Package pdftex.def Info: imagens/sdf-operations/intersection.png  used on input line 300.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/subtraction1.png, id=444, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/subtraction1.png, id=526, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/subtraction1.png Graphic file (type png)
 <use imagens/sdf-operations/subtraction1.png>
-Package pdftex.def Info: imagens/sdf-operations/subtraction1.png  used on input line 229.
+Package pdftex.def Info: imagens/sdf-operations/subtraction1.png  used on input line 306.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/sdf-operations/subtraction2.png, id=445, 803.0pt x 451.6875pt>
+<imagens/sdf-operations/subtraction2.png, id=527, 803.0pt x 451.6875pt>
 File: imagens/sdf-operations/subtraction2.png Graphic file (type png)
 <use imagens/sdf-operations/subtraction2.png>
-Package pdftex.def Info: imagens/sdf-operations/subtraction2.png  used on input line 235.
+Package pdftex.def Info: imagens/sdf-operations/subtraction2.png  used on input line 312.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smoothUnion.png, id=450, 338.26375pt x 315.1775pt>
+<imagens/smoothUnion.png, id=532, 338.26375pt x 315.1775pt>
 File: imagens/smoothUnion.png Graphic file (type png)
 <use imagens/smoothUnion.png>
-Package pdftex.def Info: imagens/smoothUnion.png  used on input line 252.
+Package pdftex.def Info: imagens/smoothUnion.png  used on input line 329.
 (pdftex.def)             Requested size: 170.71718pt x 159.0696pt.
-<imagens/smoothIntersection.png, id=451, 305.14pt x 260.975pt>
+<imagens/smoothIntersection.png, id=533, 305.14pt x 260.975pt>
 File: imagens/smoothIntersection.png Graphic file (type png)
 <use imagens/smoothIntersection.png>
-Package pdftex.def Info: imagens/smoothIntersection.png  used on input line 258.
+Package pdftex.def Info: imagens/smoothIntersection.png  used on input line 335.
 (pdftex.def)             Requested size: 170.71718pt x 146.0136pt.
-<imagens/smoothSubtraction.png, id=452, 257.96375pt x 262.9825pt>
+<imagens/smoothSubtraction.png, id=534, 257.96375pt x 262.9825pt>
 File: imagens/smoothSubtraction.png Graphic file (type png)
 <use imagens/smoothSubtraction.png>
-Package pdftex.def Info: imagens/smoothSubtraction.png  used on input line 267.
+Package pdftex.def Info: imagens/smoothSubtraction.png  used on input line 344.
 (pdftex.def)             Requested size: 170.71718pt x 174.04248pt.
-<imagens/desmos_smin.png, id=453, 869.2475pt x 602.25pt>
+<imagens/desmos_smin.png, id=535, 869.2475pt x 602.25pt>
 File: imagens/desmos_smin.png Graphic file (type png)
 <use imagens/desmos_smin.png>
-Package pdftex.def Info: imagens/desmos_smin.png  used on input line 273.
+Package pdftex.def Info: imagens/desmos_smin.png  used on input line 350.
 (pdftex.def)             Requested size: 170.71718pt x 118.27911pt.
- [26 <./imagens/sdf-operations/cube.png> <./imagens/sdf-operations/sphere.png> <./imagens/sdf-operations/union.png> <./imagens/sdf-operations/intersection.png> <./imagens/sdf-operations/subtraction1.png> <./imagens/sdf-operations/subtraction2.png>] [27 <./imagens/smoothUnion.png> <./imagens/smoothIntersection.png> <./imagens/smoothSubtraction.png> <./imagens/desmos_smin.png>]
-<imagens/smooth-sdf-operations/add-unsmooth.png, id=473, 803.0pt x 451.6875pt>
+ [28 <./imagens/sdf-operations/cube.png> <./imagens/sdf-operations/sphere.png> <./imagens/sdf-operations/union.png> <./imagens/sdf-operations/intersection.png> <./imagens/sdf-operations/subtraction1.png> <./imagens/sdf-operations/subtraction2.png>] [29 <./imagens/smoothUnion.png> <./imagens/smoothIntersection.png> <./imagens/smoothSubtraction.png> <./imagens/desmos_smin.png>]
+<imagens/smooth-sdf-operations/add-unsmooth.png, id=557, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/add-unsmooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/add-unsmooth.png>
-Package pdftex.def Info: imagens/smooth-sdf-operations/add-unsmooth.png  used on input line 306.
+Package pdftex.def Info: imagens/smooth-sdf-operations/add-unsmooth.png  used on input line 383.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/subtraction-unsmooth.png, id=474, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/subtraction-unsmooth.png, id=558, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/subtraction-unsmooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/subtraction-unsmooth.png>
-Package pdftex.def Info: imagens/smooth-sdf-operations/subtraction-unsmooth.png  used on input line 312.
+Package pdftex.def Info: imagens/smooth-sdf-operations/subtraction-unsmooth.png  used on input line 389.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/intersection-unsmooth.png, id=475, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/intersection-unsmooth.png, id=559, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/intersection-unsmooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/intersection-unsmooth.png>
-Package pdftex.def Info: imagens/smooth-sdf-operations/intersection-unsmooth.png  used on input line 318.
+Package pdftex.def Info: imagens/smooth-sdf-operations/intersection-unsmooth.png  used on input line 395.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/add-smooth.png, id=476, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/add-smooth.png, id=560, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/add-smooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/add-smooth.png>
-Package pdftex.def Info: imagens/smooth-sdf-operations/add-smooth.png  used on input line 327.
+Package pdftex.def Info: imagens/smooth-sdf-operations/add-smooth.png  used on input line 404.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/subtraction-smooth.png, id=477, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/subtraction-smooth.png, id=561, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/subtraction-smooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/subtraction-smooth.png>
-Package pdftex.def Info: imagens/smooth-sdf-operations/subtraction-smooth.png  used on input line 333.
+Package pdftex.def Info: imagens/smooth-sdf-operations/subtraction-smooth.png  used on input line 410.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
-<imagens/smooth-sdf-operations/intersection-smooth.png, id=478, 803.0pt x 451.6875pt>
+<imagens/smooth-sdf-operations/intersection-smooth.png, id=562, 803.0pt x 451.6875pt>
 File: imagens/smooth-sdf-operations/intersection-smooth.png Graphic file (type png)
 <use imagens/smooth-sdf-operations/intersection-smooth.png>
-Package pdftex.def Info: imagens/smooth-sdf-operations/intersection-smooth.png  used on input line 339.
+Package pdftex.def Info: imagens/smooth-sdf-operations/intersection-smooth.png  used on input line 416.
 (pdftex.def)             Requested size: 128.0387pt x 72.01646pt.
- [28 <./imagens/smooth-sdf-operations/add-unsmooth.png> <./imagens/smooth-sdf-operations/subtraction-unsmooth.png> <./imagens/smooth-sdf-operations/intersection-unsmooth.png> <./imagens/smooth-sdf-operations/add-smooth.png> <./imagens/smooth-sdf-operations/subtraction-smooth.png> <./imagens/smooth-sdf-operations/intersection-smooth.png>]
-<imagens/domainRepetition-circle.png, id=492, 700.6175pt x 393.47pt>
+ [30 <./imagens/smooth-sdf-operations/add-unsmooth.png> <./imagens/smooth-sdf-operations/subtraction-unsmooth.png> <./imagens/smooth-sdf-operations/intersection-unsmooth.png> <./imagens/smooth-sdf-operations/add-smooth.png> <./imagens/smooth-sdf-operations/subtraction-smooth.png> <./imagens/smooth-sdf-operations/intersection-smooth.png>]
+<imagens/domainRepetition-circle.png, id=574, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-circle.png Graphic file (type png)
 <use imagens/domainRepetition-circle.png>
-Package pdftex.def Info: imagens/domainRepetition-circle.png  used on input line 361.
+Package pdftex.def Info: imagens/domainRepetition-circle.png  used on input line 438.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
-<imagens/domainRepetition-sine.png, id=493, 700.6175pt x 393.47pt>
+<imagens/domainRepetition-sine.png, id=575, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-sine.png Graphic file (type png)
 <use imagens/domainRepetition-sine.png>
-Package pdftex.def Info: imagens/domainRepetition-sine.png  used on input line 367.
+Package pdftex.def Info: imagens/domainRepetition-sine.png  used on input line 444.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
 
-Overfull \hbox (2.14778pt too wide) in paragraph at lines 368--369
+Overfull \hbox (2.14778pt too wide) in paragraph at lines 445--446
  [][] 
  []
 
-<imagens/domainRepetition-round.png, id=494, 700.6175pt x 393.47pt>
+<imagens/domainRepetition-round.png, id=576, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-round.png Graphic file (type png)
 <use imagens/domainRepetition-round.png>
-Package pdftex.def Info: imagens/domainRepetition-round.png  used on input line 376.
+Package pdftex.def Info: imagens/domainRepetition-round.png  used on input line 453.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
-<imagens/domainRepetition-mod.png, id=495, 700.6175pt x 393.47pt>
+<imagens/domainRepetition-mod.png, id=577, 700.6175pt x 393.47pt>
 File: imagens/domainRepetition-mod.png Graphic file (type png)
 <use imagens/domainRepetition-mod.png>
-Package pdftex.def Info: imagens/domainRepetition-mod.png  used on input line 382.
+Package pdftex.def Info: imagens/domainRepetition-mod.png  used on input line 459.
 (pdftex.def)             Requested size: 192.0548pt x 107.85936pt.
-[29 <./imagens/domainRepetition-circle.png> <./imagens/domainRepetition-sine.png> <./imagens/domainRepetition-round.png> <./imagens/domainRepetition-mod.png>]
-<imagens/domain-repetition.png, id=507, 803.0pt x 451.6875pt>
+<imagens/domain-repetition.png, id=580, 803.0pt x 451.6875pt>
 File: imagens/domain-repetition.png Graphic file (type png)
 <use imagens/domain-repetition.png>
-Package pdftex.def Info: imagens/domain-repetition.png  used on input line 397.
+Package pdftex.def Info: imagens/domain-repetition.png  used on input line 474.
 (pdftex.def)             Requested size: 256.0774pt x 144.0467pt.
- [30 <./imagens/domain-repetition.png>]
-<imagens/sdf-distortion/sin-cos-distortion.png, id=521, 700.6175pt x 394.47375pt>
+[31 <./imagens/domainRepetition-circle.png> <./imagens/domainRepetition-sine.png> <./imagens/domainRepetition-round.png> <./imagens/domainRepetition-mod.png>] [32 <./imagens/domain-repetition.png>]
+<imagens/sdf-distortion/sin-cos-distortion.png, id=602, 700.6175pt x 394.47375pt>
 File: imagens/sdf-distortion/sin-cos-distortion.png Graphic file (type png)
 <use imagens/sdf-distortion/sin-cos-distortion.png>
-Package pdftex.def Info: imagens/sdf-distortion/sin-cos-distortion.png  used on input line 438.
+Package pdftex.def Info: imagens/sdf-distortion/sin-cos-distortion.png  used on input line 515.
 (pdftex.def)             Requested size: 256.0774pt x 144.18335pt.
-) (elementos-textuais/capitulo-4.tex [31] [32 <./imagens/sdf-distortion/sin-cos-distortion.png>]
+) (elementos-textuais/capitulo-4.tex [33 <./imagens/sdf-distortion/sin-cos-distortion.png>]
 Chapter 4.
 
 LaTeX Warning: Float too large for page by 5.87726pt on input line 58.
 
-[33
+[34
 
 ]
-<imagens/cloud-noise/no-noise-cloud.png, id=555, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/no-noise-cloud.png, id=632, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/no-noise-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/no-noise-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/no-noise-cloud.png  used on input line 74.
 (pdftex.def)             Requested size: 256.0774pt x 144.18335pt.
- [34 <./imagens/cloud-noise/no-noise-cloud.png>]
-<imagens/cloud-noise/white-noise.png, id=569, 700.6175pt x 394.47375pt>
+ [35]
+<imagens/cloud-noise/white-noise.png, id=647, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/white-noise.png Graphic file (type png)
 <use imagens/cloud-noise/white-noise.png>
 Package pdftex.def Info: imagens/cloud-noise/white-noise.png  used on input line 98.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/white-noise-cloud.png, id=570, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/white-noise-cloud.png, id=648, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/white-noise-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/white-noise-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/white-noise-cloud.png  used on input line 104.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/value-noise.png, id=571, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/value-noise.png, id=649, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/value-noise.png Graphic file (type png)
 <use imagens/cloud-noise/value-noise.png>
 Package pdftex.def Info: imagens/cloud-noise/value-noise.png  used on input line 113.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/value-noise-cloud.png, id=572, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/value-noise-cloud.png, id=650, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/value-noise-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/value-noise-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/value-noise-cloud.png  used on input line 119.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/1-octave-fbm.png, id=575, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/1-octave-fbm.png, id=653, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/1-octave-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/1-octave-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/1-octave-fbm.png  used on input line 137.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/1-octave-fbm-cloud.png, id=576, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/1-octave-fbm-cloud.png, id=654, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/1-octave-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/1-octave-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/1-octave-fbm-cloud.png  used on input line 144.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/2-octaves-fbm.png, id=577, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/2-octaves-fbm.png, id=655, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/2-octaves-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/2-octaves-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/2-octaves-fbm.png  used on input line 153.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/2-octaves-fbm-cloud.png, id=578, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/2-octaves-fbm-cloud.png, id=656, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/2-octaves-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/2-octaves-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/2-octaves-fbm-cloud.png  used on input line 160.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/3-octaves-fbm.png, id=579, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/3-octaves-fbm.png, id=657, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/3-octaves-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/3-octaves-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/3-octaves-fbm.png  used on input line 169.
@@ -1523,57 +1569,70 @@ Overfull \hbox (5.98819pt too wide) in paragraph at lines 170--171
  []\T1/cmtt/m/n/10.95 vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25 
  []
 
-<imagens/cloud-noise/3-octaves-fbm-cloud.png, id=580, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/3-octaves-fbm-cloud.png, id=658, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/3-octaves-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/3-octaves-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/3-octaves-fbm-cloud.png  used on input line 176.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/4-octaves-fbm.png, id=581, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/4-octaves-fbm.png, id=659, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/4-octaves-fbm.png Graphic file (type png)
 <use imagens/cloud-noise/4-octaves-fbm.png>
 Package pdftex.def Info: imagens/cloud-noise/4-octaves-fbm.png  used on input line 185.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-<imagens/cloud-noise/4-octaves-fbm-cloud.png, id=582, 700.6175pt x 394.47375pt>
+<imagens/cloud-noise/4-octaves-fbm-cloud.png, id=660, 700.6175pt x 394.47375pt>
 File: imagens/cloud-noise/4-octaves-fbm-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/4-octaves-fbm-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/4-octaves-fbm-cloud.png  used on input line 192.
 (pdftex.def)             Requested size: 192.0548pt x 108.1345pt.
-[35] [36 <./imagens/cloud-noise/white-noise.png> <./imagens/cloud-noise/white-noise-cloud.png> <./imagens/cloud-noise/value-noise.png> <./imagens/cloud-noise/value-noise-cloud.png>]
-<imagens/cloud-noise/lit-cloud.png, id=598, 771.88374pt x 604.2575pt>
+[36 <./imagens/cloud-noise/no-noise-cloud.png>] [37 <./imagens/cloud-noise/white-noise.png> <./imagens/cloud-noise/white-noise-cloud.png> <./imagens/cloud-noise/value-noise.png> <./imagens/cloud-noise/value-noise-cloud.png>]
+<imagens/cloud-noise/lit-cloud.png, id=676, 771.88374pt x 604.2575pt>
 File: imagens/cloud-noise/lit-cloud.png Graphic file (type png)
 <use imagens/cloud-noise/lit-cloud.png>
 Package pdftex.def Info: imagens/cloud-noise/lit-cloud.png  used on input line 235.
 (pdftex.def)             Requested size: 270.30118pt x 211.59471pt.
-) (elementos-textuais/capitulo-5.tex [37] [38] [39 <./imagens/cloud-noise/1-octave-fbm.png> <./imagens/cloud-noise/1-octave-fbm-cloud.png> <./imagens/cloud-noise/2-octaves-fbm.png> <./imagens/cloud-noise/2-octaves-fbm-cloud.png> <./imagens/cloud-noise/3-octaves-fbm.png> <./imagens/cloud-noise/3-octaves-fbm-cloud.png> <./imagens/cloud-noise/4-octaves-fbm.png> <./imagens/cloud-noise/4-octaves-fbm-cloud.png>] [40 <./imagens/cloud-noise/lit-cloud.png>]
+) (elementos-textuais/capitulo-5.tex [38] [39] [40 <./imagens/cloud-noise/1-octave-fbm.png> <./imagens/cloud-noise/1-octave-fbm-cloud.png> <./imagens/cloud-noise/2-octaves-fbm.png> <./imagens/cloud-noise/2-octaves-fbm-cloud.png> <./imagens/cloud-noise/3-octaves-fbm.png> <./imagens/cloud-noise/3-octaves-fbm-cloud.png> <./imagens/cloud-noise/4-octaves-fbm.png> <./imagens/cloud-noise/4-octaves-fbm-cloud.png>] [41 <./imagens/cloud-noise/lit-cloud.png>]
 Chapter 5.
-) [41
+) (elementos-textuais/capitulo-6.tex [42
 
-] [42] [43] (main.aux)
+]
+Chapter 6.
+) [43
+
+] [44]
+Overfull \hbox (34.96274pt too wide) in paragraph at lines 176--176
+[]\T1/cmr/m/n/12 Inigo Quilez. \T1/cmr/m/it/12 3D Ju-lia sets\T1/cmr/m/n/12 . []$\T1/cmtt/m/n/12 https : / / iquilezles . org / articles / juliasets3d/$[]\T1/cmr/m/n/12 .
+ []
+
+[45] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7F9839FBDDB13BD6A566837009512D2E;4067.
+(rerunfilecheck)             Checksum: 2E2F56C631EEA5CBF8CD10D3F40B748F;4398.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25021 strings out of 474486
- 440339 string characters out of 5743755
- 2019542 words of memory out of 5000000
- 46762 multiletter control sequences out of 15000+600000
- 582042 words of font info for 91 fonts, out of 8000000 for 9000
+ 25152 strings out of 474486
+ 443953 string characters out of 5743755
+ 2127542 words of memory out of 5000000
+ 46836 multiletter control sequences out of 15000+600000
+ 582969 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  81i,12n,98p,1549b,2985s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
- <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti0800.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (45 pages, 4893257 bytes).
+ <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti0800.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\eduar\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/eduar/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (47 pages, 4985327 bytes).
 PDF statistics:
- 1265 PDF objects out of 1440 (max. 8388607)
- 209 named destinations out of 1000 (max. 500000)
- 462 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1370 PDF objects out of 1440 (max. 8388607)
+ 260 named destinations out of 1000 (max. 500000)
+ 498 words of extra memory for PDF output out of 10000 (max. 10000000)
 

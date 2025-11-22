@@ -16,18 +16,20 @@
 \contentsline {figure}{\numberline {10}{\ignorespaces Rectangle SDF Visualization}}{22}{figure.caption.11}%
 \contentsline {figure}{\numberline {11}{\ignorespaces Graphic of Rectangle SDF calculation}}{23}{figure.caption.12}%
 \contentsline {figure}{\numberline {12}{\ignorespaces 3D Cube SDF Visualization}}{24}{figure.caption.13}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Raymarched Constructive Solid Geometry Operations with Cube and Sphere SDFs.}}{26}{figure.caption.14}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Smooth Union}}{27}{figure.caption.15}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Smooth Intersection}}{27}{figure.caption.15}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Smooth Subtraction}}{27}{figure.caption.16}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Smooth Minimum Representation}}{27}{figure.caption.16}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Raymarched Smooth Operations with Cube and Sphere SDFs.}}{28}{figure.caption.17}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Examples of Domain Repetition techniques.}}{29}{figure.caption.18}%
-\contentsline {figure}{\numberline {20}{\ignorespaces sphereDistance(p - 6.5*round(p/6.5), 1.0)}}{30}{figure.caption.19}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Distortion on Sphere from Code 7}}{32}{figure.caption.20}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Composing Different Affine Transformations on a Sphere}}{26}{figure.caption.14}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Raymarched Constructive Solid Geometry Operations with Cube and Sphere SDFs.}}{28}{figure.caption.15}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Smooth Union}}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Smooth Intersection}}{29}{figure.caption.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Smooth Subtraction}}{29}{figure.caption.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Smooth Minimum Representation}}{29}{figure.caption.17}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Raymarched Smooth Operations with Cube and Sphere SDFs.}}{30}{figure.caption.18}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Examples of Domain Repetition techniques.}}{31}{figure.caption.19}%
+\contentsline {figure}{\numberline {21}{\ignorespaces sphereDistance(p - 6.5*round(p/6.5), 1.0)}}{32}{figure.caption.20}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Distortion on Sphere from Code 7}}{33}{figure.caption.21}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {22}{\ignorespaces Raymarched Sphere with density}}{34}{figure.caption.21}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Comparison of White Noise and Value Noise for cloud generation.}}{36}{figure.caption.22}%
-\contentsline {figure}{\numberline {24}{\ignorespaces FBM Noise and Corresponding Cloud Examples with Increasing Octaves.}}{39}{figure.caption.23}%
-\contentsline {figure}{\numberline {25}{\ignorespaces Raymarched Cloud lit from directional light and point light}}{40}{figure.caption.24}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Raymarched Sphere with density}}{36}{figure.caption.23}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Comparison of White Noise and Value Noise for cloud generation.}}{37}{figure.caption.24}%
+\contentsline {figure}{\numberline {25}{\ignorespaces FBM Noise and Corresponding Cloud Examples with Increasing Octaves.}}{40}{figure.caption.25}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Raymarched Cloud lit from directional light and point light}}{41}{figure.caption.26}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }

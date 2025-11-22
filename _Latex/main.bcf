@@ -2368,16 +2368,18 @@
     <bcf:citekey order="6" intorder="1">book:REF_BOOK_1</bcf:citekey>
     <bcf:citekey order="7" intorder="1">book:REF_BOOK_1</bcf:citekey>
     <bcf:citekey order="8" intorder="1">:NVIDIA</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">akenine-moller2018realtimerendering</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">quilez2013smin</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">:REF_IN_1</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">:REF_IN_1</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">MusgraveFractalTerrains</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">Schneider2015Cloudscapes</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">green2007siggraph</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">Mizdal2019AmbientSound</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">park2019deepsdf</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">nimier2020differentiable</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">kettunen2021</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">quilez2001juliasets</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">akenine-moller2018realtimerendering</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">quilez2013smin</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">:REF_IN_1</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">:REF_IN_1</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">MusgraveFractalTerrains</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">Schneider2015Cloudscapes</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">green2007siggraph</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">Mizdal2019AmbientSound</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">park2019deepsdf</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">nimier2020differentiable</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="anyt">
