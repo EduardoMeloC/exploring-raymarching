@@ -17,6 +17,7 @@ Secondly, to consistently sample the density along the cloud, a constant step si
 To mitigate the loss, an outer bound will be applied to clouds. With a separate SDF, the bound will act as a regular surface, and when hit, Ray Marching will switch into the fixed step mode.
 
 \begin{algorithm}[ht]
+%\algsetup{linenosize=\tiny}
 \caption{MarchRay}
 \label{alg:marchray_cloud}
 \begin{algorithmic}[1]

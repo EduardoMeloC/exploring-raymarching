@@ -7,8 +7,8 @@
 \contentsline {chapter}{\numberline {2}Ray Tracing vs Ray Marching}{10}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Traversing the Canvas}{10}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Tracing the Ray}{13}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Marching the Ray}{15}{section.2.3}%
-\contentsline {section}{\numberline {2.4}When to march rather than trace}{17}{section.2.4}%
+\contentsline {section}{\numberline {2.3}Marching the Ray}{14}{section.2.3}%
+\contentsline {section}{\numberline {2.4}When to march rather than trace}{16}{section.2.4}%
 \contentsline {chapter}{\numberline {3}Signed Distance Functions Techniques}{19}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Basic Shapes}{19}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Circles and Spheres}{19}{subsection.3.1.1}%
@@ -25,7 +25,7 @@
 \contentsline {section}{\numberline {4.3}Volumetric Shading}{37}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Other Experiments}{42}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Examples of Rendered Scenes}{42}{section.5.1}%
-\contentsline {chapter}{\numberline {6}Conclusion}{43}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Future Works}{43}{section.6.1}%
-\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{44}{section.6.1}%
-\contentsline {section}{\numberline {6.2}*}{44}{section.6.2}%
+\contentsline {chapter}{\numberline {6}Conclusion}{44}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Future Works}{44}{section.6.1}%
+\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{45}{section.6.1}%
+\contentsline {section}{\numberline {6.2}*}{45}{section.6.2}%
