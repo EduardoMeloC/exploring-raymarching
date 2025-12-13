@@ -329,7 +329,7 @@ style=alphabetic,
 
   \hspace*{\fill}\parbox[b]{.5\textwidth}{%
     \linespread{1}\selectfont
-    Trabalho de conclusão de curso de graduação apresentado ao Departamento de Ciência da Computação da Universidade Federal do Rio de Janeiro como parte dos requisitos para obtenção do grau de Bacharel em Ciência da Computação.
+    Undergraduate thesis submitted to the Institute of Computing of the Federal University of Rio de Janeiro as part of the requirements for obtaining the degree of Bachelor in Computer Science.
     \\
     \\
     
@@ -393,7 +393,7 @@ style=alphabetic,
     
     \hspace*{\fill}\parbox[b]{.5\textwidth}{%
         \linespread{1}\selectfont
-        Trabalho de conclusão de curso de graduação apresentado ao Departamento de Ciência da Computação da Universidade Federal do Rio de Janeiro como parte dos requisitos para obtenção do grau de Bacharel em Ciência da Computação.
+        Undergraduate thesis submitted to the Institute of Computing of the Federal University of Rio de Janeiro as part of the requirements for obtaining the degree of Bachelor in Computer Science.
 
     }
 

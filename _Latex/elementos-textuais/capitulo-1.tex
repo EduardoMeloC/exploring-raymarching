@@ -30,12 +30,13 @@ We also explore the potential of Ray Marching for procedural rendering, showcasi
 
 \section{Methodology}
 
-We take an iterative approach to explore the Ray Marching algorithm, showcasing its capacity to render smooth, noisy, and dynamic surfaces. Real-time 3D applications often rely on graphics APIs such as OpenGL, DirectX, or Vulkan for GPU programming. To simplify development and focus on Ray Marching itself, we use Shadertoy \footnotetext{www.shadertoy.com}, a tool for running fragment shaders written in GLSL (OpenGL Shading Language) without the extensive setup. Fragment shaders are GPU programs that process each pixel on the screen, taking inputs such as the pixel position and canvas resolution.
+We take an iterative approach to explore the Ray Marching algorithm, showcasing its capacity to render smooth, noisy, and dynamic surfaces. Real-time 3D applications often rely on graphics APIs such as OpenGL, DirectX, or Vulkan for GPU programming. To simplify development and focus on Ray Marching itself, we use Shadertoy \footnotetext{www.shadertoy.com}, a tool for running fragment shaders written in GLSL (OpenGL Shading Language) without the extensive setup. All rendered scenes presented in this work are implemented as individual Shadertoy shaders. For reproducibility and ease of access, direct links to each Shadertoy example are provided in the accompanying source code repository.
 
 \section{Text Structure}
 
-The remainder of this document is organized into four chapters.  
+The remainder of this document is organized into six chapters.  
 Chapter 2 introduces Ray Tracing and Ray Marching, explaining and comparing them in terms of performance, visual fidelity, and preferred use cases.  
 Chapter 3 explores the unique capabilities of Ray Marching through Signed Distance Functions (SDFs), ranging from basic shapes to advanced operations exclusive to this technique.
 Chapter 4 focuses on volumetric rendering of clouds, one of Ray Marching’s most attractive applications, and provides a comprehensive explanation of our final shader implementation and results.  
-Finally, Chapter 5 presents our conclusions and outlines directions for future work.
+Chapter 5 presents a collection of rendered results and additional experiments that further explore and demonstrate the techniques introduced throughout this work, and includes a reference to the source code repository used to generate all examples.
+Finally, Chapter 6 presents our conclusions and outlines directions for future work.
