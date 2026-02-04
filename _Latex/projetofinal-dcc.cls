@@ -531,8 +531,8 @@ style=alphabetic,
 % Resumo (abstract) e Abstract (englishabstract)
 %=====================================================================
 \renewenvironment{abstract}[1]{
-  \if@english
-  \else
+  % \if@english
+  % \else
     %\addcontentsline{toc}{chapter}{\abstractname}
     
     \begin{center}
@@ -546,7 +546,7 @@ style=alphabetic,
 
     \renewcommand{\baselinestretch}{1.5}
     \normalsize
-  \fi
+  % \fi
 }
 {
 \bigskip
@@ -631,29 +631,29 @@ style=alphabetic,
 %=====================================================================
 \newcommand{\makethankspage}{
   %\chapter*{Agradecimentos}
-  \centerline{\textbf{AGRADECIMENTOS}}
+  \centerline{\textbf{ACKNOWLEDGMENTS}}
   \vspace{5mm}
   
   %\addcontentsline{toc}{chapter}{Agradecimentos}
   
-  \@ifundefined{@authorb}{}{\underline{\@authora}}
+  % \@ifundefined{@authorb}{}{\underline{\@authora}}
   
   \@authorathanks
   \newpage
   
-  \@ifundefined{@authorb}{}{
-    \underline{\@authorb}
+  % \@ifundefined{@authorb}{}{
+  %   \underline{\@authorb}
     
-    \@authorbthanks
-    \newpage
-  }
+  %   \@authorbthanks
+  %   \newpage
+  % }
   
-  \@ifundefined{@authorc}{}{
-    \underline{\@authorc}
+  % \@ifundefined{@authorc}{}{
+  %   \underline{\@authorc}
     
-    \@authorcthanks
-    \newpage
-  }
+  %   \@authorcthanks
+  %   \newpage
+  % }
   
   \pagebreak
 }{}
