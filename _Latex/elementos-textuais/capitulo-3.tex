@@ -162,7 +162,7 @@ float transformedSphere(vec3 point)
 
 Affine transformations can also be handled directly using matrices. GLSL provides built-in support for creating and inverting matrices. Code 6 shows how different affine transformations can be composed, and the result is illustrated in Figure \ref{fig:affineTransformations}.
 
-\begin{lstlisting}[language=GLSL, caption={Code 5: Translating Sphere}, label={lst:TransformingSphere} float=ht]
+\begin{lstlisting}[language=GLSL, caption={Code 6: Affine Transformation on Sphere}, label={lst:AffineTransformationSphere} float=ht]
 float transformedSphere(vec3 point)
 {
     // Scale 2X along Y
@@ -172,7 +172,6 @@ float transformedSphere(vec3 point)
         vec4(0., 0., 1., 0.),
         vec4(0., 0., 0., 1.)
     );
-    
     // Rotation in XY
     float t = PI/4.;
     mat4 R = mat4(
@@ -181,7 +180,6 @@ float transformedSphere(vec3 point)
         vec4(0., 0., 1., 0.),
         vec4(0., 0., 0., 1.)
     );
-    
     // Translate to (-2., -1., -1.)
     mat4 T = mat4(
         vec4(1., 0., 0., -2.),
@@ -241,10 +239,10 @@ This Section describes some of the main SDF operations used in modeling based on
 
 \subsection{Union, Intersection and Subtraction}
 
-Operations between objects are some of the most elegant features of SDFs, and the most basic ones are the combinations: Union, Intersection and Subtraction. These three have very simple definitions and are great ways to introduce SDF operations. They take as input the SDF resulting distance of two primitive SDFs $\mathbf{d_1}$ and $\mathbf{d_2}$, as described in Code 5.
+Operations between objects are some of the most elegant features of SDFs, and the most basic ones are the combinations: Union, Intersection and Subtraction. These three have very simple definitions and are great ways to introduce SDF operations. They take as input the SDF resulting distance of two primitive SDFs $\mathbf{d_1}$ and $\mathbf{d_2}$, as described in Code 7.
 
 
-\begin{lstlisting}[language=GLSL, caption={Code 5: SDF Union, Intersection and Subtraction}, label={lst:UnionIntersectionSubtraction} float=ht]
+\begin{lstlisting}[language=GLSL, caption={Code 7: SDF Union, Intersection and Subtraction}, label={lst:UnionIntersectionSubtraction} float=ht]
 float unionOperation( float d1, float d2 )
 {
     return min(d1,d2);
@@ -478,9 +476,9 @@ shows an example of repeated spheres in a repeated domain.
 
 \subsection{Displacement}
 
-Displacement is a technique used to adjust the geometry to simulate bumps or irregularities, adding fine detail to the surface. This is often done by perturbing the distance field using patterns that look random, such as static or grain, which can be generated with mathematical formulas (procedural noise) or taken from images (noise textures). This technique is implemented in Code 6.
+Displacement is a technique used to adjust the geometry to simulate bumps or irregularities, adding fine detail to the surface. This is often done by perturbing the distance field using patterns that look random, such as static or grain, which can be generated with mathematical formulas (procedural noise) or taken from images (noise textures). This technique is implemented in Code 8.
 
-\begin{lstlisting}[language=GLSL, caption={Code 6: SDF Displacement}, label={lst:Displacement} float=ht]
+\begin{lstlisting}[language=GLSL, caption={Code 8: SDF Displacement}, label={lst:Displacement} float=ht]
 float displacementOperation( in sdf3d sdfShape, in vec3 p )
 {
     float d1 = sdfShape(p);
@@ -495,7 +493,7 @@ A key property of 2D and 3D Signed Distance Functions is that their gradient has
 
 This issue can be attenuated by reducing the step size and increasing the number of marching iterations, though this comes at a performance cost. In practice, small deviations in the length of the gradient rarely produce noticeable artifacts, making displacement through function addition still useful for subtle surface displacement.
 
-\begin{lstlisting}[language=GLSL, caption={Code 7: Wave Distortion on Sphere}, label={lst:DistortionOnSphere} float=ht]
+\begin{lstlisting}[language=GLSL, caption={Code 9: Wave Distortion on Sphere}, label={lst:DistortionOnSphere} float=ht]
 float distortedSphereDistance(vec3 p){
     float sphereRadius = 2.0;
     vec3 sphereCenter = vec3(0., 2., -5.);
@@ -513,8 +511,8 @@ float distortedSphereDistance(vec3 p){
 \begin{figure}[ht]
     \centering
   \includegraphics[width=.6\linewidth]{imagens/sdf-distortion/sin-cos-distortion.png}
-  \captionof{figure}{Distortion on Sphere from Code 7}
+  \captionof{figure}{Distortion on Sphere from Code 9}
   \label{fig:sin-cos-distortion}
 \end{figure}
 
-In Code 7, the Sphere Distance is distorted according to the trigonometric functions applied on its polar and azimutal angle. The result is shown in Figure \ref{fig:sin-cos-distortion}.
+In Code 9, the Sphere Distance is distorted according to the trigonometric functions applied on its polar and azimutal angle. The result is shown in Figure \ref{fig:sin-cos-distortion}.

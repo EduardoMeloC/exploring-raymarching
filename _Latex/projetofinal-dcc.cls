@@ -3,7 +3,7 @@
 \usepackage[english]{babel}
 \usepackage[
 backend=biber,
-style=alphabetic,
+style=abnt,
 ]{biblatex}
 \addbibresource{elementos-postextuais/referencias.bib} % Replace with your .bib file name
 %=====================================================================
@@ -808,13 +808,18 @@ style=alphabetic,
   %\renewcommand{\bibname}{\selectfont\normalsize REFERÊNCIAS} 
   %\addcontentsline{toc}{chapter}{\bibname}
   
-  \addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{\bibname}}{\bibname}}
+  %\addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{\bibname}}{\bibname}}
   
-  \renewcommand{\bibname}{\vspace{-70pt}\selectfont\normalsize\centerline{\textbf{REFERÊNCIAS}}\vspace{-20pt}} 
+  %\renewcommand{\bibname}{\vspace{-70pt}\selectfont\normalsize\centerline{\textbf{REFERÊNCIAS}}\vspace{-20pt}} 
   
   %\bibliographystyle{plain}
   %\bibliography{#2}
-  \printbibliography
+
+  \begin{center}
+      \textbf{REFERENCES}
+  \end{center}
+
+  \printbibliography[heading=none]
   
   \pagebreak
 }{}

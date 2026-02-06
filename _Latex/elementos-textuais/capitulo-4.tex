@@ -60,9 +60,9 @@ To mitigate the loss, an outer bound will be applied to clouds. With a separate 
 
 The pseudocode in Algorithm \ref{alg:marchray_cloud} builds upon Algorithm \ref{alg:marchray} to describe the relationship between clouds and regular surfaces. It's a lengthy, yet simple procedure in theory. The first difference comes with the addition of $\texttt{accColor}$, a 4D vector describing the RGBA channels. Red, blue and green fields store the accumulated color of the pixel and the alpha channel stores the accumulated density. This makes the variable $\texttt{isHit}$ deprecated. Since the $\texttt{accColor.a}$ channel ranges from 0 to 1, $\texttt{accColor.a = 1}$ means the ray path is now fully clouded, that being from a straight hard surface, or the accumulation of density between cloudy masses. Said check happens in lines 22 and 26.
 
-Thanks to the use of outer bounds for the clouds, the optimized Sphere Tracing (Figure \ref{fig:spheretracing}) is kept as normal, up until a cloud bound is hit, at line 13. At this point, Fixed-Step Ray Marching begins, and either stops when a hard surface is hit (line 18) or when the vision is fully clouded (line 22). As discussed, the \texttt{GetDensity(p)} function outlined in Code 8 acts as the \texttt{GetDist(p)} for cloudy objects. An example of this cloudy sphere is shown in Figure \ref{fig:no-noise-cloud}. It certainly looks foggy, but still lacks the organic shapes of a conventional cloud.
+Thanks to the use of outer bounds for the clouds, the optimized Sphere Tracing (Figure \ref{fig:spheretracing}) is kept as normal, up until a cloud bound is hit, at line 13. At this point, Fixed-Step Ray Marching begins, and either stops when a hard surface is hit (line 18) or when the vision is fully clouded (line 22). As discussed, the \texttt{GetDensity(p)} function outlined in Code 10 acts as the \texttt{GetDist(p)} for cloudy objects. An example of this cloudy sphere is shown in Figure \ref{fig:no-noise-cloud}. It certainly looks foggy, but still lacks the organic shapes of a conventional cloud.
 
-\begin{lstlisting}[language=GLSL, caption={Code 8: Get density of spherical cloud}, label={lst:GetDensity}, float=ht]
+\begin{lstlisting}[language=GLSL, caption={Code 10: Get density of spherical cloud}, label={lst:GetDensity}, float=ht]
 float GetDensity(p){
     vec3 cloudCenter = vec3(0., 0., 0.);
     float cloudRadius = 2.0;
@@ -213,9 +213,9 @@ At each sample location, we advance slightly along the light’s direction and m
   \item When the density decreases, the cloud is less dense, leading to reduced scattering
 \end{itemize}
 
-This behaviour is illustrated in the implementation in Code 9.
+This behaviour is illustrated in the implementation in Code 11.
 
-\begin{lstlisting}[language=GLSL, caption={Code 9: Lighting the Cloud Volume}, label={CloudVolume} float=ht]
+\begin{lstlisting}[language=GLSL, caption={Code 11: Lighting the Cloud Volume}, label={CloudVolume} float=ht]
 vec3 ldir = -normalize(light.direction);
 vec3 li = light.color * (light.intensity / (4. * PI));
 diffuse = clamp((getDensity(marchPos, scene) - getDensity(marchPos + 0.3 * ldir, scene)) / 0.3, 0.0, 1.0 );
