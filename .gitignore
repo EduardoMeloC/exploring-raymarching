@@ -70,3 +70,17 @@
 # Temporary auto-generated Android Assets
 /UnityShaders/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /UnityShaders/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fls
+*.lof
+*.log
+*.out
+*.pdf
+*.run.xml
+*.toc
+*.synctex.gz
+*.fdb_latexmk

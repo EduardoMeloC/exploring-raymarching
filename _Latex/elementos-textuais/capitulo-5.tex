@@ -1,0 +1,148 @@
+\chapter{Experiments}\label{chp:LABEL_CHP_5}
+
+Building upon the concepts and techniques discussed throughout this work, it is already possible to create a variety of compelling raymarched scenes. This chapter is dedicated to showcasing several images produced during the development of this research, employing the methods previously presented.
+
+\section{Rendering Results}
+
+Ray Marching is particularly expressive when it comes to rendering shapes. Since the geometry is described as a distance field, it allows an enormous flexibility when it comes to modeling 3D shapes with mathematical expressions. Figure \ref{fig:bunny_interpolation} illustrates a smooth interpolation between the distance field of a sphere and that of the Stanford Bunny, a widely used 3D test model from the Stanford 3D Scanning Repository \cite{turk1994zippered}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/final-scenes/bunny0.png}\\
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/final-scenes/bunny1.png}\\
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/final-scenes/bunny2.png}\\
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.23\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/final-scenes/bunny3.png}\\
+    \end{minipage}
+
+    \caption{Smooth Interpolation between a Sphere and Stanford Bunny}
+    \label{fig:bunny_interpolation}
+\end{figure}
+
+In the context of volumetric rendering, different signed distance functions can be employed to define the spacial bounds and volumetric density of a shape. This enables the exploration of a wide range of volumetric structures, including tubular shaped clouds and also a Stanford Bunny-shaped cloud, as illustrated in Figure \ref{fig:cloud_shapes}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[height=0.14\textheight,keepaspectratio]{imagens/final-scenes/cloudbunny2.png}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[height=0.14\textheight,keepaspectratio]{imagens/final-scenes/tubularcloud.png}
+    \end{minipage}
+
+    \caption{Stanford Bunny-shaped cloud and tubular clouds.}
+    \label{fig:cloud_shapes}
+\end{figure}
+
+Natural structures typically exhibit a balance between regularity and irregularity rather than perfect smoothness or complete randomness. Noise techniques are extremely powerful approaches to simulate organic shapes introducing a controlled variation, such as the deformed sphere, as well as larger-scale features including mountainous landscapes and terrain, illustrated in Figure \ref{fig:noise_scenes}.
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[height=0.14\textheight,keepaspectratio]{imagens/final-scenes/domainwarp.png}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[height=0.14\textheight,keepaspectratio]{imagens/final-scenes/mountains.png}
+    \end{minipage}
+
+    \caption{Scenes generated with Domain Warping and FBM Noise}
+    \label{fig:noise_scenes}
+\end{figure}
+
+Domain repetition can be used to efficiently construct scenes composed of many similar elements. In Figure \ref{fig:domain_repetition_tori}, a single torus signed distance function is periodically repeated across space to populate the scene with multiple instances.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=13.83cm,height=9.1cm]{imagens/final-scenes/domain-repetition.png} 
+    \caption{Infinite tori rendered with domain repetition}
+    \label{fig:domain_repetition_tori}
+\end{figure}
+
+Furthermore, as mentioned before, Ray Marching is largely used for the rendering of fractals, from a simpler (Sierpinsky Triangle), to more generalized ones, such as Kaleidoscopic IFSs (Iterated Function Systems), as displayed in Figure \ref{fig:fractals}.
+
+The technique used to render the Sierpinsky Triangle is just a variation of domain repetition, applied to tetrahedrons. As discussed, this means the additional cost for calculating and comparing infinite distances is reduced to just one repeating object. In fact, this process can be generalized to all platonic objects, not only tetrahedrons, and with clever space folding and rotations, a 2010 user of Fractal Forums \cite{Godar2022KaleidoscopicIFSFractals} came up with what they called Kaleidoscopic IFS, a now mainstay on the Fractal Rendering Community.
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract1.png}\\
+        Sierpinsky Triangle
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract2.png}\\
+        Hollow Insides of a Kaleidoscopic IFS
+    \end{minipage}
+
+    \vspace{1em} % space between rows
+    % Row 1
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract3.png}\\
+        Outside of Kaleidoscopic IFSs
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract4.png}\\
+        Outside of Kaleidoscopic IFSs
+    \end{minipage}
+
+    \vspace{1em} % space between rows
+
+    % Row 2
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract5.png}\\
+        Outside of Kaleidoscopic IFSs
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract6.png}\\
+        Insides of Kaleidoscopic IFS
+    \end{minipage}
+
+    % Row 3
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract7.png}\\
+        Insides of Kaleidoscopic IFS
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagens/fract8.png}\\
+        Outside of Kaleidoscopic IFSs
+    \end{minipage}
+
+    \caption{Multiple fractals using the Kaleidoscopic IFS technique.}
+    \label{fig:fractals}
+    
+\end{figure}
+
+\section{Source Code}
+
+All examples presented in this work are publicly available to support reproducibility and further experimentation. The complete source code can be accessed in the GitHub repository at https://github.com/eduardomeloc/exploring-raymarching.
+
