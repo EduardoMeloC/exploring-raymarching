@@ -54,10 +54,12 @@
       <file>blx-compat.def</file>
       <file>biblatex.def</file>
       <file>standard.bbx</file>
-      <file>alphabetic.bbx</file>
-      <file>alphabetic.cbx</file>
+      <file>abnt.bbx</file>
+      <file>authoryear-comp.cbx</file>
+      <file>abnt.cbx</file>
       <file>biblatex.cfg</file>
       <file>english.lbx</file>
+      <file>english-abnt.lbx</file>
     </requires>
   </internal>
   <external package="biblatex" priority="5" active="0">

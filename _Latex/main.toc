@@ -8,7 +8,7 @@
 \contentsline {section}{\numberline {2.1}Traversing the Canvas}{14}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Tracing the Ray}{17}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Marching the Ray}{18}{section.2.3}%
-\contentsline {section}{\numberline {2.4}When to march rather than trace}{20}{section.2.4}%
+\contentsline {section}{\numberline {2.4}When to march rather than trace}{21}{section.2.4}%
 \contentsline {chapter}{\numberline {3}Signed Distance Functions Techniques}{23}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Basic Shapes}{23}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Circles and Spheres}{23}{subsection.3.1.1}%
@@ -28,5 +28,17 @@
 \contentsline {section}{\numberline {5.2}Source Code}{48}{section.5.2}%
 \contentsline {chapter}{\numberline {6}Conclusion}{50}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Future Works}{50}{section.6.1}%
-\contentsline {chapter}{\numberline {}\uppercase {Bibliography}}{51}{section.6.1}%
-\contentsline {section}{\numberline {6.2}*}{51}{section.6.2}%
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 

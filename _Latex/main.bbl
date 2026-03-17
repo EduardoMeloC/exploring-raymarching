@@ -18,24 +18,27 @@
 
 
 \refsection{0}
-  \datalist[entry]{anyt/global//global/global}
+  \datalist[entry]{nty/global//global/global}
     \entry{akenine-moller2018realtimerendering}{book}{}
       \name{author}{3}{}{%
-        {{hash=f6061b73d9bdb8fceb556ed41cd144a6}{%
+        {{un=0,uniquepart=base,hash=f6061b73d9bdb8fceb556ed41cd144a6}{%
            family={Akenine-Möller},
            familyi={A\bibinithyphendelim M\bibinitperiod},
            given={Tomas},
-           giveni={T\bibinitperiod}}}%
-        {{hash=f2cd5883c9757f88d9a81f92ee663907}{%
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f2cd5883c9757f88d9a81f92ee663907}{%
            family={Haines},
            familyi={H\bibinitperiod},
            given={Eric},
-           giveni={E\bibinitperiod}}}%
-        {{hash=eed616961e0274036a96489be8cd147e}{%
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eed616961e0274036a96489be8cd147e}{%
            family={Hoffman},
            familyi={H\bibinitperiod},
            given={Naty},
-           giveni={N\bibinitperiod}}}%
+           giveni={N\bibinitperiod},
+           givenun=0}}%
       }
       \list{publisher}{1}{%
         {A K Peters/CRC Press}%
@@ -46,9 +49,10 @@
       \strng{authorbibnamehash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \strng{authornamehash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
       \strng{authorfullhash}{dbfd5d60176b95f4ab27b0c00a1ff6fd}
-      \field{labelalpha}{AHH18}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{4th}
@@ -58,11 +62,12 @@
     \endentry
     \entry{Godar2022KaleidoscopicIFSFractals}{misc}{}
       \name{author}{1}{}{%
-        {{hash=8ddf88fc1a27bedf0c273e3b0519c2fd}{%
+        {{un=0,uniquepart=base,hash=8ddf88fc1a27bedf0c273e3b0519c2fd}{%
            family={Godar},
            familyi={G\bibinitperiod},
            given={Cruz},
-           giveni={C\bibinitperiod}}}%
+           giveni={C\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{8ddf88fc1a27bedf0c273e3b0519c2fd}
       \strng{fullhash}{8ddf88fc1a27bedf0c273e3b0519c2fd}
@@ -70,9 +75,10 @@
       \strng{authorbibnamehash}{8ddf88fc1a27bedf0c273e3b0519c2fd}
       \strng{authornamehash}{8ddf88fc1a27bedf0c273e3b0519c2fd}
       \strng{authorfullhash}{8ddf88fc1a27bedf0c273e3b0519c2fd}
-      \field{labelalpha}{God22}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://cruzgodar.com/applets/kaleidoscopic-ifs-fractals/}}
@@ -82,11 +88,12 @@
     \endentry
     \entry{green2007siggraph}{inproceedings}{}
       \name{author}{1}{}{%
-        {{hash=6eaf40df0366e3a055dee01e950d1dc8}{%
+        {{un=0,uniquepart=base,hash=6eaf40df0366e3a055dee01e950d1dc8}{%
            family={Green},
            familyi={G\bibinitperiod},
            given={Chris},
-           giveni={C\bibinitperiod}}}%
+           giveni={C\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{fullhash}{6eaf40df0366e3a055dee01e950d1dc8}
@@ -94,9 +101,10 @@
       \strng{authorbibnamehash}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{authornamehash}{6eaf40df0366e3a055dee01e950d1dc8}
       \strng{authorfullhash}{6eaf40df0366e3a055dee01e950d1dc8}
-      \field{labelalpha}{Gre07}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{SIGGRAPH 2007 Courses}
@@ -105,16 +113,18 @@
     \endentry
     \entry{turn0search0}{misc}{}
       \name{author}{2}{}{%
-        {{hash=f2cd5883c9757f88d9a81f92ee663907}{%
+        {{un=0,uniquepart=base,hash=f2cd5883c9757f88d9a81f92ee663907}{%
            family={Haines},
            familyi={H\bibinitperiod},
            given={Eric},
-           giveni={E\bibinitperiod}}}%
-        {{hash=f6061b73d9bdb8fceb556ed41cd144a6}{%
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f6061b73d9bdb8fceb556ed41cd144a6}{%
            family={Akenine-Möller},
            familyi={A\bibinithyphendelim M\bibinitperiod},
            given={Tomas},
-           giveni={T\bibinitperiod}}}%
+           giveni={T\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{4bb577992ec0879c109df6dc7287614f}
       \strng{fullhash}{4bb577992ec0879c109df6dc7287614f}
@@ -122,9 +132,10 @@
       \strng{authorbibnamehash}{4bb577992ec0879c109df6dc7287614f}
       \strng{authornamehash}{4bb577992ec0879c109df6dc7287614f}
       \strng{authorfullhash}{4bb577992ec0879c109df6dc7287614f}
-      \field{labelalpha}{HA15}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Ray-Sphere Intersection - A Minimal Ray-Tracer}
@@ -138,11 +149,12 @@
     \endentry
     \entry{Hillaire2016FrostbiteSky}{report}{}
       \name{author}{1}{}{%
-        {{hash=a37eb0629ae081d1dab037319d4bf54d}{%
+        {{un=0,uniquepart=base,hash=a37eb0629ae081d1dab037319d4bf54d}{%
            family={Hillaire},
            familyi={H\bibinitperiod},
            given={Sébastien},
-           giveni={S\bibinitperiod}}}%
+           giveni={S\bibinitperiod},
+           givenun=0}}%
       }
       \list{institution}{1}{%
         {Electronic Arts / Frostbite}%
@@ -153,9 +165,10 @@
       \strng{authorbibnamehash}{a37eb0629ae081d1dab037319d4bf54d}
       \strng{authornamehash}{a37eb0629ae081d1dab037319d4bf54d}
       \strng{authorfullhash}{a37eb0629ae081d1dab037319d4bf54d}
-      \field{labelalpha}{Hil16}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{SIGGRAPH 2016 – Physically Based Shading in Theory and Practice course}
@@ -171,26 +184,30 @@
     \endentry
     \entry{kettunen2021}{article}{}
       \name{author}{4}{}{%
-        {{hash=23afc84944b4c7d301421491babaf2c2}{%
+        {{un=0,uniquepart=base,hash=23afc84944b4c7d301421491babaf2c2}{%
            family={Kettunen},
            familyi={K\bibinitperiod},
            given={Markus},
-           giveni={M\bibinitperiod}}}%
-        {{hash=6745e0460e2d8c50b9bc55cec5e99715}{%
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6745e0460e2d8c50b9bc55cec5e99715}{%
            family={D'Eon},
            familyi={D\bibinitperiod},
            given={Eugene},
-           giveni={E\bibinitperiod}}}%
-        {{hash=0a6b526649063fb6ed8b508d4e46442c}{%
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0a6b526649063fb6ed8b508d4e46442c}{%
            family={Pantaleoni},
            familyi={P\bibinitperiod},
            given={Jacopo},
-           giveni={J\bibinitperiod}}}%
-        {{hash=eb871242c3cc6b59592dcb005fddd0cd}{%
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eb871242c3cc6b59592dcb005fddd0cd}{%
            family={Novák},
            familyi={N\bibinitperiod},
            given={Jan},
-           giveni={J\bibinitperiod}}}%
+           giveni={J\bibinitperiod},
+           givenun=0}}%
       }
       \list{location}{1}{%
         {New York, NY, USA}%
@@ -204,9 +221,10 @@
       \strng{authorbibnamehash}{c20a94d70428e39e76c3cd512e39971a}
       \strng{authornamehash}{c20a94d70428e39e76c3cd512e39971a}
       \strng{authorfullhash}{79c13ec6b5844a5c24aecdc24f00e0d1}
-      \field{labelalpha}{Ket+21}
       \field{sortinit}{K}
       \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0730-0301}
@@ -229,16 +247,18 @@
     \endentry
     \entry{Mizdal2019AmbientSound}{inproceedings}{}
       \name{author}{2}{}{%
-        {{hash=a7d8503903da7a4133715172afda7b62}{%
+        {{un=0,uniquepart=base,hash=a7d8503903da7a4133715172afda7b62}{%
            family={Mizdal},
            familyi={M\bibinitperiod},
            given={Tiago\bibnamedelima Boelter},
-           giveni={T\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
-        {{hash=9b46277f32a2727b01e78e1e908dad69}{%
+           giveni={T\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b46277f32a2727b01e78e1e908dad69}{%
            family={Pozzer},
            familyi={P\bibinitperiod},
            given={Cesar\bibnamedelima Tadeu},
-           giveni={C\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+           giveni={C\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
       }
       \list{location}{1}{%
         {Rio de Janeiro, Brazil}%
@@ -252,9 +272,10 @@
       \strng{authorbibnamehash}{053af64ac08101504ea82f1cef25d906}
       \strng{authornamehash}{053af64ac08101504ea82f1cef25d906}
       \strng{authorfullhash}{053af64ac08101504ea82f1cef25d906}
-      \field{labelalpha}{MP19}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of SBGames 2019}
@@ -270,11 +291,12 @@
     \endentry
     \entry{MusgraveFractalTerrains}{report}{}
       \name{author}{1}{}{%
-        {{hash=b889feb567378d061d51324277500e75}{%
+        {{un=0,uniquepart=base,hash=b889feb567378d061d51324277500e75}{%
            family={Musgrave},
            familyi={M\bibinitperiod},
            given={F.\bibnamedelimi Kenton},
-           giveni={F\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+           giveni={F\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
       }
       \list{institution}{1}{%
         {University of Chicago}%
@@ -285,9 +307,10 @@
       \strng{authorbibnamehash}{b889feb567378d061d51324277500e75}
       \strng{authornamehash}{b889feb567378d061d51324277500e75}
       \strng{authorfullhash}{b889feb567378d061d51324277500e75}
-      \field{labelalpha}{Musnd}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Course notes, retrieved from \url{https://www.classes.cs.uchicago.edu/archive/2015/fall/23700-1/final-project/MusgraveTerrain00.pdf}}
@@ -303,26 +326,30 @@
     \endentry
     \entry{nimier2020differentiable}{inproceedings}{}
       \name{author}{4}{}{%
-        {{hash=842180dbcd36e62dd45ccff6b48fded8}{%
+        {{un=0,uniquepart=base,hash=842180dbcd36e62dd45ccff6b48fded8}{%
            family={Nimier-David},
            familyi={N\bibinithyphendelim D\bibinitperiod},
            given={Merlin},
-           giveni={M\bibinitperiod}}}%
-        {{hash=90113166785f7ff4be6e301905c93f7f}{%
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=90113166785f7ff4be6e301905c93f7f}{%
            family={Vicini},
            familyi={V\bibinitperiod},
            given={Delio},
-           giveni={D\bibinitperiod}}}%
-        {{hash=1d37a67c2c1dd1b40e5f6cd2fddf81cf}{%
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1d37a67c2c1dd1b40e5f6cd2fddf81cf}{%
            family={Zeltner},
            familyi={Z\bibinitperiod},
            given={Tizian},
-           giveni={T\bibinitperiod}}}%
-        {{hash=5f630e56bb6a31ced5d442a3b40cc68d}{%
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5f630e56bb6a31ced5d442a3b40cc68d}{%
            family={Jakob},
            familyi={J\bibinitperiod},
            given={Wenzel},
-           giveni={W\bibinitperiod}}}%
+           giveni={W\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{13a570fe00b84847504dbb5d03b62d92}
       \strng{fullhash}{feef6d0a81a80d98d0d7ed3b9b980474}
@@ -330,9 +357,10 @@
       \strng{authorbibnamehash}{13a570fe00b84847504dbb5d03b62d92}
       \strng{authornamehash}{13a570fe00b84847504dbb5d03b62d92}
       \strng{authorfullhash}{feef6d0a81a80d98d0d7ed3b9b980474}
-      \field{labelalpha}{Nim+20}
       \field{sortinit}{N}
       \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{ACM SIGGRAPH Asia}
@@ -341,31 +369,36 @@
     \endentry
     \entry{:NVIDIA}{article}{}
       \name{author}{5}{}{%
-        {{hash=cd3be0a5137c10ac9170ec950c6fc03c}{%
+        {{un=0,uniquepart=base,hash=cd3be0a5137c10ac9170ec950c6fc03c}{%
            family={Ouyang},
            familyi={O\bibinitperiod},
            given={Y.},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=92faacc6874983183ce7fb86e39f31ec}{%
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=92faacc6874983183ce7fb86e39f31ec}{%
            family={Liu},
            familyi={L\bibinitperiod},
            given={S.},
-           giveni={S\bibinitperiod}}}%
-        {{hash=fbf55d0a499dafe2556c26ac4599cb54}{%
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fbf55d0a499dafe2556c26ac4599cb54}{%
            family={Kettunen},
            familyi={K\bibinitperiod},
            given={M.},
-           giveni={M\bibinitperiod}}}%
-        {{hash=980b0ea4c070676c0d7df48d69b3ea24}{%
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=980b0ea4c070676c0d7df48d69b3ea24}{%
            family={Pharr},
            familyi={P\bibinitperiod},
            given={M.},
-           giveni={M\bibinitperiod}}}%
-        {{hash=2d84515997f0981ec9adecb365a3508a}{%
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d84515997f0981ec9adecb365a3508a}{%
            family={Pantaleoni},
            familyi={P\bibinitperiod},
            given={J.},
-           giveni={J\bibinitperiod}}}%
+           giveni={J\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{4d118ca786bea29b82f8d5a988f761c9}
       \strng{fullhash}{cb945cda3c6747e741a7ba2836f52577}
@@ -373,9 +406,10 @@
       \strng{authorbibnamehash}{4d118ca786bea29b82f8d5a988f761c9}
       \strng{authornamehash}{4d118ca786bea29b82f8d5a988f761c9}
       \strng{authorfullhash}{cb945cda3c6747e741a7ba2836f52577}
-      \field{labelalpha}{Ouy+21}
       \field{sortinit}{O}
       \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Abstract Even with the advent of hardware-accelerated ray tracing in modern GPUs, only a small number of rays can be traced at each pixel in real-time applications. This presents a significant challenge for path tracing, even when augmented with state-of-the art denoising algorithms. While the recently-developed ReSTIR algorithm [BWP∗20] enables high-quality renderings of scenes with millions of light sources using just a few shadow rays at each pixel, there remains a need for effective algorithms to sample indirect illumination. We introduce an effective path sampling algorithm for indirect lighting that is suitable to highly parallel GPU architectures. Building on the screen-space spatio-temporal resampling principles of ReSTIR, our approach resamples multi-bounce indirect lighting paths obtained by path tracing. Doing so allows sharing information about important paths that contribute to lighting both across time and pixels in the image. The resulting algorithm achieves a substantial error reduction compared to path tracing: at a single sample per pixel every frame, our algorithm achieves MSE improvements ranging from 9.3× to 166× in our test scenes. In conjunction with a denoiser, it leads to high-quality path traced global illumination at real-time frame rates on modern GPUs.}
@@ -402,31 +436,36 @@
     \endentry
     \entry{park2019deepsdf}{inproceedings}{}
       \name{author}{5}{}{%
-        {{hash=cef3fbbccf81ac6acea8e00c8137c326}{%
+        {{un=0,uniquepart=base,hash=cef3fbbccf81ac6acea8e00c8137c326}{%
            family={Park},
            familyi={P\bibinitperiod},
            given={Jeong\bibnamedelima Joon},
-           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=5f71cfa4ac4c47fb53ec82f01d708c71}{%
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5f71cfa4ac4c47fb53ec82f01d708c71}{%
            family={Florence},
            familyi={F\bibinitperiod},
            given={Peter},
-           giveni={P\bibinitperiod}}}%
-        {{hash=449da8c93866a386da0e55cfd97629b1}{%
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=449da8c93866a386da0e55cfd97629b1}{%
            family={Straub},
            familyi={S\bibinitperiod},
            given={Julian},
-           giveni={J\bibinitperiod}}}%
-        {{hash=239670d06a0c3f1468b54a7264838ce6}{%
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=239670d06a0c3f1468b54a7264838ce6}{%
            family={Newcombe},
            familyi={N\bibinitperiod},
            given={Richard},
-           giveni={R\bibinitperiod}}}%
-        {{hash=e7c982cac058f95aeb5e1e584f764c82}{%
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e7c982cac058f95aeb5e1e584f764c82}{%
            family={Lovegrove},
            familyi={L\bibinitperiod},
            given={Steven},
-           giveni={S\bibinitperiod}}}%
+           giveni={S\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{30ba824db16c5501cf28476ce5ecc005}
       \strng{fullhash}{8927ca8e6f9564821df0550ceb47683d}
@@ -434,9 +473,10 @@
       \strng{authorbibnamehash}{30ba824db16c5501cf28476ce5ecc005}
       \strng{authornamehash}{30ba824db16c5501cf28476ce5ecc005}
       \strng{authorfullhash}{8927ca8e6f9564821df0550ceb47683d}
-      \field{labelalpha}{Par+19}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{CVPR}
@@ -445,16 +485,18 @@
     \endentry
     \entry{book:REF_BOOK_1}{book}{}
       \name{author}{2}{}{%
-        {{hash=c69ff00a5e1719a4ad2dddd6254ac3c9}{%
+        {{un=0,uniquepart=base,hash=c69ff00a5e1719a4ad2dddd6254ac3c9}{%
            family={Pharr},
            familyi={P\bibinitperiod},
            given={Matt},
-           giveni={M\bibinitperiod}}}%
-        {{hash=db29a6dc224521c1b6cd5e5817ddf0c7}{%
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=db29a6dc224521c1b6cd5e5817ddf0c7}{%
            family={Fernando},
            familyi={F\bibinitperiod},
            given={Randima},
-           giveni={R\bibinitperiod}}}%
+           giveni={R\bibinitperiod},
+           givenun=0}}%
       }
       \list{publisher}{1}{%
         {Addison-Wesley Professional}%
@@ -465,9 +507,10 @@
       \strng{authorbibnamehash}{a8caa1a83a4164c3470c0834efb385dd}
       \strng{authornamehash}{a8caa1a83a4164c3470c0834efb385dd}
       \strng{authorfullhash}{a8caa1a83a4164c3470c0834efb385dd}
-      \field{labelalpha}{PF05}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{0321335597}
@@ -476,11 +519,12 @@
     \endentry
     \entry{quilez2001juliasets}{misc}{}
       \name{author}{1}{}{%
-        {{hash=00f9bcdad45f435417911d040feff60a}{%
+        {{un=0,uniquepart=base,hash=00f9bcdad45f435417911d040feff60a}{%
            family={Quilez},
            familyi={Q\bibinitperiod},
            given={Inigo},
-           giveni={I\bibinitperiod}}}%
+           giveni={I\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{00f9bcdad45f435417911d040feff60a}
       \strng{fullhash}{00f9bcdad45f435417911d040feff60a}
@@ -489,9 +533,10 @@
       \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
       \field{extraname}{1}
-      \field{labelalpha}{Qui01}
       \field{sortinit}{Q}
       \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://iquilezles.org/articles/juliasets3d/}}
@@ -501,11 +546,12 @@
     \endentry
     \entry{quilez2013distfunctions}{misc}{}
       \name{author}{1}{}{%
-        {{hash=00f9bcdad45f435417911d040feff60a}{%
+        {{un=0,uniquepart=base,hash=00f9bcdad45f435417911d040feff60a}{%
            family={Quilez},
            familyi={Q\bibinitperiod},
            given={Inigo},
-           giveni={I\bibinitperiod}}}%
+           giveni={I\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{00f9bcdad45f435417911d040feff60a}
       \strng{fullhash}{00f9bcdad45f435417911d040feff60a}
@@ -514,10 +560,11 @@
       \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
       \field{extraname}{2}
-      \field{labelalpha}{Qui13}
       \field{sortinit}{Q}
       \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
-      \field{extraalpha}{1}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://iquilezles.org/articles/distfunctions/}}
@@ -527,11 +574,12 @@
     \endentry
     \entry{quilez2013smin}{misc}{}
       \name{author}{1}{}{%
-        {{hash=00f9bcdad45f435417911d040feff60a}{%
+        {{un=0,uniquepart=base,hash=00f9bcdad45f435417911d040feff60a}{%
            family={Quilez},
            familyi={Q\bibinitperiod},
            given={Inigo},
-           giveni={I\bibinitperiod}}}%
+           giveni={I\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{00f9bcdad45f435417911d040feff60a}
       \strng{fullhash}{00f9bcdad45f435417911d040feff60a}
@@ -540,10 +588,11 @@
       \strng{authornamehash}{00f9bcdad45f435417911d040feff60a}
       \strng{authorfullhash}{00f9bcdad45f435417911d040feff60a}
       \field{extraname}{3}
-      \field{labelalpha}{Qui13}
       \field{sortinit}{Q}
       \field{sortinithash}{ce69a400a872ddd02ee7fdb3b38c6abd}
-      \field{extraalpha}{2}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://iquilezles.org/articles/smin/}}
@@ -553,31 +602,36 @@
     \endentry
     \entry{:REF_IN_1}{inproceedings}{}
       \name{author}{5}{}{%
-        {{hash=ef86db133c01f029113a2b663ce980ae}{%
+        {{un=0,uniquepart=base,hash=ef86db133c01f029113a2b663ce980ae}{%
            family={Riley},
            familyi={R\bibinitperiod},
            given={Kirk},
-           giveni={K\bibinitperiod}}}%
-        {{hash=aab4f0ed5f2c9a50392cb9a112268dc8}{%
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=aab4f0ed5f2c9a50392cb9a112268dc8}{%
            family={Ebert},
            familyi={E\bibinitperiod},
            given={David\bibnamedelima S.},
-           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-        {{hash=51ace0eb1278ebab5cc244618eddc06b}{%
+           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=51ace0eb1278ebab5cc244618eddc06b}{%
            family={Kraus},
            familyi={K\bibinitperiod},
            given={Martin},
-           giveni={M\bibinitperiod}}}%
-        {{hash=1902bd99aec8645feea6b906ce333d36}{%
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1902bd99aec8645feea6b906ce333d36}{%
            family={Tessendorf},
            familyi={T\bibinitperiod},
            given={Jerry},
-           giveni={J\bibinitperiod}}}%
-        {{hash=4c84d62549cdcb07bce725a15943bc46}{%
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4c84d62549cdcb07bce725a15943bc46}{%
            family={Hansen},
            familyi={H\bibinitperiod},
            given={Charles},
-           giveni={C\bibinitperiod}}}%
+           giveni={C\bibinitperiod},
+           givenun=0}}%
       }
       \name{editor}{2}{}{%
         {{hash=611ada91d1e542d341733a32d3b74766}{%
@@ -603,9 +657,10 @@
       \strng{editorbibnamehash}{6c32fa0a4a3d9f2849b210d6fca3f4c3}
       \strng{editornamehash}{6c32fa0a4a3d9f2849b210d6fca3f4c3}
       \strng{editorfullhash}{6c32fa0a4a3d9f2849b210d6fca3f4c3}
-      \field{labelalpha}{Ril+04}
       \field{sortinit}{R}
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Eurographics Workshop on Rendering}
@@ -619,16 +674,18 @@
     \endentry
     \entry{Schneider2015Cloudscapes}{inproceedings}{}
       \name{author}{2}{}{%
-        {{hash=dd66896eabe258fe0f73c78968ae36b4}{%
+        {{un=0,uniquepart=base,hash=dd66896eabe258fe0f73c78968ae36b4}{%
            family={Schneider},
            familyi={S\bibinitperiod},
            given={Andrew},
-           giveni={A\bibinitperiod}}}%
-        {{hash=cc2edbe36c60cabe6f743c3111b09af0}{%
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cc2edbe36c60cabe6f743c3111b09af0}{%
            family={Vos},
            familyi={V\bibinitperiod},
            given={Nathan},
-           giveni={N\bibinitperiod}}}%
+           giveni={N\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{fullhash}{e0f9024c4821e5217ee47d6a0ab403b8}
@@ -636,9 +693,10 @@
       \strng{authorbibnamehash}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{authornamehash}{e0f9024c4821e5217ee47d6a0ab403b8}
       \strng{authorfullhash}{e0f9024c4821e5217ee47d6a0ab403b8}
-      \field{labelalpha}{SV15}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{SIGGRAPH 2015 — Advances in Real-time Rendering}
@@ -655,16 +713,18 @@
     \endentry
     \entry{turk1994zippered}{article}{}
       \name{author}{2}{}{%
-        {{hash=c651f32f7f9707025c958764a1842afd}{%
+        {{un=0,uniquepart=base,hash=c651f32f7f9707025c958764a1842afd}{%
            family={Turk},
            familyi={T\bibinitperiod},
            given={Greg},
-           giveni={G\bibinitperiod}}}%
-        {{hash=1315bf00f5fa82534be18df443fc255c}{%
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1315bf00f5fa82534be18df443fc255c}{%
            family={Levoy},
            familyi={L\bibinitperiod},
            given={Marc},
-           giveni={M\bibinitperiod}}}%
+           giveni={M\bibinitperiod},
+           givenun=0}}%
       }
       \strng{namehash}{0bf20c32d27fd1f5a58005c9da00921e}
       \strng{fullhash}{0bf20c32d27fd1f5a58005c9da00921e}
@@ -672,9 +732,10 @@
       \strng{authorbibnamehash}{0bf20c32d27fd1f5a58005c9da00921e}
       \strng{authornamehash}{0bf20c32d27fd1f5a58005c9da00921e}
       \strng{authorfullhash}{0bf20c32d27fd1f5a58005c9da00921e}
-      \field{labelalpha}{TL94}
       \field{sortinit}{T}
       \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Proceedings of SIGGRAPH}
