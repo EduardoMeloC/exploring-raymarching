@@ -1,18 +1,18 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
-[0] Config.pm:310> INFO - Logfile is 'main.blg'
-[127] biber-MSWIN64:340> INFO - === 
-[169] Biber.pm:419> INFO - Reading 'main.bcf'
-[296] Biber.pm:979> INFO - Found 18 citekeys in bib section 0
-[313] Biber.pm:4419> INFO - Processing section 0
-[329] Biber.pm:4610> INFO - Looking for bibtex file 'elementos-postextuais/referencias.bib' for section 0
-[391] bibtex.pm:1713> INFO - LaTeX decoding ...
-[424] bibtex.pm:1519> INFO - Found BibTeX data source 'elementos-postextuais/referencias.bib'
-[579] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[579] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[579] Biber.pm:4239> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[579] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[602] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[614] bbl.pm:763> INFO - Output to main.bbl
-[615] Biber.pm:131> WARN - legacy year field 'n.d.' in entry 'MusgraveFractalTerrains' is not an integer - this will probably not sort properly.
-[615] Biber.pm:131> WARN - BibTeX subsystem: C:\Users\eduar\AppData\Local\Temp\biber_tmp_rGRG\f1acd60b6c57e7ae00f56d747b2cd459_19676.utf8, line 65, warning: 327 characters of junk seen at toplevel
-[615] Biber.pm:133> INFO - WARNINGS: 2
+[1] Config.pm:310> INFO - Logfile is 'main.blg'
+[225] biber-MSWIN64:340> INFO - === 
+[325] Biber.pm:419> INFO - Reading 'main.bcf'
+[918] Biber.pm:979> INFO - Found 18 citekeys in bib section 0
+[1033] Biber.pm:4419> INFO - Processing section 0
+[1143] Biber.pm:4610> INFO - Looking for bibtex file 'elementos-postextuais/referencias.bib' for section 0
+[1416] bibtex.pm:1713> INFO - LaTeX decoding ...
+[1597] bibtex.pm:1519> INFO - Found BibTeX data source 'elementos-postextuais/referencias.bib'
+[2074] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[2074] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[2074] Biber.pm:4239> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[2075] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[2123] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[2150] bbl.pm:763> INFO - Output to main.bbl
+[2151] Biber.pm:131> WARN - legacy year field 'n.d.' in entry 'MusgraveFractalTerrains' is not an integer - this will probably not sort properly.
+[2151] Biber.pm:131> WARN - BibTeX subsystem: C:\Users\eduar\AppData\Local\Temp\biber_tmp_HMvW\f1acd60b6c57e7ae00f56d747b2cd459_10096.utf8, line 65, warning: 327 characters of junk seen at toplevel
+[2151] Biber.pm:133> INFO - WARNINGS: 2
