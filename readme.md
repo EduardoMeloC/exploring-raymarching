@@ -1,4 +1,4 @@
-# Exploring Ray March Rendering and Its Applications
+# Exploring Ray Marching and Its Applications
 
 This project is dedicated to the study and exploration of **ray marching** and its applications, with a special focus on Signed Distance Functions (SDFs). It provides a comprehensive set of GLSL shader examples that demonstrate a variety of rendering techniques, including:
 
