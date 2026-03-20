@@ -332,7 +332,10 @@ style=abnt,
     Undergraduate thesis submitted to the Institute of Computing of the Federal University of Rio de Janeiro as part of the requirements for obtaining the degree of Bachelor in Computer Science.
     \\
     \\
-    
+    \vfill
+  }
+
+  \hspace*{\fill}\parbox[b]{.55\textwidth}{%
     \@ifundefined{@advisor}{}{
         \titlepageadvisorinfo
     }
@@ -352,19 +355,8 @@ style=abnt,
 % Ficha catalográfica
 %=====================================================================
 \newcommand{\@makeindexcard}{%
-  \vbox{}
-  \begin{figure}[!b]
-    \centering
-    \includegraphics[width=1\textwidth]{elementos-pretextuais/ficha_catalografica.png}
-  % **********************************************
-  % Para elaborar a ficha catalográfica siga as instruções em
-  % http://fichacatalografica.sibi.ufrj.br/
-  %
-  % Substitua a ficha_catalografica.png pela sua.
-  % **********************************************
-  \end{figure}
+  \includepdf[pages=1]{elementos-pretextuais/ficha_catalografica.pdf}
 }
-
 
 %=====================================================================
 % Folha de Aprovação
@@ -518,8 +510,8 @@ style=abnt,
   }
 }
 \newcommand{\titlepageadvisorinfo}{%
-  \@ifundefined{@advisor}{}{\advisorname: \@advisor\\}
-  \@ifundefined{@coadvisor}{}{\\\coadvisorname: \@coadvisor\\}
+  \@ifundefined{@advisor}{}{Advisor: \@advisor\par}
+  \@ifundefined{@coadvisor}{}{Co-advisor: \@coadvisor\par}
 }
 \newcommand{\titlepageadvisorinfobak}{%
   \@ifundefined{@advisor}{}{\vfill\@advisor\\\advisorname}
@@ -563,7 +555,7 @@ style=abnt,
 
 
   \linespread{1}\selectfont
-  \emph{#1}
+  {#1}
 
   
 }
@@ -818,6 +810,8 @@ style=abnt,
   \begin{center}
       \textbf{REFERENCES}
   \end{center}
+  
+  \addcontentsline{toc}{chapter}{REFERENCES}
 
   \printbibliography[heading=none]
   

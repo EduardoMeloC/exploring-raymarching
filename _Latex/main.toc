@@ -28,6 +28,7 @@
 \contentsline {section}{\numberline {5.2}Source Code}{48}{section.5.2}%
 \contentsline {chapter}{\numberline {6}Conclusion}{50}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Future Works}{50}{section.6.1}%
+\contentsline {chapter}{REFERENCES}{51}{section.6.1}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
