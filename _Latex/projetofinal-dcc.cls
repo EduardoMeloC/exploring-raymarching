@@ -362,80 +362,80 @@ style=abnt,
 % Folha de Aprovação
 %=====================================================================
 \newcommand{\@makeapprovalpage}{%
-
-    \parbox[t]{\textwidth}{%
-        \centering%
-        \vbox to 55mm{%
-          \parbox[b]{\titlepagewinwidth}{
-            \centering\vbox to \titlepagewinheight{
+    \includepdf[pages=1]{elementos-pretextuais/folha_de_rosto_assinada.pdf}
+    % \parbox[t]{\textwidth}{%
+    %     \centering%
+    %     \vbox to 55mm{%
+    %       \parbox[b]{\titlepagewinwidth}{
+    %         \centering\vbox to \titlepagewinheight{
         
-              \MakeUppercase{\@authora}\\
-              \@ifundefined{@authorb}{}{\MakeUppercase{\@authorb}\\}
-              \@ifundefined{@authorc}{}{\MakeUppercase{\@authorc}\\}
+    %           \MakeUppercase{\@authora}\\
+    %           \@ifundefined{@authorb}{}{\MakeUppercase{\@authorb}\\}
+    %           \@ifundefined{@authorc}{}{\MakeUppercase{\@authorc}\\}
               
-              \vspace{20mm}
-              \MakeUppercase{\@title}\@ifundefined{@subtitle}{}{: \@subtitle\\}
+    %           \vspace{20mm}
+    %           \MakeUppercase{\@title}\@ifundefined{@subtitle}{}{: \@subtitle\\}
               
-              %\vfill
-            }
-          }
-        }
-    }
+    %           %\vfill
+    %         }
+    %       }
+    %     }
+    % }
 
     
-    \hspace*{\fill}\parbox[b]{.5\textwidth}{%
-        \linespread{1}\selectfont
-        Undergraduate thesis submitted to the Institute of Computing of the Federal University of Rio de Janeiro as part of the requirements for obtaining the degree of Bachelor in Computer Science.
+    % \hspace*{\fill}\parbox[b]{.5\textwidth}{%
+    %     \linespread{1}\selectfont
+    %     Undergraduate thesis submitted to the Institute of Computing of the Federal University of Rio de Janeiro as part of the requirements for obtaining the degree of Bachelor in Computer Science.
 
-    }
+    % }
 
-    \vspace{15mm}
+    % \vspace{15mm}
 
-    \noindent
-    Aprovado em \underline{\hspace{40pt}} de \underline{\hspace{100pt}}  de \underline{\hspace{60pt}} .
+    % \noindent
+    % Aprovado em \underline{\hspace{40pt}} de \underline{\hspace{100pt}}  de \underline{\hspace{60pt}} .
 
-    \vfill
+    % \vfill
 
 
-    \noindent
-    BANCA EXAMINADORA:
+    % \noindent
+    % BANCA EXAMINADORA:
 
-    \bigskip
-    \begin{center}
-    \linespread{1.2}\selectfont
-    \vspace{.8cm}
-      \line(1,0){250}\\
-      \@advisor 
+    % \bigskip
+    % \begin{center}
+    % \linespread{1.2}\selectfont
+    % \vspace{.8cm}
+    %   \line(1,0){250}\\
+    %   \@advisor 
       
-      \@ifundefined{@coadvisor}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@coadvisor 
+    %   \@ifundefined{@coadvisor}{}{
+    %   \vspace{.8cm}
+    %     \line(1,0){250}\\
+    %     \@coadvisor 
 
-      }
+    %   }
 
-      \@ifundefined{@bancaa}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@bancaa 
+    %   \@ifundefined{@bancaa}{}{
+    %   \vspace{.8cm}
+    %     \line(1,0){250}\\
+    %     \@bancaa 
 
-      }
-      \@ifundefined{@bancab}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@bancab  
+    %   }
+    %   \@ifundefined{@bancab}{}{
+    %   \vspace{.8cm}
+    %     \line(1,0){250}\\
+    %     \@bancab  
 
-      }
-      \@ifundefined{@bancac}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@bancac 
+    %   }
+    %   \@ifundefined{@bancac}{}{
+    %   \vspace{.8cm}
+    %     \line(1,0){250}\\
+    %     \@bancac 
   
-      }
-      \vspace{.8cm}
-    \end{center}
+    %   }
+    %   \vspace{.8cm}
+    % \end{center}
 
-    \pagebreak
+    % \pagebreak
 }
 
 

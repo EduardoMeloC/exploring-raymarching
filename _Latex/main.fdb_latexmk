@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1774019843.33204 "main.bcf" "main.bbl" "main" 1774019878.86695 0
+["biber main"] 1774019843.33204 "main.bcf" "main.bbl" "main" 1774398498.01033 0
   "elementos-postextuais/referencias.bib" 1773773786 9717 433fa8e496d40b214df0072f10f8d41e ""
-  "main.bcf" 1774019878 114861 361efa96035f8533ca4c8adbb87a9993 "pdflatex"
+  "main.bcf" 1774398496 114861 361efa96035f8533ca4c8adbb87a9993 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1774019868.54202 "c:/dev/TCC/_Latex/main.tex" "main.pdf" "main" 1774019878.86825 0
+["pdflatex"] 1774398477.2762 "c:/dev/TCC/_Latex/main.tex" "main.pdf" "main" 1774398498.01187 0
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1774019832 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbi1200.pk" 1758759175 42728 2657daaf5cbcd686e6d2430a123bdd73 ""
   "C:/Users/eduar/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1758759177 31952 c439c305f1ec4a12e686d58acd6795ed ""
@@ -188,11 +188,12 @@
   "C:/Users/eduar/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044403200 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "C:/Users/eduar/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "C:/Users/eduar/AppData/Local/Programs/MiKTeX/tex/latex/xpatch/xpatch.sty" 1585221260 8510 7803f78066c4f9d008405191a4b43073 ""
-  "c:/dev/TCC/_Latex/main.tex" 1774019824 5965 49221b814fe049b2306ed16ee9a27cfc ""
+  "c:/dev/TCC/_Latex/main.tex" 1774019936 5965 49221b814fe049b2306ed16ee9a27cfc ""
   "elementos-pretextuais/abstract.tex" 1773773786 714 1abb494cd4c173f36c9097b1595d05ba ""
   "elementos-pretextuais/agradecimentos.tex" 1773773786 1465 ed6d6d393f4cff364aba950a9d16d0b4 ""
   "elementos-pretextuais/epigrafe.tex" 1773773786 108 400735062accdb0c6c2f5ed099ba87f9 ""
   "elementos-pretextuais/ficha_catalografica.pdf" 1774017926 271247 cf99af4676db09b02b2b90224d1374ff ""
+  "elementos-pretextuais/folha_de_rosto_assinada.pdf" 1774398178 71262 4bc49b32b6b68cc85cf19bcc512ec2e1 ""
   "elementos-pretextuais/resumo.tex" 1773773786 835 f12f05885941e1e238f1c9639d4b6aa6 ""
   "elementos-textuais/capitulo-1.tex" 1773773786 5225 09afc5da072c7af3ed1ca9b161f8d799 ""
   "elementos-textuais/capitulo-2.tex" 1773773786 18499 d0599a057cacdacc52eb0eb3c2f4bd71 ""
@@ -271,14 +272,14 @@
   "imagens/unlit-raymarched-sphere.png" 1773773786 11907 fc6fa22acc14608edb6549415adaeb63 ""
   "imagens/unlit-raytraced-sphere.png" 1773773786 9409 868dc52ffe61a68c7d8dd4bb9eb87e20 ""
   "listings-glsl.prf" 1773773786 4748 9ff1c6bd33d1999a16d76e6ce4d5a207 ""
-  "main.aux" 1774019878 21846 a84d17644f3db36583a785a7101582b1 "pdflatex"
+  "main.aux" 1774398496 21846 a84d17644f3db36583a785a7101582b1 "pdflatex"
   "main.bbl" 1774019846 32332 73721d57cba436ae8172b91fb1f58b1a "biber main"
-  "main.lof" 1774019878 4464 d8aea9d6729b114d7d5e320bbc5b4bb9 "pdflatex"
-  "main.out" 1774019878 4350 101bc6df52d500edf74237c87cac4a45 "pdflatex"
-  "main.run.xml" 1774019878 2397 9cf6db6ecb626c8473570f2a37e19352 "pdflatex"
-  "main.tex" 1774019824 5965 49221b814fe049b2306ed16ee9a27cfc ""
-  "main.toc" 1774019878 2801 692958e1744c00614f729db6134995ee "pdflatex"
-  "projetofinal-dcc.cls" 1774019791 29288 a2720308cf766efe23ea2303117adfe7 ""
+  "main.lof" 1774398496 4464 d8aea9d6729b114d7d5e320bbc5b4bb9 "pdflatex"
+  "main.out" 1774398496 4350 101bc6df52d500edf74237c87cac4a45 "pdflatex"
+  "main.run.xml" 1774398496 2397 9cf6db6ecb626c8473570f2a37e19352 "pdflatex"
+  "main.tex" 1774019936 5965 49221b814fe049b2306ed16ee9a27cfc ""
+  "main.toc" 1774398496 2801 692958e1744c00614f729db6134995ee "pdflatex"
+  "projetofinal-dcc.cls" 1774398476 29471 785cbc6fbc4cde5388886c266f84484c ""
   "tocstyle.sty" 1773773786 35919 46e27d40dcd0b3ee2a301d9bdf72fdbb ""
   (generated)
   "main.aux"
