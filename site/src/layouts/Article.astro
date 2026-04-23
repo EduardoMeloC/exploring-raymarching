@@ -405,10 +405,60 @@ const { title, description, prev, next, chapterIndex } = Astro.props;
   }
 
   @media (max-width: 600px) {
-    .fig-grid-2,
     .fig-grid-3,
     .fig-grid-4 {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    header {
+      padding: 0.75rem 1rem;
+    }
+
+    .chapter-badge {
+      display: none;
+    }
+
+    main {
+      padding: 2rem 1rem 3rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    .chapter-nav {
+      padding: 0;
+    }
+
+    .nav-prev,
+    .nav-next {
+      padding: 1rem 0.75rem;
+    }
+
+    .nav-dir {
+      font-size: 0.65rem;
+    }
+
+    .nav-title {
+      font-size: 0.8rem;
+    }
+
+    /* image grids: single column on phones */
+    .fig-grid-2,
+    .fig-grid-3,
+    .fig-grid-4 {
+      grid-template-columns: 1fr;
+    }
+
+    pre, .algorithm pre {
+      font-size: 0.78rem;
+      padding: 0.9rem 1rem;
     }
   }
 
