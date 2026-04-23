@@ -16,6 +16,7 @@ This project is dedicated to the study and exploration of **ray marching** and i
 
 - **GlslShaders/** — Organized by topic and progression, each folder contains GLSL fragment shaders illustrating specific ray marching and SDF concepts.
 - **_Latex/** — Contains the thesis and related LaTeX files, as this project was also part of the final thesis for the Computer Science degree at the Federal University of Rio de Janeiro (UFRJ).
+- **site/** — A static astro website, built to present the thesis as a digital book. 
 
 ## About the Thesis
 
