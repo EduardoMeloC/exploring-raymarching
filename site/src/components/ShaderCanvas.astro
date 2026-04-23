@@ -1,0 +1,209 @@
+---
+interface Props {
+  /** Inline GLSL fragment shader source. Must define mainImage(out vec4 fragColor, in vec2 fragCoord). */
+  src: string;
+  /** Canvas height in pixels (width fills container). */
+  height?: number;
+  /** Caption shown below the canvas. */
+  caption?: string;
+  /** Whether to pause on load (user must click to start). */
+  paused?: boolean;
+}
+
+const { src, height = 360, caption, paused = false } = Astro.props;
+
+const id = `shader-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<figure class="shader-figure">
+  <div class="shader-wrap" style={`height:${height}px`}>
+    <canvas id={id} class="shader-canvas"></canvas>
+    <button class="shader-toggle" aria-label="Pause/resume shader" data-paused={paused ? "true" : "false"}>
+      <span class="icon-play">▶</span>
+      <span class="icon-pause">⏸</span>
+    </button>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<script define:vars={{ id, src, paused }}>
+  (() => {
+    const canvas = document.getElementById(id);
+    const btn = canvas.parentElement.querySelector('.shader-toggle');
+    const gl = canvas.getContext('webgl2');
+
+    if (!gl) {
+      canvas.parentElement.innerHTML = '<p class="shader-error">WebGL2 not supported in this browser.</p>';
+      return;
+    }
+
+    const vert = `#version 300 es
+precision highp float;
+in vec2 a_pos;
+void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
+
+    // Wrap ShaderToy-style mainImage convention
+    const frag = `#version 300 es
+precision highp float;
+uniform vec2 iResolution;
+uniform float iTime;
+uniform vec4 iMouse;
+out vec4 fragColor;
+
+${src}
+
+void main() {
+  mainImage(fragColor, gl_FragCoord.xy);
+}`;
+
+    function compile(type, source) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, source);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error('Shader compile error:', gl.getShaderInfoLog(s));
+        return null;
+      }
+      return s;
+    }
+
+    const vs = compile(gl.VERTEX_SHADER, vert);
+    const fs = compile(gl.FRAGMENT_SHADER, frag);
+    if (!vs || !fs) {
+      canvas.parentElement.querySelector('canvas').insertAdjacentHTML(
+        'afterend', '<p class="shader-error">Shader compile error — check console.</p>'
+      );
+      return;
+    }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    // Full-screen quad
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'a_pos');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes   = gl.getUniformLocation(prog, 'iResolution');
+    const uTime  = gl.getUniformLocation(prog, 'iTime');
+    const uMouse = gl.getUniformLocation(prog, 'iMouse');
+
+    let startTime = performance.now();
+    let pausedAt = paused ? 0 : null;
+    let elapsedBeforePause = 0;
+    let rafId;
+    let mouse = [0, 0, 0, 0];
+
+    canvas.addEventListener('mousemove', e => {
+      const r = canvas.getBoundingClientRect();
+      mouse[0] = e.clientX - r.left;
+      mouse[1] = canvas.height - (e.clientY - r.top);
+    });
+    canvas.addEventListener('mousedown', e => { mouse[2] = mouse[0]; mouse[3] = mouse[1]; });
+    canvas.addEventListener('mouseup', () => { mouse[2] = 0; mouse[3] = 0; });
+
+    function resize() {
+      const w = canvas.parentElement.clientWidth;
+      canvas.width = w;
+      canvas.height = canvas.parentElement.clientHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+
+    function render(now) {
+      const t = pausedAt !== null ? elapsedBeforePause : (now - startTime) / 1000;
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, t);
+      gl.uniform4fv(uMouse, mouse);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (pausedAt === null) rafId = requestAnimationFrame(render);
+    }
+
+    function togglePause() {
+      if (pausedAt !== null) {
+        startTime = performance.now() - elapsedBeforePause * 1000;
+        pausedAt = null;
+        btn.dataset.paused = 'false';
+        rafId = requestAnimationFrame(render);
+      } else {
+        elapsedBeforePause = (performance.now() - startTime) / 1000;
+        pausedAt = elapsedBeforePause;
+        btn.dataset.paused = 'true';
+        cancelAnimationFrame(rafId);
+        requestAnimationFrame(render); // draw one last frame
+      }
+    }
+
+    btn.addEventListener('click', togglePause);
+    new ResizeObserver(resize).observe(canvas.parentElement);
+    resize();
+
+    if (paused) {
+      requestAnimationFrame(render);
+    } else {
+      startTime = performance.now();
+      rafId = requestAnimationFrame(render);
+    }
+  })();
+</script>
+
+<style>
+  .shader-figure {
+    margin: 2rem 0;
+  }
+
+  .shader-wrap {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .shader-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .shader-toggle {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.6rem;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.55rem;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .shader-wrap:hover .shader-toggle { opacity: 1; }
+
+  .shader-toggle[data-paused="false"] .icon-play  { display: none; }
+  .shader-toggle[data-paused="true"]  .icon-pause { display: none; }
+
+  figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  :global(.shader-error) {
+    padding: 1rem;
+    color: #f87171;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,0 +1,175 @@
+---
+import Article from "../layouts/Article.astro";
+import { getAdjacentChapters } from "../data/chapters";
+
+const { prev, next } = getAdjacentChapters("05-experiments");
+---
+
+<Article
+  title="Experiments"
+  description="Rendered results showcasing shapes, volumes, domain repetition, and fractals."
+  prev={prev}
+  next={next}
+  chapterIndex={5}
+>
+  <h1>Experiments</h1>
+  <p class="lead">
+    Building upon the concepts and techniques discussed throughout this work,
+    this chapter showcases several images produced during the development of the
+    research.
+  </p>
+
+  <h2>Rendering Results</h2>
+
+  <p>
+    Ray Marching is particularly expressive when it comes to rendering shapes.
+    Since the geometry is described as a distance field, it allows enormous
+    flexibility when modeling 3D shapes with mathematical expressions. Figure 27
+    illustrates a smooth interpolation between the distance field of a sphere
+    and that of the Stanford Bunny, a widely used 3D test model from the
+    Stanford 3D Scanning Repository <cite>[Turk &amp; Levoy, 1994]</cite>.
+  </p>
+
+  <div class="fig-grid fig-grid-4">
+    <figure>
+      <img src="/images/final-scenes/bunny0.png" alt="Interpolation step 0" />
+    </figure>
+    <figure>
+      <img src="/images/final-scenes/bunny1.png" alt="Interpolation step 1" />
+    </figure>
+    <figure>
+      <img src="/images/final-scenes/bunny2.png" alt="Interpolation step 2" />
+    </figure>
+    <figure>
+      <img src="/images/final-scenes/bunny3.png" alt="Interpolation step 3" />
+    </figure>
+  </div>
+  <p class="fig-label">
+    Figure 27 — Smooth Interpolation between a Sphere and Stanford Bunny.
+  </p>
+
+  <p>
+    In the context of volumetric rendering, different signed distance functions
+    can be employed to define the spatial bounds and volumetric density of a
+    shape. This enables the exploration of a wide range of volumetric
+    structures, including tubular clouds and a Stanford Bunny-shaped cloud, as
+    illustrated in Figure 28.
+  </p>
+
+  <div class="fig-grid fig-grid-2">
+    <figure>
+      <img
+        src="/images/final-scenes/cloudbunny2.png"
+        alt="Stanford Bunny-shaped cloud"
+      />
+      <figcaption>Stanford Bunny-shaped Cloud</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/final-scenes/tubularcloud.png" alt="Tubular clouds" />
+      <figcaption>Tubular Clouds</figcaption>
+    </figure>
+  </div>
+  <p class="fig-label">
+    Figure 28 — Stanford Bunny-shaped cloud and tubular clouds.
+  </p>
+
+  <p>
+    Natural structures typically exhibit a balance between regularity and
+    irregularity rather than perfect smoothness or complete randomness. Noise
+    techniques are extremely powerful for simulating organic shapes through
+    controlled variation — including deformed spheres, mountainous landscapes,
+    and terrain, illustrated in Figure 29.
+  </p>
+
+  <div class="fig-grid fig-grid-2">
+    <figure>
+      <img src="/images/final-scenes/domainwarp.png" alt="Domain warping" />
+      <figcaption>Domain Warping</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/final-scenes/mountains.png" alt="Mountains" />
+      <figcaption>FBM Noise Mountains</figcaption>
+    </figure>
+  </div>
+  <p class="fig-label">
+    Figure 29 — Scenes generated with Domain Warping and FBM Noise.
+  </p>
+
+  <p>
+    Domain repetition can be used to efficiently construct scenes composed of
+    many similar elements. In Figure 30, a single torus SDF is periodically
+    repeated across space to populate the scene with multiple instances.
+  </p>
+
+  <figure>
+    <img src="/images/final-scenes/domain-repetition.png" alt="Infinite tori" />
+    <figcaption>
+      Figure 30 — Infinite tori rendered with domain repetition.
+    </figcaption>
+  </figure>
+
+  <p>
+    As mentioned in earlier chapters, Ray Marching is widely used for the
+    rendering of fractals — from simpler forms (Sierpiński Triangle) to more
+    generalized ones such as Kaleidoscopic IFSs (Iterated Function Systems), as
+    displayed in Figure 31.
+  </p>
+
+  <p>
+    The technique used to render the Sierpiński Triangle is a variation of
+    domain repetition applied to tetrahedrons — the additional cost for
+    calculating infinite distances is reduced to just one repeating object. This
+    generalizes to all platonic objects. With clever space folding and
+    rotations, a 2010 user of Fractal Forums <cite>[Godar, 2010]</cite> came up with
+    what they called Kaleidoscopic IFS, now a mainstay in the fractal rendering community.
+  </p>
+
+  <div class="fig-grid fig-grid-2">
+    <figure>
+      <img src="/images/fract1.png" alt="Sierpinski Triangle" />
+      <figcaption>Sierpiński Triangle</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/fract2.png" alt="Hollow Insides of Kaleidoscopic IFS" />
+      <figcaption>Hollow Insides of a Kaleidoscopic IFS</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/fract3.png" alt="Outside of Kaleidoscopic IFS" />
+      <figcaption>Outside of Kaleidoscopic IFSs</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/fract4.png" alt="Outside of Kaleidoscopic IFS" />
+      <figcaption>Outside of Kaleidoscopic IFSs</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/fract5.png" alt="Outside of Kaleidoscopic IFS" />
+      <figcaption>Outside of Kaleidoscopic IFSs</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/fract6.png" alt="Insides of Kaleidoscopic IFS" />
+      <figcaption>Insides of Kaleidoscopic IFS</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/fract7.png" alt="Insides of Kaleidoscopic IFS" />
+      <figcaption>Insides of Kaleidoscopic IFS</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/fract8.png" alt="Outside of Kaleidoscopic IFS" />
+      <figcaption>Outside of Kaleidoscopic IFSs</figcaption>
+    </figure>
+  </div>
+  <p class="fig-label">
+    Figure 31 — Multiple fractals using the Kaleidoscopic IFS technique.
+  </p>
+</Article>
+
+<style>
+  .fig-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+</style>

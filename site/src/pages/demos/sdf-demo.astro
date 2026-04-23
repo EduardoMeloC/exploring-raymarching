@@ -1,0 +1,123 @@
+---
+import Article from '../../layouts/Article.astro';
+import ShaderCanvas from '../../components/ShaderCanvas.astro';
+import sdfSrc from '../../shaders/sdfs.glsl?raw';
+
+const prev = null;
+const next = null;
+---
+
+<Article
+  title="Signed Distance Functions"
+  description="Primitives, boolean operations, smooth blending, and domain transformations."
+  prev={prev}
+  next={next}
+  chapterIndex={2}
+>
+
+  <h1>Signed Distance Functions</h1>
+  <p class="lead">
+    A signed distance function returns the shortest distance from any point in
+    space to the nearest surface — negative inside, positive outside, zero on
+    the surface. This simple contract unlocks a rich algebra of shape operations.
+  </p>
+
+  <h2>Primitives</h2>
+
+  <p>
+    Every SDF scene is built from primitives. Here are the three most useful ones:
+  </p>
+
+  <pre><code>// Sphere centered at origin, radius r
+float sdSphere(vec3 p, float r) &#123;
+  return length(p) - r;
+&#125;
+
+// Axis-aligned box, half-extents b
+float sdBox(vec3 p, vec3 b) &#123;
+  vec3 q = abs(p) - b;
+  return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0);
+&#125;
+
+// Capsule from a to b, radius r
+float sdCapsule(vec3 p, vec3 a, vec3 b, float r) &#123;
+  vec3 ab = b - a, ap = p - a;
+  float t = clamp(dot(ap, ab) / dot(ab, ab), 0.0, 1.0);
+  return length(ap - ab * t) - r;
+&#125;</code></pre>
+
+  <p>
+    To place a primitive somewhere in the world, subtract its position from
+    <code>p</code> before passing it in: <code>sdSphere(p - center, r)</code>.
+    This is a <em>domain translation</em>.
+  </p>
+
+  <h2>Boolean operations</h2>
+
+  <p>
+    Because SDFs are just numbers, combining shapes is arithmetic:
+  </p>
+
+  <pre><code>float opUnion    (float a, float b) &#123; return min(a, b);  &#125;  // A or B
+float opSubtract (float a, float b) &#123; return max(-a, b); &#125;  // B minus A
+float opIntersect(float a, float b) &#123; return max(a, b);  &#125;  // A and B</code></pre>
+
+  <p>
+    These are exact for convex primitives, and approximate (but visually
+    correct) for anything more complex.
+  </p>
+
+  <h2>Smooth union</h2>
+
+  <p>
+    Hard boolean operations produce sharp creases. A smooth union blends the
+    boundary between two surfaces, producing an organic merge. The blend radius
+    is controlled by <code>k</code>:
+  </p>
+
+  <pre><code>float opSmoothUnion(float a, float b, float k) &#123;
+  float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
+  return mix(b, a, h) - k * h * (1.0 - h);
+&#125;</code></pre>
+
+  <p>
+    The demo below uses smooth union to blend two spheres and a box. The blend
+    radius is animated — watch how the surfaces melt into one another.
+  </p>
+
+  <ShaderCanvas
+    src={sdfSrc}
+    height={400}
+    caption="Smooth union of two spheres and a box — all from three SDF primitives."
+  />
+
+  <h2>Domain transformations</h2>
+
+  <p>
+    Because we evaluate the SDF by transforming <code>p</code> before calling a
+    primitive, we can apply any spatial operation for free:
+  </p>
+
+  <pre><code>// Rotation — rotate p before evaluating
+vec3 rotateY(vec3 p, float a) &#123;
+  float s = sin(a), c = cos(a);
+  return vec3(c*p.x + s*p.z, p.y, -s*p.x + c*p.z);
+&#125;
+
+// Uniform scale — scale p, then compensate the result
+float sdScaled(vec3 p, float s) &#123;
+  return sdSphere(p / s, 1.0) * s;
+&#125;
+
+// Infinite repetition — wrap space into a tile
+float opRep(vec3 p, vec3 cell) &#123;
+  vec3 q = mod(p + 0.5 * cell, cell) - 0.5 * cell;
+  return sdSphere(q, 0.4);
+&#125;</code></pre>
+
+  <div class="note">
+    <strong>Note:</strong> domain repetition (<code>opRep</code>) is covered in
+    depth in <a href="/05-domain-repetition">Chapter 5</a>.
+  </div>
+
+</Article>

@@ -1,0 +1,466 @@
+---
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { chapters } from "../data/chapters";
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ray Marching and Its Applications</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const sys = window.matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark";
+        document.documentElement.dataset.theme = stored || sys;
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <span class="site-title">Ray Marching and Its Applications</span>
+      <ThemeToggle />
+    </header>
+
+    <main>
+      <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <h1>Ray Marching<br />and Its Applications</h1>
+        <p class="intro">
+          An exploration of realtime rendering with sphere tracing, exploring
+          signed distance functions, procedural modeling, clouds, and more.
+        </p>
+        <p class="author">by Eduardo Catarina and Rafael de Aguiar</p>
+        <a href={`/${chapters[0].slug}`} class="cta">Start reading →</a>
+      </section>
+
+      <ol class="toc">
+        {
+          chapters.map((ch, i) => (
+            <li>
+              <a href={`/${ch.slug}`} class="toc-item">
+                <span class="toc-num">{String(i + 1).padStart(2, "0")}</span>
+                <span class="toc-body">
+                  <span class="toc-title">{ch.title}</span>
+                  <span class="toc-desc">{ch.description}</span>
+                </span>
+                <span class="toc-arrow">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </main>
+
+    <footer>
+      <p>Eduardo Catarina · Rafael de Aguiar · 2026</p>
+    </footer>
+  </body>
+</html>
+
+<script is:inline>
+  (function () {
+    const canvas = document.getElementById("hero-canvas");
+    const gl = canvas.getContext("webgl2");
+    if (!gl) return;
+
+    const vert = `#version 300 es
+  in vec2 a_pos;
+  void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
+
+    const frag = `#version 300 es
+  precision highp float;
+  uniform vec2 iResolution;
+  uniform float iTime;
+  uniform vec2 iMouse;
+  uniform float iBulge;
+  out vec4 fragColor;
+
+  #define TAU 6.28318530718
+  #define MAX_STEPS 64
+  #define SURF_DIST 0.002
+  #define MAX_DIST 10.0
+
+  // IQ hash noise
+  float hash(vec3 p) {
+    p = fract(p * 0.3183099 + 0.1);
+    p *= 17.0;
+    return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+  }
+  float noise(vec3 p) {
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    vec3 u = f * f * (3.0 - 2.0 * f);
+    return mix(mix(mix(hash(i),             hash(i+vec3(1,0,0)),u.x),
+                   mix(hash(i+vec3(0,1,0)), hash(i+vec3(1,1,0)),u.x),u.y),
+               mix(mix(hash(i+vec3(0,0,1)), hash(i+vec3(1,0,1)),u.x),
+                   mix(hash(i+vec3(0,1,1)), hash(i+vec3(1,1,1)),u.x),u.y),u.z);
+  }
+
+  // 2 octaves only — enough for organic look, much cheaper
+  float fbm(vec3 p) {
+    return 0.5 * noise(p) + 0.25 * noise(p * 2.0);
+  }
+
+  float sdf(vec3 p, vec2 mouse) {
+    float t = iTime * 0.4;
+    float wobble = 0.07 * fbm(p * 1.8 + vec3(t * 0.5, t * 0.3, t * 0.7));
+    float base = length(p) - (0.72 + 0.04 * sin(t * 1.3)) + wobble;
+
+    vec3 mouseDir = normalize(vec3(mouse * 16.0, -1.0));
+    float facing = dot(normalize(p), mouseDir);
+    float bulge = iBulge * 0.36 * exp(4.5 * (facing - 1.0));
+    return base - bulge;
+  }
+
+  // Tetrahedron normals: 4 SDF samples instead of 6
+  vec3 normal(vec3 p, vec2 mouse) {
+    float e = 0.002;
+    vec2 k = vec2(1.0, -1.0);
+    return normalize(
+      k.xyy * sdf(p + k.xyy * e, mouse) +
+      k.yyx * sdf(p + k.yyx * e, mouse) +
+      k.yxy * sdf(p + k.yxy * e, mouse) +
+      k.xxx * sdf(p + k.xxx * e, mouse)
+    );
+  }
+
+  vec3 iridescence(float NdotV, float thickness) {
+    float phase = thickness * (1.0 - NdotV * NdotV);
+    return 0.5 + 0.48 * cos(TAU * phase * vec3(1.0, 1.3, 1.8) + vec3(0.0, 1.2, 2.5));
+  }
+
+  void main() {
+    vec2 uv = (gl_FragCoord.xy - 0.5 * iResolution.xy) / iResolution.y;
+    vec2 mouse = iMouse; // already in [-aspect..aspect, -0.5..0.5] range
+
+    vec3 ro = vec3(0.0, 0.0, 2.2);
+    vec3 rd = normalize(vec3(uv, -1.0));
+
+    float d = 0.0;
+    bool hit = false;
+    for (int i = 0; i < MAX_STEPS; i++) {
+      vec3 p = ro + rd * d;
+      float dist = sdf(p, mouse);
+      if (dist < SURF_DIST) { hit = true; break; }
+      if (d > MAX_DIST) break;
+      d += dist;
+    }
+
+    if (!hit) { fragColor = vec4(0.0); return; }
+
+    vec3 p = ro + rd * d;
+    vec3 n = normal(p, mouse);
+    vec3 v = -rd;
+    float NdotV = max(dot(n, v), 0.0);
+
+    // iridescent color
+    float thickness = 1.6 + 0.4 * sin(iTime * 0.7 + p.y * 3.0);
+    vec3 iri = iridescence(NdotV, thickness);
+
+    // accent tint (matches site --accent #7c6aff)
+    vec3 accent = vec3(0.49, 0.42, 1.0);
+    iri = mix(iri, accent, 0.25);
+
+    // Fresnel: transparent center, opaque rim
+    float fresnel = pow(1.0 - NdotV, 2.5);
+    float alpha = 0.1 + 0.85 * fresnel;
+
+    // specular highlight
+    vec3 light = normalize(vec3(0.6, 1.0, 0.8));
+    float spec = pow(max(dot(reflect(-light, n), v), 0.0), 64.0) * 0.7;
+
+    vec3 col = iri * (0.3 + 0.5 * fresnel) + vec3(spec);
+    fragColor = vec4(col, alpha);
+  }`;
+
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vert));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, frag));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 3, -1, -1, 3]),
+      gl.STATIC_DRAW,
+    );
+    const loc = gl.getAttribLocation(prog, "a_pos");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    const uRes   = gl.getUniformLocation(prog, "iResolution");
+    const uTime  = gl.getUniformLocation(prog, "iTime");
+    const uMouse = gl.getUniformLocation(prog, "iMouse");
+    const uBulge = gl.getUniformLocation(prog, "iBulge");
+
+    const smoothMouse = [0, 0];
+    const targetMouse = [0, 0];
+
+    document.addEventListener("mousemove", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      targetMouse[0] = (e.clientX - cx) / rect.height;
+      targetMouse[1] = -(e.clientY - cy) / rect.height;
+    });
+
+    function resize() {
+      const dpr = Math.min(devicePixelRatio, 1);
+      canvas.width = canvas.clientWidth * dpr;
+      canvas.height = canvas.clientHeight * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    new ResizeObserver(resize).observe(canvas);
+    resize();
+
+    const start = performance.now();
+    function frame() {
+      smoothMouse[0] += (targetMouse[0] - smoothMouse[0]) * 0.07;
+      smoothMouse[1] += (targetMouse[1] - smoothMouse[1]) * 0.07;
+
+      const heroH = canvas.parentElement.offsetHeight;
+      const bulge = Math.max(0, 1 - window.scrollY / heroH);
+
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, (performance.now() - start) / 1000);
+      gl.uniform2f(uMouse, smoothMouse[0], smoothMouse[1]);
+      gl.uniform1f(uBulge, bulge);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
+</script>
+
+<style>
+  /* ── Tokens (duplicated from layout so index works standalone) ── */
+  :root,
+  [data-theme="dark"] {
+    --bg: #0d0d0f;
+    --surface: #141416;
+    --border: #2a2a2e;
+    --text: #e8e8ea;
+    --muted: #888890;
+    --accent: #7c6aff;
+    --heading: #ffffff;
+    --font-sans: "Inter", system-ui, sans-serif;
+  }
+  [data-theme="light"] {
+    --bg: #fafaf8;
+    --surface: #f2f2ef;
+    --border: #d8d8d2;
+    --text: #1c1c1e;
+    --muted: #6b6b72;
+    --accent: #5040d9;
+    --heading: #0a0a0c;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 2rem;
+  }
+
+  .site-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 1.5rem 6rem;
+    gap: 4rem;
+    max-width: 68ch;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    position: relative;
+    padding: 3rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  #hero-canvas {
+    position: absolute;
+    left: -50%;
+    right: 0;
+    top: -50%;
+    height: 200%;
+    width: 200%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero > *:not(#hero-canvas) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .author {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--heading);
+    letter-spacing: -0.02em;
+  }
+
+  .intro {
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    transition: opacity 0.15s;
+  }
+  .cta:hover {
+    opacity: 0.85;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    list-style: none;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .toc li + li {
+    border-top: 1px solid var(--border);
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.1rem 1.5rem;
+    text-decoration: none;
+    transition: background 0.12s;
+    color: var(--text);
+  }
+  .toc-item:hover {
+    background: var(--surface);
+  }
+
+  .toc-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    min-width: 1.75rem;
+  }
+
+  .toc-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .toc-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--heading);
+  }
+
+  .toc-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .toc-arrow {
+    font-size: 0.9rem;
+    color: var(--muted);
+    transition:
+      color 0.12s,
+      transform 0.12s;
+  }
+  .toc-item:hover .toc-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>

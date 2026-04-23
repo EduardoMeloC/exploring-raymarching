@@ -1,0 +1,114 @@
+---
+import Article from '../../layouts/Article.astro';
+import ShaderCanvas from '../../components/ShaderCanvas.astro';
+import helloSphere from '../../shaders/hello-sphere.glsl?raw';
+
+const prev = null;
+const next = null;
+---
+
+<Article
+  title="Introduction to Ray Marching"
+  description="The sphere tracing algorithm, your first SDF, and surface normals."
+  prev={prev}
+  next={next}
+  chapterIndex={1}
+>
+
+  <h1>Introduction to Ray Marching</h1>
+  <p class="lead">
+    A rendering technique with no meshes, no triangles — just a function that
+    measures distance to the nearest surface.
+  </p>
+
+  <div class="note">
+    <strong>Prerequisites:</strong> basic linear algebra (vectors, dot product)
+    and a browser that supports WebGL 2. No GPU experience required.
+  </div>
+
+  <h2>What is ray marching?</h2>
+
+  <p>
+    Classical ray tracing finds intersections by solving analytic equations —
+    a ray against a triangle, a sphere, a plane. Ray marching takes a different
+    approach: instead of solving for the exact intersection, it <em>steps</em>
+    along the ray until it gets close enough.
+  </p>
+
+  <p>
+    What makes it powerful is the stepping strategy. At each point
+    <code>p</code> along the ray, we evaluate a <strong>signed distance
+    function</strong> (SDF) — a function that returns the shortest distance
+    from <code>p</code> to any surface in the scene. Because that distance is a
+    safe step size (we cannot hit a surface before walking that far), we can
+    jump forward without overshooting. This is called <strong>sphere
+    tracing</strong>.
+  </p>
+
+  <h3>The algorithm</h3>
+
+  <pre><code>// March a ray from origin ro in direction rd.
+// Returns the distance to the first hit, or -1 on miss.
+float march(vec3 ro, vec3 rd) &#123;
+  float t = 0.0;
+  for (int i = 0; i &lt; MAX_STEPS; i++) &#123;
+    vec3  p = ro + rd * t;
+    float d = scene(p);        // SDF of the whole scene
+    if (d &lt; EPSILON)  return t; // hit — close enough
+    if (t &gt; MAX_DIST) return -1.0; // miss — too far
+    t += d;                    // safe step forward
+  &#125;
+  return -1.0;
+&#125;</code></pre>
+
+  <p>
+    The elegance here is that <code>scene(p)</code> can be arbitrarily complex —
+    it can combine dozens of primitives, twist and distort space, and still be
+    evaluated at a single point with no mesh data.
+  </p>
+
+  <h2>Your first ray marched sphere</h2>
+
+  <p>
+    The SDF for a sphere centered at the origin with radius <code>r</code> is
+    simply <code>length(p) - r</code>. Below is a complete, minimal ray marcher
+    rendering a single sphere with Lambertian shading. The normal is estimated
+    by sampling the SDF at six nearby points — the <em>central differences</em>
+    method.
+  </p>
+
+  <ShaderCanvas
+    src={helloSphere}
+    height={400}
+    caption="A sphere rendered entirely in a fragment shader via sphere tracing."
+  />
+
+  <p>
+    Every pixel is independent — the GPU runs this fragment shader for each one
+    in parallel, casting a ray from the virtual camera through that pixel's
+    position on the image plane.
+  </p>
+
+  <h2>Surface normals</h2>
+
+  <p>
+    Because we have an SDF, normals are free. The gradient of a distance field
+    at any surface point equals the outward normal. We approximate it with
+    central differences — six SDF samples at offset positions:
+  </p>
+
+  <pre><code>vec3 normal(vec3 p) &#123;
+  vec2 e = vec2(0.001, 0.0);
+  return normalize(vec3(
+    scene(p + e.xyy) - scene(p - e.xyy),
+    scene(p + e.yxy) - scene(p - e.yxy),
+    scene(p + e.yyx) - scene(p - e.yyx)
+  ));
+&#125;</code></pre>
+
+  <p>
+    This costs six extra SDF evaluations per hit point. For complex scenes,
+    <em>tetrahedron sampling</em> achieves similar quality with four evaluations.
+  </p>
+
+</Article>

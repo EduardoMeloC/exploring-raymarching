@@ -1,0 +1,385 @@
+---
+import Article from "../layouts/Article.astro";
+import { Code } from "astro:components";
+import { getAdjacentChapters } from "../data/chapters";
+
+const { prev, next } = getAdjacentChapters("02-ray-tracing-vs-ray-marching");
+
+const codeCanvasTraversal = `void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    Scene scene = createScene();
+
+    vec2 uv = (fragCoord - .5*iResolution.xy) / iResolution.y;
+    vec3 color = vec3(0.);
+
+    // Creating Ray
+    vec3 rayOrigin = vec3(0., 0., 1.);
+    vec3 rayDirection = normalize(vec3(uv.xy, 0.) - rayOrigin);
+    Ray ray = Ray(rayOrigin, rayDirection);
+
+    // Tracing Ray
+    Hit hit = traceRay(ray, scene);
+
+    if (hit.isHit) color = getHitColor(hit, ray, scene);
+
+    // Output to screen
+    fragColor = vec4(color,1.0);
+}`;
+---
+
+<Article
+  title="Ray Tracing vs Ray Marching"
+  description="Two ray-based techniques, their trade-offs, and ideal use cases."
+  prev={prev}
+  next={next}
+  chapterIndex={2}
+>
+  <h1>Ray Tracing vs Ray Marching</h1>
+  <p class="lead">
+    Two approaches to the same fundamental problem: finding what a ray hits
+  </p>
+
+  <p>
+    One of the goals of computer graphics is to synthesize images of virtual
+    scenes simulating the behaviour of light. In order to determine the visible
+    surfaces described in the environment and the respective color of each pixel
+    displayed on the screen, two of the most widespread techniques are
+    rasterization and Ray Tracing. Rasterization, widely used in real-time
+    applications like video games, prioritizes speed and efficiency. In
+    contrast, Ray Tracing, commonly employed in high-quality 3D animations,
+    sacrifices speed for photorealistic accuracy by simulating the paths of
+    individual light rays. Beyond these methods, Ray Marching offers a unique
+    approach, particularly suited for rendering complex implicit surfaces and
+    volumetric effects. In this chapter, we will focus on Ray Tracing and
+    explore how it compares and contrasts with Ray Marching, shedding light on
+    their respective strengths and applications.
+  </p>
+
+  <h2>Traversing the Canvas</h2>
+
+  <p>
+    A scene consists of a camera, 3D objects, and light sources placed in the
+    environment. The goal when using Ray Tracing or Ray Marching is to generate
+    a 2D render of the scene from the camera's point of view. We will need to
+    traverse the canvas, a 2D grid with the dimensions of our final image. Then,
+    given a camera point, we iterate over each position in the canvas, shooting
+    a ray in its direction. This process is the basis of both Ray Marching and
+    Ray Tracing, as shown in Figure 2.
+  </p>
+
+  <figure>
+    <img src="/images/ray-trace.jpg" alt="Ray Tracing Algorithm" />
+    <figcaption>
+      Figure 2 — Ray Tracing Algorithm.<sup
+        ><a id="fn-ref-1" href="#fn-1">1</a></sup
+      >
+    </figcaption>
+  </figure>
+
+  <p>
+    For didactic purposes, we will ignore details such as the field of view, and
+    we will assume that the distance between the canvas and the camera origin is
+    always equal to 1, and that the canvas center will be positioned at $(0, 0,
+    0)$. We then establish the following definitions:
+  </p>
+
+  <ul>
+    <li>
+      <strong>CanvasResolution</strong> — a 2D vector where each component represents
+      the canvas' width and height.
+    </li>
+    <li>
+      <strong>uv</strong> — a mapping of the canvas' coordinate system, offsetting
+      the $(0, 0)$ coordinate to the canvas' center and ranging between -1 and 1.
+      We later divide it by the resolution to fix the aspect ratio.
+    </li>
+    <li>
+      <strong>RayOrigin</strong> — a 3D vector representing the viewer's position,
+      initialized at $(0, 0, 1)$.
+    </li>
+    <li>
+      <strong>RayDirection</strong> — a normalized 3D vector representing the ray
+      shot from the origin towards the pixel's position.
+    </li>
+    <li>
+      <strong>Hit</strong> — a data structure storing information about the ray's
+      interaction with geometry, including hit position, surface normal, distance
+      from the origin, and data for lighting calculations.
+    </li>
+  </ul>
+
+  <div class="algorithm">
+    <div class="algorithm-header">
+      Algorithm 1 <span>Canvas Traversal</span>
+    </div>
+    <pre>{`PROCEDURE Render(Canvas, Scene)
+  FOR y = 0 TO CanvasResolution.y - 1
+    FOR x = 0 TO CanvasResolution.x - 1
+      uv ← ([x, y] - 0.5 × CanvasResolution) / CanvasResolution.y
+      RayOrigin ← [0, 0, 1]
+      RayDirection ← normalize([uv.x, uv.y, 0] - RayOrigin)
+      Hit ← TraceRay(RayOrigin, RayDirection, Scene)
+      IF Hit.isHit
+        HitColor ← GetHitColor(Hit, RayDirection, Scene)
+        SetPixelColor(x, y, HitColor)
+      ELSE
+        SetPixelColor(x, y, BACKGROUND_COLOR)
+      END IF
+    END FOR
+  END FOR
+END PROCEDURE`}</pre>
+  </div>
+
+  <p>
+    The pseudocode explicitly uses nested loops to traverse the canvas. In the
+    GLSL implementation below, the iteration logic is unnecessary because the
+    fragment shader operates on a per-pixel basis — each invocation of the
+    shader corresponds to a single pixel on the canvas, and the GPU
+    automatically handles the parallel execution. The input <code
+      >fragCoord</code
+    > provides the current pixel's coordinates.
+  </p>
+
+  <Code code={codeCanvasTraversal} lang="glsl" theme="one-dark-pro" />
+  <p class="fig-label">Code 1: Canvas Traversal</p>
+
+  <h2>Tracing the Ray</h2>
+
+  <p>
+    In ray tracing, once a ray is cast in the direction of a pixel on the
+    canvas, it must traverse the scene to identify the closest object
+    intersecting the ray. This requires a function capable of calculating the
+    intersection between the ray and the geometric objects in the scene. The
+    closest intersection point determines what will be rendered on the screen.
+  </p>
+
+  <div class="algorithm">
+    <div class="algorithm-header">Algorithm 2 <span>TraceRay</span></div>
+    <pre>{`PROCEDURE TraceRay(RayOrigin, RayDirection, Scene)
+  ClosestHit ← RAYHIT_INFINITY
+  FOR EACH object IN Scene
+    Hit ← RayObjectIntersection(object, RayOrigin, RayDirection)
+    IF Hit.distance < ClosestHit.distance
+      ClosestHit ← Hit
+    END IF
+  END FOR
+  RETURN ClosestHit
+END PROCEDURE`}</pre>
+  </div>
+
+  <p>
+    In traditional computer graphics, most objects on a screen are represented
+    as a collection of triangles. This allows any geometry tessellated into
+    triangles to be described using ray-triangle intersection calculations.
+    However, rendering smooth shapes requires an extremely fine mesh, leading to
+    a high polygon count — a significant performance bottleneck in scenes with
+    thousands of objects.
+  </p>
+
+  <p>
+    In Figure 3, the scene is simplified to a single sphere. Since the analytic
+    solution for ray-sphere intersection is well known, the surface can be
+    rendered smoothly and accurately without relying on geometric tessellation.
+    Our
+    <code>GetHitColor</code> function currently returns only the object's albedo —
+    the pure color of the object. By rendering a scene with a black background, a
+    large white sphere below the camera to simulate the ground, and a smaller red
+    sphere above it, the image in Figure 3 is produced.
+  </p>
+
+  <figure>
+    <img
+      src="/images/unlit-raytraced-sphere.png"
+      alt="Unlit Raytraced Sphere"
+      class="bordered"
+      style="max-width:400px"
+    />
+    <figcaption>Figure 3 — Unlit Raytraced Sphere.</figcaption>
+  </figure>
+
+  <h2>Marching the Ray</h2>
+
+  <p>
+    If the term "trace" implies a fast, swift motion, "march" is used to convey
+    taking one step at a time. The Ray Marching algorithm uses the
+    <code>MarchRay</code> function instead of <code>TraceRay</code> — rather than
+    calculating a direct intersection, it iteratively marches through space, at each
+    step sampling the distance to all objects in the scene, until one distance turns
+    negative or smaller than a specified threshold (a hit). The distance-sampling
+    function is called SDF (Signed Distance Function), as it returns positive when
+    outside the object and negative when inside.
+  </p>
+
+  <p>
+    Ray Marching could be considered a family of algorithms. The most
+    straightforward approach is to use a <strong>fixed step size</strong>, where
+    the ray advances in uniform increments. While simple, this method has
+    notable limitations: the ray may need to be backtracked to locate the
+    precise point of intersection (Figure 4, top), and fixed steps risk skipping
+    over fine details or thin structures entirely (Figure 5).
+  </p>
+
+  <p>
+    To prevent the march from ever skipping a surface between steps, the next
+    step size can be picked as the <strong
+      >minimum distance to any object</strong
+    > in the scene — this is <em>sphere tracing</em>. The ray then acts as if it
+    has a sensor, slowing down when surfaces are nearby. Each circle in Figure 4
+    (bottom) represents the safe step radius at that position.
+  </p>
+
+  <div class="fig-grid fig-grid-2">
+    <figure>
+      <img
+        src="/images/spheretracing.png"
+        alt="Sphere Tracing"
+        class="bordered"
+      />
+      <figcaption>
+        Figure 4 — Top: binary search maneuver to bypass fixed-step limitations.
+        Bottom: sphere tracing.
+      </figcaption>
+    </figure>
+    <figure>
+      <img
+        src="/images/raymarch_fixed_fail.jpg"
+        alt="Fixed step failure"
+        class="bordered"
+      />
+      <figcaption>
+        Figure 5 — A problematic case of fixed-step marching where the surface
+        is skipped entirely. <cite>[Shirley & Morley, 2003]</cite>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="algorithm">
+    <div class="algorithm-header">Algorithm 3 <span>MarchRay</span></div>
+    <pre>{`PROCEDURE MarchRay(RayOrigin, RayDirection, Scene)
+  MarchDistance ← 0
+  Hit ← NULL_HIT
+  IsHit ← false
+  FOR step = 0 TO MAX_MARCH_STEPS - 1
+    MarchPos ← RayOrigin + (MarchDistance × RayDirection)
+    Hit ← GetDistance(MarchPos, Scene)
+    IF Hit.distance < SURFACE_DISTANCE
+      IsHit ← true
+      BREAK
+    END IF
+    IF MarchDistance > MAX_MARCH_DISTANCE
+      BREAK
+    END IF
+    MarchDistance ← MarchDistance + Hit.distance
+  END FOR
+  RETURN Hit
+END PROCEDURE`}</pre>
+  </div>
+
+  <figure>
+    <img
+      src="/images/unlit-raymarched-sphere.png"
+      alt="Unlit Raymarched Sphere"
+      class="bordered"
+      style="max-width:400px"
+    />
+    <figcaption>
+      Figure 6 — Unlit Raymarched Sphere rendered with a low step cap of 150,
+      revealing how the ground plane disappears near the sphere's edges when the
+      step budget is exhausted.
+    </figcaption>
+  </figure>
+
+  <p>
+    Figure 6 was rendered with a low step cap of 150 to illustrate a limitation
+    of the method. Careful inspection reveals that the distant ground plane
+    disappears near the edges of the sphere. This occurs because rays take
+    smaller steps when approaching a surface, requiring more iterations to
+    traverse its boundary. In practice, most rays terminate within fewer than 10
+    steps due to scene distance limits, and our final scenes use a cap of around
+    1000 steps.
+  </p>
+
+  <h2>When to march rather than trace</h2>
+
+  <p>
+    At first glance, Ray Tracing comes off as the best, most optimal method. Ray
+    Marching is prone to visual artifacts and might take many marching steps,
+    especially in crowded scenes. Most 3D modeling done in software like Blender<sup
+      ><a id="fn-ref-2" href="#fn-2">2</a></sup
+    > and ZBrush<sup><a id="fn-ref-3" href="#fn-3">3</a></sup> is not based on primitives
+    such as spheres and boxes, but rather on polygons. As such, any traditionally
+    modeled scene with high poly counts, textures, reflection, refraction, and shadows
+    is better suited to Ray Tracing, especially considering recent advances in hardware-accelerated
+    path tracing on modern GPUs such as the NVIDIA RTX architecture <cite
+      >[NVIDIA]</cite
+    >.
+  </p>
+
+  <p>
+    However, Ray Marching has competitive applications. The flexibility of SDFs,
+    and capability of diverse object combination and manipulation, makes it
+    particularly well-suited for rendering complex, mathematically defined
+    shapes such as fractals. Moreover, Ray Marching excels at rendering
+    volumetric effects like clouds, fog, and smoke — inherently continuous
+    phenomena that are difficult to model with traditional polygonal geometry.
+    By evaluating density functions at each step along a ray, Ray Marching can
+    accurately simulate light scattering, absorption, and shadowing within these
+    volumetric media.
+  </p>
+
+  <p>
+    Although demand for Ray Tracing specific hardware all but decreases, there
+    is still a place for Ray Marching in real-time computing, even if it isn't
+    suited for rendering high-poly solid objects. Its creative potential
+    flourishes in communities like <a
+      href="https://www.shadertoy.com/"
+      target="_blank"
+      rel="noopener">ShaderToy</a
+    >, where innovative raymarched shaders showcase its versatility. Beyond
+    artistic applications, most mid-budget to high-budget games still leverage
+    Ray Marching for realistic, dynamic effects like clouds characters fly
+    through or smoke that bullets poke holes in. Additionally, in scientific
+    fields, laboratories apply Ray Marching to visualizations of 3D volumetric
+    fields <cite>[Kettunen et al., 2021]</cite>, complex mathematical structures
+    such as Julia sets and quaternionic fractals
+    <cite>[Quilez, 2001]</cite>. While its use cases may be more specialized,
+    Ray Marching remains a powerful tool across both creative and technical
+    domains, and hybrid solutions using both marching and tracing are widely
+    adopted to optimize the pros and cons of each method.
+  </p>
+
+  <div class="footnotes">
+    <ol>
+      <li id="fn-1">
+        <a href="#fn-ref-1">↑</a> Source: <a
+          href="https://developer.nvidia.com/discover/ray-tracing"
+          target="_blank"
+          rel="noopener">developer.nvidia.com/discover/ray-tracing</a
+        >
+      </li>
+      <li id="fn-2">
+        <a href="#fn-ref-2">↑</a>
+        <a href="https://www.blender.org/about/" target="_blank" rel="noopener"
+          >https://www.blender.org/about/</a
+        >
+      </li>
+      <li id="fn-3">
+        <a href="#fn-ref-3">↑</a>
+        <a href="https://www.maxon.net/en/zbrush" target="_blank" rel="noopener"
+          >https://www.maxon.net/en/zbrush</a
+        >
+      </li>
+    </ol>
+  </div>
+</Article>
+
+<style>
+  .fig-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+</style>

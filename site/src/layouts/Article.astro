@@ -1,0 +1,472 @@
+---
+import ThemeToggle from "../components/ThemeToggle.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  prev?: { slug: string; title: string } | null;
+  next?: { slug: string; title: string } | null;
+  chapterIndex?: number | null;
+}
+const { title, description, prev, next, chapterIndex } = Astro.props;
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
+    <title>{title} — Ray Marching</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+      crossorigin="anonymous"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"
+    ></script>
+    <!-- Prevent flash by applying stored theme before first paint -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const sys = window.matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark";
+        document.documentElement.dataset.theme = stored || sys;
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="home-link">Ray Marching and Its Applications</a>
+      {
+        chapterIndex != null && (
+          <span class="chapter-badge">Chapter {chapterIndex}</span>
+        )
+      }
+      <ThemeToggle />
+    </header>
+
+    <main>
+      <article>
+        <slot />
+      </article>
+    </main>
+
+    {
+      (prev || next) && (
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+          <div class="nav-prev">
+            {prev && (
+              <a href={`/${prev.slug}`}>
+                <span class="nav-dir">← Previous</span>
+                <span class="nav-title">{prev.title}</span>
+              </a>
+            )}
+          </div>
+          <div class="nav-next">
+            {next && (
+              <a href={`/${next.slug}`}>
+                <span class="nav-dir">Next →</span>
+                <span class="nav-title">{next.title}</span>
+              </a>
+            )}
+          </div>
+        </nav>
+      )
+    }
+
+    <footer>
+      <p>Eduardo Catarina · Rafael de Aguiar · 2026</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  /* ── Tokens ──────────────────────────────────────────── */
+  :root,
+  [data-theme="dark"] {
+    --bg: #0d0d0f;
+    --surface: #141416;
+    --border: #2a2a2e;
+    --text: #e8e8ea;
+    --muted: #888890;
+    --accent: #7c6aff;
+    --code-bg: #111116;
+    --heading: #ffffff;
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", monospace;
+    --content-width: 72ch;
+  }
+
+  [data-theme="light"] {
+    --bg: #fafaf8;
+    --surface: #f2f2ef;
+    --border: #d8d8d2;
+    --text: #1c1c1e;
+    --muted: #6b6b72;
+    --accent: #5040d9;
+    --code-bg: #ededea;
+    --heading: #0a0a0c;
+  }
+
+  /* ── Reset ───────────────────────────────────────────── */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  /* ── Header ──────────────────────────────────────────── */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 2rem;
+  }
+
+  .home-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    margin-right: auto;
+  }
+
+  .chapter-badge {
+    font-size: 0.75rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.15rem 0.65rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* ── Main content ────────────────────────────────────── */
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  article {
+    width: 100%;
+    max-width: var(--content-width);
+  }
+
+  /* ── Typography ──────────────────────────────────────── */
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--heading);
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin: 3rem 0 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+  h3 {
+    font-size: 1.15rem;
+    margin: 2rem 0 0.75rem;
+    color: var(--accent);
+  }
+
+  p {
+    margin-bottom: 1.25rem;
+  }
+
+  a {
+    color: var(--accent);
+  }
+
+  strong {
+    color: var(--heading);
+    font-weight: 600;
+  }
+
+  em {
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  :not(pre) > code {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    color: var(--accent);
+  }
+
+  pre {
+    background: var(--code-bg) !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    font-family: var(--font-mono);
+  }
+
+  .note {
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .note strong {
+    color: var(--accent);
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  li {
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── Chapter nav ─────────────────────────────────────── */
+  .chapter-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    border-top: 1px solid var(--border);
+    background: var(--border);
+    max-width: var(--content-width);
+    margin: 0 auto;
+    width: 100%;
+    /* match article left/right padding */
+    padding: 0 1.5rem;
+    box-sizing: content-box;
+  }
+
+  .nav-prev,
+  .nav-next {
+    background: var(--bg);
+    padding: 1.5rem;
+    transition: background 0.15s;
+  }
+  .nav-prev {
+    border-right: 1px solid var(--border);
+  }
+  .nav-next {
+    text-align: right;
+  }
+
+  .nav-prev:hover,
+  .nav-next:hover {
+    background: var(--surface);
+  }
+
+  .chapter-nav a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    text-decoration: none;
+  }
+
+  .nav-dir {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* ── Footer ──────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ── Figures ─────────────────────────────────────────── */
+  figure {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  figure img {
+    max-width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: block;
+    margin: 0 auto;
+  }
+  figure img.bordered {
+    box-shadow: 0 0 0 3px var(--border);
+  }
+  figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── Image grids ─────────────────────────────────────── */
+  .fig-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    align-items: start;
+  }
+  .fig-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fig-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .fig-grid-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .fig-grid figure {
+    margin: 0;
+  }
+  .fig-grid .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.35rem;
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 600px) {
+    .fig-grid-2,
+    .fig-grid-3,
+    .fig-grid-4 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ── Algorithm / pseudocode blocks ──────────────────── */
+  .algorithm {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0;
+    margin: 1.5rem 0;
+    overflow: hidden;
+  }
+  .algorithm-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  }
+  .algorithm-header span {
+    color: var(--muted);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .algorithm pre {
+    margin: 0;
+    background: transparent !important;
+    border: none;
+    border-radius: 0;
+    padding: 1.1rem 1.5rem;
+    font-size: 0.83rem;
+    line-height: 1.6;
+  }
+
+  /* ── Footnote list ────────────────────────────────────── */
+  .footnotes {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .footnotes ol {
+    padding-left: 1.25rem;
+  }
+  .footnotes li {
+    margin-bottom: 0.4rem;
+  }
+  sup a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.75em;
+  }
+
+  /* ── KaTeX display override ──────────────────────────── */
+  .katex-display {
+    overflow-x: auto;
+    padding: 0.5rem 0;
+  }
+</style>

@@ -71,6 +71,11 @@
 /UnityShaders/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /UnityShaders/[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# Astro / Node
+node_modules/
+site/dist/
+site/.astro/
+
 *.aux
 *.bbl
 *.bcf

@@ -1,0 +1,146 @@
+---
+import Article from "../layouts/Article.astro";
+import { Code } from "astro:components";
+import { getAdjacentChapters } from "../data/chapters";
+
+const { prev, next } = getAdjacentChapters("01-introduction");
+---
+
+<Article
+  title="Introduction"
+  description="Context, scope, and methodology of this work on Ray Marching."
+  prev={prev}
+  next={next}
+  chapterIndex={1}
+>
+  <h1>Introduction</h1>
+  <p class="lead">
+    Ray Marching is a powerful technique with a simple implementation.
+  </p>
+
+  <p>
+    In the realm of computer graphics, the quest for realism and visual fidelity
+    has driven the development of various rendering techniques. From the early
+    days of rasterization to the advent of ray tracing, each method has
+    contributed to the evolution of how we create and experience digital
+    imagery. Ray Marching, a technique that emerged as an alternative to
+    traditional ray tracing, offers unique advantages in rendering complex
+    scenes with intricate details and dynamic effects.
+  </p>
+
+  <p>
+    With advancements in rendering techniques and algorithms, methods such as
+    Ray Tracing and Path Tracing have emerged to accurately simulate the
+    behavior of light, textures <cite>[NVIDIA]</cite>, and materials in
+    three-dimensional environments. These methods are widely used in still
+    images and animations, though they require significant computational power.
+    Additionally, technologies like shaders<sup
+      ><a id="fn-ref-1" href="#fn-1">1</a></sup
+    >, which allow customization at the pixel level, have become essential in
+    gaming and simulation environments, delivering increasingly immersive visual
+    experiences to users.
+  </p>
+
+  <p>
+    In this context, Ray Marching stands out as an innovative technique,
+    particularly for real-time rendering of complex surfaces and fractals.
+    Unlike traditional Ray Tracing, Ray Marching uses an iterative approach to
+    detect surfaces within a Signed Distance Field (SDF) <cite
+      >[Quilez, 2013]</cite
+    >. An SDF is a function that returns the shortest distance from any point in
+    space to the closest surface, which allows it to describe smooth and
+    detailed shapes without needing traditional polygonal geometry. This
+    technique is especially useful for rendering scenes involving implicit
+    geometry, such as fractals and abstract scenarios, and is frequently applied
+    in virtual reality environments and visual effects for games.
+  </p>
+
+  <figure>
+    <img
+      src="/images/raymarched-clouds-schneider.png"
+      alt="Raymarched Clouds by Schneider et al."
+    />
+    <figcaption>
+      Figure 1 — Raymarched Clouds obtained by Schneider et al.<sup
+        ><a id="fn-ref-2" href="#fn-2">2</a></sup
+      >
+    </figcaption>
+  </figure>
+
+  <p>
+    Ray Marching has found several practical applications in the gaming
+    industry, particularly for rendering complex and dynamic scenes. In the
+    Frostbite Engine
+    <cite>[Hillaire, 2016]</cite>, used in titles such as Battlefield V, Ray
+    Marching is employed to render highly realistic volumetric clouds, as shown
+    in Figure 1. This approach allows the engine to simulate depth, light
+    scattering, and other atmospheric effects in real time, creating lifelike
+    skies that respond dynamically to environmental lighting conditions.
+  </p>
+
+  <h2>Scope and Objective</h2>
+
+  <p>
+    During the following chapters, we will explore Ray Marching as implemented
+    in GLSL and compare its strengths to traditional Ray Tracing methods. Our
+    primary objective is to demonstrate Ray Marching's unique capabilities,
+    particularly its use of SDFs, which allow for precise control over shapes
+    and blending effects that are challenging to achieve with Ray Tracing.
+  </p>
+
+  <p>
+    We also explore the potential of Ray Marching for procedural rendering,
+    showcasing its use in creating complex geometry with noise patterns and
+    highly realistic volumetric effects, including cloud rendering. By examining
+    these features, we aim to highlight Ray Marching's versatility and its
+    advantages in generating intricate, dynamic visuals for real-time
+    applications.
+  </p>
+
+  <p>
+    This work is intended for readers with a basic understanding of computer
+    graphics and rendering techniques, though it is also accessible to those new
+    to the field. The simplicity of ray marching's implementation allows us to
+    implement it in a single fragment shader, making it an ideal subject for
+    exploration and experimentation in the context of real-time rendering. This
+    approach allows us to bypass the complexity and overhead associated with
+    traditional graphics APIs and GPU programming, enabling us to focus on the
+    core mathematical concepts, rather than the intricacies of graphics APIs.
+  </p>
+
+  <h2>Methodology</h2>
+
+  <p>
+    We take an iterative approach to explore the Ray Marching algorithm,
+    showcasing its capacity to render smooth, noisy, and dynamic surfaces.
+    Real-time 3D applications often rely on graphics APIs such as OpenGL,
+    DirectX, or Vulkan for GPU programming. To simplify development and focus on
+    Ray Marching itself, we use Shadertoy<sup
+      ><a id="fn-ref-3" href="#fn-3">3</a></sup
+    >, a tool for running fragment shaders written in GLSL (OpenGL Shading
+    Language) without the extensive setup. All rendered scenes presented in this
+    work are implemented as individual Shadertoy shaders.
+  </p>
+
+  <div class="footnotes">
+    <ol>
+      <li id="fn-1">
+        <a href="#fn-ref-1">↑</a>
+        <a
+          href="https://www.khronos.org/opengl/wiki/shader"
+          target="_blank"
+          rel="noopener">https://www.khronos.org/opengl/wiki/shader</a
+        >
+      </li>
+      <li id="fn-2">
+        <a href="#fn-ref-2">↑</a> Source: media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf
+      </li>
+      <li id="fn-3">
+        <a href="#fn-ref-3">↑</a>
+        <a href="https://www.shadertoy.com" target="_blank" rel="noopener"
+          >www.shadertoy.com</a
+        >
+      </li>
+    </ol>
+  </div>
+</Article>

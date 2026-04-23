@@ -1,0 +1,70 @@
+---
+import Article from '../layouts/Article.astro';
+import { getAdjacentChapters } from '../data/chapters';
+
+const { prev, next } = getAdjacentChapters('06-conclusion');
+---
+
+<Article
+  title="Conclusion"
+  description="Summary of the work and directions for future research."
+  prev={prev}
+  next={next}
+  chapterIndex={6}
+>
+
+<h1>Conclusion</h1>
+<p class="lead">
+  In this work, we presented the versatility and expressiveness of the Ray
+  Marching technique.
+</p>
+
+<p>
+  Initially, we compared Ray Tracing and Ray Marching, highlighting their
+  similarities and differences. Signed Distance Functions were introduced as a
+  flexible mathematical representation of geometry, allowing us to easily apply
+  techniques for the construction of procedural scenes. After building a strong
+  foundation upon these concepts, we explored how this technique can be employed
+  to render volumetric clouds in real time.
+</p>
+
+<p>
+  Through the adoption of an iterative approach that presented code snippets and
+  algorithms supported by rendered examples, we ultimately provided a
+  comprehensive overview of Ray Marching and its capabilities. The techniques
+  explored not only achieve the intended visual outcomes but also provide a robust
+  framework for further experimentation with procedural and volumetric rendering.
+</p>
+
+<h2>Future Works</h2>
+
+<p>
+  Building on these results, further explorations could be made to apply more
+  physically accurate shading on clouds. State-of-the-art techniques build on
+  these basic principles by incorporating physically based models such as Beer's
+  Law and the Powder Effect, as exemplified in the cloud rendering system of
+  <em>Horizon Zero Dawn</em> <cite>[Schneider &amp; Angelini, 2015]</cite>.
+</p>
+
+<p>
+  Regarding Signed Distance Fields, many other applications are open: from font
+  rendering <cite>[Green, 2007]</cite> and ambient sound propagation
+  <cite>[Mizdal et al., 2019]</cite>, to the approximation of distance fields
+  from mesh data using neural networks <cite>[Park et al., 2019]</cite>. Recent
+  research also investigates their role in differentiable rendering
+  <cite>[Nimier-David et al., 2020]</cite> and implicit neural representations,
+  where SDFs can provide a continuous and differentiable description of geometry.
+  These diverse applications highlight the versatility of SDFs as a unifying
+  mathematical framework.
+</p>
+
+<hr />
+
+<div class="note">
+  <strong>Source Code:</strong> All shader examples from this work are available at
+  <a href="https://github.com/eduardomeloc/exploring-raymarching" target="_blank" rel="noopener">
+    github.com/eduardomeloc/exploring-raymarching
+  </a>.
+</div>
+
+</Article>

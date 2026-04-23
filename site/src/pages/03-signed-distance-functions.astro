@@ -1,0 +1,518 @@
+---
+import Article from '../layouts/Article.astro';
+import { Code } from 'astro:components';
+import { getAdjacentChapters } from '../data/chapters';
+
+const { prev, next } = getAdjacentChapters('03-signed-distance-functions');
+
+// ── Code samples ──────────────────────────────────────────────────────────────
+const codeCircleSphere = `float circleDistance(vec2 point, float radius){
+    return length(point) - radius;
+}
+
+float sphereDistance(vec3 point, float radius){
+    return length(point) - radius;
+}`;
+
+const codeColoringCircle = `vec3 plainColor (in float d){
+     return vec3(1.0) - sign(d)*vec3(0.4);
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    vec2 uv = (2.*fragCoord.xy-iResolution.xy)/min(iResolution.x, iResolution.y);
+
+    float d = circleDistance(uv, 0.5);
+
+    vec3 col = plainColor(d);
+    fragColor = vec4(col,1.0);
+}`;
+
+const codeRectangleBox = `float rectangleDistance( in vec2 p, in vec2 b ){
+    vec2 d = abs(p)-b;
+    return length(max(d,0.0)) + min(max(d.x,d.y),0.0);
+}
+
+float boxDistance( in vec3 p, in vec3 b ){
+    vec3 d = abs(p)-b;
+    return length(max(d,0.0)) + min(max(d.x,d.y,d.z),0.0);
+}`;
+
+const codeTranslateSphere = `float transformedSphere(vec3 point)
+{
+    return sphereDistance(point - vec3(0., 3., 0.));
+}`;
+
+const codeAffineTransform = `float transformedSphere(vec3 point)
+{
+    // Scale 2X along Y
+    mat4 S = mat4(
+        vec4(1., 0., 0., 0.),
+        vec4(0., 2., 0., 0.),
+        vec4(0., 0., 1., 0.),
+        vec4(0., 0., 0., 1.)
+    );
+    // Rotation in XY
+    float t = PI/4.;
+    mat4 R = mat4(
+        vec4(cos(t), sin(t), 0., 0.),
+        vec4(-sin(t), cos(t), 0., 0.),
+        vec4(0., 0., 1., 0.),
+        vec4(0., 0., 0., 1.)
+    );
+    // Translate to (-2., -1., -1.)
+    mat4 T = mat4(
+        vec4(1., 0., 0., -2.),
+        vec4(0., 1., 0., -1.),
+        vec4(0., 0., 1., -1.),
+        vec4(0., 0., 0., 1.)
+    );
+
+    mat4 transformationMatrix = S * R * T;
+    vec3 transformedPoint = (vec4(point, 1.) * inverse(transformationMatrix)).xyz;
+
+    return sphereDistance(transformedPoint);
+}`;
+
+const codeUnionEtc = `float unionOperation( float d1, float d2 )
+{
+    return min(d1,d2);
+}
+float intersectionOperation( float d1, float d2 )
+{
+    return max(d1,d2);
+}
+float subtractionOperation( float d1, float d2 )
+{
+    return max(-d1,d2);
+}`;
+
+const codeDisplacement = `float displacementOperation( in sdf3d sdfShape, in vec3 p )
+{
+    float d1 = sdfShape(p);
+    float d2 = displacement(p);
+    return d1+d2;
+}`;
+
+const codeWaveDistortion = `float distortedSphereDistance(vec3 p){
+    float sphereRadius = 2.0;
+    vec3 sphereCenter = vec3(0., 2., -5.);
+    float sphereDist = length(p - sphereCenter) - sphereRadius;
+
+    vec2 uv = sphereUV(point, sphereCenter); // spherical coordinate angles
+    float distortion = sin(uv.x * 64.) * cos(uv.y * 64.); // wave pattern
+    sphereDist += distortion * 0.1; // apply displacement
+
+    return sphereDist;
+}`;
+
+// ── Math strings (set:html bypasses JSX text node compilation issues with \) ──
+const mathCircleSDF    = String.raw`$$\text{CircleSDF}(\mathbf{p}) = \|\mathbf{p}\| - r$$`;
+const mathSphereSDF    = String.raw`$$\text{SphereSDF}(\mathbf{p}) = \|\mathbf{p}\| - r$$`;
+const mathH            = String.raw`$$h = \frac{\max(k - \|\mathbf{a} - \mathbf{b}\|,\; 0.0)}{k}$$`;
+const mathC            = String.raw`$$c = \frac{h^n \cdot k}{2n}$$`;
+const mathRepDomain    = String.raw`$\mathbf{p} - \textit{gap} \cdot \mathrm{round}\!\left(\frac{\mathbf{p}}{\textit{gap}}\right)$`;
+const mathGradUnit     = String.raw`A key property of SDFs is that their gradient has length $1$ everywhere in space. When two SDFs are added, this property is violated — the gradient no longer has unit length, effectively "bending" space. This can cause the raymarcher to underestimate or overestimate the true distance to a surface.`;
+
+const pCircleDim  = String.raw`The only difference is the dimension of the query point $\mathbf{p}$. In the case of a circle, $\mathbf{p}$ is a two-dimensional vector; for a sphere, $\mathbf{p}$ is a three-dimensional vector. The formula is structurally identical because both objects are defined by a center and a radius in their respective spaces.`;
+const pRectSymm   = String.raw`The rectangle SDF is defined at the origin $(0,0)$. Due to the rectangle's symmetry, it is convenient to work within the first Cartesian quadrant. $\mathbf{b}$ (half each box's side) is subtracted from $\text{abs}(\mathbf{p})$, yielding a point $\mathbf{d}$. As illustrated in Figure 11:`;
+const pRectInner  = String.raw`When both $\mathbf{d}.x$ and $\mathbf{d}.y$ are clamped to zero, <code>length(max(d, 0.0))</code> gives the corner distance for all outer sections. For the interior (where that expression is always 0), the SDF must return the negative distance to the nearest edge via <code>min(max(d.x, d.y), 0.0)</code>. This generalizes directly to $\mathbb{R}^3$ for the box SDF.`;
+const pRectFour   = String.raw`If expanded to $\mathbb{R}^4$, the SDF can help visualize forms such as the tesseract (the 4D hypercube) by fixing and scrolling through one of the four axes.`;
+const pTranslate  = String.raw`All primitives described above are centered at the origin. To perform a transformation such as scaling, rotation, or translation, it is possible to apply the <em>inverse</em> transformation at the query point $\mathbf{p}$ — transforming space rather than the shape directly.`;
+const pTransCode5 = String.raw`In Code 5, by subtracting the vector $(0, 3, 0)$, the sphere is effectively positioned at $(0, 3, 0)$.`;
+const liUnion     = String.raw`Taking the <strong>minimum</strong> between $\mathbf{d_1}$ and $\mathbf{d_2}$ renders only the closest surface from both objects — the union.`;
+const liInter     = String.raw`Taking the <strong>maximum</strong> means nothing outside the intersection of both objects is visible, since the ray march only considers a hit if both SDF results are below the hit threshold.`;
+const liSubtr     = String.raw`Taking the maximum between $\mathbf{-d_1}$ and $\mathbf{d_2}$ intersects with the inverse of object 1, resulting in the subtraction of object 1 from object 2.`;
+const pSmoothK    = String.raw`Because it is fast and does not overestimate distances, the <strong>quadratic polynomial</strong> is less prone to visual artifacts and is the most widely used version for Ray Marching. Similarly to the regular <code>min</code> function, <code>smin</code> (Smooth Minimum) takes inputs $\mathbf{a}$, $\mathbf{b}$, and the threshold $k$ — blending starts where the distance between $\mathbf{a}$ and $\mathbf{b}$ is smaller than $k$.`;
+const pSmoothH    = String.raw`All polynomial methods start by finding the $h()$ function, which ramps from 0 to 1 as $|\mathbf{a} - \mathbf{b}|$ goes from $k$ down to 0:`;
+const pSmoothC    = String.raw`Next, a correction term $c$ is applied such that $\min(\mathbf{a},\mathbf{b}) - c$ produces the smoothed curve. For the quadratic version ($n = 2$):`;
+const pSmoothEnd  = String.raw`Squaring $h$ makes $c$ ease into its peak rather than following a straight ramp. Multiplying by $k$ compensates for variation as $k$ increases. For smooth maximum, $\max(\mathbf{a},\mathbf{b}) + c$ suffices.`;
+const pRepeat     = String.raw`This can also be used in 3D. Given that $\mathbf{p}$ represents the query point, the repeated domain can be expressed as <span set:html=${JSON.stringify(mathRepDomain)}></span>, where <em>gap</em> is the size of the repeated domain box.`;
+const pDomGrad    = String.raw`A key property of SDFs is that their gradient has length $1$ everywhere in space. When two SDFs are added, this property is violated — the gradient no longer has unit length, effectively "bending" space. This can cause the raymarcher to underestimate or overestimate the true distance to a surface. This issue can be attenuated by reducing the step size, though at a performance cost. In practice, small deviations rarely produce noticeable artifacts, making displacement through function addition still useful for subtle surface detail.`;
+const liRect1 = String.raw`If only $\mathbf{d}.x < 0$, $\mathbf{p}$ is above the rectangle — the shortest distance is straight down.`;
+const liRect2 = String.raw`If only $\mathbf{d}.y < 0$, $\mathbf{p}$ is next to the rectangle — the shortest distance is straight left.`;
+const liRect3 = String.raw`If both $\mathbf{d}.x < 0$ and $\mathbf{d}.y < 0$, the point is inside — the shortest distance is the closest of the two sides.`;
+const liRect4 = String.raw`If neither component is negative, the point lies diagonally outside — the distance to the corner is the shortest.`;
+const pGenForm = String.raw`The general form of an SDF function includes:`;
+const liP      = String.raw`$\mathbf{p}$, the <strong>query point</strong>, for which the distance from the shape positioned at the origin is computed.`;
+const liParams = String.raw`Shape-specific parameters, such as the <strong>radius</strong> for circles and spheres, or additional properties like <strong>width, height, or orientation</strong> for more complex geometries.`;
+const pCircle2D = String.raw`For a circle centered at the origin in $\mathbb{R}^2$ with radius $r$, the SDF is:`;
+const pSphere3D = String.raw`A sphere in three-dimensional space follows the same principle. If the sphere is centered at the origin with radius $r$:`;
+---
+
+<Article
+  title="Signed Distance Functions Techniques"
+  description="Basic shapes, transformations, boolean operations, domain repetition, and displacement."
+  prev={prev}
+  next={next}
+  chapterIndex={3}
+>
+
+<h1>Signed Distance Functions Techniques</h1>
+<p class="lead">
+  A Signed Distance Function provides a way to describe geometric forms in a
+  continuous manner by associating each point in space with its signed distance
+  to a surface.
+</p>
+
+<p>
+  The function returns a positive value when the point is outside the shape and
+  a negative value when inside. This framework is highly flexible, allowing the
+  representation of shapes in 2D, 3D, and even N-dimensional spaces, since the
+  Euclidean distance is not restricted to a particular number of dimensions.
+</p>
+
+<p>
+  A defining feature of Ray Marching is its use of signed distance functions to
+  describe geometry, rather than traditional vertices, edges, and faces. This
+  approach is precisely what makes Ray Marching a powerful technique, capable of
+  rendering smooth surfaces, shapes distorted by procedural noise, repetitive
+  patterns, and dynamic shapes that evolve over time.
+</p>
+
+<h2>Basic Shapes</h2>
+
+<p set:html={pGenForm} />
+<ul>
+  <li set:html={liP} />
+  <li set:html={liParams} />
+</ul>
+
+<h3>Circles and Spheres</h3>
+
+<p set:html={pCircle2D} />
+<p set:html={mathCircleSDF} />
+
+<p set:html={pSphere3D} />
+<p set:html={mathSphereSDF} />
+
+<p set:html={pCircleDim} />
+
+<Code code={codeCircleSphere} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 2: Circle and Sphere SDFs</p>
+
+<p>
+  Since an SDF returns a positive distance when a point is outside the primitive
+  and a negative distance when inside, this information can be used to assign
+  different colors to a 2D shape rendered on the canvas.
+</p>
+
+<Code code={codeColoringCircle} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 3: Rendering Circles</p>
+
+<div class="fig-grid fig-grid-2">
+  <figure>
+    <img src="/images/circle-plainColor.png" alt="Plain Colored Circle" />
+    <figcaption>Figure 7 — Plain Colored Circle.</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/circle-customColor.png" alt="Custom Colored Circle" />
+    <figcaption>Figure 8 — Custom Colored Circle with isolines.</figcaption>
+  </figure>
+</div>
+
+<p>
+  In Figure 7, the color outside the circle is rendered in a darker shade than
+  inside. For the following shapes, a custom coloring function adds isolines and
+  highlights the border, as shown in Figure 8. This technique allows the
+  visualization of 2D SDFs in the distance space.
+</p>
+
+<p>
+  3D SDFs define the shapes of objects within a scene in the Ray Marching
+  pipeline. The following examples illustrate 3D SDFs rendered with Lambertian
+  diffuse shading and Phong specular reflection. Since lighting models are
+  outside the scope of this work, readers may refer to
+  <cite>[Akenine-Möller, 2018]</cite> for further details.
+</p>
+
+<figure>
+  <img src="/images/sdf-sphere.png" alt="Raymarched Sphere SDF" style="max-width:60%" />
+  <figcaption>Figure 9 — Raymarched Sphere SDF Visualization.</figcaption>
+</figure>
+
+<h3>Rectangles and Boxes</h3>
+
+<figure>
+  <img src="/images/rectangle-customColor.png" alt="Rectangle SDF Visualization" style="max-width:60%" />
+  <figcaption>Figure 10 — Rectangle SDF Visualization.</figcaption>
+</figure>
+
+<p>
+  Similar to the 2D circle, the SDF of a 2D box (rectangle) can be generalized
+  to higher dimensions.
+</p>
+
+<Code code={codeRectangleBox} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 4: Rectangle and Box SDF</p>
+
+<p set:html={pRectSymm} />
+
+<ul>
+  <li set:html={liRect1} />
+  <li set:html={liRect2} />
+  <li set:html={liRect3} />
+  <li set:html={liRect4} />
+</ul>
+
+<figure>
+  <img src="/images/square_sdf.png" alt="Rectangle SDF calculation" class="bordered" style="max-width:420px" />
+  <figcaption>Figure 11 — Graphic of Rectangle SDF calculation.</figcaption>
+</figure>
+
+<p set:html={pRectInner} />
+
+<figure>
+  <img src="/images/sdf-cube.png" alt="3D Cube SDF" style="max-width:60%" />
+  <figcaption>Figure 12 — 3D Cube SDF Visualization.</figcaption>
+</figure>
+
+<p set:html={pRectFour} />
+
+<h2>Basic Transformations</h2>
+
+<p set:html={pTranslate} />
+
+<p set:html={pTransCode5} />
+
+<Code code={codeTranslateSphere} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 5: Translating a Sphere</p>
+
+<p>
+  Affine transformations can also be composed using matrices. GLSL provides
+  built-in support for creating and inverting matrices. Code 6 shows how
+  different affine transformations can be composed.
+</p>
+
+<Code code={codeAffineTransform} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 6: Affine Transformations on a Sphere</p>
+
+<div class="fig-grid fig-grid-2">
+  <figure>
+    <img src="/images/transformations/1-transformations-identity.png" alt="Original Sphere" />
+    <figcaption>Original Sphere</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/transformations/2-transformations-scale.png" alt="Scale 2X along Y" />
+    <figcaption>Scale 2× along Y</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/transformations/3-transformations-rotation.png" alt="Rotation in XY" />
+    <figcaption>Rotation in XY</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/transformations/4-transformations-translation.png" alt="Translation" />
+    <figcaption>Translate to (−2, −1, −1)</figcaption>
+  </figure>
+</div>
+<p class="fig-label">Figure 13 — Composing Different Affine Transformations on a Sphere.</p>
+
+<h2>Operations</h2>
+
+<p>
+  While being able to display a variety of primitives is useful, building more
+  complex forms is where Ray Tracing and Ray Marching part ways. While Ray
+  Tracing depends on high polygon-count models, Ray Marching finds more success
+  with combinations of primitives and operations as building blocks.
+</p>
+
+<h3>Union, Intersection and Subtraction</h3>
+
+<p>
+  The most basic SDF operations are the boolean combinations: Union,
+  Intersection, and Subtraction. These are some of the most elegant features of
+  SDFs, taking as input the resulting distances of two primitive SDFs.
+</p>
+
+<Code code={codeUnionEtc} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 7: SDF Union, Intersection, and Subtraction</p>
+
+<p>From the perspective of a 3D raymarched view:</p>
+<ul>
+  <li set:html={liUnion} />
+  <li set:html={liInter} />
+  <li set:html={liSubtr} />
+</ul>
+
+<p>Figure 14 illustrates these constructive solid geometry operations between a cube and a sphere.</p>
+
+<div class="fig-grid fig-grid-3">
+  <figure>
+    <img src="/images/sdf-operations/cube.png" alt="Cube" />
+    <figcaption>Cube</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/sdf-operations/sphere.png" alt="Sphere" />
+    <figcaption>Sphere</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/sdf-operations/union.png" alt="Union" />
+    <figcaption>Union</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/sdf-operations/intersection.png" alt="Intersection" />
+    <figcaption>Intersection</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/sdf-operations/subtraction1.png" alt="Subtraction 1" />
+    <figcaption>Subtraction 1</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/sdf-operations/subtraction2.png" alt="Subtraction 2" />
+    <figcaption>Subtraction 2</figcaption>
+  </figure>
+</div>
+<p class="fig-label">Figure 14 — Raymarched Constructive Solid Geometry Operations with Cube and Sphere SDFs.</p>
+
+<h3>Smooth Union, Intersection and Subtraction</h3>
+
+<p>
+  A more visually appealing way to display boolean operations is through
+  <em>smooth minimum and maximum</em>. Instead of hard edge transitions, it
+  offers a smooth blend. This blending can be achieved through multiple types
+  of functions — quadratic, cubic, exponential, sigmoid — each having its pros
+  and cons <cite>[Quilez, 2013]</cite>.
+</p>
+
+<div class="fig-grid fig-grid-2">
+  <figure>
+    <img src="/images/smoothUnion.png" alt="Smooth Union" />
+    <figcaption>Figure 15 — Smooth Union.</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/smoothIntersection.png" alt="Smooth Intersection" />
+    <figcaption>Figure 16 — Smooth Intersection.</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/smoothSubtraction.png" alt="Smooth Subtraction" />
+    <figcaption>Figure 17 — Smooth Subtraction.</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/desmos_smin.png" alt="Smooth Minimum Representation" />
+    <figcaption>Figure 18 — Smooth Minimum Representation.</figcaption>
+  </figure>
+</div>
+
+<p set:html={pSmoothK} />
+
+<p set:html={pSmoothH} />
+<p set:html={mathH} />
+
+<p set:html={pSmoothC} />
+<p set:html={mathC} />
+
+<p set:html={pSmoothEnd} />
+
+<div class="fig-grid fig-grid-3">
+  <figure>
+    <img src="/images/smooth-sdf-operations/add-unsmooth.png" alt="Addition" />
+    <figcaption>Addition</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/smooth-sdf-operations/subtraction-unsmooth.png" alt="Subtraction" />
+    <figcaption>Subtraction</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/smooth-sdf-operations/intersection-unsmooth.png" alt="Intersection" />
+    <figcaption>Intersection</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/smooth-sdf-operations/add-smooth.png" alt="Smooth Addition" />
+    <figcaption>Smooth Addition</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/smooth-sdf-operations/subtraction-smooth.png" alt="Smooth Subtraction" />
+    <figcaption>Smooth Subtraction</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/smooth-sdf-operations/intersection-smooth.png" alt="Smooth Intersection" />
+    <figcaption>Smooth Intersection</figcaption>
+  </figure>
+</div>
+<p class="fig-label">Figure 19 — Raymarched Smooth Operations with Cube and Sphere SDFs.</p>
+
+<h3>Domain Repetition</h3>
+
+<p>
+  Since SDFs are expressed as mathematical functions, they can be transformed to
+  repeat periodically across space. This technique, known as
+  <strong>Domain Repetition</strong>, allows for the creation of infinite,
+  repeating patterns while also optimizing performance by avoiding the need for
+  multiple individual primitives.
+</p>
+
+<p>
+  Trigonometric functions such as sin and cos create natural repetitive patterns,
+  however bending the domain with these functions compromises the accurate
+  Euclidean distances the SDF relies on, potentially generating undesired
+  features. Functions such as <code>round(x)</code> or <code>mod(x)</code> are
+  more commonly used instead.
+</p>
+
+<div class="fig-grid fig-grid-2">
+  <figure>
+    <img src="/images/domainRepetition-circle.png" alt="Single circle" />
+    <figcaption><code>circleDistance(uv, 0.1)</code></figcaption>
+  </figure>
+  <figure>
+    <img src="/images/domainRepetition-sine.png" alt="Sine domain" />
+    <figcaption><code>circleDistance(sin(uv*5.)*0.2, 0.1)</code></figcaption>
+  </figure>
+  <figure>
+    <img src="/images/domainRepetition-round.png" alt="Round domain" />
+    <figcaption><code>circleDistance(uv - round(uv), 0.1)</code></figcaption>
+  </figure>
+  <figure>
+    <img src="/images/domainRepetition-mod.png" alt="Mod domain" />
+    <figcaption><code>circleDistance(mod(uv, 1.) - 0.5, 0.1)</code></figcaption>
+  </figure>
+</div>
+<p class="fig-label">Figure 20 — Examples of Domain Repetition techniques.</p>
+
+<p set:html={pRepeat} />
+
+<figure>
+  <img src="/images/domain-repetition.png" alt="3D domain repetition" style="max-width:60%" />
+  <figcaption>Figure 21 — <code>sphereDistance(p - 6.5*round(p/6.5), 1.0)</code> — infinite spheres from a single SDF.</figcaption>
+</figure>
+
+<h3>Displacement</h3>
+
+<p>
+  Displacement adjusts the geometry to simulate bumps or irregularities, adding
+  fine detail to the surface. This is done by perturbing the distance field using
+  patterns that look random, such as procedural noise or noise textures.
+</p>
+
+<Code code={codeDisplacement} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 8: SDF Displacement</p>
+
+<p>
+  Although noisy functions are commonly used for displacement, any function can
+  be applied to distort the distance field — enabling non-Euclidean effects such
+  as bending or twisting space. However, this comes with a caveat: the sum of an
+  SDF and an arbitrary function is not necessarily a valid SDF.
+</p>
+
+<p set:html={pDomGrad} />
+
+<Code code={codeWaveDistortion} lang="glsl" theme="one-dark-pro" />
+<p class="fig-label">Code 9: Wave Distortion on Sphere</p>
+
+<figure>
+  <img src="/images/sdf-distortion/sin-cos-distortion.png" alt="Wave distortion on sphere" style="max-width:60%" />
+  <figcaption>Figure 22 — Distortion on Sphere from Code 9: the Sphere Distance is distorted according to trigonometric functions applied on its polar and azimuthal angles.</figcaption>
+</figure>
+
+</Article>
+
+<style>
+  .fig-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+</style>
