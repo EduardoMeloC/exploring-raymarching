@@ -139,38 +139,162 @@ const sourcesJson = JSON.stringify({
     });
   });
 
-  /* ── Lazy-load CodeMirror 5 from CDN ── */
-  function loadCSS(href) {
-    if (document.querySelector(`link[href="${href}"]`)) return;
-    const el = document.createElement("link");
-    el.rel = "stylesheet";
-    el.href = href;
-    document.head.appendChild(el);
-  }
-
+  /* ── Lazy-load CodeMirror 5 core from CDN ── */
   function loadScript(src) {
     return new Promise((resolve, reject) => {
       if (document.querySelector(`script[src="${src}"]`)) {
-        /* Already in DOM — wait for it to be ready */
+        /* Script tag already in DOM — poll until CodeMirror global appears */
         const check = setInterval(() => {
           if (typeof CodeMirror !== "undefined") { clearInterval(check); resolve(); }
         }, 20);
         return;
       }
       const el = document.createElement("script");
-      el.src = src;
-      el.onload  = resolve;
-      el.onerror = reject;
+      el.src = src; el.onload = resolve; el.onerror = reject;
       document.head.appendChild(el);
     });
   }
 
+  /* ── Inline GLSL mode — no dependency on clike.min.js ── */
+  function defineGLSLMode() {
+    if (typeof CodeMirror === "undefined") return;
+    /* Guard: defineMode is idempotent but skip the work if already done */
+    if (CodeMirror._glslDefined) return;
+    CodeMirror._glslDefined = true;
+
+    function makeSet(words) {
+      var o = {};
+      words.split(" ").forEach(function(w) { if (w) o[w] = true; });
+      return o;
+    }
+    var KW = makeSet(
+      "void float int uint bool true false in out inout uniform attribute varying " +
+      "const if else for while do return break continue discard struct " +
+      "precision highp mediump lowp layout location invariant flat smooth centroid"
+    );
+    var TY = makeSet(
+      "vec2 vec3 vec4 ivec2 ivec3 ivec4 bvec2 bvec3 bvec4 uvec2 uvec3 uvec4 " +
+      "mat2 mat3 mat4 mat2x2 mat2x3 mat2x4 mat3x2 mat3x3 mat3x4 mat4x2 mat4x3 mat4x4 " +
+      "sampler2D sampler3D samplerCube sampler2DShadow sampler2DArray sampler2DArrayShadow " +
+      "isampler2D isampler3D isamplerCube usampler2D usampler3D usamplerCube"
+    );
+    var BI = makeSet(
+      "radians degrees sin cos tan asin acos atan sinh cosh tanh asinh acosh atanh " +
+      "pow exp log exp2 log2 sqrt inversesqrt " +
+      "abs sign floor trunc round roundEven ceil fract mod modf " +
+      "min max clamp mix step smoothstep isnan isinf " +
+      "floatBitsToInt floatBitsToUint intBitsToFloat uintBitsToFloat " +
+      "packSnorm2x16 unpackSnorm2x16 packUnorm2x16 unpackUnorm2x16 " +
+      "length distance dot cross normalize faceforward reflect refract " +
+      "matrixCompMult outerProduct transpose determinant inverse " +
+      "lessThan lessThanEqual greaterThan greaterThanEqual equal notEqual any all not " +
+      "texture texture2D texture2DProj textureCube texture2DLod textureCubeLod " +
+      "dFdx dFdy fwidth emit " +
+      "gl_Position gl_PointSize gl_FragCoord gl_FrontFacing gl_FragDepth gl_PointCoord " +
+      "iResolution iTime iTimeDelta iFrameRate iFrame iMouse iDate iSampleRate"
+    );
+
+    CodeMirror.defineMode("glsl", function() {
+      return {
+        startState: function() { return { inBlock: false }; },
+        token: function(stream, state) {
+          /* Inside block comment */
+          if (state.inBlock) {
+            if (stream.match(/.*?\*\//)) state.inBlock = false;
+            else stream.skipToEnd();
+            return "comment";
+          }
+          /* Whitespace */
+          if (stream.eatSpace()) return null;
+          /* Block comment open */
+          if (stream.match("/*")) {
+            state.inBlock = true;
+            if (stream.match(/.*?\*\//)) state.inBlock = false;
+            else stream.skipToEnd();
+            return "comment";
+          }
+          /* Line comment */
+          if (stream.match("//")) { stream.skipToEnd(); return "comment"; }
+          /* Preprocessor directive (must be at column 0) */
+          if (stream.sol() && stream.peek() === "#") { stream.skipToEnd(); return "meta"; }
+          /* Numbers */
+          if (stream.match(/0x[\da-fA-F]+[uU]?/) ||
+              stream.match(/(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?[fFuU]?/)) return "number";
+          /* Identifiers → keywords / types / builtins */
+          if (stream.match(/[a-zA-Z_]\w*/)) {
+            var w = stream.current();
+            if (KW[w]) return "keyword";
+            if (TY[w]) return "type";
+            if (BI[w]) return "builtin";
+            return "variable";
+          }
+          /* Anything else: operators, punctuation */
+          stream.next();
+          return null;
+        }
+      };
+    });
+  }
+
+  function injectCMStyles() {
+    if (document.getElementById("sd-cm-theme")) return;
+    const s = document.createElement("style");
+    s.id = "sd-cm-theme";
+    s.textContent = `
+      .sd-cm-mount .CodeMirror {
+        height: 100%;
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        font-size: 0.875rem;
+        line-height: 1.65;
+        background: #282c34;
+        color: #abb2bf;
+      }
+      .sd-cm-mount .CodeMirror-scroll      { height: 100%; }
+      .sd-cm-mount .CodeMirror-gutters     { background: #21252b; border-right: 1px solid #333842; }
+      .sd-cm-mount .CodeMirror-linenumber  { color: #4b5263; padding: 0 8px; }
+      .sd-cm-mount .CodeMirror-cursor      { border-left: 2px solid #528bff; }
+      .sd-cm-mount .CodeMirror-selected,
+      .sd-cm-mount .CodeMirror-focused .CodeMirror-selected { background: rgba(82,139,255,0.22); }
+      .sd-cm-mount .CodeMirror-line::selection,
+      .sd-cm-mount .CodeMirror-line > span::selection        { background: rgba(82,139,255,0.22); }
+      /* GLSL / clike token colours — One Dark palette */
+      .sd-cm-mount .cm-keyword  { color: #c678dd; }
+      .sd-cm-mount .cm-atom     { color: #d19a66; }
+      .sd-cm-mount .cm-number   { color: #d19a66; }
+      .sd-cm-mount .cm-string   { color: #98c379; }
+      .sd-cm-mount .cm-string-2 { color: #98c379; }
+      .sd-cm-mount .cm-comment  { color: #5c6370; font-style: italic; }
+      .sd-cm-mount .cm-def      { color: #e06c75; }
+      .sd-cm-mount .cm-variable { color: #e5c07b; }
+      .sd-cm-mount .cm-variable-2 { color: #abb2bf; }
+      .sd-cm-mount .cm-type     { color: #56b6c2; }
+      .sd-cm-mount .cm-builtin  { color: #61afef; }
+      .sd-cm-mount .cm-operator { color: #56b6c2; }
+      .sd-cm-mount .cm-punctuation { color: #abb2bf; }
+      .sd-cm-mount .cm-meta     { color: #e06c75; }
+      .sd-cm-mount .cm-error    { color: #f44; }
+    `;
+    document.head.appendChild(s);
+  }
+
   async function ensureCM() {
-    if (cmReady || typeof CodeMirror !== "undefined") { cmReady = true; return; }
+    if (cmReady) return;
     const base = "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16";
-    loadCSS(`${base}/codemirror.min.css`);
-    await loadScript(`${base}/codemirror.min.js`);
-    await loadScript(`${base}/mode/clike/clike.min.js`);
+    /* Base layout CSS (scrollbar chrome, gutter, cursor geometry) */
+    if (!document.querySelector(`link[href*="codemirror.min.css"]`)) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `${base}/codemirror.min.css`;
+      document.head.appendChild(link);
+    }
+    /* Core JS — only load once */
+    if (typeof CodeMirror === "undefined") {
+      await loadScript(`${base}/codemirror.min.js`);
+    }
+    /* Define our own GLSL mode — no clike.min.js dependency */
+    defineGLSLMode();
+    /* One Dark theme injected as a plain <style> — bypasses Astro scoping */
+    injectCMStyles();
     cmReady = true;
   }
 
@@ -184,7 +308,7 @@ const sourcesJson = JSON.stringify({
       const mount = pane.querySelector(".sd-cm-mount");
       const cm = CodeMirror(mount, {
         value: sources[tabId] ?? "",
-        mode: "text/x-glsl",
+        mode: "glsl",
         lineNumbers: true,
         tabSize: 4,
         indentWithTabs: false,
@@ -518,36 +642,12 @@ out vec4 fragColor;
     min-height: 100%;
   }
 
-  /* CodeMirror container */
+  /* CodeMirror mount — sizing only.
+     All theme/token colours are injected by injectCMStyles() in JS,
+     which uses plain (non-scoped) selectors that reliably target CM's dynamic DOM. */
   .sd-cm-mount {
     height: 100%;
   }
-
-  /* CodeMirror instance — use :global since CM generates its own DOM */
-  .sd-cm-mount :global(.CodeMirror) {
-    height: 100%;
-    font-family: var(--font-mono, "JetBrains Mono", monospace);
-    font-size: 0.875rem;
-    line-height: 1.65;
-    /* One Dark palette to match Shiki theme */
-    background: #282c34;
-    color: #abb2bf;
-  }
-  .sd-cm-mount :global(.CodeMirror-scroll) { height: 100%; }
-  .sd-cm-mount :global(.CodeMirror-gutters)    { background: #21252b; border-right: 1px solid #333842; }
-  .sd-cm-mount :global(.CodeMirror-linenumber) { color: #495162; }
-  .sd-cm-mount :global(.CodeMirror-cursor)     { border-left-color: #528bff; }
-  .sd-cm-mount :global(.CodeMirror-selected)   { background: rgba(82,139,255,0.2); }
-  /* GLSL / clike token colours (One Dark palette) */
-  .sd-cm-mount :global(.cm-keyword)  { color: #c678dd; }
-  .sd-cm-mount :global(.cm-number)   { color: #d19a66; }
-  .sd-cm-mount :global(.cm-string)   { color: #98c379; }
-  .sd-cm-mount :global(.cm-comment)  { color: #5c6370; font-style: italic; }
-  .sd-cm-mount :global(.cm-def)      { color: #e06c75; }
-  .sd-cm-mount :global(.cm-variable) { color: #e5c07b; }
-  .sd-cm-mount :global(.cm-type)     { color: #56b6c2; }
-  .sd-cm-mount :global(.cm-builtin)  { color: #61afef; }
-  .sd-cm-mount :global(.cm-operator) { color: #56b6c2; }
 
   /* ── Right panel ── */
   .sd-right {
