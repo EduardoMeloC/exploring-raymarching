@@ -1,9 +1,9 @@
 ---
-import Article from '../layouts/Article.astro';
-import { Code } from 'astro:components';
-import { getAdjacentChapters } from '../data/chapters';
+import Article from "../layouts/Article.astro";
+import { Code } from "astro:components";
+import { getAdjacentChapters } from "../data/chapters";
 
-const { prev, next } = getAdjacentChapters('04-clouds');
+const { prev, next } = getAdjacentChapters("04-clouds");
 
 const codeGetDensity = `float GetDensity(vec3 p){
     vec3 cloudCenter = vec3(0., 0., 0.);
@@ -27,56 +27,61 @@ accumulatedDiffuseColor += mix(vec3(0.), li, diffuse);`;
   next={next}
   chapterIndex={4}
 >
+  <h1>Clouds</h1>
+  <p class="lead">
+    One of the main applications of Ray Marching is in the rendering of
+    realistic smoke and clouds — volumetric objects that are inherently
+    continuous and difficult to model with traditional geometry.
+  </p>
 
-<h1>Clouds</h1>
-<p class="lead">
-  One of the main applications of Ray Marching is in the rendering of realistic
-  smoke and clouds — volumetric objects that are inherently continuous and
-  difficult to model with traditional geometry.
-</p>
+  <p>
+    Clouds are mostly made of two main high-albedo types of particles (not
+    considering dirt or other minimal particles): air and water/ice. Since
+    clouds are not solid, when light hits them some rays bounce while some pass
+    through the object. Furthermore, water particles are <strong
+      >anisotropic</strong
+    >, meaning that light tends to bounce differently depending on the direction
+    from which it hits the cloud. All of this requires significant adaptation
+    from the original Ray Marching approach.
+  </p>
 
-<p>
-  Clouds are mostly made of two main high-albedo types of particles (not
-  considering dirt or other minimal particles): air and water/ice
-  <cite>[ref]</cite>. Since clouds are not solid, when light hits them some
-  rays bounce while some pass through the object. Furthermore, water particles
-  are <strong>anisotropic</strong> <cite>[ref]</cite>, meaning that light tends
-  to bounce differently depending on the direction from which it hits the cloud.
-  All of this requires significant adaptation from the original Ray Marching
-  approach.
-</p>
+  <h2>Volumetric Rendering</h2>
 
-<h2>Volumetric Rendering</h2>
+  <p>
+    To render gaseous materials, instead of avoiding surfaces, Ray Marching must
+    traverse into them. The SDF now represents <strong>density</strong> instead of
+    "distance to surface". The function is renamed <code>GetDensity(p)</code> and
+    follows these rules:
+  </p>
 
-<p>
-  To render gaseous materials, instead of avoiding surfaces, Ray Marching must
-  traverse into them. The SDF now represents <strong>density</strong> instead of
-  "distance to surface". The function is renamed <code>GetDensity(p)</code> and
-  follows these rules:
-</p>
+  <ul>
+    <li
+      set:html={String.raw`If $\mathbf{p}$ is <strong>outside</strong> the primitive: yields a <strong>negative</strong> density (no density).`}
+    />
+    <li
+      set:html={String.raw`If $\mathbf{p}$ is <strong>inside</strong> the primitive: yields a <strong>positive</strong> density, and the further $\mathbf{p}$ is from the bounds, the higher the density.`}
+    />
+  </ul>
 
-<ul>
-  <li set:html={String.raw`If $\mathbf{p}$ is <strong>outside</strong> the primitive: yields a <strong>negative</strong> density (no density).`} />
-  <li set:html={String.raw`If $\mathbf{p}$ is <strong>inside</strong> the primitive: yields a <strong>positive</strong> density, and the further $\mathbf{p}$ is from the bounds, the higher the density.`} />
-</ul>
+  <p>
+    To consistently sample the density along the cloud, a <strong
+      >constant step size</strong
+    > is better suited. Instead of querying the scene's distance for the next step,
+    each iteration advances by a fixed amount. This comes at the expense of performance,
+    losing the sphere-tracing optimizations discussed in Chapter 2.
+  </p>
 
-<p>
-  To consistently sample the density along the cloud, a <strong>constant step
-  size</strong> is better suited. Instead of querying the scene's distance for
-  the next step, each iteration advances by a fixed amount. This comes at the
-  expense of performance, losing the sphere-tracing optimizations discussed in
-  Chapter 2.
-</p>
+  <p>
+    To mitigate the performance loss, an <strong>outer bound</strong> is applied to
+    clouds. With a separate SDF, the bound acts as a regular surface — when hit, Ray
+    Marching switches into the fixed-step mode.
+  </p>
 
-<p>
-  To mitigate the performance loss, an <strong>outer bound</strong> is applied to
-  clouds. With a separate SDF, the bound acts as a regular surface — when hit,
-  Ray Marching switches into the fixed-step mode.
-</p>
-
-<div class="algorithm">
-  <div class="algorithm-header">Algorithm 4 <span>MarchRay with Clouds</span></div>
-  <pre>{`PROCEDURE MarchRay(Ray, Scene)
+  <div class="algorithm">
+    <div class="algorithm-header">
+      Algorithm 4 <span>MarchRay with Clouds</span>
+    </div>
+    <pre>{`PROCEDURE MarchRay(Ray, Scene)
   MarchDistance ← 0
   marchPos ← Ray.origin
   Hit ← NULL_HIT
@@ -111,170 +116,232 @@ accumulatedDiffuseColor += mix(vec3(0.), li, diffuse);`;
   END FOR
   RETURN accColor
 END PROCEDURE`}</pre>
-</div>
+  </div>
 
-<p>
-  The key addition is <code>accColor</code>, a 4D RGBA vector. The RGB channels
-  store the accumulated color, and the alpha channel stores the accumulated
-  density. When <code>accColor.a = 1</code>, the ray path is fully occluded —
-  either by a hard surface or by the accumulation of cloud density.
-</p>
+  <p>
+    The key addition is <code>accColor</code>, a 4D RGBA vector. The RGB
+    channels store the accumulated color, and the alpha channel stores the
+    accumulated density. When <code>accColor.a = 1</code>, the ray path is fully
+    occluded — either by a hard surface or by the accumulation of cloud density.
+  </p>
 
-<p>
-  Thanks to the outer bounds, optimized Sphere Tracing is preserved for the
-  open scene. Only upon entering a cloud boundary does Fixed-Step Ray Marching
-  begin, stopping either when a hard surface is hit or when the vision is fully
-  clouded. An example of this cloudy sphere is shown in Figure 23 — it looks
-  foggy but still lacks the organic shapes of a real cloud.
-</p>
+  <p>
+    Thanks to the outer bounds, optimized Sphere Tracing is preserved for the
+    open scene. Only upon entering a cloud boundary does Fixed-Step Ray Marching
+    begin, stopping either when a hard surface is hit or when the vision is
+    fully clouded. An example of this cloudy sphere is shown in Figure 23 — it
+    looks foggy but still lacks the organic shapes of a real cloud.
+  </p>
 
-<Code code={codeGetDensity} lang="glsl" theme="one-dark-pro" />
-<p class="fig-label">Code 10: Get density of spherical cloud</p>
+  <Code code={codeGetDensity} lang="glsl" theme="one-dark-pro" />
+  <p class="fig-label">Code 10: Get density of spherical cloud</p>
 
-<figure>
-  <img src={`${import.meta.env.BASE_URL}images/cloud-noise/no-noise-cloud.png`} alt="Raymarched Sphere with density" style="max-width:60%" />
-  <figcaption>Figure 23 — Raymarched Sphere with density accumulation — no noise yet.</figcaption>
-</figure>
-
-<h2>Shaping the Cloud with Noise</h2>
-
-<p>
-  The density accumulation process is sufficient to render a transparent object.
-  However, clouds are not a homogeneous sphere — their appearance is inherently
-  noisy. To achieve a cloud-like appearance, we must break the uniformity of the
-  sphere through randomness.
-</p>
-
-<p>
-  The core idea is to introduce variation into the <code>getDensity</code>
-  function. Directly adding a random value (<strong>white noise</strong>) is
-  insufficient — this only results in a featureless foggy sphere with a noisy
-  texture.
-</p>
-
-<p>
-  What is needed is a <strong>structured form of randomness</strong>, where
-  nearby points in space produce similar values. This is the principle behind
-  <strong>value noise</strong>: a grid of pseudo-random values is defined in
-  space, and smooth interpolation is applied between them. The result appears
-  random but exhibits greater continuity. A comparison of white noise and value
-  noise with their respective cloud renders is shown in Figure 24.
-</p>
-
-<div class="fig-grid fig-grid-2">
   <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/white-noise.png`} alt="White Noise" />
-    <figcaption>White Noise</figcaption>
+    <img
+      src={`${import.meta.env.BASE_URL}images/cloud-noise/no-noise-cloud.png`}
+      alt="Raymarched Sphere with density"
+      style="max-width:60%"
+    />
+    <figcaption>
+      Figure 23 — Raymarched Sphere with density accumulation — no noise yet.
+    </figcaption>
   </figure>
+
+  <h2>Shaping the Cloud with Noise</h2>
+
+  <p>
+    The density accumulation process is sufficient to render a transparent
+    object. However, clouds are not a homogeneous sphere — their appearance is
+    inherently noisy. To achieve a cloud-like appearance, we must break the
+    uniformity of the sphere through randomness.
+  </p>
+
+  <p>
+    The core idea is to introduce variation into the <code>getDensity</code>
+    function. Directly adding a random value (<strong>white noise</strong>) is
+    insufficient — this only results in a featureless foggy sphere with a noisy
+    texture.
+  </p>
+
+  <p>
+    What is needed is a <strong>structured form of randomness</strong>, where
+    nearby points in space produce similar values. This is the principle behind
+    <strong>value noise</strong>: a grid of pseudo-random values is defined in
+    space, and smooth interpolation is applied between them. The result appears
+    random but exhibits greater continuity. A comparison of white noise and
+    value noise with their respective cloud renders is shown in Figure 24.
+  </p>
+
+  <div class="fig-grid fig-grid-2">
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/white-noise.png`}
+        alt="White Noise"
+      />
+      <figcaption>White Noise</figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/white-noise-cloud.png`}
+        alt="White Noise Cloud"
+      />
+      <figcaption>White Noise Cloud</figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/value-noise.png`}
+        alt="Value Noise"
+      />
+      <figcaption>Value Noise</figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/value-noise-cloud.png`}
+        alt="Value Noise Cloud"
+      />
+      <figcaption>Value Noise Cloud</figcaption>
+    </figure>
+  </div>
+  <p class="fig-label">
+    Figure 24 — Comparison of White Noise and Value Noise for cloud generation.
+  </p>
+
+  <p>
+    While value noise introduces better variation, it still produces patterns
+    that lack the complexity of a real cloud. To overcome this limitation,
+    multiple layers of noise can be combined at different scales in a technique
+    known as
+    <strong>fractal Brownian motion (fBm)</strong>
+    <cite>[Musgrave et al.]</cite>. For each successive layer (or <em>octave</em
+    >), a higher frequency and lower amplitude are used. By applying fBm within
+    the <code>getDensity</code>
+    function, the cloud surface becomes more irregular and visually convincing.
+  </p>
+
+  <p>
+    Figure 25 shows the 2D construction of the fBm with each layer and the
+    corresponding cloud render, where the noise is evaluated in three dimensions
+    rather than two.
+  </p>
+
+  <div class="fig-grid fig-grid-2">
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/1-octave-fbm.png`}
+        alt="1-Octave FBM"
+      />
+      <figcaption><code>valueNoise(uv)</code></figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/1-octave-fbm-cloud.png`}
+        alt="1-Octave Cloud"
+      />
+      <figcaption>1 Octave Cloud</figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/2-octaves-fbm.png`}
+        alt="2-Octaves FBM"
+      />
+      <figcaption><code>vn(uv)+vn(uv*2.)*0.5</code></figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/2-octaves-fbm-cloud.png`}
+        alt="2-Octaves Cloud"
+      />
+      <figcaption>2 Octaves Cloud</figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/3-octaves-fbm.png`}
+        alt="3-Octaves FBM"
+      />
+      <figcaption><code>vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25</code></figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/3-octaves-fbm-cloud.png`}
+        alt="3-Octaves Cloud"
+      />
+      <figcaption>3 Octaves Cloud</figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/4-octaves-fbm.png`}
+        alt="4-Octaves FBM"
+      />
+      <figcaption><code>...vn(uv*4.)*0.25+vn(uv*8.)*0.125</code></figcaption>
+    </figure>
+    <figure>
+      <img
+        src={`${import.meta.env.BASE_URL}images/cloud-noise/4-octaves-fbm-cloud.png`}
+        alt="4-Octaves Cloud"
+      />
+      <figcaption>4 Octaves Cloud</figcaption>
+    </figure>
+  </div>
+  <p class="fig-label">
+    Figure 25 — fBm Noise and Corresponding Cloud Examples with Increasing
+    Octaves.
+  </p>
+
+  <h2>Volumetric Shading</h2>
+
+  <p>
+    In the current implementation, cloud rendering does not account for scene
+    illumination. To approximate the interaction between light and the
+    volumetric medium, an efficient technique is employed: at each sampling
+    position, the algorithm advances a short distance along the direction of the
+    incoming light and evaluates the density at this secondary location.
+  </p>
+
+  <ul>
+    <li>
+      When the density is <strong>higher</strong> at the second position, the medium
+      is locally thicker, resulting in increased light scattering.
+    </li>
+    <li>
+      When the density <strong>decreases</strong>, the cloud is less dense,
+      leading to reduced scattering.
+    </li>
+  </ul>
+
+  <Code code={codeLightCloud} lang="glsl" theme="one-dark-pro" />
+  <p class="fig-label">Code 11: Lighting the Cloud Volume</p>
+
+  <p>
+    Because this technique only compares two nearby points, it is
+    computationally inexpensive yet still captures the essential behavior of
+    light within the volume.
+  </p>
+
+  <div class="note">
+    <strong>Note:</strong> This technique does not constitute a physically accurate
+    simulation of light transport — in particular, it does not strictly follow Beer's
+    Law, which describes the exponential attenuation of light as it travels through
+    a medium. Nevertheless, this approximation is sufficient for producing visually
+    convincing results in scenes with few light sources.
+  </div>
+
+  <p>
+    A demonstration of this lighting approximation is shown in Figure 26: a
+    raymarched cloud lit from a white directional light and a pink point light.
+  </p>
+
   <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/white-noise-cloud.png`} alt="White Noise Cloud" />
-    <figcaption>White Noise Cloud</figcaption>
+    <img
+      src={`${import.meta.env.BASE_URL}images/cloud-noise/lit-cloud.png`}
+      alt="Lit Raymarched Cloud"
+      class="bordered"
+      style="max-width:600px"
+    />
+    <figcaption>
+      Figure 26 — Raymarched Cloud lit from a directional light and a point
+      light.
+    </figcaption>
   </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/value-noise.png`} alt="Value Noise" />
-    <figcaption>Value Noise</figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/value-noise-cloud.png`} alt="Value Noise Cloud" />
-    <figcaption>Value Noise Cloud</figcaption>
-  </figure>
-</div>
-<p class="fig-label">Figure 24 — Comparison of White Noise and Value Noise for cloud generation.</p>
-
-<p>
-  While value noise introduces better variation, it still produces patterns that
-  lack the complexity of a real cloud. To overcome this limitation, multiple
-  layers of noise can be combined at different scales in a technique known as
-  <strong>fractal Brownian motion (fBm)</strong> <cite>[Musgrave et al.]</cite>.
-  For each successive layer (or <em>octave</em>), a higher frequency and lower
-  amplitude are used. By applying fBm within the <code>getDensity</code>
-  function, the cloud surface becomes more irregular and visually convincing.
-</p>
-
-<p>
-  Figure 25 shows the 2D construction of the fBm with each layer and the
-  corresponding cloud render, where the noise is evaluated in three dimensions
-  rather than two.
-</p>
-
-<div class="fig-grid fig-grid-2">
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/1-octave-fbm.png`} alt="1-Octave FBM" />
-    <figcaption><code>valueNoise(uv)</code></figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/1-octave-fbm-cloud.png`} alt="1-Octave Cloud" />
-    <figcaption>1 Octave Cloud</figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/2-octaves-fbm.png`} alt="2-Octaves FBM" />
-    <figcaption><code>vn(uv)+vn(uv*2.)*0.5</code></figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/2-octaves-fbm-cloud.png`} alt="2-Octaves Cloud" />
-    <figcaption>2 Octaves Cloud</figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/3-octaves-fbm.png`} alt="3-Octaves FBM" />
-    <figcaption><code>vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25</code></figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/3-octaves-fbm-cloud.png`} alt="3-Octaves Cloud" />
-    <figcaption>3 Octaves Cloud</figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/4-octaves-fbm.png`} alt="4-Octaves FBM" />
-    <figcaption><code>...vn(uv*4.)*0.25+vn(uv*8.)*0.125</code></figcaption>
-  </figure>
-  <figure>
-    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/4-octaves-fbm-cloud.png`} alt="4-Octaves Cloud" />
-    <figcaption>4 Octaves Cloud</figcaption>
-  </figure>
-</div>
-<p class="fig-label">Figure 25 — fBm Noise and Corresponding Cloud Examples with Increasing Octaves.</p>
-
-<h2>Volumetric Shading</h2>
-
-<p>
-  In the current implementation, cloud rendering does not account for scene
-  illumination. To approximate the interaction between light and the volumetric
-  medium, an efficient technique is employed: at each sampling position, the
-  algorithm advances a short distance along the direction of the incoming light
-  and evaluates the density at this secondary location.
-</p>
-
-<ul>
-  <li>When the density is <strong>higher</strong> at the second position, the medium is locally thicker, resulting in increased light scattering.</li>
-  <li>When the density <strong>decreases</strong>, the cloud is less dense, leading to reduced scattering.</li>
-</ul>
-
-<Code code={codeLightCloud} lang="glsl" theme="one-dark-pro" />
-<p class="fig-label">Code 11: Lighting the Cloud Volume</p>
-
-<p>
-  Because this technique only compares two nearby points, it is computationally
-  inexpensive yet still captures the essential behavior of light within the
-  volume.
-</p>
-
-<div class="note">
-  <strong>Note:</strong> This technique does not constitute a physically accurate
-  simulation of light transport — in particular, it does not strictly follow
-  Beer's Law, which describes the exponential attenuation of light as it travels
-  through a medium. Nevertheless, this approximation is sufficient for producing
-  visually convincing results in scenes with few light sources.
-</div>
-
-<p>
-  A demonstration of this lighting approximation is shown in Figure 26: a
-  raymarched cloud lit from a white directional light and a pink point light.
-</p>
-
-<figure>
-  <img src={`${import.meta.env.BASE_URL}images/cloud-noise/lit-cloud.png`} alt="Lit Raymarched Cloud" class="bordered" style="max-width:600px" />
-  <figcaption>Figure 26 — Raymarched Cloud lit from a directional light and a point light.</figcaption>
-</figure>
-
 </Article>
 
 <style>

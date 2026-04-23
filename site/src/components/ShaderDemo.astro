@@ -1,0 +1,582 @@
+---
+import { Code } from "astro:components";
+
+interface Props {
+  image: string;
+  common?: string;
+  bufferA?: string;
+  bufferB?: string;
+  bufferC?: string;
+  bufferD?: string;
+  height?: number;
+}
+
+const { image, common, bufferA, bufferB, bufferC, bufferD, height = 400 } = Astro.props;
+
+const tabs = [
+  { id: "image",   label: "Image",    code: image    },
+  ...(common  ? [{ id: "common",  label: "Common",   code: common  }] : []),
+  ...(bufferA ? [{ id: "bufferA", label: "Buffer A", code: bufferA }] : []),
+  ...(bufferB ? [{ id: "bufferB", label: "Buffer B", code: bufferB }] : []),
+  ...(bufferC ? [{ id: "bufferC", label: "Buffer C", code: bufferC }] : []),
+  ...(bufferD ? [{ id: "bufferD", label: "Buffer D", code: bufferD }] : []),
+];
+
+const uid = `sd-${Math.random().toString(36).slice(2, 8)}`;
+const sourcesJson = JSON.stringify({
+  image:   image,
+  common:  common   ?? null,
+  bufferA: bufferA  ?? null,
+  bufferB: bufferB  ?? null,
+  bufferC: bufferC  ?? null,
+  bufferD: bufferD  ?? null,
+});
+---
+
+<div class="shader-demo" id={uid} style={`--sd-h:${height}px`}>
+  <!-- Left: code + toolbar -->
+  <div class="sd-left">
+    <div class="sd-toolbar">
+      <div class="sd-tabs" role="tablist">
+        {tabs.map((tab, i) => (
+          <button
+            class={`sd-tab${i === 0 ? " is-active" : ""}`}
+            role="tab"
+            data-target={`${uid}-${tab.id}`}
+            aria-selected={i === 0 ? "true" : "false"}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div class="sd-actions">
+        <button class="sd-btn sd-edit-btn">Edit</button>
+        <button class="sd-btn sd-run-btn" disabled>&#9654;&nbsp;Run</button>
+      </div>
+    </div>
+
+    <div class="sd-code-wrap">
+      {tabs.map((tab, i) => (
+        <div
+          class="sd-pane"
+          id={`${uid}-${tab.id}`}
+          data-tab-id={tab.id}
+          role="tabpanel"
+          style={i > 0 ? "display:none" : "display:flex; flex-direction:column; height:100%"}
+        >
+          <!-- View: Shiki highlighted (always rendered, toggled via JS) -->
+          <div class="sd-view" style="flex:1; overflow:auto">
+            <Code code={tab.code} lang="glsl" theme="one-dark-pro" />
+          </div>
+          <!-- Edit: CodeMirror will be mounted here (hidden until Edit clicked) -->
+          <div class="sd-cm-mount" style="display:none; flex:1; overflow:hidden"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Right: WebGL canvas -->
+  <div class="sd-right">
+    <canvas class="sd-canvas"></canvas>
+    <div class="sd-error-box" style="display:none"></div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ uid, sourcesJson }}>
+(function () {
+  const container = document.getElementById(uid);
+  if (!container) return;
+
+  /* ── Sources (mutated on edit) ── */
+  const sources = JSON.parse(sourcesJson);
+
+  /* ── DOM refs ── */
+  const editBtn  = container.querySelector(".sd-edit-btn");
+  const runBtn   = container.querySelector(".sd-run-btn");
+  const errorBox = container.querySelector(".sd-error-box");
+  const canvas   = container.querySelector(".sd-canvas");
+
+  /* ── CodeMirror state ── */
+  const cmInstances = {};
+  let cmReady   = false;
+  let editMode  = false;
+
+  /* ── WebGL globals — declared first so recompile() can reference them ── */
+  let prog     = null;
+  let uniforms = {};
+
+  /* ── Render loop state — declared first ── */
+  let rafId    = null;
+  let startTs  = null;
+  let lastTs   = null;
+  let frameIdx = 0;
+  let running  = false;
+
+  /* ── Tab switching ── */
+  let activeTabId = tabs()[0];
+  function tabs() {
+    return [...container.querySelectorAll(".sd-pane")].map((p) => p.dataset.tabId);
+  }
+
+  container.querySelectorAll(".sd-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      container.querySelectorAll(".sd-tab").forEach((b) => {
+        b.classList.toggle("is-active", b === btn);
+        b.setAttribute("aria-selected", b === btn ? "true" : "false");
+      });
+      container.querySelectorAll(".sd-pane").forEach((p) => {
+        const show = p.id === btn.dataset.target;
+        p.style.display = show
+          ? "flex"
+          : "none";
+        if (show) p.style.flexDirection = "column";
+        if (show) p.style.height = "100%";
+      });
+      activeTabId = btn.dataset.target.replace(uid + "-", "");
+      if (editMode && cmInstances[activeTabId]) {
+        setTimeout(() => cmInstances[activeTabId].refresh(), 0);
+      }
+    });
+  });
+
+  /* ── Lazy-load CodeMirror 5 from CDN ── */
+  function loadCSS(href) {
+    if (document.querySelector(`link[href="${href}"]`)) return;
+    const el = document.createElement("link");
+    el.rel = "stylesheet";
+    el.href = href;
+    document.head.appendChild(el);
+  }
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${src}"]`)) {
+        /* Already in DOM — wait for it to be ready */
+        const check = setInterval(() => {
+          if (typeof CodeMirror !== "undefined") { clearInterval(check); resolve(); }
+        }, 20);
+        return;
+      }
+      const el = document.createElement("script");
+      el.src = src;
+      el.onload  = resolve;
+      el.onerror = reject;
+      document.head.appendChild(el);
+    });
+  }
+
+  async function ensureCM() {
+    if (cmReady || typeof CodeMirror !== "undefined") { cmReady = true; return; }
+    const base = "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16";
+    loadCSS(`${base}/codemirror.min.css`);
+    await loadScript(`${base}/codemirror.min.js`);
+    await loadScript(`${base}/mode/clike/clike.min.js`);
+    cmReady = true;
+  }
+
+  async function initEditors() {
+    await ensureCM();
+
+    container.querySelectorAll(".sd-pane").forEach((pane) => {
+      const tabId = pane.dataset.tabId;
+      if (cmInstances[tabId]) return;
+
+      const mount = pane.querySelector(".sd-cm-mount");
+      const cm = CodeMirror(mount, {
+        value: sources[tabId] ?? "",
+        mode: "text/x-glsl",
+        lineNumbers: true,
+        tabSize: 4,
+        indentWithTabs: false,
+        lineWrapping: false,
+      });
+      cm.setSize("100%", "100%");
+      cm.on("change", () => {
+        sources[tabId] = cm.getValue();
+        runBtn.disabled = false;
+      });
+      cmInstances[tabId] = cm;
+    });
+  }
+
+  /* ── Edit / View toggle ── */
+  editBtn.addEventListener("click", async () => {
+    if (!editMode) {
+      editBtn.textContent = "…";
+      editBtn.disabled = true;
+      await initEditors();
+      editBtn.disabled = false;
+      editMode = true;
+      editBtn.textContent = "View";
+      editBtn.classList.add("is-active");
+
+      container.querySelectorAll(".sd-pane").forEach((pane) => {
+        pane.querySelector(".sd-view").style.display     = "none";
+        pane.querySelector(".sd-cm-mount").style.display = "block";
+      });
+
+      if (cmInstances[activeTabId]) {
+        setTimeout(() => cmInstances[activeTabId].refresh(), 0);
+      }
+    } else {
+      editMode = false;
+      editBtn.textContent = "Edit";
+      editBtn.classList.remove("is-active");
+
+      container.querySelectorAll(".sd-pane").forEach((pane) => {
+        pane.querySelector(".sd-view").style.display     = "block";
+        pane.querySelector(".sd-cm-mount").style.display = "none";
+      });
+    }
+  });
+
+  /* ── Run ── */
+  runBtn.addEventListener("click", () => {
+    errorBox.style.display = "none";
+    recompile();
+    runBtn.disabled = true;
+  });
+
+  /* ── WebGL helpers ── */
+  const gl = canvas.getContext("webgl2");
+  if (!gl) {
+    showError("WebGL2 not supported in this browser.");
+    return;
+  }
+
+  const VERT = `#version 300 es
+in vec2 a_pos;
+void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
+
+  const PREAMBLE = `#version 300 es
+precision highp float;
+precision highp int;
+uniform vec3 iResolution;
+uniform float iTime;
+uniform float iTimeDelta;
+uniform float iFrameRate;
+uniform int iFrame;
+uniform vec4 iMouse;
+uniform vec4 iDate;
+uniform float iSampleRate;
+out vec4 fragColor;
+`;
+  const SUFFIX = `\nvoid main() { mainImage(fragColor, gl_FragCoord.xy); }`;
+
+  const triBuf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+
+  function buildShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error("Shader error:\n" + gl.getShaderInfoLog(s));
+      gl.deleteShader(s);
+      return null;
+    }
+    return s;
+  }
+
+  function recompile() {
+    const fragSrc = PREAMBLE
+      + (sources.common ? sources.common + "\n" : "")
+      + sources.image
+      + SUFFIX;
+
+    const vs = buildShader(gl.VERTEX_SHADER, VERT);
+    const fs = buildShader(gl.FRAGMENT_SHADER, fragSrc);
+    if (!vs || !fs) { showError("Shader compile error — check the browser console."); return; }
+
+    const p = gl.createProgram();
+    gl.attachShader(p, vs);
+    gl.attachShader(p, fs);
+    gl.linkProgram(p);
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
+
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+      console.error("Link error:", gl.getProgramInfoLog(p));
+      gl.deleteProgram(p);
+      showError("Shader link error — check the browser console.");
+      return;
+    }
+
+    if (prog) gl.deleteProgram(prog);
+    prog = p;
+    gl.useProgram(prog);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
+    const loc = gl.getAttribLocation(prog, "a_pos");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    uniforms = {
+      res:   gl.getUniformLocation(prog, "iResolution"),
+      time:  gl.getUniformLocation(prog, "iTime"),
+      dt:    gl.getUniformLocation(prog, "iTimeDelta"),
+      fps:   gl.getUniformLocation(prog, "iFrameRate"),
+      frame: gl.getUniformLocation(prog, "iFrame"),
+      mouse: gl.getUniformLocation(prog, "iMouse"),
+      date:  gl.getUniformLocation(prog, "iDate"),
+      sr:    gl.getUniformLocation(prog, "iSampleRate"),
+    };
+
+    startTs = null; frameIdx = 0;
+    if (!running) startLoop();
+  }
+
+  /* ── Resize ── */
+  function resize() {
+    const dpr = Math.min(devicePixelRatio, 1.5);
+    canvas.width  = canvas.clientWidth  * dpr;
+    canvas.height = canvas.clientHeight * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  new ResizeObserver(resize).observe(canvas);
+  resize();
+
+  /* ── Mouse (ShaderToy: pixels, bottom-left origin) ── */
+  const mouse = { x:0, y:0, cx:0, cy:0, down:false };
+  function toGL(e) {
+    const r = canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - r.left) * (canvas.width  / r.width),
+      y: canvas.height - (e.clientY - r.top) * (canvas.height / r.height),
+    };
+  }
+  canvas.addEventListener("mousemove", (e) => {
+    const c = toGL(e); mouse.x = c.x; mouse.y = c.y;
+    if (mouse.down) { mouse.cx = c.x; mouse.cy = c.y; }
+  });
+  canvas.addEventListener("mousedown", (e) => {
+    mouse.down = true; const c = toGL(e); mouse.cx = c.x; mouse.cy = c.y;
+  });
+  canvas.addEventListener("mouseup", () => { mouse.down = false; });
+
+  /* ── Render loop ── */
+  function frame(now) {
+    if (!running || !prog) return;
+    if (startTs === null) { startTs = now; lastTs = now; }
+    const t  = (now - startTs) / 1000;
+    const dt = Math.min((now - lastTs) / 1000, 0.1);
+    lastTs = now; frameIdx++;
+
+    const d = new Date();
+    gl.uniform3f(uniforms.res,   canvas.width, canvas.height, 1);
+    gl.uniform1f(uniforms.time,  t);
+    gl.uniform1f(uniforms.dt,    dt);
+    gl.uniform1f(uniforms.fps,   dt > 0 ? 1/dt : 60);
+    gl.uniform1i(uniforms.frame, frameIdx);
+    gl.uniform4f(uniforms.mouse, mouse.x, mouse.y, mouse.cx, mouse.cy);
+    gl.uniform4f(uniforms.date,
+      d.getFullYear(), d.getMonth(), d.getDate(),
+      d.getHours()*3600 + d.getMinutes()*60 + d.getSeconds()
+    );
+    gl.uniform1f(uniforms.sr, 44100);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function startLoop() {
+    if (running) return;
+    running = true;
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function stopLoop() {
+    running = false;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.style.cssText = "display:flex; position:absolute; inset:0; align-items:center; justify-content:center; padding:1rem; background:var(--surface); color:var(--muted); font-size:0.85rem; text-align:center;";
+    stopLoop();
+  }
+
+  /* ── IntersectionObserver ── */
+  new IntersectionObserver(
+    (entries) => entries.forEach((e) => (e.isIntersecting ? startLoop() : stopLoop())),
+    { threshold: 0.05 }
+  ).observe(container);
+
+  /* ── Initial compile — MUST be after all let declarations ── */
+  recompile();
+})();
+</script>
+
+<style>
+  /* Break out of the article's content width */
+  .shader-demo {
+    --sd-full: min(920px, calc(100vw - 4rem));
+    width: var(--sd-full);
+    /* Negative margins center the element even when wider than the article */
+    margin-left:  calc(50% - var(--sd-full) / 2);
+    margin-right: calc(50% - var(--sd-full) / 2);
+    margin-top:    1.5rem;
+    margin-bottom: 1.5rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* ── Left panel ── */
+  .sd-left {
+    display: flex;
+    flex-direction: column;
+    height: var(--sd-h, 400px);
+    border-right: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .sd-toolbar {
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sd-tabs {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+  .sd-tabs::-webkit-scrollbar { display: none; }
+
+  .sd-tab {
+    background: none;
+    border: none;
+    border-right: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.1s, background 0.1s;
+    white-space: nowrap;
+  }
+  .sd-tab:hover       { color: var(--text); }
+  .sd-tab.is-active   { color: var(--accent); background: var(--surface); }
+
+  .sd-actions {
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+
+  .sd-btn {
+    background: none;
+    border: none;
+    border-left: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.1s, background 0.1s;
+    white-space: nowrap;
+  }
+  .sd-btn:first-child               { border-left: none; }
+  .sd-btn:hover:not(:disabled)      { color: var(--text); background: var(--surface); }
+  .sd-btn.is-active                 { color: var(--accent); }
+  .sd-btn:disabled                  { opacity: 0.3; cursor: default; }
+  .sd-run-btn:not(:disabled)        { color: var(--accent); }
+
+  /* Scrollable code area */
+  .sd-code-wrap {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Each pane fills the code wrap */
+  .sd-pane {
+    height: 100%;
+  }
+
+  /* Shiki <pre> resets */
+  .sd-view :global(pre) {
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    min-height: 100%;
+  }
+
+  /* CodeMirror container */
+  .sd-cm-mount {
+    height: 100%;
+  }
+
+  /* CodeMirror instance — use :global since CM generates its own DOM */
+  .sd-cm-mount :global(.CodeMirror) {
+    height: 100%;
+    font-family: var(--font-mono, "JetBrains Mono", monospace);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    /* One Dark palette to match Shiki theme */
+    background: #282c34;
+    color: #abb2bf;
+  }
+  .sd-cm-mount :global(.CodeMirror-scroll) { height: 100%; }
+  .sd-cm-mount :global(.CodeMirror-gutters)    { background: #21252b; border-right: 1px solid #333842; }
+  .sd-cm-mount :global(.CodeMirror-linenumber) { color: #495162; }
+  .sd-cm-mount :global(.CodeMirror-cursor)     { border-left-color: #528bff; }
+  .sd-cm-mount :global(.CodeMirror-selected)   { background: rgba(82,139,255,0.2); }
+  /* GLSL / clike token colours (One Dark palette) */
+  .sd-cm-mount :global(.cm-keyword)  { color: #c678dd; }
+  .sd-cm-mount :global(.cm-number)   { color: #d19a66; }
+  .sd-cm-mount :global(.cm-string)   { color: #98c379; }
+  .sd-cm-mount :global(.cm-comment)  { color: #5c6370; font-style: italic; }
+  .sd-cm-mount :global(.cm-def)      { color: #e06c75; }
+  .sd-cm-mount :global(.cm-variable) { color: #e5c07b; }
+  .sd-cm-mount :global(.cm-type)     { color: #56b6c2; }
+  .sd-cm-mount :global(.cm-builtin)  { color: #61afef; }
+  .sd-cm-mount :global(.cm-operator) { color: #56b6c2; }
+
+  /* ── Right panel ── */
+  .sd-right {
+    position: relative;
+    height: var(--sd-h, 400px);
+    background: #0d0d0f;
+  }
+
+  .sd-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── Mobile: stack ── */
+  @media (max-width: 640px) {
+    .shader-demo {
+      grid-template-columns: 1fr;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+    .sd-left {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      height: 240px;
+    }
+    .sd-right {
+      height: calc(var(--sd-h, 400px) * 0.65);
+    }
+  }
+</style>
