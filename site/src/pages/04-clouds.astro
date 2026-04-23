@@ -132,7 +132,7 @@ END PROCEDURE`}</pre>
 <p class="fig-label">Code 10: Get density of spherical cloud</p>
 
 <figure>
-  <img src="/images/cloud-noise/no-noise-cloud.png" alt="Raymarched Sphere with density" style="max-width:60%" />
+  <img src={`${import.meta.env.BASE_URL}images/cloud-noise/no-noise-cloud.png`} alt="Raymarched Sphere with density" style="max-width:60%" />
   <figcaption>Figure 23 — Raymarched Sphere with density accumulation — no noise yet.</figcaption>
 </figure>
 
@@ -163,19 +163,19 @@ END PROCEDURE`}</pre>
 
 <div class="fig-grid fig-grid-2">
   <figure>
-    <img src="/images/cloud-noise/white-noise.png" alt="White Noise" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/white-noise.png`} alt="White Noise" />
     <figcaption>White Noise</figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/white-noise-cloud.png" alt="White Noise Cloud" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/white-noise-cloud.png`} alt="White Noise Cloud" />
     <figcaption>White Noise Cloud</figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/value-noise.png" alt="Value Noise" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/value-noise.png`} alt="Value Noise" />
     <figcaption>Value Noise</figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/value-noise-cloud.png" alt="Value Noise Cloud" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/value-noise-cloud.png`} alt="Value Noise Cloud" />
     <figcaption>Value Noise Cloud</figcaption>
   </figure>
 </div>
@@ -199,35 +199,35 @@ END PROCEDURE`}</pre>
 
 <div class="fig-grid fig-grid-2">
   <figure>
-    <img src="/images/cloud-noise/1-octave-fbm.png" alt="1-Octave FBM" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/1-octave-fbm.png`} alt="1-Octave FBM" />
     <figcaption><code>valueNoise(uv)</code></figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/1-octave-fbm-cloud.png" alt="1-Octave Cloud" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/1-octave-fbm-cloud.png`} alt="1-Octave Cloud" />
     <figcaption>1 Octave Cloud</figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/2-octaves-fbm.png" alt="2-Octaves FBM" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/2-octaves-fbm.png`} alt="2-Octaves FBM" />
     <figcaption><code>vn(uv)+vn(uv*2.)*0.5</code></figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/2-octaves-fbm-cloud.png" alt="2-Octaves Cloud" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/2-octaves-fbm-cloud.png`} alt="2-Octaves Cloud" />
     <figcaption>2 Octaves Cloud</figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/3-octaves-fbm.png" alt="3-Octaves FBM" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/3-octaves-fbm.png`} alt="3-Octaves FBM" />
     <figcaption><code>vn(uv)+vn(uv*2.)*0.5+vn(uv*4.)*0.25</code></figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/3-octaves-fbm-cloud.png" alt="3-Octaves Cloud" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/3-octaves-fbm-cloud.png`} alt="3-Octaves Cloud" />
     <figcaption>3 Octaves Cloud</figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/4-octaves-fbm.png" alt="4-Octaves FBM" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/4-octaves-fbm.png`} alt="4-Octaves FBM" />
     <figcaption><code>...vn(uv*4.)*0.25+vn(uv*8.)*0.125</code></figcaption>
   </figure>
   <figure>
-    <img src="/images/cloud-noise/4-octaves-fbm-cloud.png" alt="4-Octaves Cloud" />
+    <img src={`${import.meta.env.BASE_URL}images/cloud-noise/4-octaves-fbm-cloud.png`} alt="4-Octaves Cloud" />
     <figcaption>4 Octaves Cloud</figcaption>
   </figure>
 </div>
@@ -271,7 +271,7 @@ END PROCEDURE`}</pre>
 </p>
 
 <figure>
-  <img src="/images/cloud-noise/lit-cloud.png" alt="Lit Raymarched Cloud" class="bordered" style="max-width:600px" />
+  <img src={`${import.meta.env.BASE_URL}images/cloud-noise/lit-cloud.png`} alt="Lit Raymarched Cloud" class="bordered" style="max-width:600px" />
   <figcaption>Figure 26 — Raymarched Cloud lit from a directional light and a point light.</figcaption>
 </figure>
 
