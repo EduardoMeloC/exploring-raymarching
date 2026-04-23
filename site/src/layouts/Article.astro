@@ -47,7 +47,7 @@ const { title, description, prev, next, chapterIndex } = Astro.props;
   </head>
   <body>
     <header>
-      <a href="/" class="home-link">Ray Marching and Its Applications</a>
+      <a href={import.meta.env.BASE_URL} class="home-link">Ray Marching and Its Applications</a>
       {
         chapterIndex != null && (
           <span class="chapter-badge">Chapter {chapterIndex}</span>
@@ -67,7 +67,7 @@ const { title, description, prev, next, chapterIndex } = Astro.props;
         <nav class="chapter-nav" aria-label="Chapter navigation">
           <div class="nav-prev">
             {prev && (
-              <a href={`/${prev.slug}`}>
+              <a href={`${import.meta.env.BASE_URL}${prev.slug}`}>
                 <span class="nav-dir">← Previous</span>
                 <span class="nav-title">{prev.title}</span>
               </a>
@@ -75,7 +75,7 @@ const { title, description, prev, next, chapterIndex } = Astro.props;
           </div>
           <div class="nav-next">
             {next && (
-              <a href={`/${next.slug}`}>
+              <a href={`${import.meta.env.BASE_URL}${next.slug}`}>
                 <span class="nav-dir">Next →</span>
                 <span class="nav-title">{next.title}</span>
               </a>

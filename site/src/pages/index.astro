@@ -34,14 +34,14 @@ import { chapters } from "../data/chapters";
           signed distance functions, procedural modeling, clouds, and more.
         </p>
         <p class="author">by Eduardo Catarina and Rafael de Aguiar</p>
-        <a href={`/${chapters[0].slug}`} class="cta">Start reading →</a>
+        <a href={`${import.meta.env.BASE_URL}${chapters[0].slug}`} class="cta">Start reading →</a>
       </section>
 
       <ol class="toc">
         {
           chapters.map((ch, i) => (
             <li>
-              <a href={`/${ch.slug}`} class="toc-item">
+              <a href={`${import.meta.env.BASE_URL}${ch.slug}`} class="toc-item">
                 <span class="toc-num">{String(i + 1).padStart(2, "0")}</span>
                 <span class="toc-body">
                   <span class="toc-title">{ch.title}</span>
