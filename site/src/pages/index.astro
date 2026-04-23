@@ -7,8 +7,12 @@ import { chapters } from "../data/chapters";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ray Marching and Its Applications</title>
-    <link rel="icon" type="image/svg+xml" href={import.meta.env.BASE_URL + "favicon.svg"} />
+    <title>Exploring Ray Marching</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={import.meta.env.BASE_URL + "favicon.svg"}
+    />
     <script is:inline>
       (function () {
         const stored = localStorage.getItem("theme");
@@ -21,27 +25,33 @@ import { chapters } from "../data/chapters";
   </head>
   <body>
     <header>
-      <span class="site-title">Ray Marching and Its Applications</span>
+      <span class="site-title">Exploring Ray Marching</span>
       <ThemeToggle />
     </header>
 
     <main>
       <section class="hero">
         <canvas id="hero-canvas"></canvas>
-        <h1>Ray Marching<br />and Its Applications</h1>
+        <h1>Exploring<br />Ray Marching</h1>
         <p class="intro">
-          An exploration of realtime rendering with sphere tracing, exploring
-          signed distance functions, procedural modeling, clouds, and more.
+          An exploration of realtime rendering with ray marching, covering
+          concepts such as signed distance functions, procedural modeling,
+          clouds, and more.
         </p>
         <p class="author">by Eduardo Catarina and Rafael de Aguiar</p>
-        <a href={`${import.meta.env.BASE_URL}${chapters[0].slug}`} class="cta">Start reading →</a>
+        <a href={`${import.meta.env.BASE_URL}${chapters[0].slug}`} class="cta"
+          >Start reading →</a
+        >
       </section>
 
       <ol class="toc">
         {
           chapters.map((ch, i) => (
             <li>
-              <a href={`${import.meta.env.BASE_URL}${ch.slug}`} class="toc-item">
+              <a
+                href={`${import.meta.env.BASE_URL}${ch.slug}`}
+                class="toc-item"
+              >
                 <span class="toc-num">{String(i + 1).padStart(2, "0")}</span>
                 <span class="toc-body">
                   <span class="toc-title">{ch.title}</span>
@@ -204,8 +214,8 @@ import { chapters } from "../data/chapters";
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    const uRes   = gl.getUniformLocation(prog, "iResolution");
-    const uTime  = gl.getUniformLocation(prog, "iTime");
+    const uRes = gl.getUniformLocation(prog, "iResolution");
+    const uTime = gl.getUniformLocation(prog, "iTime");
     const uMouse = gl.getUniformLocation(prog, "iMouse");
     const uBulge = gl.getUniformLocation(prog, "iBulge");
 

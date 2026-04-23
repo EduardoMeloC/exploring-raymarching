@@ -26,4 +26,4 @@ This repository was developed as part of the undergraduate thesis for the Comput
 
 1. Browse the `GlslShaders/` directory to explore the different shader examples.
 2. Each subfolder contains fragment shaders (`.frag`) that can be run in environments like [Shadertoy](https://www.shadertoy.com/) or integrated into your own OpenGL/WebGL projects.
-3. Refer to the pdf file in `_Latex/` for the full thesis.
+3. Refer to the pdf file in `_Latex/` for the full thesis, or read it on https://eduardomeloc.github.io/exploring-raymarching/.
