@@ -2,6 +2,10 @@
 import Article from "../layouts/Article.astro";
 import { Code } from "astro:components";
 import { getAdjacentChapters } from "../data/chapters";
+import ShaderDemo from "../components/ShaderDemo.astro";
+import common from "../shaders/common.glsl?raw";
+import rayTracingShader from "../shaders/02-raytracing.glsl?raw";
+import rayMarchingShader from "../shaders/02-raymarching.glsl?raw";
 
 const { prev, next } = getAdjacentChapters("02-ray-tracing-vs-ray-marching");
 
@@ -68,7 +72,10 @@ const codeCanvasTraversal = `void mainImage( out vec4 fragColor, in vec2 fragCoo
   </p>
 
   <figure>
-    <img src={`${import.meta.env.BASE_URL}images/ray-trace.jpg`} alt="Ray Tracing Algorithm" />
+    <img
+      src={`${import.meta.env.BASE_URL}images/ray-trace.jpg`}
+      alt="Ray Tracing Algorithm"
+    />
     <figcaption>
       Figure 2 — Ray Tracing Algorithm.<sup
         ><a id="fn-ref-1" href="#fn-1">1</a></sup
@@ -177,25 +184,17 @@ END PROCEDURE`}</pre>
   </p>
 
   <p>
-    In Figure 3, the scene is simplified to a single sphere. Since the analytic
-    solution for ray-sphere intersection is well known, the surface can be
-    rendered smoothly and accurately without relying on geometric tessellation.
-    Our
+    In the following exmaple, the scene is simplified to a single sphere. Since
+    the analytic solution for ray-sphere intersection is well known, the surface
+    can be rendered smoothly and accurately without relying on geometric
+    tessellation. Our
     <code>GetHitColor</code> function currently returns only the object's albedo —
-    the pure color of the object. By rendering a scene with a black background, a
-    large white sphere below the camera to simulate the ground, and a smaller red
-    sphere above it, the image in Figure 3 is produced.
+    the pure color of the object. The provided shader renders a scene with a black
+    background, a large white sphere below the camera to simulate the ground, and
+    a smaller red sphere above it.
   </p>
 
-  <figure>
-    <img
-      src={`${import.meta.env.BASE_URL}images/unlit-raytraced-sphere.png`}
-      alt="Unlit Raytraced Sphere"
-      class="bordered"
-      style="max-width:400px"
-    />
-    <figcaption>Figure 3 — Unlit Raytraced Sphere.</figcaption>
-  </figure>
+  <ShaderDemo image={rayTracingShader} height={380} />
 
   <h2>Marching the Ray</h2>
 
@@ -275,28 +274,16 @@ END PROCEDURE`}</pre>
 END PROCEDURE`}</pre>
   </div>
 
-  <figure>
-    <img
-      src={`${import.meta.env.BASE_URL}images/unlit-raymarched-sphere.png`}
-      alt="Unlit Raymarched Sphere"
-      class="bordered"
-      style="max-width:400px"
-    />
-    <figcaption>
-      Figure 6 — Unlit Raymarched Sphere rendered with a low step cap of 150,
-      revealing how the ground plane disappears near the sphere's edges when the
-      step budget is exhausted.
-    </figcaption>
-  </figure>
+  <ShaderDemo image={rayMarchingShader} height={380} />
 
   <p>
-    Figure 6 was rendered with a low step cap of 150 to illustrate a limitation
-    of the method. Careful inspection reveals that the distant ground plane
-    disappears near the edges of the sphere. This occurs because rays take
-    smaller steps when approaching a surface, requiring more iterations to
-    traverse its boundary. In practice, most rays terminate within fewer than 10
-    steps due to scene distance limits, and our final scenes use a cap of around
-    1000 steps.
+    The shader above renderes the scene with a low step cap of 150 to illustrate
+    a limitation of the method. Careful inspection reveals that the distant
+    ground plane disappears near the edges of the sphere. This occurs because
+    rays take smaller steps when approaching a surface, requiring more
+    iterations to traverse its boundary. In practice, most rays terminate within
+    fewer than 10 steps due to scene distance limits, and our final scenes use a
+    cap of around 1000 steps.
   </p>
 
   <h2>When to march rather than trace</h2>

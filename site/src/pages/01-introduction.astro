@@ -2,6 +2,10 @@
 import Article from "../layouts/Article.astro";
 import { Code } from "astro:components";
 import { getAdjacentChapters } from "../data/chapters";
+import ShaderDemo from "../components/ShaderDemo.astro";
+import metaballs from "../shaders/01-metaballs.glsl?raw";
+import bufferA from "../shaders/bufferA.glsl?raw";
+import common from "../shaders/common.glsl?raw";
 
 const { prev, next } = getAdjacentChapters("01-introduction");
 ---
@@ -14,6 +18,8 @@ const { prev, next } = getAdjacentChapters("01-introduction");
   chapterIndex={1}
 >
   <h1>Introduction</h1>
+
+  <ShaderDemo image={metaballs} common={common} height={180} hideCode={true} />
 
   <p>
     In the realm of computer graphics, the quest for realism and visual fidelity

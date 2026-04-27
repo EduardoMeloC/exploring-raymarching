@@ -1,0 +1,703 @@
+---
+import { Code } from "astro:components";
+
+interface Props {
+  image: string;
+  common?: string;
+  bufferA?: string;
+  bufferB?: string;
+  bufferC?: string;
+  bufferD?: string;
+  height?: number;
+  hideCode?: boolean;
+}
+
+const { image, common, bufferA, bufferB, bufferC, bufferD, height = 400, hideCode = false } = Astro.props;
+
+const tabs = [
+  { id: "image",   label: "Image",    code: image    },
+  ...(common  ? [{ id: "common",  label: "Common",   code: common  }] : []),
+  ...(bufferA ? [{ id: "bufferA", label: "Buffer A", code: bufferA }] : []),
+  ...(bufferB ? [{ id: "bufferB", label: "Buffer B", code: bufferB }] : []),
+  ...(bufferC ? [{ id: "bufferC", label: "Buffer C", code: bufferC }] : []),
+  ...(bufferD ? [{ id: "bufferD", label: "Buffer D", code: bufferD }] : []),
+];
+
+const uid = `sd-${Math.random().toString(36).slice(2, 8)}`;
+const sourcesJson = JSON.stringify({
+  image:   image,
+  common:  common   ?? null,
+  bufferA: bufferA  ?? null,
+  bufferB: bufferB  ?? null,
+  bufferC: bufferC  ?? null,
+  bufferD: bufferD  ?? null,
+});
+---
+
+<div class="shader-demo" id={uid} style={`--sd-h:${height}px`} data-hide-code={hideCode ? "true" : null}>
+  <!-- Left: code + toolbar (omitted when hideCode) -->
+  {!hideCode && <div class="sd-left">
+    <div class="sd-toolbar">
+      <div class="sd-tabs" role="tablist">
+        {tabs.map((tab, i) => (
+          <button
+            class={`sd-tab${i === 0 ? " is-active" : ""}`}
+            role="tab"
+            data-target={`${uid}-${tab.id}`}
+            aria-selected={i === 0 ? "true" : "false"}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div class="sd-actions">
+        <button class="sd-btn sd-edit-btn">Edit</button>
+        <button class="sd-btn sd-run-btn" disabled>&#9654;&nbsp;Run</button>
+      </div>
+    </div>
+
+    <div class="sd-code-wrap">
+      {tabs.map((tab, i) => (
+        <div
+          class="sd-pane"
+          id={`${uid}-${tab.id}`}
+          data-tab-id={tab.id}
+          role="tabpanel"
+          style={i > 0 ? "display:none" : "display:flex; flex-direction:column; height:100%"}
+        >
+          <!-- View: Shiki highlighted (always rendered, toggled via JS) -->
+          <div class="sd-view" style="flex:1; overflow:auto">
+            <Code code={tab.code} lang="glsl" theme="one-dark-pro" />
+          </div>
+          <!-- Edit: CodeMirror will be mounted here (hidden until Edit clicked) -->
+          <div class="sd-cm-mount" style="display:none; flex:1; overflow:hidden"></div>
+        </div>
+      ))}
+    </div>
+  </div>}
+
+  <!-- Right: WebGL canvas -->
+  <div class="sd-right">
+    <canvas class="sd-canvas"></canvas>
+    <div class="sd-error-box" style="display:none"></div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ uid, sourcesJson }}>
+(function () {
+  const container = document.getElementById(uid);
+  if (!container) return;
+
+  /* ── Sources (mutated on edit) ── */
+  const sources = JSON.parse(sourcesJson);
+
+  /* ── DOM refs ── */
+  const editBtn  = container.querySelector(".sd-edit-btn");
+  const runBtn   = container.querySelector(".sd-run-btn");
+  const errorBox = container.querySelector(".sd-error-box");
+  const canvas   = container.querySelector(".sd-canvas");
+
+  /* ── CodeMirror state ── */
+  const cmInstances = {};
+  let cmReady   = false;
+  let editMode  = false;
+
+  /* ── WebGL globals — declared first so recompile() can reference them ── */
+  let prog     = null;
+  let uniforms = {};
+
+  /* ── Render loop state — declared first ── */
+  let rafId    = null;
+  let startTs  = null;
+  let lastTs   = null;
+  let frameIdx = 0;
+  let running  = false;
+
+  /* ── Tab switching ── */
+  let activeTabId = tabs()[0];
+  function tabs() {
+    return [...container.querySelectorAll(".sd-pane")].map((p) => p.dataset.tabId);
+  }
+
+  container.querySelectorAll(".sd-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      container.querySelectorAll(".sd-tab").forEach((b) => {
+        b.classList.toggle("is-active", b === btn);
+        b.setAttribute("aria-selected", b === btn ? "true" : "false");
+      });
+      container.querySelectorAll(".sd-pane").forEach((p) => {
+        const show = p.id === btn.dataset.target;
+        p.style.display = show
+          ? "flex"
+          : "none";
+        if (show) p.style.flexDirection = "column";
+        if (show) p.style.height = "100%";
+      });
+      activeTabId = btn.dataset.target.replace(uid + "-", "");
+      if (editMode && cmInstances[activeTabId]) {
+        setTimeout(() => cmInstances[activeTabId].refresh(), 0);
+      }
+    });
+  });
+
+  /* ── Lazy-load CodeMirror 5 core from CDN ── */
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${src}"]`)) {
+        /* Script tag already in DOM — poll until CodeMirror global appears */
+        const check = setInterval(() => {
+          if (typeof CodeMirror !== "undefined") { clearInterval(check); resolve(); }
+        }, 20);
+        return;
+      }
+      const el = document.createElement("script");
+      el.src = src; el.onload = resolve; el.onerror = reject;
+      document.head.appendChild(el);
+    });
+  }
+
+  /* ── Inline GLSL mode — no dependency on clike.min.js ── */
+  function defineGLSLMode() {
+    if (typeof CodeMirror === "undefined") return;
+    /* Guard: defineMode is idempotent but skip the work if already done */
+    if (CodeMirror._glslDefined) return;
+    CodeMirror._glslDefined = true;
+
+    function makeSet(words) {
+      var o = {};
+      words.split(" ").forEach(function(w) { if (w) o[w] = true; });
+      return o;
+    }
+    var KW = makeSet(
+      "void float int uint bool true false in out inout uniform attribute varying " +
+      "const if else for while do return break continue discard struct " +
+      "precision highp mediump lowp layout location invariant flat smooth centroid"
+    );
+    var TY = makeSet(
+      "vec2 vec3 vec4 ivec2 ivec3 ivec4 bvec2 bvec3 bvec4 uvec2 uvec3 uvec4 " +
+      "mat2 mat3 mat4 mat2x2 mat2x3 mat2x4 mat3x2 mat3x3 mat3x4 mat4x2 mat4x3 mat4x4 " +
+      "sampler2D sampler3D samplerCube sampler2DShadow sampler2DArray sampler2DArrayShadow " +
+      "isampler2D isampler3D isamplerCube usampler2D usampler3D usamplerCube"
+    );
+    var BI = makeSet(
+      "radians degrees sin cos tan asin acos atan sinh cosh tanh asinh acosh atanh " +
+      "pow exp log exp2 log2 sqrt inversesqrt " +
+      "abs sign floor trunc round roundEven ceil fract mod modf " +
+      "min max clamp mix step smoothstep isnan isinf " +
+      "floatBitsToInt floatBitsToUint intBitsToFloat uintBitsToFloat " +
+      "packSnorm2x16 unpackSnorm2x16 packUnorm2x16 unpackUnorm2x16 " +
+      "length distance dot cross normalize faceforward reflect refract " +
+      "matrixCompMult outerProduct transpose determinant inverse " +
+      "lessThan lessThanEqual greaterThan greaterThanEqual equal notEqual any all not " +
+      "texture texture2D texture2DProj textureCube texture2DLod textureCubeLod " +
+      "dFdx dFdy fwidth emit " +
+      "gl_Position gl_PointSize gl_FragCoord gl_FrontFacing gl_FragDepth gl_PointCoord " +
+      "iResolution iTime iTimeDelta iFrameRate iFrame iMouse iDate iSampleRate iBackground"
+    );
+
+    CodeMirror.defineMode("glsl", function() {
+      return {
+        startState: function() { return { inBlock: false }; },
+        token: function(stream, state) {
+          /* Inside block comment */
+          if (state.inBlock) {
+            if (stream.match(/.*?\*\//)) state.inBlock = false;
+            else stream.skipToEnd();
+            return "comment";
+          }
+          /* Whitespace */
+          if (stream.eatSpace()) return null;
+          /* Block comment open */
+          if (stream.match("/*")) {
+            state.inBlock = true;
+            if (stream.match(/.*?\*\//)) state.inBlock = false;
+            else stream.skipToEnd();
+            return "comment";
+          }
+          /* Line comment */
+          if (stream.match("//")) { stream.skipToEnd(); return "comment"; }
+          /* Preprocessor directive (must be at column 0) */
+          if (stream.sol() && stream.peek() === "#") { stream.skipToEnd(); return "meta"; }
+          /* Numbers */
+          if (stream.match(/0x[\da-fA-F]+[uU]?/) ||
+              stream.match(/(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?[fFuU]?/)) return "number";
+          /* Identifiers → keywords / types / builtins */
+          if (stream.match(/[a-zA-Z_]\w*/)) {
+            var w = stream.current();
+            if (KW[w]) return "keyword";
+            if (TY[w]) return "type";
+            if (BI[w]) return "builtin";
+            return "variable";
+          }
+          /* Anything else: operators, punctuation */
+          stream.next();
+          return null;
+        }
+      };
+    });
+  }
+
+  function injectCMStyles() {
+    if (document.getElementById("sd-cm-theme")) return;
+    const s = document.createElement("style");
+    s.id = "sd-cm-theme";
+    s.textContent = `
+      .sd-cm-mount .CodeMirror {
+        height: 100%;
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        font-size: 0.875rem;
+        line-height: 1.65;
+        background: #282c34;
+        color: #abb2bf;
+      }
+      .sd-cm-mount .CodeMirror-scroll      { height: 100%; }
+      .sd-cm-mount .CodeMirror-gutters     { background: #21252b; border-right: 1px solid #333842; }
+      .sd-cm-mount .CodeMirror-linenumber  { color: #4b5263; padding: 0 8px; }
+      .sd-cm-mount .CodeMirror-cursor      { border-left: 2px solid #528bff; }
+      .sd-cm-mount .CodeMirror-selected,
+      .sd-cm-mount .CodeMirror-focused .CodeMirror-selected { background: rgba(82,139,255,0.22); }
+      .sd-cm-mount .CodeMirror-line::selection,
+      .sd-cm-mount .CodeMirror-line > span::selection        { background: rgba(82,139,255,0.22); }
+      /* GLSL / clike token colours — One Dark palette */
+      .sd-cm-mount .cm-keyword  { color: #c678dd; }
+      .sd-cm-mount .cm-atom     { color: #d19a66; }
+      .sd-cm-mount .cm-number   { color: #d19a66; }
+      .sd-cm-mount .cm-string   { color: #98c379; }
+      .sd-cm-mount .cm-string-2 { color: #98c379; }
+      .sd-cm-mount .cm-comment  { color: #5c6370; font-style: italic; }
+      .sd-cm-mount .cm-def      { color: #e06c75; }
+      .sd-cm-mount .cm-variable { color: #e5c07b; }
+      .sd-cm-mount .cm-variable-2 { color: #abb2bf; }
+      .sd-cm-mount .cm-type     { color: #56b6c2; }
+      .sd-cm-mount .cm-builtin  { color: #61afef; }
+      .sd-cm-mount .cm-operator { color: #56b6c2; }
+      .sd-cm-mount .cm-punctuation { color: #abb2bf; }
+      .sd-cm-mount .cm-meta     { color: #e06c75; }
+      .sd-cm-mount .cm-error    { color: #f44; }
+    `;
+    document.head.appendChild(s);
+  }
+
+  async function ensureCM() {
+    if (cmReady) return;
+    const base = "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16";
+    /* Base layout CSS (scrollbar chrome, gutter, cursor geometry) */
+    if (!document.querySelector(`link[href*="codemirror.min.css"]`)) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `${base}/codemirror.min.css`;
+      document.head.appendChild(link);
+    }
+    /* Core JS — only load once */
+    if (typeof CodeMirror === "undefined") {
+      await loadScript(`${base}/codemirror.min.js`);
+    }
+    /* Define our own GLSL mode — no clike.min.js dependency */
+    defineGLSLMode();
+    /* One Dark theme injected as a plain <style> — bypasses Astro scoping */
+    injectCMStyles();
+    cmReady = true;
+  }
+
+  async function initEditors() {
+    await ensureCM();
+
+    container.querySelectorAll(".sd-pane").forEach((pane) => {
+      const tabId = pane.dataset.tabId;
+      if (cmInstances[tabId]) return;
+
+      const mount = pane.querySelector(".sd-cm-mount");
+      const cm = CodeMirror(mount, {
+        value: sources[tabId] ?? "",
+        mode: "glsl",
+        lineNumbers: true,
+        tabSize: 4,
+        indentWithTabs: false,
+        lineWrapping: false,
+      });
+      cm.setSize("100%", "100%");
+      cm.on("change", () => {
+        sources[tabId] = cm.getValue();
+        if (runBtn) runBtn.disabled = false;
+      });
+      cmInstances[tabId] = cm;
+    });
+  }
+
+  /* ── Edit / View toggle (only present when hideCode is false) ── */
+  if (editBtn) {
+    editBtn.addEventListener("click", async () => {
+      if (!editMode) {
+        editBtn.textContent = "…";
+        editBtn.disabled = true;
+        await initEditors();
+        editBtn.disabled = false;
+        editMode = true;
+        editBtn.textContent = "View";
+        editBtn.classList.add("is-active");
+
+        container.querySelectorAll(".sd-pane").forEach((pane) => {
+          pane.querySelector(".sd-view").style.display     = "none";
+          pane.querySelector(".sd-cm-mount").style.display = "block";
+        });
+
+        if (cmInstances[activeTabId]) {
+          setTimeout(() => cmInstances[activeTabId].refresh(), 0);
+        }
+      } else {
+        editMode = false;
+        editBtn.textContent = "Edit";
+        editBtn.classList.remove("is-active");
+
+        container.querySelectorAll(".sd-pane").forEach((pane) => {
+          pane.querySelector(".sd-view").style.display     = "block";
+          pane.querySelector(".sd-cm-mount").style.display = "none";
+        });
+      }
+    });
+  }
+
+  /* ── Run ── */
+  if (runBtn) {
+    runBtn.addEventListener("click", () => {
+      errorBox.style.display = "none";
+      recompile();
+      runBtn.disabled = true;
+    });
+  }
+
+  /* ── WebGL helpers ── */
+  const gl = canvas.getContext("webgl2");
+  if (!gl) {
+    showError("WebGL2 not supported in this browser.");
+    return;
+  }
+
+  const VERT = `#version 300 es
+in vec2 a_pos;
+void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
+
+  const PREAMBLE = `#version 300 es
+precision highp float;
+precision highp int;
+uniform vec3 iResolution;
+uniform float iTime;
+uniform float iTimeDelta;
+uniform float iFrameRate;
+uniform int iFrame;
+uniform vec4 iMouse;
+uniform vec4 iDate;
+uniform float iSampleRate;
+uniform vec3 iBackground;
+out vec4 fragColor;
+`;
+  const SUFFIX = `\nvoid main() { mainImage(fragColor, gl_FragCoord.xy); }`;
+
+  const triBuf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+
+  function buildShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error("Shader error:\n" + gl.getShaderInfoLog(s));
+      gl.deleteShader(s);
+      return null;
+    }
+    return s;
+  }
+
+  function recompile() {
+    const fragSrc = PREAMBLE
+      + (sources.common ? sources.common + "\n" : "")
+      + sources.image
+      + SUFFIX;
+
+    const vs = buildShader(gl.VERTEX_SHADER, VERT);
+    const fs = buildShader(gl.FRAGMENT_SHADER, fragSrc);
+    if (!vs || !fs) { showError("Shader compile error — check the browser console."); return; }
+
+    const p = gl.createProgram();
+    gl.attachShader(p, vs);
+    gl.attachShader(p, fs);
+    gl.linkProgram(p);
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
+
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+      console.error("Link error:", gl.getProgramInfoLog(p));
+      gl.deleteProgram(p);
+      showError("Shader link error — check the browser console.");
+      return;
+    }
+
+    if (prog) gl.deleteProgram(prog);
+    prog = p;
+    gl.useProgram(prog);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, triBuf);
+    const loc = gl.getAttribLocation(prog, "a_pos");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    uniforms = {
+      res:   gl.getUniformLocation(prog, "iResolution"),
+      time:  gl.getUniformLocation(prog, "iTime"),
+      dt:    gl.getUniformLocation(prog, "iTimeDelta"),
+      fps:   gl.getUniformLocation(prog, "iFrameRate"),
+      frame: gl.getUniformLocation(prog, "iFrame"),
+      mouse: gl.getUniformLocation(prog, "iMouse"),
+      date:  gl.getUniformLocation(prog, "iDate"),
+      sr:    gl.getUniformLocation(prog, "iSampleRate"),
+      bg:    gl.getUniformLocation(prog, "iBackground"),
+    };
+
+    startTs = null; frameIdx = 0;
+    if (!running) startLoop();
+  }
+
+  /* ── Resize ── */
+  function resize() {
+    const dpr = Math.min(devicePixelRatio, 1.5);
+    canvas.width  = canvas.clientWidth  * dpr;
+    canvas.height = canvas.clientHeight * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  new ResizeObserver(resize).observe(canvas);
+  resize();
+
+  /* ── Mouse (ShaderToy: pixels, bottom-left origin) ── */
+  const mouse = { x:0, y:0, cx:0, cy:0, down:false };
+  function toGL(e) {
+    const r = canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - r.left) * (canvas.width  / r.width),
+      y: canvas.height - (e.clientY - r.top) * (canvas.height / r.height),
+    };
+  }
+  canvas.addEventListener("mousemove", (e) => {
+    const c = toGL(e); mouse.x = c.x; mouse.y = c.y;
+    if (mouse.down) { mouse.cx = c.x; mouse.cy = c.y; }
+  });
+  canvas.addEventListener("mousedown", (e) => {
+    mouse.down = true; const c = toGL(e); mouse.cx = c.x; mouse.cy = c.y;
+  });
+  canvas.addEventListener("mouseup", () => { mouse.down = false; });
+
+  /* ── Render loop ── */
+  function frame(now) {
+    if (!running || !prog) return;
+    if (startTs === null) { startTs = now; lastTs = now; }
+    const t  = (now - startTs) / 1000;
+    const dt = Math.min((now - lastTs) / 1000, 0.1);
+    lastTs = now; frameIdx++;
+
+    const d = new Date();
+    gl.uniform3f(uniforms.res,   canvas.width, canvas.height, 1);
+    gl.uniform1f(uniforms.time,  t);
+    gl.uniform1f(uniforms.dt,    dt);
+    gl.uniform1f(uniforms.fps,   dt > 0 ? 1/dt : 60);
+    gl.uniform1i(uniforms.frame, frameIdx);
+    gl.uniform4f(uniforms.mouse, mouse.x, mouse.y, mouse.cx, mouse.cy);
+    gl.uniform4f(uniforms.date,
+      d.getFullYear(), d.getMonth(), d.getDate(),
+      d.getHours()*3600 + d.getMinutes()*60 + d.getSeconds()
+    );
+    gl.uniform1f(uniforms.sr, 44100);
+    const isLight = document.documentElement.dataset.theme === "light";
+    const bgR = isLight ? 0.980 : 0.051;
+    const bgG = isLight ? 0.980 : 0.051;
+    const bgB = isLight ? 0.973 : 0.059;
+    gl.uniform3f(uniforms.bg, bgR, bgG, bgB);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function startLoop() {
+    if (running) return;
+    running = true;
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function stopLoop() {
+    running = false;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.style.cssText = "display:flex; position:absolute; inset:0; align-items:center; justify-content:center; padding:1rem; background:var(--surface); color:var(--muted); font-size:0.85rem; text-align:center;";
+    stopLoop();
+  }
+
+  /* ── IntersectionObserver ── */
+  new IntersectionObserver(
+    (entries) => entries.forEach((e) => (e.isIntersecting ? startLoop() : stopLoop())),
+    { threshold: 0.05 }
+  ).observe(container);
+
+  /* ── Initial compile — MUST be after all let declarations ── */
+  recompile();
+})();
+</script>
+
+<style>
+  /* Break out of the article's content width */
+  .shader-demo {
+    --sd-full: min(920px, calc(100vw - 4rem));
+    width: var(--sd-full);
+    /* Negative margins center the element even when wider than the article */
+    margin-left:  calc(50% - var(--sd-full) / 2);
+    margin-right: calc(50% - var(--sd-full) / 2);
+    margin-top:    1.5rem;
+    margin-bottom: 1.5rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Canvas-only mode: single column, no breakout */
+  .shader-demo[data-hide-code] {
+    grid-template-columns: 1fr;
+    /* Don't break out — a standalone canvas looks better at article width */
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* ── Left panel ── */
+  .sd-left {
+    display: flex;
+    flex-direction: column;
+    height: var(--sd-h, 400px);
+    border-right: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .sd-toolbar {
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sd-tabs {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+  .sd-tabs::-webkit-scrollbar { display: none; }
+
+  .sd-tab {
+    background: none;
+    border: none;
+    border-right: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.1s, background 0.1s;
+    white-space: nowrap;
+  }
+  .sd-tab:hover       { color: var(--text); }
+  .sd-tab.is-active   { color: var(--accent); background: var(--surface); }
+
+  .sd-actions {
+    display: flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    border-left: 1px solid var(--border);
+  }
+
+  .sd-btn {
+    background: none;
+    border: none;
+    border-left: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.1s, background 0.1s;
+    white-space: nowrap;
+  }
+  .sd-btn:first-child               { border-left: none; }
+  .sd-btn:hover:not(:disabled)      { color: var(--text); background: var(--surface); }
+  .sd-btn.is-active                 { color: var(--accent); }
+  .sd-btn:disabled                  { opacity: 0.3; cursor: default; }
+  .sd-run-btn:not(:disabled)        { color: var(--accent); }
+
+  /* Scrollable code area */
+  .sd-code-wrap {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Each pane fills the code wrap */
+  .sd-pane {
+    height: 100%;
+  }
+
+  /* Shiki <pre> resets */
+  .sd-view :global(pre) {
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    min-height: 100%;
+  }
+
+  /* CodeMirror mount — sizing only.
+     All theme/token colours are injected by injectCMStyles() in JS,
+     which uses plain (non-scoped) selectors that reliably target CM's dynamic DOM. */
+  .sd-cm-mount {
+    height: 100%;
+  }
+
+  /* ── Right panel ── */
+  .sd-right {
+    position: relative;
+    height: var(--sd-h, 400px);
+    background: #0d0d0f;
+  }
+
+  .sd-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── Mobile: stack ── */
+  @media (max-width: 640px) {
+    .shader-demo {
+      grid-template-columns: 1fr;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+    .sd-left {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      height: 240px;
+    }
+    .sd-right {
+      height: calc(var(--sd-h, 400px) * 0.65);
+    }
+  }
+</style>
