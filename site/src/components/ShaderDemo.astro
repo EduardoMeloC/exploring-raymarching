@@ -9,9 +9,10 @@ interface Props {
   bufferC?: string;
   bufferD?: string;
   height?: number;
+  hideCode?: boolean;
 }
 
-const { image, common, bufferA, bufferB, bufferC, bufferD, height = 400 } = Astro.props;
+const { image, common, bufferA, bufferB, bufferC, bufferD, height = 400, hideCode = false } = Astro.props;
 
 const tabs = [
   { id: "image",   label: "Image",    code: image    },
@@ -33,9 +34,9 @@ const sourcesJson = JSON.stringify({
 });
 ---
 
-<div class="shader-demo" id={uid} style={`--sd-h:${height}px`}>
-  <!-- Left: code + toolbar -->
-  <div class="sd-left">
+<div class="shader-demo" id={uid} style={`--sd-h:${height}px`} data-hide-code={hideCode ? "true" : null}>
+  <!-- Left: code + toolbar (omitted when hideCode) -->
+  {!hideCode && <div class="sd-left">
     <div class="sd-toolbar">
       <div class="sd-tabs" role="tablist">
         {tabs.map((tab, i) => (
@@ -73,7 +74,7 @@ const sourcesJson = JSON.stringify({
         </div>
       ))}
     </div>
-  </div>
+  </div>}
 
   <!-- Right: WebGL canvas -->
   <div class="sd-right">
@@ -191,7 +192,7 @@ const sourcesJson = JSON.stringify({
       "texture texture2D texture2DProj textureCube texture2DLod textureCubeLod " +
       "dFdx dFdy fwidth emit " +
       "gl_Position gl_PointSize gl_FragCoord gl_FrontFacing gl_FragDepth gl_PointCoord " +
-      "iResolution iTime iTimeDelta iFrameRate iFrame iMouse iDate iSampleRate"
+      "iResolution iTime iTimeDelta iFrameRate iFrame iMouse iDate iSampleRate iBackground"
     );
 
     CodeMirror.defineMode("glsl", function() {
@@ -317,49 +318,53 @@ const sourcesJson = JSON.stringify({
       cm.setSize("100%", "100%");
       cm.on("change", () => {
         sources[tabId] = cm.getValue();
-        runBtn.disabled = false;
+        if (runBtn) runBtn.disabled = false;
       });
       cmInstances[tabId] = cm;
     });
   }
 
-  /* ── Edit / View toggle ── */
-  editBtn.addEventListener("click", async () => {
-    if (!editMode) {
-      editBtn.textContent = "…";
-      editBtn.disabled = true;
-      await initEditors();
-      editBtn.disabled = false;
-      editMode = true;
-      editBtn.textContent = "View";
-      editBtn.classList.add("is-active");
+  /* ── Edit / View toggle (only present when hideCode is false) ── */
+  if (editBtn) {
+    editBtn.addEventListener("click", async () => {
+      if (!editMode) {
+        editBtn.textContent = "…";
+        editBtn.disabled = true;
+        await initEditors();
+        editBtn.disabled = false;
+        editMode = true;
+        editBtn.textContent = "View";
+        editBtn.classList.add("is-active");
 
-      container.querySelectorAll(".sd-pane").forEach((pane) => {
-        pane.querySelector(".sd-view").style.display     = "none";
-        pane.querySelector(".sd-cm-mount").style.display = "block";
-      });
+        container.querySelectorAll(".sd-pane").forEach((pane) => {
+          pane.querySelector(".sd-view").style.display     = "none";
+          pane.querySelector(".sd-cm-mount").style.display = "block";
+        });
 
-      if (cmInstances[activeTabId]) {
-        setTimeout(() => cmInstances[activeTabId].refresh(), 0);
+        if (cmInstances[activeTabId]) {
+          setTimeout(() => cmInstances[activeTabId].refresh(), 0);
+        }
+      } else {
+        editMode = false;
+        editBtn.textContent = "Edit";
+        editBtn.classList.remove("is-active");
+
+        container.querySelectorAll(".sd-pane").forEach((pane) => {
+          pane.querySelector(".sd-view").style.display     = "block";
+          pane.querySelector(".sd-cm-mount").style.display = "none";
+        });
       }
-    } else {
-      editMode = false;
-      editBtn.textContent = "Edit";
-      editBtn.classList.remove("is-active");
-
-      container.querySelectorAll(".sd-pane").forEach((pane) => {
-        pane.querySelector(".sd-view").style.display     = "block";
-        pane.querySelector(".sd-cm-mount").style.display = "none";
-      });
-    }
-  });
+    });
+  }
 
   /* ── Run ── */
-  runBtn.addEventListener("click", () => {
-    errorBox.style.display = "none";
-    recompile();
-    runBtn.disabled = true;
-  });
+  if (runBtn) {
+    runBtn.addEventListener("click", () => {
+      errorBox.style.display = "none";
+      recompile();
+      runBtn.disabled = true;
+    });
+  }
 
   /* ── WebGL helpers ── */
   const gl = canvas.getContext("webgl2");
@@ -383,6 +388,7 @@ uniform int iFrame;
 uniform vec4 iMouse;
 uniform vec4 iDate;
 uniform float iSampleRate;
+uniform vec3 iBackground;
 out vec4 fragColor;
 `;
   const SUFFIX = `\nvoid main() { mainImage(fragColor, gl_FragCoord.xy); }`;
@@ -445,6 +451,7 @@ out vec4 fragColor;
       mouse: gl.getUniformLocation(prog, "iMouse"),
       date:  gl.getUniformLocation(prog, "iDate"),
       sr:    gl.getUniformLocation(prog, "iSampleRate"),
+      bg:    gl.getUniformLocation(prog, "iBackground"),
     };
 
     startTs = null; frameIdx = 0;
@@ -499,6 +506,11 @@ out vec4 fragColor;
       d.getHours()*3600 + d.getMinutes()*60 + d.getSeconds()
     );
     gl.uniform1f(uniforms.sr, 44100);
+    const isLight = document.documentElement.dataset.theme === "light";
+    const bgR = isLight ? 0.980 : 0.051;
+    const bgG = isLight ? 0.980 : 0.051;
+    const bgB = isLight ? 0.973 : 0.059;
+    gl.uniform3f(uniforms.bg, bgR, bgG, bgB);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     rafId = requestAnimationFrame(frame);
   }
@@ -547,6 +559,15 @@ out vec4 fragColor;
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
+  }
+
+  /* Canvas-only mode: single column, no breakout */
+  .shader-demo[data-hide-code] {
+    grid-template-columns: 1fr;
+    /* Don't break out — a standalone canvas looks better at article width */
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   /* ── Left panel ── */
